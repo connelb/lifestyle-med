@@ -1,0 +1,153 @@
+<!-- <div class="container-fluid mb-60px pb-2 align-middle">
+  <div *ngIf="update;">
+    <p>
+       <ngb-alert type="primary" [dismissible]="false"> 
+      <span>New version available
+        <button class="btn btn-primary float-right" (click)="activateUpdate()">Update</button>
+        <br>
+      </span>
+      </ngb-alert> 
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4 p-1">
+
+      <div class="border bg border-dark rounded rounded p-2 h-100">
+        <div class="left-pane bg">
+
+          <div class="text-center mb-2">
+            <h4>
+              <span class="badge badge-pill" [class.badge-dark]="me?.registered" [class.badge-light]="!me || !me.registered">{{me?.username}}</span>
+            </h4>
+          </div>
+          <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+          <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8 p-1" id="chat">
+      <div *ngIf="conversation; else instructions">
+        <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation"></app-chat-message-view>
+        <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId"></app-chat-input>
+      </div>
+    </div> 
+  </div>
+</div> -->
+
+
+
+<!-- <mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>chat component</mat-card-title>
+    <mat-card-subtitle>chat subtitle</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> 
+  <mat-card-content>
+    <div *ngIf="update;">
+      <p>
+      <ngb-alert type="primary" [dismissible]="false"> 
+
+
+      <span>
+        New version available
+        <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent" click)="activateUpdate()">
+          Update
+        </button>
+      </span>
+       <span>New version available
+                  <button class="btn btn-primary float-right" (click)="activateUpdate()">Update</button>
+                  <br>
+                </span> -->
+      <!-- </ngb-alert> -->
+      <!-- </p> 
+    </div> -->
+
+
+    <mat-grid-list cols="4">
+        <mat-grid-tile
+            [colspan]=1
+            [rowspan]=1>
+            <div *ngIf="update;">
+                <!-- <p> -->
+                <!-- <ngb-alert type="primary" [dismissible]="false"> -->
+          
+          
+                <span>
+                  New version available
+                  <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent" click)="activateUpdate()">
+                    Update
+                  </button>
+                </span>
+                <!-- <span>New version available
+                            <button class="btn btn-primary float-right" (click)="activateUpdate()">Update</button>
+                            <br>
+                          </span> -->
+                <!-- </ngb-alert> -->
+                <!-- </p> -->
+              </div>A
+            <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+        </mat-grid-tile>
+        <mat-grid-tile
+            [colspan]=2
+            [rowspan]=1>B
+            <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+        </mat-grid-tile>
+
+        <mat-grid-tile
+        [colspan]=2
+        [rowspan]=2>C
+        
+        <mat-card>
+        <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
+          </app-chat-input>
+          </mat-card>
+        
+    </mat-grid-tile>
+        <mat-grid-tile
+            [colspan]=2
+            [rowspan]=2>D
+            <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation">
+              </app-chat-message-view>
+            <!-- <span>
+                <span matBadge="11" matBadgeColor="accent">Email</span>
+                <span class="badge badge-pill" [class.badge-dark]="me?.registered" [class.badge-light]="!me || !me.registered">{{me?.username}}</span>
+            </span> -->
+          
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    <!-- <mat-grid-list cols="2">
+        <mat-grid-tile>
+          <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+          <div *ngIf="conversation; else instructions">
+              <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation"></app-chat-message-view>
+              <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId"></app-chat-input>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <span>
+                <span matBadge="11" matBadgeColor="accent">Email</span>
+                <span class="badge badge-pill" [class.badge-dark]="me?.registered" [class.badge-light]="!me || !me.registered">{{me?.username}}</span>
+            </span>
+          <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+        </mat-grid-tile>
+      
+      </mat-grid-list> -->
+  <!-- </mat-card-content>
+  <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions> 
+</mat-card> -->
+
+<ng-template #instructions>
+  <div class="bg rounded p-2 border border-dark rounded text-center instructions">
+    <p class="p-5 m-5 h5 text-white instructions-text">Welcome,
+      <strong>{{me?.username}}</strong>! Select a User or a Conversation to start or continue a chat</p>
+  </div>
+</ng-template>

@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~styles-lc.css";
+
+
+body {
+    /* padding-top: 0rem; */
+}
+.starter-template {
+    /* padding: 1rem 0rem; */
+    text-align: center;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
