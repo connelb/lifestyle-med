@@ -36,6 +36,29 @@ export type DeleteMeasurementInput = {
   createdAt: string;
 };
 
+export type CreateWorkoutInput = {
+  workoutId: string;
+  createdAt: string;
+  userId?: string | null;
+  desc?: string | null;
+  duration?: string | null;
+  capture?: string | null;
+};
+
+export type UpdateWorkoutInput = {
+  workoutId: string;
+  createdAt: string;
+  userId?: string | null;
+  desc?: string | null;
+  duration?: string | null;
+  capture?: string | null;
+};
+
+export type DeleteWorkoutInput = {
+  workoutId: string;
+  createdAt: string;
+};
+
 export type TableMeasurementFilterInput = {
   measurementId?: TableStringFilterInput | null;
   createdAt?: TableStringFilterInput | null;
@@ -72,6 +95,15 @@ export type TableIntFilterInput = {
   contains?: number | null;
   notContains?: number | null;
   between?: Array<number | null> | null;
+};
+
+export type TableWorkoutFilterInput = {
+  workoutId?: TableStringFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  userId?: TableStringFilterInput | null;
+  desc?: TableStringFilterInput | null;
+  duration?: TableStringFilterInput | null;
+  capture?: TableStringFilterInput | null;
 };
 
 export type CreateConversationMutation = {
@@ -258,6 +290,36 @@ export type DeleteMeasurementMutation = {
   rightThigh: number | null;
   waist: number | null;
   weight: number | null;
+};
+
+export type CreateWorkoutMutation = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
+};
+
+export type UpdateWorkoutMutation = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
+};
+
+export type DeleteWorkoutMutation = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
 };
 
 export type AllMessageQuery = {
@@ -460,6 +522,30 @@ export type ListMeasurementsQuery = {
   nextToken: string | null;
 };
 
+export type GetWorkoutQuery = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
+};
+
+export type ListWorkoutsQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Workout";
+    workoutId: string;
+    createdAt: string;
+    userId: string | null;
+    desc: string | null;
+    duration: string | null;
+    capture: string | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
   author: {
@@ -624,6 +710,36 @@ export type OnDeleteMeasurementSubscription = {
   rightThigh: number | null;
   waist: number | null;
   weight: number | null;
+};
+
+export type OnCreateWorkoutSubscription = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
+};
+
+export type OnUpdateWorkoutSubscription = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
+};
+
+export type OnDeleteWorkoutSubscription = {
+  __typename: string;
+  workoutId: string;
+  createdAt: string;
+  userId: string | null;
+  desc: string | null;
+  duration: string | null;
+  capture: string | null;
 };
 
 @Injectable({
@@ -915,6 +1031,72 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteMeasurementMutation>response.data.deleteMeasurement;
+  }
+  async CreateWorkout(
+    input: CreateWorkoutInput
+  ): Promise<CreateWorkoutMutation> {
+    const statement = `mutation CreateWorkout($input: CreateWorkoutInput!) {
+        createWorkout(input: $input) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateWorkoutMutation>response.data.createWorkout;
+  }
+  async UpdateWorkout(
+    input: UpdateWorkoutInput
+  ): Promise<UpdateWorkoutMutation> {
+    const statement = `mutation UpdateWorkout($input: UpdateWorkoutInput!) {
+        updateWorkout(input: $input) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateWorkoutMutation>response.data.updateWorkout;
+  }
+  async DeleteWorkout(
+    input: DeleteWorkoutInput
+  ): Promise<DeleteWorkoutMutation> {
+    const statement = `mutation DeleteWorkout($input: DeleteWorkoutInput!) {
+        deleteWorkout(input: $input) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteWorkoutMutation>response.data.deleteWorkout;
   }
   async AllMessage(
     conversationId: string,
@@ -1232,6 +1414,65 @@ export class APIService {
     )) as any;
     return <ListMeasurementsQuery>response.data.listMeasurements;
   }
+  async GetWorkout(
+    workoutId: string,
+    createdAt: string
+  ): Promise<GetWorkoutQuery> {
+    const statement = `query GetWorkout($workoutId: String!, $createdAt: String!) {
+        getWorkout(workoutId: $workoutId, createdAt: $createdAt) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      workoutId,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetWorkoutQuery>response.data.getWorkout;
+  }
+  async ListWorkouts(
+    filter?: TableWorkoutFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListWorkoutsQuery> {
+    const statement = `query ListWorkouts($filter: TableWorkoutFilterInput, $limit: Int, $nextToken: String) {
+        listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            workoutId
+            createdAt
+            userId
+            desc
+            duration
+            capture
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListWorkoutsQuery>response.data.listWorkouts;
+  }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
   > = API.graphql(
@@ -1445,4 +1686,58 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteMeasurementSubscription>;
+
+  OnCreateWorkoutListener: Observable<
+    OnCreateWorkoutSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+        onCreateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`
+    )
+  ) as Observable<OnCreateWorkoutSubscription>;
+
+  OnUpdateWorkoutListener: Observable<
+    OnUpdateWorkoutSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+        onUpdateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`
+    )
+  ) as Observable<OnUpdateWorkoutSubscription>;
+
+  OnDeleteWorkoutListener: Observable<
+    OnDeleteWorkoutSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+        onDeleteWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
+          __typename
+          workoutId
+          createdAt
+          userId
+          desc
+          duration
+          capture
+        }
+      }`
+    )
+  ) as Observable<OnDeleteWorkoutSubscription>;
 }

@@ -149,7 +149,7 @@ export class MeasurePage implements OnInit {
     this.workoutPost = post;
     this.workoutPost.workoutId = `${uuid()}`;
     this.workoutPost.createdAt = `${new Date().toISOString()}_${uuid()}`;
-    this.workoutPost.userId = this.me.id;
+    this.workoutPost.userId = 'test';//this.me.id
 
     //this.measurement = '';
     this.appsync.hc().then(client => {

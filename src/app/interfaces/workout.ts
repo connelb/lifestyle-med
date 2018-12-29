@@ -3,7 +3,7 @@ type Workout = {
     createdAt: string | null,
     userId: string,
     desc: string | null,
-    duration: number | null,
+    duration: string | null,
     capture: string | null,
   };
   
