@@ -87,14 +87,14 @@ export class MeasurePage implements OnInit {
 
   createForm() {
     this.measurementFormGroup = this.fb.group({
-      'chest': [''],
-      'hips': [''],
-      'leftArm': [''],
-      'leftThigh': [''],
-      'rightArm': [''],
-      'rightThigh': [''],
-      'waist': [''],
-      'weight': ['']
+      'chest': [],
+      'hips': [],
+      'leftArm': [],
+      'leftThigh': [],
+      'rightArm': [],
+      'rightThigh': [],
+      'waist': [],
+      'weight': []
     });
   }
 
@@ -145,12 +145,13 @@ export class MeasurePage implements OnInit {
   }
 
   workoutOnSubmit(post) {
-    console.log('workout',post);
+    
     this.workoutPost = post;
     this.workoutPost.workoutId = `${uuid()}`;
     this.workoutPost.createdAt = `${new Date().toISOString()}_${uuid()}`;
     this.workoutPost.userId = 'test';//this.me.id
 
+    console.log('workout',this.workoutPost);
     //this.measurement = '';
     this.appsync.hc().then(client => {
       client.mutate({
