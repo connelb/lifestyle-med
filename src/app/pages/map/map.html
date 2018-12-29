@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<amplify-photo-picker framework="Ionic"
+    (picked)="onImagePicked($event)"
+    (loaded)="onImageLoaded($event)">
+</amplify-photo-picker>
+
+  <!-- <div #mapCanvas class="map-canvas"></div> -->
+
+  <amplify-s3-album framework="Ionic" 
+    path="private/us-east-1:d86b33dd-fded-48f1-8e2a-ddda5bb7c83f" (selected)="onAlbumImageSelected($event)">
+</amplify-s3-album>
+
+</ion-content>

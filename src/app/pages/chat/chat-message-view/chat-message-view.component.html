@@ -1,0 +1,60 @@
+<!-- <mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon>chat</mat-icon>{{conversation?.name}}
+    </mat-panel-title> -->
+<!-- <mat-panel-description>
+          ??
+        </mat-panel-description> -->
+<!-- </mat-expansion-panel-header> -->
+<!-- <div class="bg rounded p-2 border border-dark rounded">
+    <div class="p-0 bg"> -->
+<!-- <span class="d-block font-weight-bold bg-dark text-white text-right rounded p-2 mb-2">
+        <i class="ion-chatbubbles" data-pack="default" data-tags="talk"></i>
+        <mat-icon>forum</mat-icon>{{conversation?.name}}
+      </span> -->
+<!-- <div #scrollMe class="chat" [appInfscroll]="loadMoreMessages" [completedFetching]="completedFetching"> -->
+<!-- <mat-chip-list>  -->
+<!-- <app-chat-message *ngFor="let message of messages; last as isLast; first as isFirst" [message]="message" [fromMe]="fromMe(message)"
+          [isLast]="isLast" [isFirst]="isFirst" (added)="messageAdded(isFirst, $event)"></app-chat-message> -->
+<!-- </mat-chip-list> -->
+<!-- </div> -->
+<!-- </div>
+  </div> -->
+
+<!-- </mat-expansion-panel> -->
+<!-- <ion-list *ngFor="let message of messages" ;> -->
+  <!-- <ion-virtual-scroll [items]="messages">
+    <ion-item *virtualItem="let message"> -->
+
+
+      <!-- <ion-item> -->
+
+      <!-- <app-chat-message [message]="message" [fromMe]="fromMe(message)" [isLast]="isLast" [isFirst]="isFirst" (added)="messageAdded(isFirst, $event)"></app-chat-message> -->
+      <!-- <ion-avatar slot="start">
+              <img src="/docs/assets/img/avatar-finn.png"></img> 
+            </ion-avatar>
+            <ion-label>
+              <h2>{{user?.username}}</h2>
+              <h4>{{createdAt | momentAgo }}</h4>
+              <p>{{message.content}}</p>
+              <p>{{ message|json }}</p>
+            </ion-label> -->
+    <!-- </ion-item>
+  </ion-virtual-scroll> -->
+
+
+  <ion-list *ngFor="let message of messages"  >
+      <ion-item ><!--*virtualItem="let message" -->
+          <!-- <ion-virtual-scroll [items]="messages"> -->
+          <!-- <ion-label> -->
+            <app-chat-message [message]="message" [fromMe]="fromMe(message)" [isLast]="isLast" [isFirst]="isFirst" (added)="messageAdded(isFirst, $event)"></app-chat-message>
+        <!-- <ion-label><a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+            <mat-icon>forum</mat-icon>
+            {{convo.name}}</a> -->
+          <!-- </ion-label> -->
+        <!-- </ion-virtual-scroll> -->
+      </ion-item>
+    </ion-list>
+<!-- </ion-list> -->
+<!-- </ion-item> -->

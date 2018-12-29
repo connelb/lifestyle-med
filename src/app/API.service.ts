@@ -5,68 +5,130 @@ import API, { graphqlOperation } from "@aws-amplify/api";
 import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
+export type CreateMeasurementInput = {
+  measurementId: string;
+  createdAt: string;
+  chest?: number | null;
+  hips?: number | null;
+  leftArm?: number | null;
+  leftThigh?: number | null;
+  rightArm?: number | null;
+  rightThigh?: number | null;
+  waist?: number | null;
+  weight?: number | null;
+};
+
+export type UpdateMeasurementInput = {
+  measurementId: string;
+  createdAt: string;
+  chest?: number | null;
+  hips?: number | null;
+  leftArm?: number | null;
+  leftThigh?: number | null;
+  rightArm?: number | null;
+  rightThigh?: number | null;
+  waist?: number | null;
+  weight?: number | null;
+};
+
+export type DeleteMeasurementInput = {
+  measurementId: string;
+  createdAt: string;
+};
+
+export type TableMeasurementFilterInput = {
+  measurementId?: TableStringFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  chest?: TableIntFilterInput | null;
+  hips?: TableIntFilterInput | null;
+  leftArm?: TableIntFilterInput | null;
+  leftThigh?: TableIntFilterInput | null;
+  rightArm?: TableIntFilterInput | null;
+  rightThigh?: TableIntFilterInput | null;
+  waist?: TableIntFilterInput | null;
+  weight?: TableIntFilterInput | null;
+};
+
+export type TableStringFilterInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
+
+export type TableIntFilterInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  contains?: number | null;
+  notContains?: number | null;
+  between?: Array<number | null> | null;
+};
+
 export type CreateConversationMutation = {
   __typename: string;
-  // The Conversation's timestamp.
   createdAt: string | null;
-  // A unique identifier for the Conversation.
   id: string;
-  // The Conversation's messages.
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // The message content.
       content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
-      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
-      // Generated id for a message -- read-only
       id: string;
-      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
-  // The Conversation's name.
   name: string;
 };
 
 export type CreateMessageMutation = {
   __typename: string;
-  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
   author: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
-  // The message content.
   content: string;
-  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
-  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
-  // Generated id for a message -- read-only
   id: string;
-  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
   recipient: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   sender: string | null;
@@ -74,47 +136,31 @@ export type CreateMessageMutation = {
 
 export type CreateUserMutation = {
   __typename: string;
-  // A unique identifier for the user.
   cognitoId: string;
-  // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
     userConversations: Array<{
       __typename: "UserConversations";
-      associated: Array<{
-        __typename: "UserConversations";
-        conversationId: string;
-        userId: string;
-      } | null> | null;
       conversationId: string;
       userId: string;
     } | null> | null;
   } | null;
-  // Generated id for a user. read-only
   id: string;
-  // Get a users messages by querying a GSI on the Messages table.
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // The message content.
       content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
-      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
-      // Generated id for a message -- read-only
       id: string;
-      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
-  // The username
   username: string;
-  // is the user registered?
   registered: boolean | null;
 };
 
@@ -129,84 +175,126 @@ export type CreateUserConversationsMutation = {
     } | null> | null;
     conversation: {
       __typename: "Conversation";
-      // The Conversation's timestamp.
       createdAt: string | null;
-      // A unique identifier for the Conversation.
       id: string;
-      // The Conversation's name.
       name: string;
     } | null;
     conversationId: string;
     user: {
       __typename: "User";
-      // A unique identifier for the user.
       cognitoId: string;
-      // Generated id for a user. read-only
       id: string;
-      // The username
       username: string;
-      // is the user registered?
       registered: boolean | null;
     } | null;
     userId: string;
   } | null> | null;
   conversation: {
     __typename: "Conversation";
-    // The Conversation's timestamp.
     createdAt: string | null;
-    // A unique identifier for the Conversation.
     id: string;
-    // The Conversation's name.
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     name: string;
   } | null;
   conversationId: string;
   user: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   userId: string;
 };
 
+export type CreateMeasurementMutation = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
+export type UpdateMeasurementMutation = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
+export type DeleteMeasurementMutation = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
 export type AllMessageQuery = {
   __typename: string;
-  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
   author: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
-  // The message content.
   content: string;
-  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
-  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
-  // Generated id for a message -- read-only
   id: string;
-  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
   recipient: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   sender: string | null;
@@ -216,37 +304,23 @@ export type AllMessageConnectionQuery = {
   __typename: string;
   messages: Array<{
     __typename: "Message";
-    // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
     author: {
       __typename: "User";
-      // A unique identifier for the user.
       cognitoId: string;
-      // Generated id for a user. read-only
       id: string;
-      // The username
       username: string;
-      // is the user registered?
       registered: boolean | null;
     } | null;
-    // The message content.
     content: string;
-    // The id of the Conversation this message belongs to. This is the table primary key.
     conversationId: string;
-    // The message timestamp. This is also the table sort key.
     createdAt: string | null;
-    // Generated id for a message -- read-only
     id: string;
-    // Flag denoting if this message has been accepted by the server or not.
     isSent: boolean | null;
     recipient: {
       __typename: "User";
-      // A unique identifier for the user.
       cognitoId: string;
-      // Generated id for a user. read-only
       id: string;
-      // The username
       username: string;
-      // is the user registered?
       registered: boolean | null;
     } | null;
     sender: string | null;
@@ -256,37 +330,39 @@ export type AllMessageConnectionQuery = {
 
 export type AllMessageFromQuery = {
   __typename: string;
-  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
   author: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
-  // The message content.
   content: string;
-  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
-  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
-  // Generated id for a message -- read-only
   id: string;
-  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
   recipient: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   sender: string | null;
@@ -294,129 +370,131 @@ export type AllMessageFromQuery = {
 
 export type AllUserQuery = {
   __typename: string;
-  // A unique identifier for the user.
   cognitoId: string;
-  // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
     userConversations: Array<{
       __typename: "UserConversations";
-      associated: Array<{
-        __typename: "UserConversations";
-        conversationId: string;
-        userId: string;
-      } | null> | null;
       conversationId: string;
       userId: string;
     } | null> | null;
   } | null;
-  // Generated id for a user. read-only
   id: string;
-  // Get a users messages by querying a GSI on the Messages table.
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // The message content.
       content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
-      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
-      // Generated id for a message -- read-only
       id: string;
-      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
-  // The username
   username: string;
-  // is the user registered?
   registered: boolean | null;
 };
 
 export type MeQuery = {
   __typename: string;
-  // A unique identifier for the user.
   cognitoId: string;
-  // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
     userConversations: Array<{
       __typename: "UserConversations";
-      associated: Array<{
-        __typename: "UserConversations";
-        conversationId: string;
-        userId: string;
-      } | null> | null;
       conversationId: string;
       userId: string;
     } | null> | null;
   } | null;
-  // Generated id for a user. read-only
   id: string;
-  // Get a users messages by querying a GSI on the Messages table.
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // The message content.
       content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
-      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
-      // Generated id for a message -- read-only
       id: string;
-      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
-  // The username
   username: string;
-  // is the user registered?
   registered: boolean | null;
+};
+
+export type GetMeasurementQuery = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
+export type ListMeasurementsQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Measurement";
+    measurementId: string;
+    createdAt: string;
+    chest: number | null;
+    hips: number | null;
+    leftArm: number | null;
+    leftThigh: number | null;
+    rightArm: number | null;
+    rightThigh: number | null;
+    waist: number | null;
+    weight: number | null;
+  } | null> | null;
+  nextToken: string | null;
 };
 
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
-  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
   author: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
-  // The message content.
   content: string;
-  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
-  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
-  // Generated id for a message -- read-only
   id: string;
-  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
   recipient: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   sender: string | null;
@@ -433,46 +511,44 @@ export type SubscribeToNewUCsSubscription = {
     } | null> | null;
     conversation: {
       __typename: "Conversation";
-      // The Conversation's timestamp.
       createdAt: string | null;
-      // A unique identifier for the Conversation.
       id: string;
-      // The Conversation's name.
       name: string;
     } | null;
     conversationId: string;
     user: {
       __typename: "User";
-      // A unique identifier for the user.
       cognitoId: string;
-      // Generated id for a user. read-only
       id: string;
-      // The username
       username: string;
-      // is the user registered?
       registered: boolean | null;
     } | null;
     userId: string;
   } | null> | null;
   conversation: {
     __typename: "Conversation";
-    // The Conversation's timestamp.
     createdAt: string | null;
-    // A unique identifier for the Conversation.
     id: string;
-    // The Conversation's name.
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     name: string;
   } | null;
   conversationId: string;
   user: {
     __typename: "User";
-    // A unique identifier for the user.
     cognitoId: string;
-    // Generated id for a user. read-only
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
     id: string;
-    // The username
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
     username: string;
-    // is the user registered?
     registered: boolean | null;
   } | null;
   userId: string;
@@ -480,48 +556,74 @@ export type SubscribeToNewUCsSubscription = {
 
 export type SubscribeToNewUsersSubscription = {
   __typename: string;
-  // A unique identifier for the user.
   cognitoId: string;
-  // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
     userConversations: Array<{
       __typename: "UserConversations";
-      associated: Array<{
-        __typename: "UserConversations";
-        conversationId: string;
-        userId: string;
-      } | null> | null;
       conversationId: string;
       userId: string;
     } | null> | null;
   } | null;
-  // Generated id for a user. read-only
   id: string;
-  // Get a users messages by querying a GSI on the Messages table.
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // The message content.
       content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
-      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
-      // Generated id for a message -- read-only
       id: string;
-      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
   } | null;
-  // The username
   username: string;
-  // is the user registered?
   registered: boolean | null;
+};
+
+export type OnCreateMeasurementSubscription = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
+export type OnUpdateMeasurementSubscription = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
+};
+
+export type OnDeleteMeasurementSubscription = {
+  __typename: string;
+  measurementId: string;
+  createdAt: string;
+  chest: number | null;
+  hips: number | null;
+  leftArm: number | null;
+  leftThigh: number | null;
+  rightArm: number | null;
+  rightThigh: number | null;
+  waist: number | null;
+  weight: number | null;
 };
 
 @Injectable({
@@ -578,7 +680,15 @@ export class APIService {
           author {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -590,7 +700,15 @@ export class APIService {
           recipient {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -620,11 +738,6 @@ export class APIService {
             nextToken
             userConversations {
               __typename
-              associated {
-                __typename
-                conversationId
-                userId
-              }
               conversationId
               userId
             }
@@ -689,13 +802,25 @@ export class APIService {
             __typename
             createdAt
             id
+            messages {
+              __typename
+              nextToken
+            }
             name
           }
           conversationId
           user {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -713,6 +838,84 @@ export class APIService {
       response.data.createUserConversations
     );
   }
+  async CreateMeasurement(
+    input: CreateMeasurementInput
+  ): Promise<CreateMeasurementMutation> {
+    const statement = `mutation CreateMeasurement($input: CreateMeasurementInput!) {
+        createMeasurement(input: $input) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateMeasurementMutation>response.data.createMeasurement;
+  }
+  async UpdateMeasurement(
+    input: UpdateMeasurementInput
+  ): Promise<UpdateMeasurementMutation> {
+    const statement = `mutation UpdateMeasurement($input: UpdateMeasurementInput!) {
+        updateMeasurement(input: $input) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateMeasurementMutation>response.data.updateMeasurement;
+  }
+  async DeleteMeasurement(
+    input: DeleteMeasurementInput
+  ): Promise<DeleteMeasurementMutation> {
+    const statement = `mutation DeleteMeasurement($input: DeleteMeasurementInput!) {
+        deleteMeasurement(input: $input) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteMeasurementMutation>response.data.deleteMeasurement;
+  }
   async AllMessage(
     conversationId: string,
     after?: string,
@@ -724,7 +927,15 @@ export class APIService {
           author {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -736,7 +947,15 @@ export class APIService {
           recipient {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -817,7 +1036,15 @@ export class APIService {
           author {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -829,7 +1056,15 @@ export class APIService {
           recipient {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -861,11 +1096,6 @@ export class APIService {
             nextToken
             userConversations {
               __typename
-              associated {
-                __typename
-                conversationId
-                userId
-              }
               conversationId
               userId
             }
@@ -910,11 +1140,6 @@ export class APIService {
             nextToken
             userConversations {
               __typename
-              associated {
-                __typename
-                conversationId
-                userId
-              }
               conversationId
               userId
             }
@@ -940,6 +1165,73 @@ export class APIService {
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <MeQuery>response.data.me;
   }
+  async GetMeasurement(
+    measurementId: string,
+    createdAt: string
+  ): Promise<GetMeasurementQuery> {
+    const statement = `query GetMeasurement($measurementId: String!, $createdAt: String!) {
+        getMeasurement(measurementId: $measurementId, createdAt: $createdAt) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      measurementId,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetMeasurementQuery>response.data.getMeasurement;
+  }
+  async ListMeasurements(
+    filter?: TableMeasurementFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListMeasurementsQuery> {
+    const statement = `query ListMeasurements($filter: TableMeasurementFilterInput, $limit: Int, $nextToken: String) {
+        listMeasurements(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            measurementId
+            createdAt
+            chest
+            hips
+            leftArm
+            leftThigh
+            rightArm
+            rightThigh
+            waist
+            weight
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListMeasurementsQuery>response.data.listMeasurements;
+  }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
   > = API.graphql(
@@ -950,7 +1242,15 @@ export class APIService {
           author {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -962,7 +1262,15 @@ export class APIService {
           recipient {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -1006,13 +1314,25 @@ export class APIService {
             __typename
             createdAt
             id
+            messages {
+              __typename
+              nextToken
+            }
             name
           }
           conversationId
           user {
             __typename
             cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
             id
+            messages {
+              __typename
+              nextToken
+            }
             username
             registered
           }
@@ -1035,11 +1355,6 @@ export class APIService {
             nextToken
             userConversations {
               __typename
-              associated {
-                __typename
-                conversationId
-                userId
-              }
               conversationId
               userId
             }
@@ -1064,4 +1379,70 @@ export class APIService {
       }`
     )
   ) as Observable<SubscribeToNewUsersSubscription>;
+
+  OnCreateMeasurementListener: Observable<
+    OnCreateMeasurementSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+        onCreateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`
+    )
+  ) as Observable<OnCreateMeasurementSubscription>;
+
+  OnUpdateMeasurementListener: Observable<
+    OnUpdateMeasurementSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+        onUpdateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`
+    )
+  ) as Observable<OnUpdateMeasurementSubscription>;
+
+  OnDeleteMeasurementListener: Observable<
+    OnDeleteMeasurementSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+        onDeleteMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
+          __typename
+          measurementId
+          createdAt
+          chest
+          hips
+          leftArm
+          leftThigh
+          rightArm
+          rightThigh
+          waist
+          weight
+        }
+      }`
+    )
+  ) as Observable<OnDeleteMeasurementSubscription>;
 }

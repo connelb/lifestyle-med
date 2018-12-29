@@ -1,0 +1,103 @@
+<!-- <mat-card> -->
+  <!-- <div class="card w-75 mb-2 chat-message" [class.float-right]="fromMe" [class.border-primary]="fromMe" [class.border-success]="!fromMe"> -->
+    <!-- <div class="card-body p-2 border rounded"> -->
+    <!-- <div class='clearfix'> -->
+
+    <!-- <mat-card-header>{{user?.username}}: {{createdAt | momentAgo }} -->
+
+      <!-- <p class="card-title mb-1 float-left"
+      [class.text-primary]="fromMe"
+      [class.text-success]="!fromMe">
+      {{user?.username}}
+      </p>&nbsp; -->
+    <!-- </mat-card-header> -->
+
+    <!-- <mat-card-subtitle>
+        {{createdAt | momentAgo }} -->
+    <!-- <div class='float-right'>
+        <small class="card-subtitle mb-0 text-muted">{{createdAt | momentAgo }}</small>
+        &nbsp;
+        <i class="ion-checkmark" [class.text-muted]="!message.isSent" [class.text-info]="message.isSent" data-pack="default" data-tags="talk"></i>
+      </div> -->
+    <!-- </mat-card-subtitle> -->
+
+
+    <!-- <mat-card-content> -->
+
+      <!-- <mat-list-item class="pad-top pad-bottom">
+          <img matListAvatar src="https://api.adorable.io/avatars/285/{{i}}@adorable.io.png" />
+          <h3 matLine class="cursor-pointer"> Firstname Lastname <span class="tc-grey-500 md-caption">11:24 AM</span></h3>
+          <div matLine>
+            <div class="text-wrap">
+              {{ 'Farm-to-table poke distillery, bushwick messenger bag vaporware neutra artisan paleo. Single-origin coffee shabby chic glossier lumberjack chambray dreamcatcher, blue bottle raclette.' | truncate:200 }}
+            </div>
+          </div>
+        </mat-list-item>  -->
+        <!-- <div class="rectanglebox" style="width:300px;height:100px;"> -->
+        <!-- <div style="display: inline-block;position: absolute;"> -->
+      <mat-chip-list>
+          
+        <mat-chip>{{user?.username}}: {{createdAt | momentAgo }}</mat-chip>
+        <!-- <div style="display: inline-block;position: absolute;"> -->
+            <div style="display: inline-block;margin-left: 45px;">{{message.content}}</div>
+          <!-- {{message.content}} -->
+        <!-- </div>  -->
+      </mat-chip-list>
+        <!-- </div> -->
+        <!-- </div> -->
+
+
+      <!-- <div class="rectanglebox" style="width:300px;height:500px;">
+          <div style="display: inline-block;position: absolute;">
+          <mat-chip-list>
+            <mat-chip>A</mat-chip>
+          </mat-chip-list>
+          </div>
+          <div style="display: inline-block;margin-left: 45px;">Text for A where something is super long that ehrere sids sdis fdf ds f sdf sd fs d fs fsd f s fsd f sf df s fs fd Text for A where something is super long that ehrere sids sdis fdf ds f sdf sd fs d fs fsd f s fsd f sf df s fs fd Text for C long that ehrere sids sdis fdf ds f sdf sd fs d fs fsd f s fsd f sf df s fs fd margin-left: 45px;</div>
+          
+          <div>
+          <div style="display: inline-block;position: absolute;">
+          <mat-chip-list aria-orientation="vertical"> 
+            <mat-chip>B</mat-chip>
+          </mat-chip-list>
+          </div>
+          <div style="display: inline-block;margin-left: 45px;">Text for B Text for A where something is super long that ehrere sids sdis fdf ds f sdf sd fs d fs fsd f s fsd f sf df s fs fd margin-left: 45px;</div>
+          </div>
+          <div style="display: inline-block;position: absolute;">
+          <mat-chip-list>
+            <mat-chip>C</mat-chip>
+          </mat-chip-list>
+          </div>
+          <div style="display: inline-block;margin-left: 45px;" >Text for C long that ehrere sids sdis fdf ds f sdf sd fs d fs fsd f s fsd f sf df s fs fd margin-left: 45px;</div>
+          </div> -->
+
+    <!-- </mat-card-content> -->
+
+
+
+    <!-- </div> -->
+
+    <!-- <p class="card-text mb-0">{{message.content}}</p> -->
+    <!-- </div> -->
+  <!-- </div>
+</mat-card> -->
+
+<!-- <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card> -->

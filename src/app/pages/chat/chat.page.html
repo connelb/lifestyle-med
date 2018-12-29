@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Chat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+    <div *ngIf="update;">
+        <span>
+          New version available
+          <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent" click)="activateUpdate()">
+            Update
+          </button>
+        </span>
+      </div>
+
+<!-- List of Text Items -->
+<!-- <ion-list>
+    <ion-item>
+      <ion-label>Pokémon Yellow</ion-label>
+    </ion-item>
+  </ion-list> -->
+
+    <!-- List of Sliding Items -->
+<!-- <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>Item</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="unread(item)"><app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat">Unread</app-chat-user-list></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list> -->
+
+    <ion-list> 
+        <ion-item>
+          <ion-label>Current Users</ion-label>
+          <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Active Chats</ion-label>
+          <!-- <ion-select value="brown" okText="Okay" cancelText="Dismiss"> -->
+              <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+          <!-- </ion-select> -->
+        </ion-item>
+      <ion-item>
+        <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation">
+          </app-chat-message-view>
+        </ion-item>
+      <ion-item>
+        <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
+          </app-chat-input>
+        </ion-item>
+      </ion-list>
+
+
+
+    <!-- <div *ngIf="update;">
+        <span>
+          New version available
+          <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent" click)="activateUpdate()">
+            Update
+          </button>
+        </span>
+      </div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Contacts
+            </mat-panel-title>
+            <mat-panel-description>
+                reach out today... :)
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+        </mat-expansion-panel>
+      
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Chats
+            </mat-panel-title>
+            <mat-panel-description>
+              Current conversations...
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+        </mat-expansion-panel> -->
+      
+        <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Selected conversation:
+              </mat-panel-title> -->
+              <!-- <mat-panel-description>
+                ??
+              </mat-panel-description> -->
+            <!-- </mat-expansion-panel-header> -->
+            <!-- <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation">
+              </app-chat-message-view> -->
+      
+          <!-- </mat-expansion-panel> -->
+          <!-- <mat-action-row>
+              <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
+              </app-chat-input>
+            </mat-action-row> -->
+      
+      
+      <!-- </mat-accordion> -->
+      <!-- <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation">
+      </app-chat-message-view>
+      <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
+      </app-chat-input> -->
+      
+      
+      <ng-template #instructions>
+        <div class="bg rounded p-2 border border-dark rounded text-center instructions">
+          <p class="p-5 m-5 h5 text-white instructions-text">Welcome,
+            <strong>{{me?.username}}</strong>! Select a User or a Conversation to start or continue a chat</p>
+        </div>
+      </ng-template>
+
+</ion-content>

@@ -1,18 +1,13 @@
 {
   "index": "/index.html",
   "assetGroups": [{
-    "name": "app",
+    "name": "chatql",
     "installMode": "prefetch",
     "resources": {
       "files": [
         "/favicon.ico",
         "/index.html",
         "/assets/**"
-      ],
-      "versionedFiles": [
-        "/*.bundle.css",
-        "/*.bundle.js",
-        "/*.chunk.js"
       ]
     }
   }, {

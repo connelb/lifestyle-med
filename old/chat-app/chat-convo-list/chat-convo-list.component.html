@@ -1,0 +1,63 @@
+<!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
+  <h6 class='mb-0'>
+    <i class="ion-person-stalker" data-pack="default" data-tags="talk"></i> Convos</h6>
+</div> -->
+<!-- <div class="convo-list"> -->
+<!-- <mat-card>
+  <mat-list role="list">
+     <div class="list-group mb-2"> 
+    <mat-list-item role="listitem">
+      <a href *ngFor="let convo of conversations" [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+        <mat-icon>forum</mat-icon>
+        {{convo.name}}</a>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+
+    </div>
+  </mat-list>
+</mat-card> -->
+
+<!-- <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Current chats</mat-card-title>
+      <mat-card-subtitle><i>join a discussion...</i></mat-card-subtitle>
+    </mat-card-header> -->
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <!-- <mat-card-content>
+        <mat-card> -->
+            <mat-chip-list *ngFor="let convo of conversations" class="mat-chip-list-stacked">
+          
+              <mat-chip>
+                <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+                  <mat-icon>forum</mat-icon>
+                  {{convo.name}}</a>
+              </mat-chip>
+          
+            </mat-chip-list>
+          <!-- </mat-card>
+    </mat-card-content> -->
+
+
+ 
+    <!-- <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions> -->
+  <!-- </mat-card> -->
+
+
+
+
+
+
+
+<!-- </div> -->
+<!-- <button
+
+  class="list-group-item list-group-item-action p-2 border-0 bg"
+
+*ngIf="conversationNextToken"
+type="button" class="btn btn-secondary"
+(click)="false">See more convos</button> -->
