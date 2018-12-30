@@ -251,6 +251,14 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
     });
+
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load New Version?")) {
+          window.location.reload();
+        }
+      });
+    }
   }
 
   initializeApp() {
@@ -323,7 +331,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.session = session;
             // this.register();
             // this.register1();
-             this.register2();
+            this.register2();
             setImmediate(() => this.createUser());
           });
 
@@ -360,15 +368,15 @@ export class AppComponent implements OnInit, OnDestroy {
         //if (data) { this.me = data.me; }
       });
     });
-    
-      // this.apollo.watchQuery<any>({
-      //   query: queryListAllMessages,
-      // })
-      //   .valueChanges
-      //   .pipe(
-      //     map(result => result)
-      //   ).subscribe(res=>console.log(res))
-   
+
+    // this.apollo.watchQuery<any>({
+    //   query: queryListAllMessages,
+    // })
+    //   .valueChanges
+    //   .pipe(
+    //     map(result => result)
+    //   ).subscribe(res=>console.log(res))
+
   }
 
   register() {
