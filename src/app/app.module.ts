@@ -72,7 +72,8 @@ import { SubmitRepositoryService } from './providers/submit-repository.service';
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AmplifyAngularModule,
-    GraphQLModule 
+    GraphQLModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) 
   ],
   providers: [InAppBrowser, SplashScreen, StatusBar, 
     AmplifyService,
