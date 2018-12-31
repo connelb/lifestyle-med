@@ -90,26 +90,26 @@ export class MapPage implements AfterViewInit {
 
 }
 
-function getGoogleMaps(apiKey: string): Promise<any> {
-  const win = window as any;
-  const googleModule = win.google;
-  if (googleModule && googleModule.maps) {
-    return Promise.resolve(googleModule.maps);
-  }
+// function getGoogleMaps(apiKey: string): Promise<any> {
+//   const win = window as any;
+//   const googleModule = win.google;
+//   if (googleModule && googleModule.maps) {
+//     return Promise.resolve(googleModule.maps);
+//   }
 
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-    script.onload = () => {
-      const googleModule2 = win.google;
-      if (googleModule2 && googleModule2.maps) {
-        resolve(googleModule2.maps);
-      } else {
-        reject('google maps not available');
-      }
-    };
-  });
-}
+//   return new Promise((resolve, reject) => {
+//     const script = document.createElement('script');
+//     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
+//     script.async = true;
+//     script.defer = true;
+//     document.body.appendChild(script);
+//     script.onload = () => {
+//       const googleModule2 = win.google;
+//       if (googleModule2 && googleModule2.maps) {
+//         resolve(googleModule2.maps);
+//       } else {
+//         reject('google maps not available');
+//       }
+//     };
+//   });
+// }

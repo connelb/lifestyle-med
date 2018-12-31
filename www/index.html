@@ -8,6 +8,8 @@
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
+  <meta name="description" content="Lifestyle Medicine">
+  <meta name="keywords" content="lifestyle, nutrition, fitness">
 
   <meta name="theme-color" content="#387ef5">
 
@@ -19,12 +21,29 @@
   <link rel="icon" type="image/x-icon" href="assets/img/appicon.png">
 
   <link rel="apple-touch-icon" href="assets/img/appicon.png">
-  
+
 
   <script>
-      if (global === undefined) {
-          var global = window;
-      }
+    if (global === undefined) {
+      var global = window;
+    }
+  </script>
+
+<button id="goFS">Go fullscreen</button>
+<script>
+  var goFS = document.getElementById("goFS");
+  goFS.addEventListener("click", function() {
+      document.body.requestFullscreen();
+  }, false);
+</script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./ngsw-worker.js')
+      // ngsw-worker.js
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
   </script>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
@@ -34,12 +53,7 @@
 
   <app-root></app-root>
 
-  <!-- Replace the API key with your own, see:
-    https://developers.google.com/maps/documentation/javascript/get-api-key -->
-  <!-- <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw"></script> -->
-
   <noscript>Please enable JavaScript to continue using this application.</noscript>
-<script type="text/javascript" src="runtime.fc1835bb96b399a522d2.js"></script><script type="text/javascript" src="polyfills.f70dc430429680ae8348.js"></script><script type="text/javascript" src="main.ea55727abef55392f34a.js"></script></body>
+<script type="text/javascript" src="runtime.b363b53b51aa213642ab.js"></script><script type="text/javascript" src="polyfills.f70dc430429680ae8348.js"></script><script type="text/javascript" src="main.599aafaddc41a4633711.js"></script></body>
 
 </html>
-

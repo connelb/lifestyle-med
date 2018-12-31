@@ -11,11 +11,13 @@
   <div padding-top text-center *ngIf="username">
     <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
     <h2>{{username}}</h2>
-
+    <ion-list><ion-item>Goal: {{goal}}</ion-item></ion-list>
+    
     <ion-list inset>
       <ion-item (click)="updatePicture()">Update Picture</ion-item>
       <ion-item (click)="changeUsername()">Change Username</ion-item>
       <ion-item (click)="changePassword()">Change Password</ion-item>
+      <ion-item (click)="changeGoal()">Change Goal</ion-item>
       <ion-item (click)="support()">Support</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>

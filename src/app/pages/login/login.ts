@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
+//import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserData } from '../../providers/user-data';
@@ -20,7 +20,7 @@ export class LoginPage {
   submitted = false;
   signedIn;
   user;
-  greeting;
+  //greeting;
 
   constructor(
     public amplifyService: AmplifyService,
@@ -28,7 +28,7 @@ export class LoginPage {
     public router: Router
   ) { 
 
-    this.amplifyService = amplifyService;
+    //this.amplifyService = amplifyService;
 
     this.amplifyService.authStateChange$
         .subscribe(authState => {
@@ -37,7 +37,7 @@ export class LoginPage {
                 this.user = null;
             } else {
                 this.user = authState.user;
-                this.greeting = "Hello " + this.user.username;
+                //this.greeting = "Hello " + this.user.username;
                 this.userData.login(this.user.username);
                 this.router.navigateByUrl('/app/tabs/blog');
             }

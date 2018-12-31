@@ -44,15 +44,15 @@ import { User } from './interfaces/user'
 import { SwUpdate } from '@angular/service-worker';
 import { AppsyncService } from './providers/appsync.service';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
-import getMe from './graphql.1/queries/getMe';
-import createUser from './graphql.1/mutations/createUser';
+import getMe from './graphql/queries/getMe';
+import createUser from './graphql/mutations/createUser';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
-import getAllUsers from './graphql.1/queries/getAllUsers';
-import queryListAllMessages from './graphql.1/queries/queryListAllMessages';
+import getAllUsers from './graphql/queries/getAllUsers';
+import queryListAllMessages from './graphql/queries/queryListAllMessages';
 
 const CurrentUserForProfile = gql`
 query CurrentUserForProfile {
@@ -199,6 +199,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.amplifyService.auth().currentSession().then(session => {
+      this.logInfoToConsole(session);
+      this.session = session;
+      // this.register();
+      // this.register1();
+      this.register2();
+      
+      setImmediate(() => this.createUser());
+    });
+
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
 
@@ -307,33 +317,25 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   checkLoginStatus1() {
-
-
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        console.log('from app.component', authState.user);
+        //console.log('from app.component', authState.user);
         this.signedIn = authState.state === 'signedIn';
+
         if (!authState.user) {
           this.user = null;
         } else {
           this.user = authState.user;
-          this.greeting = "Hello0000000000 " + this.user.username;
+          //this.greeting = "Hello0000000000 " + this.user.username;
           this.userData.login(this.user.username);
           this.checkLoginStatus();
 
-          this.amplifyService.storage()
-            .list('')
-            .then(data => console.log('data from S3: ', data))
-            .catch(err => console.log('error'))
+          // this.amplifyService.storage()
+          //   .list('')
+          //   .then(data => console.log('data from S3: ', data))
+          //   .catch(err => console.log('error'))
 
-          this.amplifyService.auth().currentSession().then(session => {
-            this.logInfoToConsole(session);
-            this.session = session;
-            // this.register();
-            // this.register1();
-            this.register2();
-            setImmediate(() => this.createUser());
-          });
+         
 
           //this.router.navigateByUrl('/app/tabs/blog');
         }
@@ -344,6 +346,10 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.userData.isLoggedIn().then(loggedIn => {
       return this.updateLoggedInStatus(loggedIn);
     });
+  }
+
+  updateUser(){
+    //this.userData.HAS_LOGGED_IN
   }
 
   register1() {

@@ -16,11 +16,16 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
+            "assets":[
               {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/@ionic/angular/dist/ionic/svg",
+                "output": "./svg"
               },
               "src/manifest.json"
             ],
@@ -51,8 +56,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "src/ngsw-config.json"
+              "serviceWorker": true
             }
           }
         },
@@ -91,11 +95,15 @@
             "scripts": [],
             "assets": [
               {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
+              },
+              {
                 "glob": "**/*",
                 "input": "src/assets",
-                "output": "assets"
+                "output": "/assets"
               },
-              "src/manifest.json",
               "src/manifest.json"
             ]
           }

@@ -3,7 +3,7 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "chatql",
+      "name": "balance",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
@@ -16,26 +16,6 @@
         "/assets/icons/icon-512x512.png",
         "/assets/icons/icon-72x72.png",
         "/assets/icons/icon-96x96.png",
-        "/assets/img.1/appicon.png",
-        "/assets/img.1/appicon.svg",
-        "/assets/img.1/ica-slidebox-img-1.png",
-        "/assets/img.1/ica-slidebox-img-2.png",
-        "/assets/img.1/ica-slidebox-img-3.png",
-        "/assets/img.1/ica-slidebox-img-4.png",
-        "/assets/img.1/ionic-logo-white.svg",
-        "/assets/img.1/speakers/bear.jpg",
-        "/assets/img.1/speakers/cheetah.jpg",
-        "/assets/img.1/speakers/duck.jpg",
-        "/assets/img.1/speakers/eagle.jpg",
-        "/assets/img.1/speakers/elephant.jpg",
-        "/assets/img.1/speakers/giraffe.jpg",
-        "/assets/img.1/speakers/iguana.jpg",
-        "/assets/img.1/speakers/kitten.jpg",
-        "/assets/img.1/speakers/lion.jpg",
-        "/assets/img.1/speakers/mouse.jpg",
-        "/assets/img.1/speakers/puppy.jpg",
-        "/assets/img.1/speakers/rabbit.jpg",
-        "/assets/img.1/speakers/turtle.jpg",
         "/assets/img/AWS_logo_RGB.png",
         "/assets/img/AppSync.png",
         "/assets/img/appicon.png",
@@ -79,26 +59,10 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [],
-      "patterns": [
-        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
-        "https:\\/\\/fonts\\.gstatic\\.com\\/.*",
-        "https:\\/\\/code\\.ionicframework\\.com\\/.*"
-      ]
+      "patterns": []
     }
   ],
-  "dataGroups": [
-    {
-      "name": "appsync",
-      "patterns": [
-        "\\/chat"
-      ],
-      "strategy": "freshness",
-      "maxSize": 50,
-      "maxAge": 1000,
-      "timeoutMs": 1000,
-      "version": 1
-    }
-  ],
+  "dataGroups": [],
   "hashTable": {
     "/assets/data/data.json": "1a67e618ce7ae487762e1fb0658d5a4a1944afb0",
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
@@ -109,26 +73,6 @@
     "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
-    "/assets/img.1/appicon.png": "e8e1955ddbabe481c615cabe13c70d9c097d3cbb",
-    "/assets/img.1/appicon.svg": "589b05ec0ef2c8b766bded586431cb780dd0b95b",
-    "/assets/img.1/ica-slidebox-img-1.png": "0bdc29a1e640108914a8e4f6108d128122e24f7f",
-    "/assets/img.1/ica-slidebox-img-2.png": "d6c5876e61b45ff11c72b93ef622fcbb244966e4",
-    "/assets/img.1/ica-slidebox-img-3.png": "42cb2ee40624fa63ef05db0cbfa89f9391d2e4e8",
-    "/assets/img.1/ica-slidebox-img-4.png": "8ed2a4d2193c371b5b50460e4b719daee0bc99f2",
-    "/assets/img.1/ionic-logo-white.svg": "baba15d089499f0d6b2ad5aa2ff584c645f0e043",
-    "/assets/img.1/speakers/bear.jpg": "01dad70af0d8ac1836c5c007131d81e8cd308fbb",
-    "/assets/img.1/speakers/cheetah.jpg": "dff5a664e4c0b97021fcfa40e3525891e47bd170",
-    "/assets/img.1/speakers/duck.jpg": "a86b1359e97fd36ccaf52f2f9576dc07734c1921",
-    "/assets/img.1/speakers/eagle.jpg": "6d7c47c09093b630873f30b571f456db98608ffe",
-    "/assets/img.1/speakers/elephant.jpg": "1873529b5c26ae7961df29497224ae1a439ff811",
-    "/assets/img.1/speakers/giraffe.jpg": "265f83e12d55374f683f578b424ba2028d80fc15",
-    "/assets/img.1/speakers/iguana.jpg": "d4974df378bd972b3ac7b6226b624d7644c9a5fc",
-    "/assets/img.1/speakers/kitten.jpg": "78ca639fb4a157fa38f38216a4cf99776f1f0af2",
-    "/assets/img.1/speakers/lion.jpg": "7b06a56f1d228cf1fafe10617f2c2a27fc406f1e",
-    "/assets/img.1/speakers/mouse.jpg": "d9e0a6e192e2ef059bf8fa14f5e4b91a31c57f7c",
-    "/assets/img.1/speakers/puppy.jpg": "8f625906d2f5268a9e5e2cf41d513e2736c6e6fe",
-    "/assets/img.1/speakers/rabbit.jpg": "5286740d99c900d080da59c511865f495e8c6266",
-    "/assets/img.1/speakers/turtle.jpg": "8bf240a802062bf0ee3c1b31ff12cd9158b5734e",
     "/assets/img/AWS_logo_RGB.png": "f1e687f0649b0fc0cf5eb0e522623c4c84808cf6",
     "/assets/img/AppSync.png": "61184f3ad22f8d65efaa44a59aae76f341952954",
     "/assets/img/appicon.png": "e8e1955ddbabe481c615cabe13c70d9c097d3cbb",
@@ -163,7 +107,7 @@
     "/assets/img/speakers/puppy.jpg": "8f625906d2f5268a9e5e2cf41d513e2736c6e6fe",
     "/assets/img/speakers/rabbit.jpg": "5286740d99c900d080da59c511865f495e8c6266",
     "/assets/img/speakers/turtle.jpg": "8bf240a802062bf0ee3c1b31ff12cd9158b5734e",
-    "/index.html": "4f7dd92ec13de514b2cdb590979f35746e7d9621"
+    "/index.html": "5f16f44e6e951c9b12261319ed54d2d1ba8c4775"
   },
   "navigationUrls": [
     {

@@ -50,7 +50,6 @@ import { InfscrollDirective } from './infscroll.directive';
 import { MomentAgoPipe } from './moment-ago.pipe';
 
 import { NgxPageScrollModule } from 'ngx-page-scroll';
-import { AppMaterialModule } from './../../app-material/app-material.module';
 
 
 const routes: Routes = [
@@ -67,7 +66,6 @@ const routes: Routes = [
     FormsModule,
     ChatAppRoutingModule,
     NgxPageScrollModule,
-    AppMaterialModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

@@ -13,6 +13,7 @@ import { UserData } from '../../providers/user-data';
 })
 export class AccountPage implements AfterViewInit {
   username: string;
+  goal: string = 'example goal'
 
   constructor(
     public alertCtrl: AlertController,
@@ -64,6 +65,10 @@ export class AccountPage implements AfterViewInit {
 
   changePassword() {
     console.log('Clicked to change password');
+  }
+
+  changeGoal() {
+    console.log('Clicked to change your goal');
   }
 
   logout() {

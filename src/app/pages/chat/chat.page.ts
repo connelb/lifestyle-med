@@ -26,8 +26,8 @@ import User from '../../types/user';
 import Conversation from '../../types/conversation';
 
 import { AppsyncService } from '../../providers/appsync.service';
-import getMe from '../../graphql.1/queries/getMe';
-import createUser from '../../graphql.1/mutations/createUser';
+import getMe from '../../graphql/queries/getMe';
+import createUser from '../../graphql/mutations/createUser';
 
 import { Auth } from 'aws-amplify';
 
@@ -88,7 +88,7 @@ export class ChatPage implements OnInit {
     console.log('creating user', user);
     
     this.appsync.hc().then(client => {
-      console.log('client?', client);
+      //console.log('client?', client);
       client.mutate({
         mutation: createUser,
         variables: {username: user.username},
@@ -110,7 +110,7 @@ export class ChatPage implements OnInit {
 
   register() {
     //this.appsync.hc
-    console.log('what is client??????????????????????????', this.appsync)
+    //console.log('what is client??????????????????????????', this.appsync)
     
     this.appsync.hc().then(client => {
       

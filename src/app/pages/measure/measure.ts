@@ -11,16 +11,15 @@ import { AppsyncService } from '../../providers/appsync.service';
 import { v4 as uuid } from 'uuid';
 // import {  } from '../../graphql.1/mutations';//createMeasurement
 
-import getMeasurements from '../../graphql.1/queries/getMeasurements';
-import createMeasurement from '../../graphql.1/mutations/createMeasurement';
-import createWorkout from '../../graphql.1/mutations/createWorkout';
+import getMeasurements from '../../graphql/queries/getMeasurements';
+import createMeasurement from '../../graphql/mutations/createMeasurement';
+import createWorkout from '../../graphql/mutations/createWorkout';
 //import { unshiftMessage, constants } from '../chat-helper';
 //import Measurement from '../types/measurement';
 import {Measurement} from '../../interfaces/measurement'
 import { Analytics } from 'aws-amplify';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { AppMaterialModule } from '../../app-material/app-material.module';
-import getMe from '../../graphql.1/queries/getMe';
+import getMe from '../../graphql/queries/getMe';
 import { Auth } from 'aws-amplify';
 import User from '../../types/user';
 

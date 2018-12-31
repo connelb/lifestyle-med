@@ -6,7 +6,6 @@ import { IonicModule } from '@ionic/angular';
 import { MeasurePage } from './measure';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { MeasurePageRoutingModule } from './measure-routing.module';
-import { AppMaterialModule } from '../../app-material/app-material.module';
 import { AppsyncService } from '../../providers/appsync.service';
 import { AmplifyService } from 'aws-amplify-angular';
 
@@ -16,7 +15,6 @@ import { AmplifyService } from 'aws-amplify-angular';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AppMaterialModule,
     IonicModule,
     MeasurePageRoutingModule
   ],
