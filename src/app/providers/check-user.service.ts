@@ -13,11 +13,11 @@ export class CheckUser implements CanLoad {
   canLoad() {
     return this.user.isLoggedIn().then(res => {
       if (res) {
-          console.log('what is res?????????', res)
-        //this.router.navigate(['/app', 'tabs', 'blog']);
+        this.router.navigate(['/app', 'tabs', 'blog']);
         return true;
       } else {
-        return false
+        this.router.navigate(['/app', 'tabs', 'blog']);
+        return false;
       }
     });
   }

@@ -199,15 +199,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.amplifyService.auth().currentSession().then(session => {
-      this.logInfoToConsole(session);
-      this.session = session;
-      // this.register();
-      // this.register1();
-      this.register2();
-      
-      setImmediate(() => this.createUser());
-    });
+    // this.amplifyService.auth().currentSession().then(session => {
+    //   this.logInfoToConsole(session);
+    //   this.session = session;
+    //   // this.register();
+    //   // this.register1();
+    //   this.register2();
+
+    //   setImmediate(() => this.createUser());
+    // });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
@@ -335,7 +335,7 @@ export class AppComponent implements OnInit, OnDestroy {
           //   .then(data => console.log('data from S3: ', data))
           //   .catch(err => console.log('error'))
 
-         
+
 
           //this.router.navigateByUrl('/app/tabs/blog');
         }
@@ -348,7 +348,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateUser(){
+  updateUser() {
     //this.userData.HAS_LOGGED_IN
   }
 
@@ -418,9 +418,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/blog');
-    });
+    this.amplifyService.auth().signOut()
+      .then(() => {
+        this.userData.logout().then(() => {
+          return this.router.navigateByUrl('/app/tabs/blog');
+        })
+      })
+      .catch(err => {
+        console.log('err: ', err)
+      })
+
   }
 
   openTutorial() {

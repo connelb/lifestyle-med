@@ -17,7 +17,6 @@ export class TabsPage implements OnInit{
   ngOnInit(){
     this.userData.isLoggedIn().then(res =>
       {
-        console.log('what is res??', res)
         this.loggedIn = res
       }
     )

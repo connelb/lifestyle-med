@@ -32,11 +32,16 @@ const routes: Routes = [
     loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
     canLoad: [CheckTutorial]
   },
-    { 
-      path: 'members', 
-      canActivate: [CheckUser ],
-      loadChildren: './members/member-routing.module#MemberRoutingModule'
-    }
+  {
+    path: 'app',
+    loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
+    //canLoad: [CheckUser]
+  },
+    // { 
+    //   path: 'members', 
+    //   canActivate: [CheckUser ],
+    //   loadChildren: './members/member-routing.module#MemberRoutingModule'
+    // }
   ]
 
 // const routes: Routes = [

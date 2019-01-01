@@ -55,17 +55,17 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    Auth.currentSession().then(session => {
-      this.logInfoToConsole(session);
-      this.session = session;
-      this.register();
-      setImmediate(() => this.createUser());
-    });
+    // Auth.currentSession().then(session => {
+    //   this.logInfoToConsole(session);
+    //   this.session = session;
+    //   this.register();
+    //   setImmediate(() => this.createUser());
+    // });
 
-    this.swUpdate.available.subscribe(event => {
-      console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
-      this.update = true;
-    });
+    // this.swUpdate.available.subscribe(event => {
+    //   console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
+    //   this.update = true;
+    // });
   }
 
   logInfoToConsole(session) {

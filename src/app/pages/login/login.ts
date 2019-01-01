@@ -40,6 +40,7 @@ export class LoginPage {
                 //this.greeting = "Hello " + this.user.username;
                 this.userData.login(this.user.username);
                 this.router.navigateByUrl('/app/tabs/blog');
+                //this.router.navigate(['members', 'blog1']);
             }
         });
   }
