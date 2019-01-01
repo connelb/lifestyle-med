@@ -40,6 +40,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 // Apollo
 import { GraphQLModule } from './graphql.module';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
+import { MemberRoutingModule } from './members/member-routing.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SubmitRepositoryService } from './providers/submit-repository.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MemberRoutingModule,
     HttpClientModule,
     ApolloModule,
     AmplifyAngularModule,

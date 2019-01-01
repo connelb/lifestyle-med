@@ -20,7 +20,6 @@ export class TabsPage implements OnInit{
         console.log('what is res??', res)
         this.loggedIn = res
       }
-
     )
   }
 
