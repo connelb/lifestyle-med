@@ -6,7 +6,7 @@ import { TabsPage } from './tabs-page';
 import { TabsPageRoutingModule } from './tabs-page-routing.module';
 
 import { AboutModule } from '../about/about.module';
-import { MapModule } from '../map/map.module';
+import { PostModule } from '../post/post.module';
 import { MeasureModule } from '../measure/measure.module';
 //import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { SpeakerDetailModule } from '../speaker-detail/speaker-detail.module';
@@ -19,7 +19,7 @@ import { ChatPageModule } from '../chat/chat.module';
     AboutModule,
     CommonModule,
     IonicModule,
-    MapModule,
+    PostModule,
     ChatPageModule,
     MeasureModule,
     //SessionDetailModule,

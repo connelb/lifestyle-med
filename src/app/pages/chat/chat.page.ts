@@ -55,10 +55,23 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    this.register()
-    Auth.currentSession().then(session => {
-      console.log('what is session in chat, can it be used everywhere??',session)
-    })
+
+    this.appsync.hc().then(client => {
+      
+      client.watchQuery({
+        query: getMe,
+        fetchPolicy: 'cache-only'
+      }).subscribe(({data}) => {
+        // console.log('register user, fetch cache', data);
+        if (data) { this.me = data.me; }
+      });
+    });
+
+
+    //this.register()
+    // Auth.currentSession().then(session => {
+    //   console.log('what is session in chat, can it be used everywhere??',session)
+    // })
     // Auth.currentSession().then(session => {
     //   this.logInfoToConsole(session);
     //   this.session = session;
@@ -66,21 +79,21 @@ export class ChatPage implements OnInit {
     //   setImmediate(() => this.createUser());
     // });
 
-    // this.swUpdate.available.subscribe(event => {
-    //   console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
-    //   this.update = true;
-    // });
+    this.swUpdate.available.subscribe(event => {
+      console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
+      this.update = true;
+    });
   }
 
-  logInfoToConsole(session) {
-    console.log(session);
-    console.log(`ID Token: <${session.idToken.jwtToken}>`);
-    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-    console.log('Decoded ID Token:');
-    console.log(JSON.stringify(session.idToken.payload, null, 2));
-    console.log('Decoded Acess Token:');
-    console.log(JSON.stringify(session.accessToken.payload, null, 2));
-  }
+  // logInfoToConsole(session) {
+  //   console.log(session);
+  //   console.log(`ID Token: <${session.idToken.jwtToken}>`);
+  //   console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+  //   console.log('Decoded ID Token:');
+  //   console.log(JSON.stringify(session.idToken.payload, null, 2));
+  //   console.log('Decoded Acess Token:');
+  //   console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  // }
 
   createUser() {
     const user: User = {

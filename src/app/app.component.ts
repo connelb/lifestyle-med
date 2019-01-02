@@ -94,15 +94,15 @@ export class AppComponent implements OnInit, OnDestroy {
       url: '/app/tabs/measure',
       icon: 'calendar'
     },
+    // {
+    //   title: 'Speakers',
+    //   url: '/app/tabs/speakers',
+    //   icon: 'contacts'
+    // },
     {
-      title: 'Speakers',
-      url: '/app/tabs/speakers',
+      title: 'Post',
+      url: '/app/tabs/post',
       icon: 'contacts'
-    },
-    {
-      title: 'Map',
-      url: '/app/tabs/map',
-      icon: 'map'
     },
     {
       title: 'About',

@@ -54,11 +54,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'map',
+        path: 'post',
         children: [
           {
             path: '',
-            loadChildren: '../map/map.module#MapModule'
+            loadChildren: '../post/post.module#PostModule'
           }
         ]
       },

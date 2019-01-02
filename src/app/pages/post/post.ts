@@ -8,12 +8,16 @@ import AWSAppSyncClient from 'aws-appsync';
 import { AmplifyService }  from 'aws-amplify-angular';
 import { SwUpdate } from '@angular/service-worker';
 
+import { PopoverController } from '@ionic/angular';
+
+import { PopoverPage } from '../post-popover/post-popover';
+
 @Component({
   selector: 'page-map',
-  templateUrl: 'map.html',
-  styleUrls: ['./map.scss']
+  templateUrl: 'post.html',
+  styleUrls: ['./post.scss']
 })
-export class MapPage implements AfterViewInit {
+export class PostPage implements AfterViewInit {
   @ViewChild('mapCanvas') mapElement: ElementRef;
 
   session;
@@ -23,7 +27,7 @@ export class MapPage implements AfterViewInit {
   //conversation: Conversation;
   update: boolean;
 
-  constructor(public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) {}
+  constructor(public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) {}
 
   async ngAfterViewInit() {
 
@@ -86,6 +90,14 @@ export class MapPage implements AfterViewInit {
 
   onAlbumImageSelected(event){
     window.open( event, '_blank' );
+  }
+
+  async presentPopover(event: Event) {
+    const popover = await this.popoverCtrl.create({
+      component: PopoverPage,
+      event
+    });
+    await popover.present();
   }
 
 }
