@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPage } from './about';
 import { PopoverPage } from '../about-popover/about-popover';
 import { AboutPageRoutingModule } from './about-routing.module';
+// import { App } from 'ionic-angular';
 
 @NgModule({
   imports: [

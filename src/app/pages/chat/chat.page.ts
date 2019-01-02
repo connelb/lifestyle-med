@@ -55,6 +55,10 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
+    this.register()
+    Auth.currentSession().then(session => {
+      console.log('what is session in chat, can it be used everywhere??',session)
+    })
     // Auth.currentSession().then(session => {
     //   this.logInfoToConsole(session);
     //   this.session = session;

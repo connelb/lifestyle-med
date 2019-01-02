@@ -427,7 +427,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .catch(err => {
         console.log('err: ', err)
       })
-
   }
 
   openTutorial() {

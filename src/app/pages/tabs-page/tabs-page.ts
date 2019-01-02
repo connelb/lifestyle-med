@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { AmplifyService }  from 'aws-amplify-angular';
+import { AmplifyService } from 'aws-amplify-angular';
 import { UserData } from '../../providers/user-data';
 
 @Component({
   templateUrl: 'tabs-page.html'
 })
-export class TabsPage implements OnInit{
+export class TabsPage {
 
   loggedIn = false;
 
   constructor(
     public amplifyService: AmplifyService,
     public userData: UserData,
-  ) {}
+  ) {
 
-  ngOnInit(){
-    this.userData.isLoggedIn().then(res =>
-      {
-        this.loggedIn = res
-      }
-    )
+    this.amplifyService.authStateChange$
+      .subscribe(authState => {
+        this.loggedIn = authState.state === 'signedIn';
+      })
   }
 
 }

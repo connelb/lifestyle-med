@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { AmplifyService }  from 'aws-amplify-angular'; 
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserData {
+  authState: any;
+
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
   constructor(
     public events: Events,
-    public storage: Storage
-  ) { }
+    public storage: Storage,
+    public AmplifyService:AmplifyService
+  ) { 
+    this.authState = { signedIn: false };
+  }
 
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
@@ -49,6 +55,13 @@ export class UserData {
     return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
       return this.storage.remove('username');
     }).then(() => {
+      this.AmplifyService.authStateChange$
+      .subscribe(authState => {
+        this.authState.signedOut = authState.state === 'signedOut';
+        this.events.publish('data:AuthState', this.authState);
+        // this.events.publish('user:logout');
+      });
+
       this.events.publish('user:logout');
     });
   }

@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
 
-import { PopoverController } from '@ionic/angular';
+import { PopoverController} from '@ionic/angular';
+
+// import { App} from 'ionic-angular';
 
 @Component({
   template: `
     <ion-list>
-      <ion-item button (click)="close('https://ionicframework.com/docs/v2/getting-started')">
-        <ion-label>Learn Ionic</ion-label>
+      <ion-item button (click)="close('https://google.com')">
+        <ion-label>Facebook</ion-label>
       </ion-item>
-      <ion-item button (click)="close('https://ionicframework.com/docs/v2')">
-        <ion-label>Documentation</ion-label>
-      </ion-item>
-      <ion-item button (click)="close('https://showcase.ionicframework.com')">
-        <ion-label>Showcase</ion-label>
-      </ion-item>
-      <ion-item button (click)="close('https://github.com/ionic-team/ionic')">
-        <ion-label>GitHub Repo</ion-label>
+      <ion-item button (click)="close('https://google.com')">
+        <ion-label>LinkedIn</ion-label>
       </ion-item>
       <ion-item button (click)="support()">
         <ion-label>Support</ion-label>
@@ -24,10 +20,12 @@ import { PopoverController } from '@ionic/angular';
   `
 })
 export class PopoverPage {
-  constructor(public popoverCtrl: PopoverController) {}
+  constructor(public popoverCtrl: PopoverController) {} //, private app: App
+
 
   support() {
-    // this.app.getRootNavs()[0].push('/support');
+    // this.app.getRootNavById[0].push('/support');
+  
     this.popoverCtrl.dismiss();
   }
 

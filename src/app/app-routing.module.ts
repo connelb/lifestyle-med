@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
-    //canLoad: [CheckUser]
+    //canActivate: [CheckUser]
   },
     // { 
     //   path: 'members', 
