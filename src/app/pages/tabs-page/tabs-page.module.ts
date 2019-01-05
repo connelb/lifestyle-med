@@ -13,6 +13,9 @@ import { SpeakerDetailModule } from '../speaker-detail/speaker-detail.module';
 import { SpeakerListModule } from '../speaker-list/speaker-list.module';
 import { BlogPageModule } from '../blog/blog.module';
 import { ChatPageModule } from '../chat/chat.module';
+import { SignUpModule } from '../signup/signup.module';
+import { SleepPageModule } from '../sleep/sleep.module';
+import { ActionSheetPageModule } from '../action-sheet/action-sheet.module';
 
 @NgModule({
   imports: [
@@ -26,6 +29,9 @@ import { ChatPageModule } from '../chat/chat.module';
     SpeakerDetailModule,
     SpeakerListModule,
     BlogPageModule,
+    SignUpModule,
+    SleepPageModule,
+    ActionSheetPageModule,
     TabsPageRoutingModule
   ],
   declarations: [

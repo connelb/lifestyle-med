@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
 import { MeasurePage } from '../measure/measure';
 import { BlogPage } from '../blog/blog.page';
+import { ActionSheetPage } from '../action-sheet/action-sheet.page';
 
 
 const routes: Routes = [
@@ -16,6 +17,19 @@ const routes: Routes = [
           {
             path: '',
             component: BlogPage,
+          },
+          // {
+          //   path: 'session/:sessionId',
+          //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
+          // }
+        ]
+      },
+      {
+        path: 'action-sheet',
+        children: [
+          {
+            path: '',
+            component: ActionSheetPage,
           },
           // {
           //   path: 'session/:sessionId',
@@ -80,6 +94,15 @@ const routes: Routes = [
           }
         ]
       },
+      // {
+      //   path: 'signup',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../signup/signup.module#SignUpModule'
+      //     }
+      //   ]
+      // },
       {
         path: '',
         redirectTo: '/app/tabs/blog',

@@ -44,10 +44,12 @@
             </ion-select> -->
 
             <ion-list *ngFor="let convo of conversations" >
-                <ion-item>
-                  <ion-label><a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+                <ion-item >
+                  <!-- <ion-label> -->
+                    <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
                       <!-- <mat-icon>forum</mat-icon> -->
-                      {{convo.name}}</a></ion-label>
+                      {{convo.name}}</a>
+                    <!-- </ion-label> -->
                 </ion-item>
               </ion-list>
 

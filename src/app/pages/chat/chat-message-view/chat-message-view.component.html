@@ -55,7 +55,11 @@
           <!-- </ion-label> -->
         <!-- </ion-virtual-scroll> -->
       </ion-item>
+
     </ion-list>
+    <h4>test</h4>
+    <app-chat-input *ngIf='me' [conversation]="conversation" [senderId]="me.cognitoId">chat input here
+      </app-chat-input>
     
  
 <!-- </ion-list> -->

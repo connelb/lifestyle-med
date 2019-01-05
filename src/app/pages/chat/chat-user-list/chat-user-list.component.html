@@ -1,15 +1,8 @@
-<div *ngIf="no_user;">
-  <br/>
-  <!-- <ngb-alert type="success" [dismissible]="false"> -->
-  <span>It looks lonely here... Sign up another user</span>
-  <!-- </ngb-alert> -->
-</div>
-
 <ion-list *ngFor="let user of users">
   <ion-item>
-    <ion-label>
+    <!-- <ion-label> -->
       <a href='#' [class.active]="current && convo.id === current.id" (click)="createNewConversation(user, $event); false">
         {{user.username}}</a>
-    </ion-label>
+    <!-- </ion-label> -->
   </ion-item>
 </ion-list>

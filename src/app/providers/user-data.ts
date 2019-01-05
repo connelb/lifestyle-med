@@ -40,6 +40,7 @@ export class UserData {
   login(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
+      this.events.publish('data:AuthState', this.authState);
       return this.events.publish('user:login');
     });
   }
@@ -47,6 +48,7 @@ export class UserData {
   signup(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
+      
       return this.events.publish('user:signup');
     });
   }

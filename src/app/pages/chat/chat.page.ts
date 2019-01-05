@@ -30,6 +30,7 @@ import getMe from '../../graphql/queries/getMe';
 import createUser from '../../graphql/mutations/createUser';
 
 import { Auth } from 'aws-amplify';
+import { AmplifyService } from 'aws-amplify-angular/dist/src/providers/amplify.service';
 
 
 @Component({
@@ -46,10 +47,12 @@ export class ChatPage implements OnInit {
   me: User;
   conversation: Conversation;
   update: boolean;
+  user;
 
   constructor(
     private swUpdate: SwUpdate,
-    private appsync: AppsyncService
+    private appsync: AppsyncService,
+    public amplifyService: AmplifyService
   ) {
     PageScrollConfig.defaultDuration = 400;
   }
@@ -67,6 +70,28 @@ export class ChatPage implements OnInit {
       });
     });
 
+    this.amplifyService.authStateChange$
+        .subscribe(authState => {
+            //this.signedIn = authState.state === 'signedIn';
+            if (!authState.user) {
+                this.user = null;
+            } else {
+              //console.log('what is authState????????', authState);
+                //this.user = authState.user;
+                //this.greeting = "Hello " + this.user.username;
+                //this.userData.login(this.user.username);
+                this.session = authState.user.signInUserSession;
+                //this.logInfoToConsole(authState.user.signInUserSession);
+                
+                //this.register();
+                setImmediate(() => this.createUser());
+
+
+                //this.router.navigateByUrl('/app/tabs/blog');
+                //this.router.navigate(['members', 'blog1']);
+            }
+        });
+
 
     //this.register()
     // Auth.currentSession().then(session => {
@@ -83,6 +108,8 @@ export class ChatPage implements OnInit {
       console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
     });
+
+    console.log('what is me??', this.me)
   }
 
   // logInfoToConsole(session) {
@@ -102,7 +129,7 @@ export class ChatPage implements OnInit {
       cognitoId: this.session.idToken.payload['sub'],
       registered: false
     };
-    console.log('creating user', user);
+    console.log('creating user, does thsi wor??????', user);
     
     this.appsync.hc().then(client => {
       //console.log('client?', client);

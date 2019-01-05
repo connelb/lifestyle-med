@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: './pages/support/support.module#SupportModule'
   },
   {
+    path: 'signup',
+    loadChildren: './pages/signup/signup.module#SignUpModule'
+  },
+  {
     path: 'login',
     loadChildren: './pages/login/login.module#LoginModule'
   },
@@ -37,11 +41,12 @@ const routes: Routes = [
     loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
     //canActivate: [CheckUser]
   },
-    // { 
-    //   path: 'members', 
-    //   canActivate: [CheckUser ],
-    //   loadChildren: './members/member-routing.module#MemberRoutingModule'
-    // }
+
+    { 
+      path: 'members', 
+      //canActivate: [CheckUser ],
+      loadChildren: './members/member-routing.module#MemberRoutingModule'
+    }
   ]
 
 // const routes: Routes = [

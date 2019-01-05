@@ -36,7 +36,7 @@
     </ion-item-sliding>
   </ion-list> -->
 
-    <ion-list> 
+    <ion-list *ngIf='me'> 
         <ion-item>
           <ion-label>Current Users</ion-label>
           <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
@@ -53,10 +53,10 @@
           </app-chat-message-view>
         </ion-item>
 
-        <ion-item>
+        <!-- <ion-item>
         <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
           </app-chat-input>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
 
 
