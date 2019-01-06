@@ -13,8 +13,8 @@ import { RouterModule, Routes } from '@angular/router';
     },
     { path: 'blog', loadChildren: '../pages/blog/blog.module#BlogPageModule' },
     { path: 'chat', loadChildren: '../pages/chat/chat.module#ChatPageModule' },
-    { path: 'action-sheet', loadChildren: './pages/action-sheet/action-sheet.module#ActionSheetPageModule' },
-    { path: 'sleep', loadChildren: './pages/sleep/sleep.module#SleepPageModule' },
+    { path: 'action-sheet', loadChildren: '../pages/action-sheet/action-sheet.module#ActionSheetPageModule' },
+    { path: 'sleep', loadChildren: '../pages/sleep/sleep.module#SleepPageModule' },
   ];
 
 @NgModule({

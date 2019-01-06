@@ -59,6 +59,27 @@ export type DeleteWorkoutInput = {
   createdAt: string;
 };
 
+export type CreateSleepInput = {
+  sleepId: string;
+  createdAt: string;
+  userId?: string | null;
+  updatedAt?: string | null;
+  hours?: string | null;
+};
+
+export type UpdateSleepInput = {
+  sleepId: string;
+  createdAt: string;
+  userId?: string | null;
+  updatedAt?: string | null;
+  hours?: string | null;
+};
+
+export type DeleteSleepInput = {
+  sleepId: string;
+  createdAt: string;
+};
+
 export type TableMeasurementFilterInput = {
   measurementId?: TableStringFilterInput | null;
   createdAt?: TableStringFilterInput | null;
@@ -104,6 +125,14 @@ export type TableWorkoutFilterInput = {
   desc?: TableStringFilterInput | null;
   duration?: TableStringFilterInput | null;
   capture?: TableStringFilterInput | null;
+};
+
+export type TableSleepFilterInput = {
+  sleepId?: TableStringFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  userId?: TableStringFilterInput | null;
+  updatedAt?: TableStringFilterInput | null;
+  hours?: TableStringFilterInput | null;
 };
 
 export type CreateConversationMutation = {
@@ -320,6 +349,33 @@ export type DeleteWorkoutMutation = {
   desc: string | null;
   duration: string | null;
   capture: string | null;
+};
+
+export type CreateSleepMutation = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
+};
+
+export type UpdateSleepMutation = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
+};
+
+export type DeleteSleepMutation = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
 };
 
 export type AllMessageQuery = {
@@ -546,6 +602,28 @@ export type ListWorkoutsQuery = {
   nextToken: string | null;
 };
 
+export type GetSleepQuery = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
+};
+
+export type ListSleepsQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Sleep";
+    sleepId: string;
+    createdAt: string;
+    userId: string | null;
+    updatedAt: string | null;
+    hours: string | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
   author: {
@@ -740,6 +818,33 @@ export type OnDeleteWorkoutSubscription = {
   desc: string | null;
   duration: string | null;
   capture: string | null;
+};
+
+export type OnCreateSleepSubscription = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
+};
+
+export type OnUpdateSleepSubscription = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
+};
+
+export type OnDeleteSleepSubscription = {
+  __typename: string;
+  sleepId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  hours: string | null;
 };
 
 @Injectable({
@@ -1097,6 +1202,63 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteWorkoutMutation>response.data.deleteWorkout;
+  }
+  async CreateSleep(input: CreateSleepInput): Promise<CreateSleepMutation> {
+    const statement = `mutation CreateSleep($input: CreateSleepInput!) {
+        createSleep(input: $input) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateSleepMutation>response.data.createSleep;
+  }
+  async UpdateSleep(input: UpdateSleepInput): Promise<UpdateSleepMutation> {
+    const statement = `mutation UpdateSleep($input: UpdateSleepInput!) {
+        updateSleep(input: $input) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateSleepMutation>response.data.updateSleep;
+  }
+  async DeleteSleep(input: DeleteSleepInput): Promise<DeleteSleepMutation> {
+    const statement = `mutation DeleteSleep($input: DeleteSleepInput!) {
+        deleteSleep(input: $input) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteSleepMutation>response.data.deleteSleep;
   }
   async AllMessage(
     conversationId: string,
@@ -1473,6 +1635,60 @@ export class APIService {
     )) as any;
     return <ListWorkoutsQuery>response.data.listWorkouts;
   }
+  async GetSleep(sleepId: string, createdAt: string): Promise<GetSleepQuery> {
+    const statement = `query GetSleep($sleepId: String!, $createdAt: String!) {
+        getSleep(sleepId: $sleepId, createdAt: $createdAt) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      sleepId,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetSleepQuery>response.data.getSleep;
+  }
+  async ListSleeps(
+    filter?: TableSleepFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListSleepsQuery> {
+    const statement = `query ListSleeps($filter: TableSleepFilterInput, $limit: Int, $nextToken: String) {
+        listSleeps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            sleepId
+            createdAt
+            userId
+            updatedAt
+            hours
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListSleepsQuery>response.data.listSleeps;
+  }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
   > = API.graphql(
@@ -1740,4 +1956,49 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteWorkoutSubscription>;
+
+  OnCreateSleepListener: Observable<OnCreateSleepSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+        onCreateSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`
+    )
+  ) as Observable<OnCreateSleepSubscription>;
+
+  OnUpdateSleepListener: Observable<OnUpdateSleepSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+        onUpdateSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`
+    )
+  ) as Observable<OnUpdateSleepSubscription>;
+
+  OnDeleteSleepListener: Observable<OnDeleteSleepSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+        onDeleteSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
+          __typename
+          sleepId
+          createdAt
+          userId
+          updatedAt
+          hours
+        }
+      }`
+    )
+  ) as Observable<OnDeleteSleepSubscription>;
 }

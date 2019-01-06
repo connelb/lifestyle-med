@@ -1,9 +1,32 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>sleep</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sleep</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding fullscreen>
+    <!-- <form  [formGroup]="sleepFormGroup" class="form"> -->
+  <ion-item>
+    <ion-label position="floating"><strong>Hours slept:</strong><ion-input [(ngModel)]="value"></ion-input></ion-label>
+    
+    <!-- (ionBlur)="rangeBlurred($event)" (ionFocus)="rangeFocused($event)" -->
+    <ion-range min="2" max="12" step="1" debounce="700" (ionChange)="hoursSlept($event)" [(ngModel)]="value" pin="true">
+      <ion-icon size="small" slot="start" name="sad"></ion-icon>
+      <ion-icon slot="end" name="happy"></ion-icon>
+    </ion-range>
+  </ion-item>
+  <ion-item>
+      <ion-icon name="calendar" slot="start"></ion-icon>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
+</ion-item>
+
+  <ion-button expand="block" (click)='presentToast()'> Save</ion-button>
+
+  <!-- <ion-button (click)="sleepOnSubmit(sleepFormGroup.value)"  type="submit" expand="block">Record</ion-button>
+</form> -->
 
 </ion-content>
