@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 // import { AuthenicatedRoutingModule } from './authenicated/authenicated-routing.module';
 
 import { environment } from '../environments/environment';
+import { ChartsModule } from 'ng2-charts';
 
 import Amplify from 'aws-amplify';
 import aws_exports from '../aws-exports';
@@ -42,6 +43,7 @@ import { GraphQLModule } from './graphql.module';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
 import { MemberRoutingModule } from './members/member-routing.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,11 +69,13 @@ import { MemberRoutingModule } from './members/member-routing.module';
     // RoutingModule,
     // AuthenicatedRoutingModule,
     FormsModule,
+   
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     AmplifyAngularModule,
-    GraphQLModule
+    GraphQLModule,
+    ChartsModule
   ],
   providers: [InAppBrowser, SplashScreen, StatusBar, 
     AmplifyService,

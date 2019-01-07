@@ -29,4 +29,25 @@
   <!-- <ion-button (click)="sleepOnSubmit(sleepFormGroup.value)"  type="submit" expand="block">Record</ion-button>
 </form> -->
 
+<ion-list>
+    <ion-item *ngFor="let sleep of myData">
+      <h3>{{sleep.updatedAt}}</h3>
+    </ion-item>
+</ion-list>
+
+
+<div id="chart-container">
+
+    <canvas baseChart
+    [datasets]="chartData"
+    [labels]="chartLabels"
+    [options]="barChartOptions"
+    [colors]="chartColors"
+    chartType="bar"></canvas>
+
+
+    <!-- <canvas #myCanvas
+     id="canvas" baseChart [chartType]="chartType" [datasets]="chartData" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"></canvas> -->
+  </div>
+
 </ion-content>
