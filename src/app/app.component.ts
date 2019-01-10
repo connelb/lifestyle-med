@@ -138,9 +138,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private querySubscription: Subscription;
 
-
-
-
+ 
   constructor(
     private events: Events,
     private menu: MenuController,

@@ -37,13 +37,14 @@
 
 
 <div id="chart-container">
+    <!-- <canvas [datasets]="chartData"></canvas> -->
 
-    <canvas baseChart
+    <canvas baseChart baseChart width="400" height="400"
     [datasets]="chartData"
     [labels]="chartLabels"
-    [options]="barChartOptions"
+    [options]="chartOptions"
     [colors]="chartColors"
-    chartType="bar"></canvas>
+    [chartType]="chartType"></canvas>
 
 
     <!-- <canvas #myCanvas

@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { ChartsModule } from 'ng2-charts';
 
+
 import Amplify from 'aws-amplify';
 import aws_exports from '../aws-exports';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
@@ -43,6 +44,7 @@ import { GraphQLModule } from './graphql.module';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
 import { MemberRoutingModule } from './members/member-routing.module';
 
+// import 'chart.js/src/chart.js';
 
 @NgModule({
   declarations: [

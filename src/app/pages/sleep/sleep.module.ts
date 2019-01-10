@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 
 import { SleepPage } from './sleep.page';
+import { ChartsModule } from 'ng2-charts';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ChartsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SleepPage]
