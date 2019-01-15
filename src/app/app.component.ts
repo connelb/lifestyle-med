@@ -211,30 +211,31 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
 
-    // this.appsyncService.hc().then(client => {
-    //   const observable = client.query({
-    //     query: gql`
-    //     query getAllUsers {
-    //       allUser {
-    //         __typename
-    //         id
-    //         cognitoId
-    //         username
-    //       }
-    //     }`,
-    //     fetchPolicy: 'cache-and-network'
-    //   });
+    this.appsyncService.hc().then(client => {
+      const observable = client.watchQuery({
+        query: gql`
+        query getAllUsers {
+          allUser {
+            __typename
+            id
+            cognitoId
+            username
+          }
+        }`,
+        fetchPolicy: 'cache-and-network'
+      });
 
-    //       observable.subscribe(({data}) => {
-    //         if (!data) {
-    //           return console.log('getAllUsers - no data');
-    //         }
-    //         //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-    //         console.log('getAllUsers - Got data', data);
-    //         //this.no_user = (this.users.length === 0);
-    // });
-    //});
-    //}
+          observable.subscribe(({data}) => {
+            if (!data) {
+              return console.log('getAllUsers - no data');
+            }
+            //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
+            console.log('getAllUsers - Got data', data);
+            //this.no_user = (this.users.length === 0);
+    });
+    });
+
+    // }
     // const source$ = this.apollo.query({
     //   query: gql`
     //   {

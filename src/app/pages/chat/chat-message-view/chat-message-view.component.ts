@@ -11,6 +11,9 @@ import { ObservableQuery, ApolloQueryResult } from 'apollo-client';
 import { unshiftMessage, pushMessages, constants } from '../chat-helper';
 
 import { Observable, of, from, empty } from 'rxjs';
+
+import getMe from '../../../graphql/queries/getMe';
+import User from '../../../types/user';
 // import {  of, from, empty} from 'rxjs/operators';
 // import { interval, fromEvent, merge, empty } from 'rxjs';
 // import { switchMap, scan, takeWhile, startWith, mapTo } from 'rxjs/operators';
@@ -36,6 +39,8 @@ export class ChatMessageViewComponent {
   firstMessage: Message;
   subscription: () => void;
 
+  me: User;
+
   @Input()
   set conversation(convo: any) {
     this._conversation = convo;
@@ -55,6 +60,18 @@ export class ChatMessageViewComponent {
 
   constructor(private appsync: AppsyncService) {
     this.loadMoreMessages = this.loadMoreMessages.bind(this);
+
+
+    this.appsync.hc().then(client => {
+      
+      client.watchQuery({
+        query: getMe,
+        fetchPolicy: 'cache-only'
+      }).subscribe(({data}) => {
+        // console.log('register user, fetch cache', data);
+        if (data) { this.me = data.me; }
+      });
+    });
   }
 
   messageAdded(isFirst = false, message: Message) {

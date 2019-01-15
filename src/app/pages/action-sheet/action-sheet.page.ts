@@ -20,7 +20,7 @@ export class ActionSheetPage{
         text: 'Record',
         icon: 'share',
         handler: () => {
-          console.log('Delete clicked');
+          // console.log('Delete clicked');
           this.router.navigateByUrl('/sleep');
         }
       }, {

@@ -9,60 +9,41 @@ import queryListSleep from '../../graphql/queries/queryListSleep';
 // import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 
+import * as moment from 'moment';
+import * as _ from 'lodash';
+
+
 
 @Component({
   selector: 'sleep',
   templateUrl: './sleep.page.html',
   styleUrls: ['./sleep.page.scss'],
 })
-export class SleepPage implements OnInit{
-  me:User;
+export class SleepPage implements OnInit {
+  me: User;
   // sleepFormGroup: FormGroup;
   sleepPost: any = '';
 
   value: number = 8;
-  sleepHours:number;
-  myData:any;
+  sleepHours: number;
+  myData: any;
+  myData1: any;
 
-  public chartOptions: any;
-  public chartType: string = 'line';
-  public chartLabels: string[] = ['Jul 14', 'Jul 15', 'Jul 16', 'Jul 17'];
-  public chartData: any =
-  [
-    {
-      data: [44000, 37000, 35000, 42000],
-      label: 'Repeat Count',
-      borderWidth: 1
-    },
-    {
-      data: [5000, 5000, 5000, 6000],
-      label: 'New Count',
-      borderWidth: 1
-    },
+  public chartOptions:any;
+  public chartType: string = 'bar';
+  // public chartLabels: string[] = ['Jul 14', 'Jul 15', 'Jul 16', 'Jul 17'];
+  //public chartData: string[] =[''];
+  public chartData:any = [];
+  public chartLabels:Array<string> = [];
+
+
+  public lineChartData:Array<any> = [
+    {data: this.chartData}
   ];
 
- 
+  dateValue = new Date().toISOString().slice(0, 10);
 
-  dateValue = new Date().toISOString().slice(0,10);
-
-//   data = {
-//     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-//     datasets: [
-//         {
-//             label: 'My First dataset',
-//             backgroundColor: '#42A5F5',
-//             borderColor: '#1E88E5',
-//             data: [65, 59, 80, 81, 56, 55, 40]
-//         },
-//         {
-//             label: 'My Second dataset',
-//             backgroundColor: '#9CCC65',
-//             borderColor: '#7CB342',
-//             data: [28, 48, 40, 19, 86, 27, 90]
-//         }
-//     ]
-// }
-chart = [];
+  chart = [];
 
   constructor(
     private el: ElementRef,
@@ -73,7 +54,7 @@ chart = [];
         responsive: true,
         title: {
           display: true,
-          text: 'My Chart Title',
+          text: 'Hours Slept',
           fontColor: 'black',
         },
         scales: {
@@ -92,14 +73,14 @@ chart = [];
               fontColor: 'black',
               min: 0,
               beginAtZero: true,
-      
+  
             },
             gridLines: {
               color: '#dbd9d9'
             },
             scaleLabel: {
               display: true,
-              labelString: 'Scale Label',
+              labelString: 'Hours Slept',
               fontColor: 'black',
             }
           }]
@@ -111,50 +92,131 @@ chart = [];
           }
         },
       };
+
+      this.getAllSleep();
     }
 
-
-  // @ViewChild('myCanvas')
-  // public canvas: ElementRef;
-
-  // public context: CanvasRenderingContext2D;
-  // public chartType: string = 'line';
-  // //public chartData: any[];
-  // public chartLabels: any[];
-  // public chartColors: any[];
-  // public chartOptions: any;
-  // public barChartOptions: any;
-
-  // public chartData: any =
-  // [
-  //   {
-  //     data: [44000, 37000, 35000, 42000],
-  //     label: 'Repeat Count',
-  //     borderWidth: 1
-  //   },
-  //   {
-  //     data: [5000, 5000, 5000, 6000],
-  //     label: 'New Count',
-  //     borderWidth: 1
-  //   },
-  // ];
-
-
-
-
-  
-
-
   ngOnInit() {
+    // this.chartData['data'] =[];
     this.createForm();
     this.register();
-    this.getAllSleep();
+    
+  }
 
-    // this.barChartOptions = {
+  register() {
+    this.appsync.hc().then(client => {
+      client.watchQuery({
+        query: getMe,
+        fetchPolicy: 'cache-only'
+      }).subscribe(({ data }) => {
+        console.log('register user, fetch cache', data);
+        if (data) { this.me = data.me; }
+      });
+    });
+  }
+
+  createForm() {
+    this.sleepPost = {
+      updatedAt: this.dateValue
+    };
+  }
+
+  getAllSleep() {
+    let temp;
+
+    this.appsync.hc().then(client => {
+      const observable = client.watchQuery({
+        query: queryListSleep,
+        fetchPolicy: 'cache-and-network'
+      });
+
+      observable.subscribe(({data}) => {
+        if (!data) {
+          return console.log('getAllUsers - no data');
+        }
+        //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
+       
+        this.chartLabels = _.map(data.listSleeps.items,'updatedAt');
+        this.chartData = _.map(_.map(data.listSleeps.items,'hours'),_.ary(parseInt,1));
+        this.lineChartData = [{data: this.chartData}];//, label: 'A',borderWidth: 1
+
+        //to do convert to a number
+        //temp = _.map(this.chartData, );
+
+        console.log('chartData, chartLabels',this.lineChartData, this.chartData, this.chartLabels);
+
+        // {listSleeps: {…}}
+        // listSleeps:
+        // items: Array(3)
+        // 0: {hours: "3", userId:
+
+
+        //this.no_user = (this.users.length === 0);
+});
+
+      // observable.subscribe({ data } => {
+      //   if (!data) {
+      //     return console.log('getAllUsers - no data');
+      //   }
+
+      //  data => {
+      //     if (!data) {
+      //         return console.log('getAllUsers - no data');
+      //       }
+            //_.sortBy(data.listSleeps.items, 'createdAt');
+
+            //console.log('kkk', data.listSleeps.items['createdAt']);
+            // this.chartLabels = _.reduce(data.listSleeps.items,data.listSleeps.items['createdAt']);
+            // this.chartData = _.reduce(data.listSleeps.items,data.listSleeps.items['hours']);
+        //}
+        // error: {err => console.error('something wrong occurred: ' + err)},
+        // complete: () => console.log('done')
+
+        
+        // temp = _.sortBy(data.listSleeps.items, 'createdAt')
+        // temp=( {
+        //   temp1 : temp['updatedAt'],
+        //   temp2 : temp['hours']
+
+        // })
+       
+        // console.log('temp?', temp);
+        // for (let i = 0; i < data.listSleeps.items.length; i++) {
+        //   //console.log('ll',data.listSleeps.items[i])
+        //   temp1.push(data.listSleeps.items[i]['updatedAt']);
+        //   temp2.push(+data.listSleeps.items[i]['hours']);
+        //   console.log(temp1,temp2);
+        // }
+
+        //this.renderChart();
+        
+      //});
+      // this.renderChart(temp)
+
+      // observable.subscribeToMore({
+      //   document: subscribeToNewUserUsers,
+      //   updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewUsers: user }}}) => {
+      //     console.log('updateQuery on convo subscription', user, prev);
+      //     return this._user.id === user.id ? prev : addUser(prev, user);
+      //   }
+      // });
+      
+    });
+    
+  }
+
+  renderChart(data){
+    
+    // this.chartLabels= data['createdAt'];
+    // this.chartData=data['hours'];
+    // console.log('data is', data, this.chartLabels,this.chartData )
+    
+
+    // this.chartOptions = {
     //   responsive: true,
     //   title: {
     //     display: true,
-    //     text: 'My Chart Title',
+    //     text: 'Hours Slept',
     //     fontColor: 'black',
     //   },
     //   scales: {
@@ -173,14 +235,14 @@ chart = [];
     //         fontColor: 'black',
     //         min: 0,
     //         beginAtZero: true,
-    
+
     //       },
     //       gridLines: {
     //         color: '#dbd9d9'
     //       },
     //       scaleLabel: {
     //         display: true,
-    //         labelString: 'Scale Label',
+    //         labelString: 'Hours Slept',
     //         fontColor: 'black',
     //       }
     //     }]
@@ -194,91 +256,17 @@ chart = [];
     // };
 
 
-
-
-
-
-    // this.chartData = [{
-    //   data: [3, 1, 4, 2, 5],
-    //   label: 'Anthracnose',
-    //   fill: false
-    // }];
-    // this.chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
-    // this.chartColors = [{
-    //   backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    //      borderColor: 'rgba(0, 0, 0, 1)'
-    // }];
-
-    // this.chartOptions = {
-    //   scales: {
-    //     yAxes: [{
-    //       ticks: {
-    //         beginAtZero: true,
-    //         stepSize: 1
-    //       }
-    //     }]
-    //   }
-    // }
-
-  }
-
-  register() {
-    this.appsync.hc().then(client => {
-      client.watchQuery({
-        query: getMe,
-        fetchPolicy: 'cache-only'
-      }).subscribe(({data}) => {
-        console.log('register user, fetch cache', data);
-        if (data) { this.me = data.me; }
-      });
-    });
-  }
-
-  createForm() {
-    this.sleepPost = {
-      updatedAt: this.dateValue
-    };
-    // this.sleepFormGroup = this.fb.group({
-    //   'updatedAt': ['']
-    // });
-  }
-
-  getAllSleep() {
-    this.appsync.hc().then(client => {
-      const observable = client.watchQuery({
-        query: queryListSleep,
-        fetchPolicy: 'cache-and-network'
-      });
-
-      observable.subscribe(({data}) => {
-        if (!data) {
-          return console.log('getAllUsers - no data');
-        }
-        console.log('queryListSleep',data.listSleeps.items)
-        this.myData = data.listSleeps.items;
-        // this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-        // console.log('getAllUsers - Got data', this.users);
-        // this.no_user = (this.users.length === 0);
-      });
-
-      // observable.subscribeToMore({
-      //   document: subscribeToNewUserUsers,
-      //   updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewUsers: user }}}) => {
-      //     console.log('updateQuery on convo subscription', user, prev);
-      //     return this._user.id === user.id ? prev : addUser(prev, user);
-      //   }
-      // });
-    });
   }
 
   sleepOnSubmit() {
+
     //this.sleepPost = post;
     this.sleepPost.hours = this.sleepHours;
     this.sleepPost.sleepId = `${uuid()}`;
     this.sleepPost.createdAt = `${new Date().toISOString()}_${uuid()}`;
     this.sleepPost.userId = this.me.id;
 
-    console.log('sleep',this.sleepPost);
+    console.log('sleep', this.sleepPost);
     //this.measurement = '';
     this.appsync.hc().then(client => {
       client.mutate({
@@ -292,7 +280,7 @@ chart = [];
           }
         }),
 
-        update: (proxy, {data: { createSleep: _sleep }}) => {
+        update: (proxy, { data: { createSleep: _sleep } }) => {
 
           // const options = {
           //   query: getMeasurements,
@@ -305,13 +293,13 @@ chart = [];
           // //proxy.writeQuery({...options, data: _tmp});
           // proxy.writeQuery({...options, data: data});
         }
-      }).then(({data}) => {
+      }).then(({ data }) => {
         console.log('mutation complete', data);
       }).catch(err => console.log('Error creating sleep', err));
     });
   }
 
-  async updateMyDate(event){
+  async updateMyDate(event) {
     this.dateValue = event.detail.value
 
   }
@@ -346,8 +334,8 @@ chart = [];
   //   this.final = event;
   // }
 
-  hoursSlept(event){
-   this.sleepHours = event.detail.value;
+  hoursSlept(event) {
+    this.sleepHours = event.detail.value;
   }
 
 
