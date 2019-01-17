@@ -11,6 +11,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { timestamp } from 'rxjs/operators';
 
 
 
@@ -57,16 +58,39 @@ export class SleepPage implements OnInit {
           text: 'Hours Slept',
           fontColor: 'black',
         },
-        scales: {
-          xAxes: [{
-            stacked: true,
-            ticks: {
-              fontColor: 'black',
-            },
-            gridLines: {
-              color: '#dbd9d9'
-            }
-          }],
+        // scales: {
+        //   xAxes: [{
+        //     stacked: true,
+        //     ticks: {
+        //       fontColor: 'black',
+        //     },
+        //     gridLines: {
+        //       color: '#dbd9d9'
+        //     }
+        //   }],
+
+          scales: {
+            xAxes: [{ stacked: true,
+              ticks: {
+                fontColor: 'black',
+              },
+              gridLines: {
+                color: '#dbd9d9'
+              },
+              type: 'time',
+              time: {
+                displayFormats: {
+                   'millisecond': 'MMM DD',
+                   'second': 'MMM DD',
+                   'minute': 'MMM DD',
+                   'hour': 'MMM DD',
+                   'day': 'MMM DD',
+                   'week': 'MMM DD',
+                   'month': 'MMM DD',
+                   'quarter': 'MMM DD',
+                   'year': 'MMM DD',
+                }}
+            }],
           yAxes: [{
             stacked: true,
             ticks: {
@@ -94,9 +118,15 @@ export class SleepPage implements OnInit {
       };
 
       this.getAllSleep();
+
+      // this.chartLabels.forEach(item => {
+      //   return moment(item).format("MM-DD");
+      //   //return moment(item).format("HH:mm");
+      // });
     }
 
   ngOnInit() {
+    
     // this.chartData['data'] =[];
     this.createForm();
     this.register();
@@ -117,9 +147,16 @@ export class SleepPage implements OnInit {
 
   createForm() {
     this.sleepPost = {
-      updatedAt: this.dateValue
+      updatedAt: moment(new Date(this.dateValue)).format('X')
     };
   }
+
+  // formatDate(data){
+  //   data.forEach(item => {
+  //       return moment(item).format("MM-DD");
+  //       //return moment(item).format("HH:mm");
+  //     });
+  // }
 
   getAllSleep() {
     let temp;
@@ -134,9 +171,25 @@ export class SleepPage implements OnInit {
         if (!data) {
           return console.log('getAllUsers - no data');
         }
+
+        console.log('need to sort', _.sortBy(data.listSleeps.items, 'updatedAt'), data.listSleeps.items);
+
+        _.sortBy(data.listSleeps.items, 'updatedAt');
         //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
        
-        this.chartLabels = _.map(data.listSleeps.items,'updatedAt');
+        this.chartLabels = _.map(data.listSleeps.items,'updatedAt')
+        
+        // .map(item => {
+        //         return moment(item).format("MM-DD");
+        // });
+        // this.formatDate(data);
+        //this.chartLabels.forEach(d=>moment(d).format('MM'));
+
+        // this.chartLabels.forEach(item => {
+        //   return moment(item).format("MM-DD");
+        //   //return moment(item).format("HH:mm");
+        // });
+      
         this.chartData = _.map(_.map(data.listSleeps.items,'hours'),_.ary(parseInt,1));
         this.lineChartData = [{data: this.chartData}];//, label: 'A',borderWidth: 1
 
@@ -206,6 +259,10 @@ export class SleepPage implements OnInit {
   }
 
   renderChart(data){
+    this.chartLabels.map(item => {
+      return moment(item).format("MM-DD");
+      //return moment(item).format("HH:mm");
+    });
     
     // this.chartLabels= data['createdAt'];
     // this.chartData=data['hours'];
