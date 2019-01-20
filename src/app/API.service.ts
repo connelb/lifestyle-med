@@ -1959,7 +1959,7 @@ export class APIService {
 
   OnCreateSleepListener: Observable<OnCreateSleepSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnCreateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+      `subscription OnCreateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: AWSDate, $hours: String) {
         onCreateSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
           __typename
           sleepId
@@ -1974,7 +1974,7 @@ export class APIService {
 
   OnUpdateSleepListener: Observable<OnUpdateSleepSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+      `subscription OnUpdateSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: AWSDate, $hours: String) {
         onUpdateSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
           __typename
           sleepId
@@ -1989,7 +1989,7 @@ export class APIService {
 
   OnDeleteSleepListener: Observable<OnDeleteSleepSubscription> = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: String, $hours: String) {
+      `subscription OnDeleteSleep($sleepId: String, $createdAt: String, $userId: String, $updatedAt: AWSDate, $hours: String) {
         onDeleteSleep(sleepId: $sleepId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, hours: $hours) {
           __typename
           sleepId

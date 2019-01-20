@@ -70,26 +70,34 @@ export class SleepPage implements OnInit {
         //   }],
 
           scales: {
-            xAxes: [{ stacked: true,
+            xAxes: [{
               ticks: {
                 fontColor: 'black',
               },
               gridLines: {
-                color: '#dbd9d9'
+                color: '#dbd9d9',
+                offsetGridLines: false
               },
               type: 'time',
+              distribution: 'series',
               time: {
+                unit: 'day',
                 displayFormats: {
-                   'millisecond': 'MMM DD',
-                   'second': 'MMM DD',
-                   'minute': 'MMM DD',
-                   'hour': 'MMM DD',
-                   'day': 'MMM DD',
-                   'week': 'MMM DD',
-                   'month': 'MMM DD',
-                   'quarter': 'MMM DD',
-                   'year': 'MMM DD',
-                }}
+                  'day': 'MMM D'
+                }
+            }
+              // time: {
+              //   displayFormats: {
+              //     //  'millisecond': 'MMM DD',
+              //     //  'second': 'MMM DD',
+              //     //  'minute': 'MMM DD',
+              //     //  'hour': 'MMM DD',
+              //      'day': 'MMM D',
+              //      //'week': 'YYY',
+              //     //  'month': 'MMM DD',
+              //     //  'quarter': 'MMM DD',
+              //     //  'year': 'MMM DD',
+              //   }}
             }],
           yAxes: [{
             stacked: true,
@@ -147,7 +155,7 @@ export class SleepPage implements OnInit {
 
   createForm() {
     this.sleepPost = {
-      updatedAt: moment(new Date(this.dateValue)).format('X')
+      updatedAt: this.dateValue
     };
   }
 
@@ -172,12 +180,15 @@ export class SleepPage implements OnInit {
           return console.log('getAllUsers - no data');
         }
 
-        console.log('need to sort', _.sortBy(data.listSleeps.items, 'updatedAt'), data.listSleeps.items);
+        
 
-        _.sortBy(data.listSleeps.items, 'updatedAt');
-        //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
        
-        this.chartLabels = _.map(data.listSleeps.items,'updatedAt')
+        //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
+        _.sortBy(data.listSleeps.items, 'updatedAt');
+        this.chartLabels = _.map(data.listSleeps.items,'updatedAt');
+
+        //console.log('need to sort', _.sortBy(data.listSleeps.items, 'updatedAt'), data.listSleeps.items);
+        //
         
         // .map(item => {
         //         return moment(item).format("MM-DD");
