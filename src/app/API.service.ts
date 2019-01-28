@@ -1691,9 +1691,9 @@ export class APIService {
   }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription SubscribeToNewMessage($conversationId: ID!) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription SubscribeToNewMessage($conversationId: ID!) {
         subscribeToNewMessage(conversationId: $conversationId) {
           __typename
           author {
@@ -1734,14 +1734,14 @@ export class APIService {
           sender
         }
       }`
-    )
-  ) as Observable<SubscribeToNewMessageSubscription>;
+      )
+    ) as Observable<SubscribeToNewMessageSubscription>;
 
   SubscribeToNewUCsListener: Observable<
     SubscribeToNewUCsSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription SubscribeToNewUCs($userId: ID!) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription SubscribeToNewUCs($userId: ID!) {
         subscribeToNewUCs(userId: $userId) {
           __typename
           associated {
@@ -1796,14 +1796,14 @@ export class APIService {
           userId
         }
       }`
-    )
-  ) as Observable<SubscribeToNewUCsSubscription>;
+      )
+    ) as Observable<SubscribeToNewUCsSubscription>;
 
   SubscribeToNewUsersListener: Observable<
     SubscribeToNewUsersSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription SubscribeToNewUsers {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription SubscribeToNewUsers {
         subscribeToNewUsers {
           __typename
           cognitoId
@@ -1834,14 +1834,14 @@ export class APIService {
           registered
         }
       }`
-    )
-  ) as Observable<SubscribeToNewUsersSubscription>;
+      )
+    ) as Observable<SubscribeToNewUsersSubscription>;
 
   OnCreateMeasurementListener: Observable<
     OnCreateMeasurementSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnCreateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onCreateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1856,14 +1856,14 @@ export class APIService {
           weight
         }
       }`
-    )
-  ) as Observable<OnCreateMeasurementSubscription>;
+      )
+    ) as Observable<OnCreateMeasurementSubscription>;
 
   OnUpdateMeasurementListener: Observable<
     OnUpdateMeasurementSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnUpdateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onUpdateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1878,14 +1878,14 @@ export class APIService {
           weight
         }
       }`
-    )
-  ) as Observable<OnUpdateMeasurementSubscription>;
+      )
+    ) as Observable<OnUpdateMeasurementSubscription>;
 
   OnDeleteMeasurementListener: Observable<
     OnDeleteMeasurementSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnDeleteMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onDeleteMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1900,14 +1900,14 @@ export class APIService {
           weight
         }
       }`
-    )
-  ) as Observable<OnDeleteMeasurementSubscription>;
+      )
+    ) as Observable<OnDeleteMeasurementSubscription>;
 
   OnCreateWorkoutListener: Observable<
     OnCreateWorkoutSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnCreateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onCreateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1918,14 +1918,14 @@ export class APIService {
           capture
         }
       }`
-    )
-  ) as Observable<OnCreateWorkoutSubscription>;
+      )
+    ) as Observable<OnCreateWorkoutSubscription>;
 
   OnUpdateWorkoutListener: Observable<
     OnUpdateWorkoutSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnUpdateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onUpdateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1936,14 +1936,14 @@ export class APIService {
           capture
         }
       }`
-    )
-  ) as Observable<OnUpdateWorkoutSubscription>;
+      )
+    ) as Observable<OnUpdateWorkoutSubscription>;
 
   OnDeleteWorkoutListener: Observable<
     OnDeleteWorkoutSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+    > = API.graphql(
+      graphqlOperation(
+        `subscription OnDeleteWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onDeleteWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1954,8 +1954,8 @@ export class APIService {
           capture
         }
       }`
-    )
-  ) as Observable<OnDeleteWorkoutSubscription>;
+      )
+    ) as Observable<OnDeleteWorkoutSubscription>;
 
   OnCreateSleepListener: Observable<OnCreateSleepSubscription> = API.graphql(
     graphqlOperation(

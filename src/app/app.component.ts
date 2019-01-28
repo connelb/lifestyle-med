@@ -230,7 +230,7 @@ export class AppComponent implements OnInit, OnDestroy {
               return console.log('getAllUsers - no data');
             }
             //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-            console.log('getAllUsers - Got data', data);
+            //console.log('getAllUsers - Got data', data);
             //this.no_user = (this.users.length === 0);
     });
     });
