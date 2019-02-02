@@ -8,62 +8,57 @@
 </ion-header>
 
 <ion-content padding fullscreen>
-    <!-- <form  [formGroup]="sleepFormGroup" class="form"> -->
+
+
+
+
+  <!-- <form  [formGroup]="sleepFormGroup" class="form"> -->
+      <ion-item>
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>Modify date...</ion-label>
+          <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
+        </ion-item>
+
+  <!-- <ion-label> -->
+
+
+    <!-- <strong>Hours slept:</strong> -->
+  <!-- </ion-label> -->
+
+
+
+  <!-- (ionBlur)="rangeBlurred($event)" (ionFocus)="rangeFocused($event)" -->
   <ion-item>
-    <ion-label position="floating"><strong>Hours slept:</strong><ion-input [(ngModel)]="value"></ion-input></ion-label>
-    
-    <!-- (ionBlur)="rangeBlurred($event)" (ionFocus)="rangeFocused($event)" -->
-    <ion-range min="2" max="12" step="1" debounce="700" (ionChange)="hoursSlept($event)" [(ngModel)]="value" pin="true">
-      <ion-icon size="small" slot="start" name="sad"></ion-icon>
+    <ion-range min="2" max="12" step="1" snaps="true" debounce="700" (ionChange)="hoursSlept($event)" [(ngModel)]="value" pin="true">
+      <ion-icon slot="start" name="sad"></ion-icon>
       <ion-icon slot="end" name="happy"></ion-icon>
     </ion-range>
   </ion-item>
+
+  <ion-text color="primary">
+      <h2>Hours slept: {{value}}</h2>
+        <!-- <ion-input placeholder='hours slept...'[(ngModel)]="value"></ion-input> -->
+    </ion-text>
+
+  
+    <ion-button expand="block" (click)='presentToast()'> Save</ion-button>
+  
+
   <ion-item>
-      <ion-icon name="calendar" slot="start"></ion-icon>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
-</ion-item>
+    <ion-label>
+      <ion-text color="primary">
+        <h2>Last 7 recordings:</h2>
+      </ion-text>
+      <!-- <strong>Last 7 recordings:</strong> -->
 
-  <ion-button expand="block" (click)='presentToast()'> Save</ion-button>
+      <div id="chart-container">
+        <canvas id="canvas"></canvas>
+      </div>
+    </ion-label>
+  </ion-item>
 
-  <!-- <ion-button (click)="sleepOnSubmit(sleepFormGroup.value)"  type="submit" expand="block">Record</ion-button>
-</form> -->
-
-<!-- <ion-list *ngIf='myData'>
-    <ion-item *ngFor="let sleep of myData">
-      <h3>{{sleep.updatedAt}}</h3>
-    </ion-item>
-</ion-list> -->
-
-
-<!-- <canvas baseChart width="400" height="400"
-[datasets]="lineChartData"
-[labels]="lineChartLabels"
-[options]="lineChartOptions"
-[colors]="lineChartColors"
-[legend]="lineChartLegend"
-[chartType]="lineChartType"
-(chartHover)="chartHovered($event)"
-(chartClick)="chartClicked($event)"></canvas> -->
-<div id="chart-container"><canvas id="canvas"></canvas></div>
-
-
-<!-- <div id="chart-container"> -->
-    <!-- <canvas [datasets]="chartData"></canvas> width="400" height="400"-->
-
-    <!-- <canvas  baseChart baseChart
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [chartType]="chartType"></canvas> -->
-
-
-    <!-- <canvas #myCanvas
-     id="canvas" baseChart [chartType]="chartType" [datasets]="chartData" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"></canvas> -->
-  <!-- </div> -->
-
-  <div style="width:100%;">
+  <!-- <div style="width:100%;">
     <canvas *ngIf='barChartData' id="myChart" width="700" height="250" #mychart></canvas>
-  </div>
+  </div> -->
 
 </ion-content>

@@ -26,7 +26,6 @@ import { Observable } from 'apollo-link';
 })
 export class SleepPage implements OnInit {
 
-
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true

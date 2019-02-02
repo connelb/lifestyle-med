@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
 query ListAllSleep {
-    listSleeps{
+    listSleeps(limit:7){
       items{
         hours
         userId
