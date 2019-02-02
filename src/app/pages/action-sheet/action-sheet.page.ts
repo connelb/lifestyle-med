@@ -28,6 +28,7 @@ export class ActionSheetPage{
         icon: 'share',
         handler: () => {
           console.log('Share clicked');
+          this.router.navigateByUrl('/sleep-history');
         }
       },
       {

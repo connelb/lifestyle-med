@@ -90,18 +90,8 @@ query getAllUsers {
 export class AppComponent implements OnInit, OnDestroy {
   appPages = [
     {
-      title: 'Measure',
-      url: '/app/tabs/measure',
-      icon: 'calendar'
-    },
-    {
-      title: 'action-sheet',
+      title: 'Record',
       url: '/action-sheet',
-      icon: 'contacts'
-    },
-    {
-      title: 'Post',
-      url: '/app/tabs/post',
       icon: 'contacts'
     },
     {
