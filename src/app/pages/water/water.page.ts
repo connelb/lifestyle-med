@@ -235,4 +235,9 @@ export class WaterPage implements OnInit {
     chart.update();
 }
 
+ //updates date
+ async updateMyDate(event) {
+  this.dateValue = event.detail.value
+}
+
 }
