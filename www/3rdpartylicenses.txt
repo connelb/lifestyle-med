@@ -1554,6 +1554,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+apollo-link-dedup
+MIT
+
 @angular/common
 MIT
 
@@ -2757,12 +2760,6 @@ MIT
 apollo-link-http
 MIT
 
-@angular/service-worker
-MIT
-
-apollo-link-dedup
-MIT
-
 apollo-cache
 MIT
 The MIT License (MIT)
@@ -2788,6 +2785,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+
+@angular/service-worker
+MIT
 
 babel-polyfill
 MIT

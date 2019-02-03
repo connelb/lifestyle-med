@@ -80,6 +80,48 @@ export type DeleteSleepInput = {
   createdAt: string;
 };
 
+export type CreateNutritionCommentInput = {
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type UpdateNutritionCommentInput = {
+  content?: string | null;
+  nutritionId?: string | null;
+  createdAt: string;
+  id: string;
+};
+
+export type DeleteNutritionCommentInput = {
+  createdAt: string;
+  id: string;
+};
+
+export type CreateNutritionInput = {
+  nutritionId: string;
+  createdAt: string;
+  mealType?: string | null;
+  userId?: string | null;
+  updatedAt?: string | null;
+  social?: string | null;
+};
+
+export type UpdateNutritionInput = {
+  nutritionId: string;
+  createdAt: string;
+  mealType?: string | null;
+  userId?: string | null;
+  updatedAt?: string | null;
+  social?: string | null;
+};
+
+export type DeleteNutritionInput = {
+  nutritionId: string;
+  createdAt: string;
+};
+
 export type TableMeasurementFilterInput = {
   measurementId?: TableStringFilterInput | null;
   createdAt?: TableStringFilterInput | null;
@@ -133,6 +175,35 @@ export type TableSleepFilterInput = {
   userId?: TableStringFilterInput | null;
   updatedAt?: TableStringFilterInput | null;
   hours?: TableStringFilterInput | null;
+};
+
+export type TableNutritionCommentFilterInput = {
+  content?: TableStringFilterInput | null;
+  nutritionId?: TableIDFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  id?: TableIDFilterInput | null;
+};
+
+export type TableIDFilterInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
+
+export type TableNutritionFilterInput = {
+  nutritionId?: TableIDFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  mealType?: TableStringFilterInput | null;
+  userId?: TableStringFilterInput | null;
+  updatedAt?: TableStringFilterInput | null;
+  social?: TableStringFilterInput | null;
 };
 
 export type CreateConversationMutation = {
@@ -376,6 +447,192 @@ export type DeleteSleepMutation = {
   userId: string | null;
   updatedAt: string | null;
   hours: string | null;
+};
+
+export type CreateNutritionCommentMutation = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type UpdateNutritionCommentMutation = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type DeleteNutritionCommentMutation = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type CreateNutritionMutation = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+};
+
+export type UpdateNutritionMutation = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+};
+
+export type DeleteNutritionMutation = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
 };
 
 export type AllMessageQuery = {
@@ -624,6 +881,115 @@ export type ListSleepsQuery = {
   nextToken: string | null;
 };
 
+export type GetNutritionCommentQuery = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type ListNutritionCommentsQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetNutritionQuery = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+};
+
+export type ListNutritionsQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Nutrition";
+    nutritionId: string;
+    createdAt: string;
+    mealType: string | null;
+    userId: string | null;
+    user: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    updatedAt: string | null;
+    social: string | null;
+    comments: Array<{
+      __typename: "NutritionComment";
+      content: string;
+      nutritionId: string;
+      createdAt: string;
+      id: string;
+    } | null> | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
   author: {
@@ -845,6 +1211,192 @@ export type OnDeleteSleepSubscription = {
   userId: string | null;
   updatedAt: string | null;
   hours: string | null;
+};
+
+export type OnCreateNutritionCommentSubscription = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type OnUpdateNutritionCommentSubscription = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type OnDeleteNutritionCommentSubscription = {
+  __typename: string;
+  author: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  content: string;
+  nutritionId: string;
+  createdAt: string;
+  id: string;
+};
+
+export type OnCreateNutritionSubscription = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+};
+
+export type OnUpdateNutritionSubscription = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
+};
+
+export type OnDeleteNutritionSubscription = {
+  __typename: string;
+  nutritionId: string;
+  createdAt: string;
+  mealType: string | null;
+  userId: string | null;
+  user: {
+    __typename: "User";
+    cognitoId: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    id: string;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string;
+    registered: boolean | null;
+  } | null;
+  updatedAt: string | null;
+  social: string | null;
+  comments: Array<{
+    __typename: "NutritionComment";
+    author: {
+      __typename: "User";
+      cognitoId: string;
+      id: string;
+      username: string;
+      registered: boolean | null;
+    } | null;
+    content: string;
+    nutritionId: string;
+    createdAt: string;
+    id: string;
+  } | null> | null;
 };
 
 @Injectable({
@@ -1259,6 +1811,264 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteSleepMutation>response.data.deleteSleep;
+  }
+  async CreateNutritionComment(
+    input: CreateNutritionCommentInput
+  ): Promise<CreateNutritionCommentMutation> {
+    const statement = `mutation CreateNutritionComment($input: CreateNutritionCommentInput!) {
+        createNutritionComment(input: $input) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateNutritionCommentMutation>response.data.createNutritionComment;
+  }
+  async UpdateNutritionComment(
+    input: UpdateNutritionCommentInput
+  ): Promise<UpdateNutritionCommentMutation> {
+    const statement = `mutation UpdateNutritionComment($input: UpdateNutritionCommentInput!) {
+        updateNutritionComment(input: $input) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateNutritionCommentMutation>response.data.updateNutritionComment;
+  }
+  async DeleteNutritionComment(
+    input: DeleteNutritionCommentInput
+  ): Promise<DeleteNutritionCommentMutation> {
+    const statement = `mutation DeleteNutritionComment($input: DeleteNutritionCommentInput!) {
+        deleteNutritionComment(input: $input) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteNutritionCommentMutation>response.data.deleteNutritionComment;
+  }
+  async CreateNutrition(
+    input: CreateNutritionInput
+  ): Promise<CreateNutritionMutation> {
+    const statement = `mutation CreateNutrition($input: CreateNutritionInput!) {
+        createNutrition(input: $input) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateNutritionMutation>response.data.createNutrition;
+  }
+  async UpdateNutrition(
+    input: UpdateNutritionInput
+  ): Promise<UpdateNutritionMutation> {
+    const statement = `mutation UpdateNutrition($input: UpdateNutritionInput!) {
+        updateNutrition(input: $input) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateNutritionMutation>response.data.updateNutrition;
+  }
+  async DeleteNutrition(
+    input: DeleteNutritionInput
+  ): Promise<DeleteNutritionMutation> {
+    const statement = `mutation DeleteNutrition($input: DeleteNutritionInput!) {
+        deleteNutrition(input: $input) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteNutritionMutation>response.data.deleteNutrition;
   }
   async AllMessage(
     conversationId: string,
@@ -1689,11 +2499,190 @@ export class APIService {
     )) as any;
     return <ListSleepsQuery>response.data.listSleeps;
   }
+  async GetNutritionComment(
+    id: string,
+    createdAt: string
+  ): Promise<GetNutritionCommentQuery> {
+    const statement = `query GetNutritionComment($id: ID!, $createdAt: AWSDate!) {
+        getNutritionComment(id: $id, createdAt: $createdAt) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetNutritionCommentQuery>response.data.getNutritionComment;
+  }
+  async ListNutritionComments(
+    filter?: TableNutritionCommentFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListNutritionCommentsQuery> {
+    const statement = `query ListNutritionComments($filter: TableNutritionCommentFilterInput, $limit: Int, $nextToken: String) {
+        listNutritionComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListNutritionCommentsQuery>response.data.listNutritionComments;
+  }
+  async GetNutrition(
+    nutritionId: string,
+    createdAt: string
+  ): Promise<GetNutritionQuery> {
+    const statement = `query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
+        getNutrition(nutritionId: $nutritionId, createdAt: $createdAt) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      nutritionId,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetNutritionQuery>response.data.getNutrition;
+  }
+  async ListNutritions(
+    filter?: TableNutritionFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListNutritionsQuery> {
+    const statement = `query ListNutritions($filter: TableNutritionFilterInput, $limit: Int, $nextToken: String) {
+        listNutritions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            nutritionId
+            createdAt
+            mealType
+            userId
+            user {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            updatedAt
+            social
+            comments {
+              __typename
+              content
+              nutritionId
+              createdAt
+              id
+            }
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListNutritionsQuery>response.data.listNutritions;
+  }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription SubscribeToNewMessage($conversationId: ID!) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription SubscribeToNewMessage($conversationId: ID!) {
         subscribeToNewMessage(conversationId: $conversationId) {
           __typename
           author {
@@ -1734,14 +2723,14 @@ export class APIService {
           sender
         }
       }`
-      )
-    ) as Observable<SubscribeToNewMessageSubscription>;
+    )
+  ) as Observable<SubscribeToNewMessageSubscription>;
 
   SubscribeToNewUCsListener: Observable<
     SubscribeToNewUCsSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription SubscribeToNewUCs($userId: ID!) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription SubscribeToNewUCs($userId: ID!) {
         subscribeToNewUCs(userId: $userId) {
           __typename
           associated {
@@ -1796,14 +2785,14 @@ export class APIService {
           userId
         }
       }`
-      )
-    ) as Observable<SubscribeToNewUCsSubscription>;
+    )
+  ) as Observable<SubscribeToNewUCsSubscription>;
 
   SubscribeToNewUsersListener: Observable<
     SubscribeToNewUsersSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription SubscribeToNewUsers {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription SubscribeToNewUsers {
         subscribeToNewUsers {
           __typename
           cognitoId
@@ -1834,14 +2823,14 @@ export class APIService {
           registered
         }
       }`
-      )
-    ) as Observable<SubscribeToNewUsersSubscription>;
+    )
+  ) as Observable<SubscribeToNewUsersSubscription>;
 
   OnCreateMeasurementListener: Observable<
     OnCreateMeasurementSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnCreateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onCreateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1856,14 +2845,14 @@ export class APIService {
           weight
         }
       }`
-      )
-    ) as Observable<OnCreateMeasurementSubscription>;
+    )
+  ) as Observable<OnCreateMeasurementSubscription>;
 
   OnUpdateMeasurementListener: Observable<
     OnUpdateMeasurementSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnUpdateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onUpdateMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1878,14 +2867,14 @@ export class APIService {
           weight
         }
       }`
-      )
-    ) as Observable<OnUpdateMeasurementSubscription>;
+    )
+  ) as Observable<OnUpdateMeasurementSubscription>;
 
   OnDeleteMeasurementListener: Observable<
     OnDeleteMeasurementSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnDeleteMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMeasurement($measurementId: String, $createdAt: String, $chest: Int, $hips: Int, $leftArm: Int) {
         onDeleteMeasurement(measurementId: $measurementId, createdAt: $createdAt, chest: $chest, hips: $hips, leftArm: $leftArm) {
           __typename
           measurementId
@@ -1900,14 +2889,14 @@ export class APIService {
           weight
         }
       }`
-      )
-    ) as Observable<OnDeleteMeasurementSubscription>;
+    )
+  ) as Observable<OnDeleteMeasurementSubscription>;
 
   OnCreateWorkoutListener: Observable<
     OnCreateWorkoutSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnCreateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onCreateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1918,14 +2907,14 @@ export class APIService {
           capture
         }
       }`
-      )
-    ) as Observable<OnCreateWorkoutSubscription>;
+    )
+  ) as Observable<OnCreateWorkoutSubscription>;
 
   OnUpdateWorkoutListener: Observable<
     OnUpdateWorkoutSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnUpdateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onUpdateWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1936,14 +2925,14 @@ export class APIService {
           capture
         }
       }`
-      )
-    ) as Observable<OnUpdateWorkoutSubscription>;
+    )
+  ) as Observable<OnUpdateWorkoutSubscription>;
 
   OnDeleteWorkoutListener: Observable<
     OnDeleteWorkoutSubscription
-    > = API.graphql(
-      graphqlOperation(
-        `subscription OnDeleteWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteWorkout($workoutId: String, $createdAt: String, $userId: String, $desc: String, $duration: String) {
         onDeleteWorkout(workoutId: $workoutId, createdAt: $createdAt, userId: $userId, desc: $desc, duration: $duration) {
           __typename
           workoutId
@@ -1954,8 +2943,8 @@ export class APIService {
           capture
         }
       }`
-      )
-    ) as Observable<OnDeleteWorkoutSubscription>;
+    )
+  ) as Observable<OnDeleteWorkoutSubscription>;
 
   OnCreateSleepListener: Observable<OnCreateSleepSubscription> = API.graphql(
     graphqlOperation(
@@ -2001,4 +2990,238 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteSleepSubscription>;
+
+  OnCreateNutritionCommentListener: Observable<
+    OnCreateNutritionCommentSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateNutritionComment($content: String, $nutritionId: ID, $createdAt: AWSDate, $id: ID) {
+        onCreateNutritionComment(content: $content, nutritionId: $nutritionId, createdAt: $createdAt, id: $id) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`
+    )
+  ) as Observable<OnCreateNutritionCommentSubscription>;
+
+  OnUpdateNutritionCommentListener: Observable<
+    OnUpdateNutritionCommentSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateNutritionComment($content: String, $nutritionId: ID, $createdAt: AWSDate, $id: ID) {
+        onUpdateNutritionComment(content: $content, nutritionId: $nutritionId, createdAt: $createdAt, id: $id) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`
+    )
+  ) as Observable<OnUpdateNutritionCommentSubscription>;
+
+  OnDeleteNutritionCommentListener: Observable<
+    OnDeleteNutritionCommentSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteNutritionComment($content: String, $nutritionId: ID, $createdAt: AWSDate, $id: ID) {
+        onDeleteNutritionComment(content: $content, nutritionId: $nutritionId, createdAt: $createdAt, id: $id) {
+          __typename
+          author {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          content
+          nutritionId
+          createdAt
+          id
+        }
+      }`
+    )
+  ) as Observable<OnDeleteNutritionCommentSubscription>;
+
+  OnCreateNutritionListener: Observable<
+    OnCreateNutritionSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateNutrition($nutritionId: ID, $createdAt: AWSDate, $mealType: String, $userId: String, $updatedAt: AWSDate) {
+        onCreateNutrition(nutritionId: $nutritionId, createdAt: $createdAt, mealType: $mealType, userId: $userId, updatedAt: $updatedAt) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`
+    )
+  ) as Observable<OnCreateNutritionSubscription>;
+
+  OnUpdateNutritionListener: Observable<
+    OnUpdateNutritionSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateNutrition($nutritionId: ID, $createdAt: AWSDate, $mealType: String, $userId: String, $updatedAt: AWSDate) {
+        onUpdateNutrition(nutritionId: $nutritionId, createdAt: $createdAt, mealType: $mealType, userId: $userId, updatedAt: $updatedAt) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`
+    )
+  ) as Observable<OnUpdateNutritionSubscription>;
+
+  OnDeleteNutritionListener: Observable<
+    OnDeleteNutritionSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteNutrition($nutritionId: ID, $createdAt: AWSDate, $mealType: String, $userId: String, $updatedAt: AWSDate) {
+        onDeleteNutrition(nutritionId: $nutritionId, createdAt: $createdAt, mealType: $mealType, userId: $userId, updatedAt: $updatedAt) {
+          __typename
+          nutritionId
+          createdAt
+          mealType
+          userId
+          user {
+            __typename
+            cognitoId
+            conversations {
+              __typename
+              nextToken
+            }
+            id
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            registered
+          }
+          updatedAt
+          social
+          comments {
+            __typename
+            author {
+              __typename
+              cognitoId
+              id
+              username
+              registered
+            }
+            content
+            nutritionId
+            createdAt
+            id
+          }
+        }
+      }`
+    )
+  ) as Observable<OnDeleteNutritionSubscription>;
 }

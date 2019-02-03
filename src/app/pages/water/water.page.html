@@ -1,0 +1,40 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Water</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+  <ion-item>
+    <ion-icon name="calendar" slot="start"></ion-icon>
+    <ion-label>Modify date...</ion-label>
+    <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-range min="2" max="40" step="1" snaps="true" debounce="700" (ionChange)="hoursSlept($event)" [(ngModel)]="value" pin="true">
+      <ion-icon slot="start" name="square-outline"></ion-icon>
+      <ion-icon slot="end" name="square"></ion-icon>
+    </ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-text color="primary">Adding <strong>{{value}}</strong> fluid ounces</ion-text>
+  </ion-item>
+
+  <ion-button expand="block" (click)='presentToast()'> Save</ion-button>
+
+
+  <ion-label>
+    <ion-text color="primary">
+      <h2>title</h2>
+    </ion-text>
+    <div id="chart-container">
+      <canvas id="canvas"></canvas>
+    </div>
+  </ion-label>
+
+
+</ion-content>

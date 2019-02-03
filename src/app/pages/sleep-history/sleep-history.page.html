@@ -1,20 +1,44 @@
 <ion-header translucent>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Sleep History</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding fullscreen>
-      <ion-label>
-          <ion-text color="primary">
-            <h2>Sleep History</h2>
-          </ion-text>
-          <div id="chart-container">
-            <canvas id="canvas"></canvas>
-          </div>
-        </ion-label>
-  </ion-content>
-  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sleep History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+  <ion-label>
+    <ion-text color="primary">
+      <h2>Trending sleep pattern:</h2>
+    </ion-text>
+    <div id="chart-container">
+      <canvas id="canvas"></canvas>
+    </div>
+  </ion-label>
+
+  <ion-grid fixed>
+    <ion-card>
+      <ion-list>
+        <ion-list-header>
+          Sleep History
+        </ion-list-header>
+        <ion-item-sliding *ngFor="let item of rawData">
+          <ion-item>
+            {{item.updatedAt}}  Hours slept: {{item.hours}}
+          </ion-item>
+          <ion-item-options>
+            <ion-button color="danger" (click)="removeItem(item)">
+              <ion-icon name="trash"></ion-icon>Delete</ion-button>
+          </ion-item-options>
+        </ion-item-sliding>
+
+
+      </ion-list>
+    </ion-card>
+  </ion-grid>
+
+
+
+
+</ion-content>

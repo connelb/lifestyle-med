@@ -47,7 +47,8 @@ const routes: Routes = [
       //canActivate: [CheckUser ],
       loadChildren: './members/member-routing.module#MemberRoutingModule'
     },
-  { path: 'sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' }
+  { path: 'sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' },
+  { path: 'water', loadChildren: './pages/water/water.module#WaterPageModule' }
   ]
 
 // const routes: Routes = [

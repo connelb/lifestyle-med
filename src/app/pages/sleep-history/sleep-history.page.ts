@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 export class SleepHistoryPage implements OnInit {
   me: User;
   public chart: Chart;
+  public rawData:any;
 
   public chartOptions: any;
   public chartType: string = 'bar';
@@ -112,6 +113,10 @@ export class SleepHistoryPage implements OnInit {
     this.register();
   }
 
+  removeItem(item){
+    console.log('removed', item)
+  }
+
   register() {
     this.appsync.hc().then(client => {
       client.watchQuery({
@@ -135,15 +140,12 @@ export class SleepHistoryPage implements OnInit {
         if (!data) {
           return console.log('getAllUsers - no data');
         }
+        this.rawData = data.listSleeps.items;
         const newSleep = _.sortBy(data.listSleeps.items, 'updatedAt');
         this.chartLabels = _.map(newSleep, 'updatedAt');
         this.chartData = _.map(_.map(newSleep, 'hours'), _.ary(parseInt, 1));
         this.lineChartData = [{ data: this.chartData }];
         this.myChartData = newSleep.map(res => ({ x: res.updatedAt, y: res.hours }))
-        //this.render();
-        // if(this.chart){
-        //   this.chart.update();
-        // }
       });
     })
   }
