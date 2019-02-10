@@ -28,8 +28,8 @@
             {{item.updatedAt}}  Hours slept: {{item.hours}}
           </ion-item>
           <ion-item-options>
-            <ion-button color="danger" (click)="removeItem(item)">
-              <ion-icon name="trash"></ion-icon>Delete</ion-button>
+            <ion-button size="small" color="danger" (click)="removeItem(item)" slot="end">
+              <ion-icon name="trash" small></ion-icon>Delete</ion-button>
           </ion-item-options>
         </ion-item-sliding>
 

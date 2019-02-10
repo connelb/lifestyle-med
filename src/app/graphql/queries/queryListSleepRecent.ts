@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query ListAllSleep {
-    listSleeps{
+query ListAllSleepRecent {
+    listSleeps(limit:7){
       items{
         hours
         userId
@@ -13,5 +13,3 @@ query ListAllSleep {
     }
   }
 `;
-
-

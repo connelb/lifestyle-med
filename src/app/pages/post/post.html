@@ -14,6 +14,12 @@
 
 <ion-content>
 
+    <ion-item>
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label>Modify date...</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
+      </ion-item>
+
 <amplify-photo-picker framework="Ionic"
     (picked)="onImagePicked($event)"
     (loaded)="onImageLoaded($event)">
@@ -24,5 +30,7 @@
   <amplify-s3-album framework="Ionic" 
     path="private/us-east-1:d86b33dd-fded-48f1-8e2a-ddda5bb7c83f" (selected)="onAlbumImageSelected($event)">
 </amplify-s3-album>
+
+<ion-button expand="block" (click)='presentToast()'> Save</ion-button>
 
 </ion-content>

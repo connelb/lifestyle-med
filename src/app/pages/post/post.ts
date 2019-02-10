@@ -20,6 +20,8 @@ import { PopoverPage } from '../post-popover/post-popover';
 export class PostPage implements AfterViewInit {
   @ViewChild('mapCanvas') mapElement: ElementRef;
 
+  dateValue = new Date().toISOString().slice(0, 10);
+
   session;
   client: AWSAppSyncClient<any>;
   //client: any;
@@ -30,11 +32,6 @@ export class PostPage implements AfterViewInit {
   constructor(public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) {}
 
   async ngAfterViewInit() {
-
-
-      
-
-
     // const googleMaps = await getGoogleMaps(
     //   'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
     // );
@@ -68,7 +65,22 @@ export class PostPage implements AfterViewInit {
     // });
   }
 
+    //updates date
+    async updateMyDate(event) {
+      this.dateValue = event.detail.value
+    }
 
+    async presentToast() {
+      // this.modifiedDate();
+      // this.sleepOnSubmit();
+  
+      // const toast = await this.toastController.create({
+      //   message: 'Your hours slept have been saved.',
+      //   duration: 2000
+      // });
+      // toast.present();
+  
+    }
 
   onImagePicked(file){
 

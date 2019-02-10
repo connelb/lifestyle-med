@@ -5,7 +5,7 @@ import { AppsyncService } from '../../providers/appsync.service';
 import { v4 as uuid } from 'uuid';
 import getMe from '../../graphql/queries/getMe';
 import User from '../../types/user';
-import queryListSleep from '../../graphql/queries/queryListSleep';
+import queryListSleepRecent from '../../graphql/queries/queryListSleepRecent';
 import GetSleep from '../../graphql/queries/getSleep';
 // import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
@@ -39,7 +39,6 @@ export class SleepPage implements OnInit {
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart;
-
 
 
   me: User;
@@ -186,7 +185,7 @@ export class SleepPage implements OnInit {
   getAllSleep() {
     this.appsync.hc().then(client => {
       const observable = client.watchQuery({
-        query: queryListSleep,
+        query: queryListSleepRecent,
         fetchPolicy: 'cache-and-network'
       });
 
@@ -240,7 +239,7 @@ export class SleepPage implements OnInit {
           }
         }),
         update: (proxy, { data: { createSleep: _sleep } }) => {
-          const query = queryListSleep;
+          const query = queryListSleepRecent;
           const data = proxy.readQuery({ query });
           data.listSleeps.items.push(_sleep)
           proxy.writeQuery({ query, data });

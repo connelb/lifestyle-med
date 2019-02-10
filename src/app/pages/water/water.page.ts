@@ -53,7 +53,7 @@ export class WaterPage implements OnInit {
           time: {
             unit: 'day',
             displayFormats: {
-              millisecond: 'h:mm:ss.SSS a',
+              // millisecond: 'h:mm:ss.SSS a',
               second: 'D MMM',
               minute: 'D MMM',
               hour: 'hA',
@@ -229,9 +229,12 @@ export class WaterPage implements OnInit {
 
   addData(chart, label, data) {
     chart.data.labels.push(label);
+  
     chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
     });
+    console.log('what is chart.data?', chart.data);
+    
     chart.update();
 }
 

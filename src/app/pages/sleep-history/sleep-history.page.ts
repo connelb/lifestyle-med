@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import queryListSleep from '../../graphql/queries/queryListSleep';
+import deleteSleep from '../../graphql/mutations/deleteSleep';
 import { AppsyncService } from '../../providers/appsync.service';
 import getMe from '../../graphql/queries/getMe';
 import User from '../../types/user';
@@ -113,10 +114,6 @@ export class SleepHistoryPage implements OnInit {
     this.register();
   }
 
-  removeItem(item){
-    console.log('removed', item)
-  }
-
   register() {
     this.appsync.hc().then(client => {
       client.watchQuery({
@@ -148,6 +145,53 @@ export class SleepHistoryPage implements OnInit {
         this.myChartData = newSleep.map(res => ({ x: res.updatedAt, y: res.hours }))
       });
     })
+  }
+
+
+  removeItem(item) {
+    let temp ={};
+    temp['sleepId'] = item.sleepId;
+    temp['createdAt'] = item.createdAt;
+
+
+    this.appsync.hc().then(client => {
+      client.mutate({
+        mutation: deleteSleep,
+        variables: temp,
+
+        optimisticResponse: () => ({
+          deleteSleep: {
+            ...item,
+            __typename: 'Sleep'
+          }
+        }),
+        update: (proxy, { data: { deleteSleep: _sleep } }) => {
+          const query = queryListSleep;
+          const data = proxy.readQuery({ query });
+          data.listSleeps.items.pop(_sleep)
+          proxy.writeQuery({ query, data });
+
+          //const newSleep = _.sortBy(data.listSleeps.items, 'updatedAt');
+          //this.myChartData = newSleep.map(res => ({ x: res.updatedAt, y: res.hours }))
+
+          // const data1 = proxy.readQuery({ query });
+          // console.log('what is proxy revised data1??',data1)
+
+          // this.chart.config.data = {
+          //   labels: this.myChartData.map(res => res.x),
+          //   datasets: [
+          //     {
+          //       data: this.myChartData.map(res => res.y),
+          //     }
+          //   ]
+          // }
+          // this.chart.update();
+
+        }
+      }).then(({ data }) => {
+        console.log('mutation complete', data, this.rawData);
+      }).catch(err => console.log('Error deleting sleep', err));
+    });
   }
 
 }
