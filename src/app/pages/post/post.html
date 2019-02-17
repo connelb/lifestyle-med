@@ -5,32 +5,38 @@
     </ion-buttons>
     <ion-title>Post</ion-title>
     <ion-buttons slot="end">
-        <ion-button (click)="presentPopover($event)">
-          <ion-icon slot="icon-only" name="more"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-item>
-        <ion-icon name="calendar" slot="start"></ion-icon>
-        <ion-label>Modify date...</ion-label>
-        <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
-      </ion-item>
+  <ion-item>
+    <ion-icon name="calendar" slot="start"></ion-icon>
+    <ion-label>Modify date...</ion-label>
+    <ion-datetime displayFormat="MMM DD, YYYY" (ionChange)="updateMyDate($event)" [(ngModel)]="dateValue"></ion-datetime>
+  </ion-item>
 
-<amplify-photo-picker framework="Ionic"
-    (picked)="onImagePicked($event)"
-    (loaded)="onImageLoaded($event)">
-</amplify-photo-picker>
+  <!-- Textarea with custom number of rows and cols -->
+<ion-item>
+  <ion-label>Nutrition Log:</ion-label>
+  <ion-textarea rows="6" cols="20" placeholder="What did you have?"></ion-textarea>
+</ion-item>
 
-  <!-- <div #mapCanvas class="map-canvas"></div> -->
+  <amplify-photo-picker framework="Ionic" (picked)="onImagePicked($event)" (loaded)="onImageLoaded($event)">
+  </amplify-photo-picker>
 
-  <amplify-s3-album framework="Ionic" 
-    path="private/us-east-1:d86b33dd-fded-48f1-8e2a-ddda5bb7c83f" (selected)="onAlbumImageSelected($event)">
-</amplify-s3-album>
+  <!-- <div #mapCanvas class="map-canvas"></div> lifestylemed6a375832c546456d80452010981f5b6a -->
 
-<ion-button expand="block" (click)='presentToast()'> Save</ion-button>
+  <!-- <amplify-s3-album framework="Ionic" path="private/us-east-1:d86b33dd-fded-48f1-8e2a-ddda5bb7c83f" (selected)="onAlbumImageSelected($event)">
+  </amplify-s3-album> -->
+  
+  <amplify-s3-album framework="Ionic" path="pics" options="{level: 'public'}" (selected)="onAlbumImageSelected($event)" >
+  </amplify-s3-album>
+
+  <ion-button expand="block" (click)='presentToast()'> Save</ion-button>
 
 </ion-content>

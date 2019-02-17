@@ -12,6 +12,8 @@ import { PopoverController } from '@ionic/angular';
 
 import { PopoverPage } from '../post-popover/post-popover';
 
+import { Storage } from 'aws-amplify'
+
 @Component({
   selector: 'page-map',
   templateUrl: 'post.html',
@@ -32,6 +34,12 @@ export class PostPage implements AfterViewInit {
   constructor(public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) {}
 
   async ngAfterViewInit() {
+
+Storage.list('undefined/')
+.then(data => console.log('images from S3: ', data))
+.catch(err => console.log('error'))
+    //this.amplifyService.storage().list
+
     // const googleMaps = await getGoogleMaps(
     //   'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
     // );
@@ -84,7 +92,7 @@ export class PostPage implements AfterViewInit {
 
   onImagePicked(file){
 
-    let key = `private/${file.name}`;
+    let key = `private/pics/${file.name}`;
     
     this.amplifyService.storage().put( key, file, {
       'level': 'private',
@@ -101,6 +109,7 @@ export class PostPage implements AfterViewInit {
   }
 
   onAlbumImageSelected(event){
+    console.log('what is the album event??',event);
     window.open( event, '_blank' );
   }
 

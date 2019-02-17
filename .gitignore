@@ -51,5 +51,11 @@ Thumbs.db
 aws-exports.ts
 
 
-package-lock.json
 .graphqlconfig.yml
+
+package-lock.json
+
+#awsmobilejs
+/awsmobilejs/*
+/src/aws-exports.js
+/src/AppSync.js

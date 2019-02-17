@@ -8,6 +8,11 @@ import { Chart } from 'chart.js';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
+import {  IonItemSliding } from '@ionic/angular';
+
+// @ViewChild(IonItemSliding) itemSliding: IonItemSliding;
+ 
+
 @Component({
   selector: 'sleep-history',
   templateUrl: './sleep-history.page.html',
@@ -17,6 +22,8 @@ export class SleepHistoryPage implements OnInit {
   me: User;
   public chart: Chart;
   public rawData:any;
+  // public itemSliding:any;
+  
 
   public chartOptions: any;
   public chartType: string = 'bar';
@@ -26,6 +33,8 @@ export class SleepHistoryPage implements OnInit {
 
   public lineChartData: Array<any> = [{ data: null }];
   public myChartData: any = [];
+
+ 
 
   constructor(private appsync: AppsyncService) { 
 
@@ -113,6 +122,10 @@ export class SleepHistoryPage implements OnInit {
     // To Do: do I really did to do this or use local storage?
     this.register();
   }
+
+//   ionViewWillLeave() {
+//     setTimeout(() => { this.itemSliding.closeOpened(); }, 500);
+// }
 
   register() {
     this.appsync.hc().then(client => {
