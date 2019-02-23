@@ -74,7 +74,7 @@ import { MemberRoutingModule } from './members/member-routing.module';
    
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AmplifyAngularModule,
     GraphQLModule,
     ChartsModule

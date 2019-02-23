@@ -5,7 +5,7 @@ import { Platform } from '@ionic/angular';
 import { Auth } from 'aws-amplify';
 import AWSAppSyncClient from 'aws-appsync';
 
-import { AmplifyService }  from 'aws-amplify-angular';
+import { AmplifyService } from 'aws-amplify-angular';
 import { SwUpdate } from '@angular/service-worker';
 
 import { PopoverController } from '@ionic/angular';
@@ -30,14 +30,31 @@ export class PostPage implements AfterViewInit {
   //me: User;
   //conversation: Conversation;
   update: boolean;
+  //path:any = 'https://s3.amazonaws.com/lifestylemed6a375832c546456d80452010981f5b6a';
+  path:any = 'pics';
+  options: any = { level: 'public' };
+  list: Array<Object>;
 
-  constructor(public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) {}
+  constructor(public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public confData: ConferenceData, public platform: Platform) { }
 
   async ngAfterViewInit() {
+    //Storage.configure({ level: 'private' });
 
-Storage.list('undefined/')
-.then(data => console.log('images from S3: ', data))
-.catch(err => console.log('error'))
+    //Storage.get('pics/avatar.png').then(data => console.log('data?', data))
+
+    Storage.list('pics')
+      .then(data => console.log('images from S3: ', data))
+      .catch(err => console.log('error'))
+
+      this.amplifyService.storage()
+      .list(this.path, this.options)
+      .then(data => {
+        this.list = data.map(item => {
+          //return item;
+          return { path: item.key };
+        });
+      })
+      .catch(e => console.error(e));
     //this.amplifyService.storage().list
 
     // const googleMaps = await getGoogleMaps(
@@ -73,44 +90,44 @@ Storage.list('undefined/')
     // });
   }
 
-    //updates date
-    async updateMyDate(event) {
-      this.dateValue = event.detail.value
-    }
+  //updates date
+  async updateMyDate(event) {
+    this.dateValue = event.detail.value
+  }
 
-    async presentToast() {
-      // this.modifiedDate();
-      // this.sleepOnSubmit();
-  
-      // const toast = await this.toastController.create({
-      //   message: 'Your hours slept have been saved.',
-      //   duration: 2000
-      // });
-      // toast.present();
-  
-    }
+  async presentToast() {
+    // this.modifiedDate();
+    // this.sleepOnSubmit();
 
-  onImagePicked(file){
+    // const toast = await this.toastController.create({
+    //   message: 'Your hours slept have been saved.',
+    //   duration: 2000
+    // });
+    // toast.present();
+
+  }
+
+  onImagePicked(file) {
 
     let key = `private/pics/${file.name}`;
-    
-    this.amplifyService.storage().put( key, file, {
+
+    this.amplifyService.storage().put(key, file, {
       'level': 'private',
       'contentType': file.type
     })
-    .then (result => console.log('uploaded: ', result))
-    .catch(err => console.log('upload error: ', err));
+      .then(result => console.log('uploaded: ', result))
+      .catch(err => console.log('upload error: ', err));
 
   }
 
-  onImageLoaded(event){
-    console.log('event',event)
+  onImageLoaded(event) {
+    console.log('event', event)
 
   }
 
-  onAlbumImageSelected(event){
-    console.log('what is the album event??',event);
-    window.open( event, '_blank' );
+  onAlbumImageSelected(event) {
+    console.log('what is the album event??', event);
+    window.open(event, '_blank');
   }
 
   async presentPopover(event: Event) {

@@ -12,3 +12,5 @@ subscription subscribeToNewMessage($conversationId: ID!) {
     isSent
   }
 }`;
+
+

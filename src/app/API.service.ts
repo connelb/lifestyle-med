@@ -122,6 +122,27 @@ export type DeleteNutritionInput = {
   createdAt: string;
 };
 
+export type CreateWaterInput = {
+  waterId: string;
+  createdAt: string;
+  userId?: string | null;
+  updatedAt?: string | null;
+  intake?: number | null;
+};
+
+export type UpdateWaterInput = {
+  waterId: string;
+  createdAt: string;
+  userId?: string | null;
+  updatedAt?: string | null;
+  intake?: number | null;
+};
+
+export type DeleteWaterInput = {
+  waterId: string;
+  createdAt: string;
+};
+
 export type TableMeasurementFilterInput = {
   measurementId?: TableStringFilterInput | null;
   createdAt?: TableStringFilterInput | null;
@@ -204,6 +225,14 @@ export type TableNutritionFilterInput = {
   userId?: TableStringFilterInput | null;
   updatedAt?: TableStringFilterInput | null;
   social?: TableStringFilterInput | null;
+};
+
+export type TableWaterFilterInput = {
+  waterId?: TableIDFilterInput | null;
+  createdAt?: TableStringFilterInput | null;
+  userId?: TableStringFilterInput | null;
+  updatedAt?: TableStringFilterInput | null;
+  intake?: TableIntFilterInput | null;
 };
 
 export type CreateConversationMutation = {
@@ -635,6 +664,33 @@ export type DeleteNutritionMutation = {
   } | null> | null;
 };
 
+export type CreateWaterMutation = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
+export type UpdateWaterMutation = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
+export type DeleteWaterMutation = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
 export type AllMessageQuery = {
   __typename: string;
   author: {
@@ -986,6 +1042,28 @@ export type ListNutritionsQuery = {
       createdAt: string;
       id: string;
     } | null> | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetWaterQuery = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
+export type ListWatersQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Water";
+    waterId: string;
+    createdAt: string;
+    userId: string | null;
+    updatedAt: string | null;
+    intake: number | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -1397,6 +1475,33 @@ export type OnDeleteNutritionSubscription = {
     createdAt: string;
     id: string;
   } | null> | null;
+};
+
+export type OnCreateWaterSubscription = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
+export type OnUpdateWaterSubscription = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
+};
+
+export type OnDeleteWaterSubscription = {
+  __typename: string;
+  waterId: string;
+  createdAt: string;
+  userId: string | null;
+  updatedAt: string | null;
+  intake: number | null;
 };
 
 @Injectable({
@@ -2070,6 +2175,63 @@ export class APIService {
     )) as any;
     return <DeleteNutritionMutation>response.data.deleteNutrition;
   }
+  async CreateWater(input: CreateWaterInput): Promise<CreateWaterMutation> {
+    const statement = `mutation CreateWater($input: CreateWaterInput!) {
+        createWater(input: $input) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateWaterMutation>response.data.createWater;
+  }
+  async UpdateWater(input: UpdateWaterInput): Promise<UpdateWaterMutation> {
+    const statement = `mutation UpdateWater($input: UpdateWaterInput!) {
+        updateWater(input: $input) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateWaterMutation>response.data.updateWater;
+  }
+  async DeleteWater(input: DeleteWaterInput): Promise<DeleteWaterMutation> {
+    const statement = `mutation DeleteWater($input: DeleteWaterInput!) {
+        deleteWater(input: $input) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteWaterMutation>response.data.deleteWater;
+  }
   async AllMessage(
     conversationId: string,
     after?: string,
@@ -2678,6 +2840,60 @@ export class APIService {
     )) as any;
     return <ListNutritionsQuery>response.data.listNutritions;
   }
+  async GetWater(waterId: string, createdAt: string): Promise<GetWaterQuery> {
+    const statement = `query GetWater($waterId: ID!, $createdAt: String!) {
+        getWater(waterId: $waterId, createdAt: $createdAt) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      waterId,
+      createdAt
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetWaterQuery>response.data.getWater;
+  }
+  async ListWaters(
+    filter?: TableWaterFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListWatersQuery> {
+    const statement = `query ListWaters($filter: TableWaterFilterInput, $limit: Int, $nextToken: String) {
+        listWaters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            waterId
+            createdAt
+            userId
+            updatedAt
+            intake
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListWatersQuery>response.data.listWaters;
+  }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
   > = API.graphql(
@@ -3224,4 +3440,49 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteNutritionSubscription>;
+
+  OnCreateWaterListener: Observable<OnCreateWaterSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateWater($waterId: ID, $createdAt: String, $userId: String, $updatedAt: AWSDate, $intake: Int) {
+        onCreateWater(waterId: $waterId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, intake: $intake) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`
+    )
+  ) as Observable<OnCreateWaterSubscription>;
+
+  OnUpdateWaterListener: Observable<OnUpdateWaterSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateWater($waterId: ID, $createdAt: String, $userId: String, $updatedAt: AWSDate, $intake: Int) {
+        onUpdateWater(waterId: $waterId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, intake: $intake) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`
+    )
+  ) as Observable<OnUpdateWaterSubscription>;
+
+  OnDeleteWaterListener: Observable<OnDeleteWaterSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteWater($waterId: ID, $createdAt: String, $userId: String, $updatedAt: AWSDate, $intake: Int) {
+        onDeleteWater(waterId: $waterId, createdAt: $createdAt, userId: $userId, updatedAt: $updatedAt, intake: $intake) {
+          __typename
+          waterId
+          createdAt
+          userId
+          updatedAt
+          intake
+        }
+      }`
+    )
+  ) as Observable<OnDeleteWaterSubscription>;
 }

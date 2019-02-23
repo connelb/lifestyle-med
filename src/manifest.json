@@ -3,9 +3,10 @@
   "short_name": "balance",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
+  "orientation": "any",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
