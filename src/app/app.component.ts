@@ -187,6 +187,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    if (this.swUpdate.isEnabled) {
+
+      this.swUpdate.available.subscribe(() => {
+
+          if(confirm("New version available. Load New Version?")) {
+
+              window.location.reload();
+          }
+      });
+} 
+
     // this.amplifyService.auth().currentSession().then(session => {
     //   this.logInfoToConsole(session);
     //   this.session = session;
@@ -304,6 +315,10 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log('Decoded Acess Token:');
     console.log(JSON.stringify(session.accessToken.payload, null, 2));
   }
+
+  // installPwa(): void {
+  //   this.Pwa.promptEvent.prompt();
+  // }
 
   checkLoginStatus1() {
     this.amplifyService.authStateChange$
