@@ -1,11 +1,11 @@
 {
   "name": "balance",
   "short_name": "balance",
-  "theme_color": "#1976d2",
-  "background_color": "transparent",
+  "theme_color": "#74C0EB",
+  "background_color": "#ccffff",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "https://d2g95z3czfbqeu.cloudfront.net/",
+  "start_url": "/",
   "orientation": "any",
   "icons": [
     {
