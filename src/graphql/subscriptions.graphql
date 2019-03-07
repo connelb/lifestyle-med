@@ -1,0 +1,604 @@
+# this is an auto generated file. This will be overwritten
+subscription SubscribeToNewMessage($conversationId: ID!) {
+  subscribeToNewMessage(conversationId: $conversationId) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    conversationId
+    createdAt
+    id
+    isSent
+    recipient {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    sender
+  }
+}
+subscription SubscribeToNewUCs($userId: ID!) {
+  subscribeToNewUCs(userId: $userId) {
+    associated {
+      associated {
+        conversationId
+        userId
+      }
+      conversation {
+        createdAt
+        id
+        name
+      }
+      conversationId
+      user {
+        cognitoId
+        id
+        username
+        registered
+      }
+      userId
+    }
+    conversation {
+      createdAt
+      id
+      messages {
+        nextToken
+      }
+      name
+    }
+    conversationId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    userId
+  }
+}
+subscription SubscribeToNewUsers {
+  subscribeToNewUsers {
+    cognitoId
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    registered
+  }
+}
+subscription OnCreateMeasurement(
+  $measurementId: String
+  $createdAt: String
+  $chest: Int
+  $hips: Int
+  $leftArm: Int
+) {
+  onCreateMeasurement(
+    measurementId: $measurementId
+    createdAt: $createdAt
+    chest: $chest
+    hips: $hips
+    leftArm: $leftArm
+  ) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+subscription OnUpdateMeasurement(
+  $measurementId: String
+  $createdAt: String
+  $chest: Int
+  $hips: Int
+  $leftArm: Int
+) {
+  onUpdateMeasurement(
+    measurementId: $measurementId
+    createdAt: $createdAt
+    chest: $chest
+    hips: $hips
+    leftArm: $leftArm
+  ) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+subscription OnDeleteMeasurement(
+  $measurementId: String
+  $createdAt: String
+  $chest: Int
+  $hips: Int
+  $leftArm: Int
+) {
+  onDeleteMeasurement(
+    measurementId: $measurementId
+    createdAt: $createdAt
+    chest: $chest
+    hips: $hips
+    leftArm: $leftArm
+  ) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+subscription OnCreateWorkout(
+  $workoutId: String
+  $createdAt: String
+  $userId: String
+  $desc: String
+  $duration: String
+) {
+  onCreateWorkout(
+    workoutId: $workoutId
+    createdAt: $createdAt
+    userId: $userId
+    desc: $desc
+    duration: $duration
+  ) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+subscription OnUpdateWorkout(
+  $workoutId: String
+  $createdAt: String
+  $userId: String
+  $desc: String
+  $duration: String
+) {
+  onUpdateWorkout(
+    workoutId: $workoutId
+    createdAt: $createdAt
+    userId: $userId
+    desc: $desc
+    duration: $duration
+  ) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+subscription OnDeleteWorkout(
+  $workoutId: String
+  $createdAt: String
+  $userId: String
+  $desc: String
+  $duration: String
+) {
+  onDeleteWorkout(
+    workoutId: $workoutId
+    createdAt: $createdAt
+    userId: $userId
+    desc: $desc
+    duration: $duration
+  ) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+subscription OnCreateSleep(
+  $sleepId: String
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $hours: String
+) {
+  onCreateSleep(
+    sleepId: $sleepId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    hours: $hours
+  ) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+subscription OnUpdateSleep(
+  $sleepId: String
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $hours: String
+) {
+  onUpdateSleep(
+    sleepId: $sleepId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    hours: $hours
+  ) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+subscription OnDeleteSleep(
+  $sleepId: String
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $hours: String
+) {
+  onDeleteSleep(
+    sleepId: $sleepId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    hours: $hours
+  ) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+subscription OnCreateNutritionComment(
+  $content: String
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $id: ID
+) {
+  onCreateNutritionComment(
+    content: $content
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    id: $id
+  ) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+subscription OnUpdateNutritionComment(
+  $content: String
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $id: ID
+) {
+  onUpdateNutritionComment(
+    content: $content
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    id: $id
+  ) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+subscription OnDeleteNutritionComment(
+  $content: String
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $id: ID
+) {
+  onDeleteNutritionComment(
+    content: $content
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    id: $id
+  ) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+subscription OnCreateNutrition(
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $mealType: String
+  $userId: String
+  $updatedAt: AWSDate
+) {
+  onCreateNutrition(
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    mealType: $mealType
+    userId: $userId
+    updatedAt: $updatedAt
+  ) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+subscription OnUpdateNutrition(
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $mealType: String
+  $userId: String
+  $updatedAt: AWSDate
+) {
+  onUpdateNutrition(
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    mealType: $mealType
+    userId: $userId
+    updatedAt: $updatedAt
+  ) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+subscription OnDeleteNutrition(
+  $nutritionId: ID
+  $createdAt: AWSDate
+  $mealType: String
+  $userId: String
+  $updatedAt: AWSDate
+) {
+  onDeleteNutrition(
+    nutritionId: $nutritionId
+    createdAt: $createdAt
+    mealType: $mealType
+    userId: $userId
+    updatedAt: $updatedAt
+  ) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+subscription OnCreateWater(
+  $waterId: ID
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $intake: Int
+) {
+  onCreateWater(
+    waterId: $waterId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    intake: $intake
+  ) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}
+subscription OnUpdateWater(
+  $waterId: ID
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $intake: Int
+) {
+  onUpdateWater(
+    waterId: $waterId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    intake: $intake
+  ) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}
+subscription OnDeleteWater(
+  $waterId: ID
+  $createdAt: String
+  $userId: String
+  $updatedAt: AWSDate
+  $intake: Int
+) {
+  onDeleteWater(
+    waterId: $waterId
+    createdAt: $createdAt
+    userId: $userId
+    updatedAt: $updatedAt
+    intake: $intake
+  ) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}

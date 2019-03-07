@@ -128,7 +128,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private querySubscription: Subscription;
 
- 
+
   constructor(
     private events: Events,
     private menu: MenuController,
@@ -191,12 +191,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.swUpdate.available.subscribe(() => {
 
-          if(confirm("New version available. Load New Version?")) {
+        if (confirm("New version available. Load New Version?")) {
 
-              window.location.reload();
-          }
+          window.location.reload();
+        }
       });
-} 
+    }
 
     // this.amplifyService.auth().currentSession().then(session => {
     //   this.logInfoToConsole(session);
@@ -211,10 +211,10 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
 
-
-    this.appsyncService.hc().then(client => {
-      const observable = client.watchQuery({
-        query: gql`
+    if (this.appsyncService.hc()) {
+      this.appsyncService.hc().then(client => {
+        const observable = client.watchQuery({
+          query: gql`
         query getAllUsers {
           allUser {
             __typename
@@ -223,18 +223,19 @@ export class AppComponent implements OnInit, OnDestroy {
             username
           }
         }`,
-        fetchPolicy: 'cache-and-network'
-      });
+          fetchPolicy: 'cache-and-network'
+        });
 
-          observable.subscribe(({data}) => {
-            if (!data) {
-              return console.log('getAllUsers - no data');
-            }
-            //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-            //console.log('getAllUsers - Got data', data);
-            //this.no_user = (this.users.length === 0);
-    });
-    });
+        observable.subscribe(({ data }) => {
+          if (!data) {
+            return console.log('getAllUsers - no data');
+          }
+          //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
+          //console.log('getAllUsers - Got data', data);
+          //this.no_user = (this.users.length === 0);
+        });
+      });
+    }
 
     // }
     // const source$ = this.apollo.query({

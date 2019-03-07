@@ -1,0 +1,422 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateConversation($createdAt: String, $id: ID!, $name: String!) {
+  createConversation(createdAt: $createdAt, id: $id, name: $name) {
+    createdAt
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    name
+  }
+}
+mutation CreateMessage(
+  $content: String
+  $conversationId: ID!
+  $createdAt: String!
+  $id: ID!
+) {
+  createMessage(
+    content: $content
+    conversationId: $conversationId
+    createdAt: $createdAt
+    id: $id
+  ) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    conversationId
+    createdAt
+    id
+    isSent
+    recipient {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    sender
+  }
+}
+mutation CreateUser($username: String!) {
+  createUser(username: $username) {
+    cognitoId
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    registered
+  }
+}
+mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
+  createUserConversations(conversationId: $conversationId, userId: $userId) {
+    associated {
+      associated {
+        conversationId
+        userId
+      }
+      conversation {
+        createdAt
+        id
+        name
+      }
+      conversationId
+      user {
+        cognitoId
+        id
+        username
+        registered
+      }
+      userId
+    }
+    conversation {
+      createdAt
+      id
+      messages {
+        nextToken
+      }
+      name
+    }
+    conversationId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    userId
+  }
+}
+mutation CreateMeasurement($input: CreateMeasurementInput!) {
+  createMeasurement(input: $input) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+mutation UpdateMeasurement($input: UpdateMeasurementInput!) {
+  updateMeasurement(input: $input) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+mutation DeleteMeasurement($input: DeleteMeasurementInput!) {
+  deleteMeasurement(input: $input) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+mutation CreateWorkout($input: CreateWorkoutInput!) {
+  createWorkout(input: $input) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+mutation UpdateWorkout($input: UpdateWorkoutInput!) {
+  updateWorkout(input: $input) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+mutation DeleteWorkout($input: DeleteWorkoutInput!) {
+  deleteWorkout(input: $input) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+mutation CreateSleep($input: CreateSleepInput!) {
+  createSleep(input: $input) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+mutation UpdateSleep($input: UpdateSleepInput!) {
+  updateSleep(input: $input) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+mutation DeleteSleep($input: DeleteSleepInput!) {
+  deleteSleep(input: $input) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+mutation CreateNutritionComment($input: CreateNutritionCommentInput!) {
+  createNutritionComment(input: $input) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+mutation UpdateNutritionComment($input: UpdateNutritionCommentInput!) {
+  updateNutritionComment(input: $input) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+mutation DeleteNutritionComment($input: DeleteNutritionCommentInput!) {
+  deleteNutritionComment(input: $input) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+mutation CreateNutrition($input: CreateNutritionInput!) {
+  createNutrition(input: $input) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+mutation UpdateNutrition($input: UpdateNutritionInput!) {
+  updateNutrition(input: $input) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+mutation DeleteNutrition($input: DeleteNutritionInput!) {
+  deleteNutrition(input: $input) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+mutation CreateWater($input: CreateWaterInput!) {
+  createWater(input: $input) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}
+mutation UpdateWater($input: UpdateWaterInput!) {
+  updateWater(input: $input) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}
+mutation DeleteWater($input: DeleteWaterInput!) {
+  deleteWater(input: $input) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}

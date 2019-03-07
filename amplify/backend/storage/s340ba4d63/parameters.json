@@ -1,0 +1,13 @@
+{
+	"bucketName": "lifestylemed6a375832c546456d80452010981f5b6a",
+	"authPolicyName": "s3_amplify_40ba4d63",
+	"unauthPolicyName": "s3_amplify_40ba4d63",
+	"authRoleName": {
+		"Ref": "AuthRoleName"
+	},
+	"unauthRoleName": {
+		"Ref": "UnauthRoleName"
+	},
+	"authPermissions": "rw",
+	"unauthPermissions": ""
+}

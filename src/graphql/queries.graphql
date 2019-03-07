@@ -1,0 +1,376 @@
+# this is an auto generated file. This will be overwritten
+query AllMessage($after: String, $conversationId: ID!, $first: Int) {
+  allMessage(after: $after, conversationId: $conversationId, first: $first) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    conversationId
+    createdAt
+    id
+    isSent
+    recipient {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    sender
+  }
+}
+query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
+  allMessageConnection(
+    after: $after
+    conversationId: $conversationId
+    first: $first
+  ) {
+    messages {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      conversationId
+      createdAt
+      id
+      isSent
+      recipient {
+        cognitoId
+        id
+        username
+        registered
+      }
+      sender
+    }
+    nextToken
+  }
+}
+query AllMessageFrom(
+  $after: String
+  $conversationId: ID!
+  $first: Int
+  $sender: String!
+) {
+  allMessageFrom(
+    after: $after
+    conversationId: $conversationId
+    first: $first
+    sender: $sender
+  ) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    conversationId
+    createdAt
+    id
+    isSent
+    recipient {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    sender
+  }
+}
+query AllUser($after: String, $first: Int) {
+  allUser(after: $after, first: $first) {
+    cognitoId
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    registered
+  }
+}
+query Me {
+  me {
+    cognitoId
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    registered
+  }
+}
+query GetMeasurement($measurementId: String!, $createdAt: String!) {
+  getMeasurement(measurementId: $measurementId, createdAt: $createdAt) {
+    measurementId
+    createdAt
+    chest
+    hips
+    leftArm
+    leftThigh
+    rightArm
+    rightThigh
+    waist
+    weight
+  }
+}
+query ListMeasurements(
+  $filter: TableMeasurementFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMeasurements(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      measurementId
+      createdAt
+      chest
+      hips
+      leftArm
+      leftThigh
+      rightArm
+      rightThigh
+      waist
+      weight
+    }
+    nextToken
+  }
+}
+query GetWorkout($workoutId: String!, $createdAt: String!) {
+  getWorkout(workoutId: $workoutId, createdAt: $createdAt) {
+    workoutId
+    createdAt
+    userId
+    desc
+    duration
+    capture
+  }
+}
+query ListWorkouts(
+  $filter: TableWorkoutFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWorkouts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      workoutId
+      createdAt
+      userId
+      desc
+      duration
+      capture
+    }
+    nextToken
+  }
+}
+query GetSleep($sleepId: String!, $createdAt: String!) {
+  getSleep(sleepId: $sleepId, createdAt: $createdAt) {
+    sleepId
+    createdAt
+    userId
+    updatedAt
+    hours
+  }
+}
+query ListSleeps(
+  $filter: TableSleepFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSleeps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      sleepId
+      createdAt
+      userId
+      updatedAt
+      hours
+    }
+    nextToken
+  }
+}
+query GetNutritionComment($id: ID!, $createdAt: AWSDate!) {
+  getNutritionComment(id: $id, createdAt: $createdAt) {
+    author {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    content
+    nutritionId
+    createdAt
+    id
+  }
+}
+query ListNutritionComments(
+  $filter: TableNutritionCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNutritionComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+    nextToken
+  }
+}
+query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
+  getNutrition(nutritionId: $nutritionId, createdAt: $createdAt) {
+    nutritionId
+    createdAt
+    mealType
+    userId
+    user {
+      cognitoId
+      conversations {
+        nextToken
+      }
+      id
+      messages {
+        nextToken
+      }
+      username
+      registered
+    }
+    updatedAt
+    social
+    comments {
+      author {
+        cognitoId
+        id
+        username
+        registered
+      }
+      content
+      nutritionId
+      createdAt
+      id
+    }
+  }
+}
+query ListNutritions(
+  $filter: TableNutritionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNutritions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      nutritionId
+      createdAt
+      mealType
+      userId
+      user {
+        cognitoId
+        id
+        username
+        registered
+      }
+      updatedAt
+      social
+      comments {
+        content
+        nutritionId
+        createdAt
+        id
+      }
+    }
+    nextToken
+  }
+}
+query GetWater($waterId: ID!, $createdAt: String!) {
+  getWater(waterId: $waterId, createdAt: $createdAt) {
+    waterId
+    createdAt
+    userId
+    updatedAt
+    intake
+  }
+}
+query ListWaters(
+  $filter: TableWaterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWaters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      waterId
+      createdAt
+      userId
+      updatedAt
+      intake
+    }
+    nextToken
+  }
+}

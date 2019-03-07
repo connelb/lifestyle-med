@@ -1,0 +1,28 @@
+{
+    "auth": {
+        "cognitoa25eb0e1": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "api": {
+        "LifestyleMedicine": {
+            "service": "AppSync",
+            "output": {
+                "securityType": "AMAZON_COGNITO_USER_POOLS"
+            }
+        }
+    },
+    "storage": {
+        "s340ba4d63": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "hosting": {
+        "S3AndCloudFront": {
+            "service": "S3AndCloudFront",
+            "providerPlugin": "awscloudformation"
+        }
+    }
+}
