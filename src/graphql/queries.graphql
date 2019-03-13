@@ -11,7 +11,11 @@ query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     conversationId
@@ -28,7 +32,11 @@ query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     sender
   }
@@ -44,7 +52,11 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       conversationId
@@ -55,7 +67,11 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       sender
     }
@@ -84,7 +100,11 @@ query AllMessageFrom(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     conversationId
@@ -101,7 +121,11 @@ query AllMessageFrom(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     sender
   }
@@ -129,7 +153,11 @@ query AllUser($after: String, $first: Int) {
       nextToken
     }
     username
+    firstName
+    lastName
     registered
+    bio
+    image
   }
 }
 query Me {
@@ -155,7 +183,11 @@ query Me {
       nextToken
     }
     username
+    firstName
+    lastName
     registered
+    bio
+    image
   }
 }
 query GetMeasurement($measurementId: String!, $createdAt: String!) {
@@ -257,7 +289,11 @@ query GetNutritionComment($id: ID!, $createdAt: AWSDate!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -276,7 +312,11 @@ query ListNutritionComments(
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -302,7 +342,11 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -311,7 +355,11 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -335,7 +383,11 @@ query ListNutritions(
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       updatedAt
       social

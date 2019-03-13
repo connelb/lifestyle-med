@@ -1,10 +1,11 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-//import { ConferenceData } from '../../providers/conference-data';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
 import { Auth } from 'aws-amplify';
 import AWSAppSyncClient from 'aws-appsync';
+
+import { AppsyncService } from '../../providers/appsync.service';
 
 import { AmplifyService } from 'aws-amplify-angular';
 import { SwUpdate } from '@angular/service-worker';
@@ -15,6 +16,7 @@ import { PopoverPage } from '../post-popover/post-popover';
 
 import { Storage } from 'aws-amplify'
 import aws_exports from './../../../aws-exports';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'page-map',
@@ -28,7 +30,7 @@ export class PostPage implements AfterViewInit {
 
   session;
 
-  public myOptions: any = {level: 'public'};
+  // public myOptions: any = {bucket:aws_exports.aws_user_files_s3_bucket, level: 'public', path:'bananas'};
 
   client: AWSAppSyncClient<any>;
   //client: any;
@@ -36,23 +38,47 @@ export class PostPage implements AfterViewInit {
   //conversation: Conversation;
   //bucket:any = aws_exports.aws_user_files_s3_bucket
   update: boolean;
-  path: any = 'photos';
-  options: any = 'public';
-  list: Array<Object>;
+  // path: any = 'photos11';
+  // options: any = 'public';
 
-  constructor(public toastController: ToastController, public popoverCtrl: PopoverController, public amplifyService: AmplifyService, private swUpdate: SwUpdate, public platform: Platform) { }
+
+  list: Array<Object>;
+  // _path: string;
+  // _options: any = {};
+
+  // @Input() set data(data: any) {
+  //   if (!data.path) { return; }
+  //   this._path = data.path;
+  //   this._options = data.options;
+  // }
+
+  // @Input() set path(path: string) {
+  //   this._path = path;
+  // }
+
+  // @Input() set options(options: any) {
+  //   this._options = options;
+  // }
+
+  constructor(private appsync: AppsyncService,
+    public toastController: ToastController,
+    public popoverCtrl: PopoverController,
+    public amplifyService: AmplifyService,
+    private swUpdate: SwUpdate,
+    public platform: Platform) { }
 
   async ngAfterViewInit() {
+
     const storageOptions = {
       bucket: aws_exports.aws_user_files_s3_bucket,
-      level: 'public'
+      level: 'private'
     };
 
     this.amplifyService.storage()
-      .list('photos', storageOptions)
+      .list('pics', storageOptions)
       .then(data => {
         this.list = data.map(item => {
-          return item.key;
+          return { path: item.key };
         });
       })
       .catch(e => console.error(e));
@@ -87,42 +113,17 @@ export class PostPage implements AfterViewInit {
 
   }
 
-//   Storage.put('example.png', file, {
-//     contentType: 'image/png'
-// })
-
   onImagePicked1(file) {
-    let key = `photos/${file.name}`; //photos/2014-06-29 15.53.02-1.jpg 
-    console.log('what is file?', key, file);
-    this.amplifyService.storage().put(`${file.name}`,this.myOptions, {
-      'level': 'public',
-      'contentType': file.type,
-      progressCallback(progress) {
-        console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+    let key = 'pics/' + `${file.name}`;
+    this.amplifyService.storage().put(key, file,
+      {
+        'level': 'private',
+        'contentType': file.type
       }
-    })
+    )
       .then(result => console.log('uploaded: ', result))
       .catch(err => console.log('upload error: ', err));
   }
-
-  // onImagePicked(file) {
-
-  //   let key = `photos/${file.name}`;
-
-  //   this.amplifyService.storage().put('photos', `${file.name}`, {
-  //     'level': 'public',
-  //     'contentType': file.type,
-  //     progressCallback(progress) {
-  //       console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-  //     }
-  //   })
-  //     .then(result => {
-  //       // console.log('uploaded: what is thsi????????????', key, file, result);
-  //       this.presentToast();
-  //     })
-  //     .catch(err => console.log('upload error: ', err));
-
-  // }
 
   onImageLoaded(event) {
     console.log('event', event)

@@ -48,7 +48,8 @@ const routes: Routes = [
       loadChildren: './members/member-routing.module#MemberRoutingModule'
     },
   { path: 'sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' },
-  { path: 'water', loadChildren: './pages/water/water.module#WaterPageModule' }
+  { path: 'water', loadChildren: './pages/water/water.module#WaterPageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
   ]
 
 // const routes: Routes = [

@@ -270,7 +270,11 @@ export type CreateMessageMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   conversationId: string;
@@ -290,7 +294,11 @@ export type CreateMessageMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   sender: string | null;
 };
@@ -322,7 +330,11 @@ export type CreateUserMutation = {
     nextToken: string | null;
   } | null;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
   registered: boolean | null;
+  bio: string | null;
+  image: string | null;
 };
 
 export type CreateUserConversationsMutation = {
@@ -346,7 +358,11 @@ export type CreateUserConversationsMutation = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     userId: string;
   } | null> | null;
@@ -374,7 +390,11 @@ export type CreateUserConversationsMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   userId: string;
 };
@@ -493,7 +513,11 @@ export type CreateNutritionCommentMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -516,7 +540,11 @@ export type UpdateNutritionCommentMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -539,7 +567,11 @@ export type DeleteNutritionCommentMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -566,7 +598,11 @@ export type CreateNutritionMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -577,7 +613,11 @@ export type CreateNutritionMutation = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -605,7 +645,11 @@ export type UpdateNutritionMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -616,7 +660,11 @@ export type UpdateNutritionMutation = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -644,7 +692,11 @@ export type DeleteNutritionMutation = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -655,7 +707,11 @@ export type DeleteNutritionMutation = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -706,7 +762,11 @@ export type AllMessageQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   conversationId: string;
@@ -726,7 +786,11 @@ export type AllMessageQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   sender: string | null;
 };
@@ -740,7 +804,11 @@ export type AllMessageConnectionQuery = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     conversationId: string;
@@ -752,7 +820,11 @@ export type AllMessageConnectionQuery = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     sender: string | null;
   } | null> | null;
@@ -774,7 +846,11 @@ export type AllMessageFromQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   conversationId: string;
@@ -794,7 +870,11 @@ export type AllMessageFromQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   sender: string | null;
 };
@@ -826,7 +906,11 @@ export type AllUserQuery = {
     nextToken: string | null;
   } | null;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
   registered: boolean | null;
+  bio: string | null;
+  image: string | null;
 };
 
 export type MeQuery = {
@@ -856,7 +940,11 @@ export type MeQuery = {
     nextToken: string | null;
   } | null;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
   registered: boolean | null;
+  bio: string | null;
+  image: string | null;
 };
 
 export type GetMeasurementQuery = {
@@ -952,7 +1040,11 @@ export type GetNutritionCommentQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -969,7 +1061,11 @@ export type ListNutritionCommentsQuery = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -998,7 +1094,11 @@ export type GetNutritionQuery = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -1009,7 +1109,11 @@ export type GetNutritionQuery = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -1031,7 +1135,11 @@ export type ListNutritionsQuery = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     updatedAt: string | null;
     social: string | null;
@@ -1083,7 +1191,11 @@ export type SubscribeToNewMessageSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   conversationId: string;
@@ -1103,7 +1215,11 @@ export type SubscribeToNewMessageSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   sender: string | null;
 };
@@ -1129,7 +1245,11 @@ export type SubscribeToNewUCsSubscription = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     userId: string;
   } | null> | null;
@@ -1157,7 +1277,11 @@ export type SubscribeToNewUCsSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   userId: string;
 };
@@ -1189,7 +1313,11 @@ export type SubscribeToNewUsersSubscription = {
     nextToken: string | null;
   } | null;
   username: string;
+  firstName: string | null;
+  lastName: string | null;
   registered: boolean | null;
+  bio: string | null;
+  image: string | null;
 };
 
 export type OnCreateMeasurementSubscription = {
@@ -1306,7 +1434,11 @@ export type OnCreateNutritionCommentSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -1329,7 +1461,11 @@ export type OnUpdateNutritionCommentSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -1352,7 +1488,11 @@ export type OnDeleteNutritionCommentSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   content: string;
   nutritionId: string;
@@ -1379,7 +1519,11 @@ export type OnCreateNutritionSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -1390,7 +1534,11 @@ export type OnCreateNutritionSubscription = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -1418,7 +1566,11 @@ export type OnUpdateNutritionSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -1429,7 +1581,11 @@ export type OnUpdateNutritionSubscription = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -1457,7 +1613,11 @@ export type OnDeleteNutritionSubscription = {
       nextToken: string | null;
     } | null;
     username: string;
+    firstName: string | null;
+    lastName: string | null;
     registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null;
   updatedAt: string | null;
   social: string | null;
@@ -1468,7 +1628,11 @@ export type OnDeleteNutritionSubscription = {
       cognitoId: string;
       id: string;
       username: string;
+      firstName: string | null;
+      lastName: string | null;
       registered: boolean | null;
+      bio: string | null;
+      image: string | null;
     } | null;
     content: string;
     nutritionId: string;
@@ -1568,7 +1732,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           conversationId
@@ -1588,7 +1756,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           sender
         }
@@ -1635,7 +1807,11 @@ export class APIService {
             nextToken
           }
           username
+          firstName
+          lastName
           registered
+          bio
+          image
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1672,7 +1848,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             userId
           }
@@ -1700,7 +1880,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           userId
         }
@@ -1936,7 +2120,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -1971,7 +2159,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -2006,7 +2198,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -2045,7 +2241,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -2056,7 +2256,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -2096,7 +2300,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -2107,7 +2315,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -2147,7 +2359,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -2158,7 +2374,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -2253,7 +2473,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           conversationId
@@ -2273,7 +2497,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           sender
         }
@@ -2307,7 +2535,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             conversationId
@@ -2319,7 +2551,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             sender
           }
@@ -2362,7 +2598,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           conversationId
@@ -2382,7 +2622,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           sender
         }
@@ -2431,7 +2675,11 @@ export class APIService {
             nextToken
           }
           username
+          firstName
+          lastName
           registered
+          bio
+          image
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -2475,7 +2723,11 @@ export class APIService {
             nextToken
           }
           username
+          firstName
+          lastName
           registered
+          bio
+          image
         }
       }`;
     const response = (await API.graphql(graphqlOperation(statement))) as any;
@@ -2681,7 +2933,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -2713,7 +2969,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -2762,7 +3022,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -2773,7 +3037,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -2810,7 +3078,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             updatedAt
             social
@@ -2914,7 +3186,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           conversationId
@@ -2934,7 +3210,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           sender
         }
@@ -2968,7 +3248,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             userId
           }
@@ -2996,7 +3280,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           userId
         }
@@ -3036,7 +3324,11 @@ export class APIService {
             nextToken
           }
           username
+          firstName
+          lastName
           registered
+          bio
+          image
         }
       }`
     )
@@ -3227,7 +3519,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -3258,7 +3554,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -3289,7 +3589,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           content
           nutritionId
@@ -3324,7 +3628,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -3335,7 +3643,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -3371,7 +3683,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -3382,7 +3698,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId
@@ -3418,7 +3738,11 @@ export class APIService {
               nextToken
             }
             username
+            firstName
+            lastName
             registered
+            bio
+            image
           }
           updatedAt
           social
@@ -3429,7 +3753,11 @@ export class APIService {
               cognitoId
               id
               username
+              firstName
+              lastName
               registered
+              bio
+              image
             }
             content
             nutritionId

@@ -11,7 +11,11 @@ subscription SubscribeToNewMessage($conversationId: ID!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     conversationId
@@ -28,7 +32,11 @@ subscription SubscribeToNewMessage($conversationId: ID!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     sender
   }
@@ -50,7 +58,11 @@ subscription SubscribeToNewUCs($userId: ID!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       userId
     }
@@ -73,7 +85,11 @@ subscription SubscribeToNewUCs($userId: ID!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     userId
   }
@@ -101,7 +117,11 @@ subscription SubscribeToNewUsers {
       nextToken
     }
     username
+    firstName
+    lastName
     registered
+    bio
+    image
   }
 }
 subscription OnCreateMeasurement(
@@ -333,7 +353,11 @@ subscription OnCreateNutritionComment(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -363,7 +387,11 @@ subscription OnUpdateNutritionComment(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -393,7 +421,11 @@ subscription OnDeleteNutritionComment(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -429,7 +461,11 @@ subscription OnCreateNutrition(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -438,7 +474,11 @@ subscription OnCreateNutrition(
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -475,7 +515,11 @@ subscription OnUpdateNutrition(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -484,7 +528,11 @@ subscription OnUpdateNutrition(
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -521,7 +569,11 @@ subscription OnDeleteNutrition(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -530,7 +582,11 @@ subscription OnDeleteNutrition(
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId

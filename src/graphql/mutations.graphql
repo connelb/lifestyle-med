@@ -39,7 +39,11 @@ mutation CreateMessage(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     conversationId
@@ -56,7 +60,11 @@ mutation CreateMessage(
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     sender
   }
@@ -84,7 +92,11 @@ mutation CreateUser($username: String!) {
       nextToken
     }
     username
+    firstName
+    lastName
     registered
+    bio
+    image
   }
 }
 mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
@@ -104,7 +116,11 @@ mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       userId
     }
@@ -127,7 +143,11 @@ mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     userId
   }
@@ -243,7 +263,11 @@ mutation CreateNutritionComment($input: CreateNutritionCommentInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -263,7 +287,11 @@ mutation UpdateNutritionComment($input: UpdateNutritionCommentInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -283,7 +311,11 @@ mutation DeleteNutritionComment($input: DeleteNutritionCommentInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     content
     nutritionId
@@ -307,7 +339,11 @@ mutation CreateNutrition($input: CreateNutritionInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -316,7 +352,11 @@ mutation CreateNutrition($input: CreateNutritionInput!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -341,7 +381,11 @@ mutation UpdateNutrition($input: UpdateNutritionInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -350,7 +394,11 @@ mutation UpdateNutrition($input: UpdateNutritionInput!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId
@@ -375,7 +423,11 @@ mutation DeleteNutrition($input: DeleteNutritionInput!) {
         nextToken
       }
       username
+      firstName
+      lastName
       registered
+      bio
+      image
     }
     updatedAt
     social
@@ -384,7 +436,11 @@ mutation DeleteNutrition($input: DeleteNutritionInput!) {
         cognitoId
         id
         username
+        firstName
+        lastName
         registered
+        bio
+        image
       }
       content
       nutritionId

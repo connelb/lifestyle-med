@@ -127,7 +127,9 @@ export class ChatPage implements OnInit {
       username: this.session.idToken.payload['cognito:username'],
       id: this.session.idToken.payload['sub'],
       cognitoId: this.session.idToken.payload['sub'],
-      registered: false
+      registered: false,
+      bio:'',
+      image:''
     };
     console.log('creating user, does thsi wor??????', user);
     

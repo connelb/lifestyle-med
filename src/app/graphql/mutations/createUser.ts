@@ -8,5 +8,7 @@ mutation createUser($username: String!) {
     username
     registered
     id
+    bio
+    image
   }
 }`;

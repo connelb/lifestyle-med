@@ -8,5 +8,7 @@ query getMe {
     cognitoId
     username
     registered
+    bio
+    image
   }
 }`;
