@@ -1,26 +1,55 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content padding>
-    <div padding-top text-center *ngIf="username">
-        <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-        <amplify-s3-image [path]="user.image" [options]="{'level': 'private'}" *ngIf="showPhoto"></amplify-s3-image>
+<ion-content padding-top text-center>
+
+  <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+  <!-- <amplify-s3-image [path]="user.image" [options]="{'level': 'private'}" *ngIf="showPhoto"></amplify-s3-image>
         <amplify-photo-picker *ngIf="!showPhoto" path="image" [storageOptions]="{'level': 'private'}" (uploaded)="onImageUploaded($event)">
-        </amplify-photo-picker>
-        <h2>{{username}}</h2>
-        <ion-list><ion-item>Goal: {{goal}}</ion-item></ion-list>
-        
-        <ion-list inset>
-          <ion-item (click)="updatePicture()">Update Picture</ion-item>
-          <ion-item (click)="changeUsername()">Change Username</ion-item>
-          <ion-item (click)="changePassword()">Change Password</ion-item>
-          <ion-item (click)="changeGoal()">Change Goal</ion-item>
-          <ion-item (click)="support()">Support</ion-item>
-          <ion-item (click)="logout()">Logout</ion-item>
-        </ion-list>
-      </div>
+        </amplify-photo-picker> -->
+  <h2>{{username}}</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+    <!-- <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-input type="text" formControlName="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Last Name</ion-label>
+      <ion-textarea formControlName="lastName"></ion-textarea>
+    </ion-item> -->
+    <ion-item>
+        <ion-label>userId</ion-label>
+        <ion-textarea formControlName="userId"></ion-textarea>
+      </ion-item>
+    <ion-item>
+      <ion-label>Goal</ion-label>
+      <ion-textarea formControlName="goal"></ion-textarea>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!profileForm.valid">Update</button>
+  </form>
+
+  <div padding-top text-center *ngIf="userId">
+
+
+
+    <ion-list>
+      <ion-item>Goal: {{goal}}</ion-item>
+    </ion-list>
+
+    <ion-list inset>
+      <ion-item (click)="updatePicture()">Update Picture</ion-item>
+      <ion-item (click)="changeUsername()">Change Username</ion-item>
+      <ion-item (click)="changePassword()">Change Password</ion-item>
+      <ion-item (click)="changeGoal()">Change Goal</ion-item>
+      <ion-item (click)="support()">Support</ion-item>
+      <ion-item (click)="logout()">Logout</ion-item>
+    </ion-list>
+  </div>
 
 </ion-content>

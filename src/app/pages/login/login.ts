@@ -63,7 +63,6 @@ export class LoginPage {
                 this.register();
                 setImmediate(() => this.createUser());
 
-
                 this.router.navigateByUrl('/app/tabs/blog');
                 //this.router.navigate(['members', 'blog1']);
             }
@@ -72,7 +71,6 @@ export class LoginPage {
   }
 
   //signInUserSession.idToken
-
   logInfoToConsole(session) {
     console.log(session);
     console.log(`ID Token: <${session.idToken.jwtToken}>`);

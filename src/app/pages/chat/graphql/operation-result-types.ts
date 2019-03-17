@@ -136,7 +136,7 @@ export type getUserConversationConnectionThroughUserQuery = {
   me:  {
     // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
     conversations:  {
-      __typename: "UserConverstationsConnection",
+      __typename: "UserConversationsConnection",
       nextToken: string | null,
       userConversations:  Array< {
         __typename: "UserConversations",

@@ -240,7 +240,8 @@ export class ChatMessageViewComponent {
   loadMessages(event = null, fetchPolicy = 'cache-and-network') {
     if (event) { event.stopPropagation(); }
     const innerObserable = this.appsync.hc().then(client => {
-      console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
+      console.log('brian, what is client?', client, fetchPolicy)
+      //console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
       const options = {
         query: getConversationMessages,
         fetchPolicy: fetchPolicy,

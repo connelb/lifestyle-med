@@ -76,14 +76,14 @@ export class ChatPage implements OnInit {
             if (!authState.user) {
                 this.user = null;
             } else {
-              //console.log('what is authState????????', authState);
+              console.log('what is authState????????', authState);
                 //this.user = authState.user;
                 //this.greeting = "Hello " + this.user.username;
                 //this.userData.login(this.user.username);
                 this.session = authState.user.signInUserSession;
-                //this.logInfoToConsole(authState.user.signInUserSession);
+                this.logInfoToConsole(authState.user.signInUserSession);
                 
-                //this.register();
+                this.register();
                 setImmediate(() => this.createUser());
 
 
@@ -93,34 +93,34 @@ export class ChatPage implements OnInit {
         });
 
 
-    //this.register()
-    // Auth.currentSession().then(session => {
-    //   console.log('what is session in chat, can it be used everywhere??',session)
-    // })
-    // Auth.currentSession().then(session => {
-    //   this.logInfoToConsole(session);
-    //   this.session = session;
-    //   this.register();
-    //   setImmediate(() => this.createUser());
-    // });
+    this.register()
+    Auth.currentSession().then(session => {
+      console.log('what is session in chat, can it be used everywhere??',session)
+    })
+    Auth.currentSession().then(session => {
+      this.logInfoToConsole(session);
+      this.session = session;
+      this.register();
+      setImmediate(() => this.createUser());
+    });
 
     this.swUpdate.available.subscribe(event => {
       console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
     });
 
-    console.log('what is me??', this.me)
+    //console.log('what is me??', this.me)
   }
 
-  // logInfoToConsole(session) {
-  //   console.log(session);
-  //   console.log(`ID Token: <${session.idToken.jwtToken}>`);
-  //   console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-  //   console.log('Decoded ID Token:');
-  //   console.log(JSON.stringify(session.idToken.payload, null, 2));
-  //   console.log('Decoded Acess Token:');
-  //   console.log(JSON.stringify(session.accessToken.payload, null, 2));
-  // }
+  logInfoToConsole(session) {
+    console.log(session);
+    console.log(`ID Token: <${session.idToken.jwtToken}>`);
+    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+    console.log('Decoded ID Token:');
+    console.log(JSON.stringify(session.idToken.payload, null, 2));
+    console.log('Decoded Acess Token:');
+    console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  }
 
   createUser() {
     const user: User = {
@@ -131,7 +131,7 @@ export class ChatPage implements OnInit {
       bio:'',
       image:''
     };
-    console.log('creating user, does thsi wor??????', user);
+    //console.log('creating user, does thsi wor??????', user);
     
     this.appsync.hc().then(client => {
       //console.log('client?', client);
@@ -155,9 +155,6 @@ export class ChatPage implements OnInit {
   }
 
   register() {
-    //this.appsync.hc
-    //console.log('what is client??????????????????????????', this.appsync)
-    
     this.appsync.hc().then(client => {
       
       client.watchQuery({

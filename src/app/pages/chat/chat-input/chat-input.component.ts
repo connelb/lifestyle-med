@@ -21,6 +21,7 @@ export class ChatInputComponent {
   constructor(private appsync: AppsyncService) {}
 
   createNewMessage() {
+    console.log('create new message pressed');
     if (!this.message || this.message.trim().length === 0) {
       this.message = '';
       return;

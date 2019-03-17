@@ -69,8 +69,38 @@ mutation CreateMessage(
     sender
   }
 }
-mutation CreateUser($username: String!) {
-  createUser(username: $username) {
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    cognitoId
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    id
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstName
+    lastName
+    registered
+    bio
+    image
+  }
+}
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
     cognitoId
     conversations {
       nextToken

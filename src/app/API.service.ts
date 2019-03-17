@@ -5,6 +5,28 @@ import API, { graphqlOperation } from "@aws-amplify/api";
 import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
+export type CreateUserInput = {
+  cognitoId: string;
+  id?: string | null;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  registered?: boolean | null;
+  bio?: string | null;
+  image?: string | null;
+};
+
+export type UpdateUserInput = {
+  cognitoId: string;
+  id?: string | null;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  registered?: boolean | null;
+  bio?: string | null;
+  image?: string | null;
+};
+
 export type CreateMeasurementInput = {
   measurementId: string;
   createdAt: string;
@@ -304,6 +326,40 @@ export type CreateMessageMutation = {
 };
 
 export type CreateUserMutation = {
+  __typename: string;
+  cognitoId: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  id: string;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string;
+  firstName: string | null;
+  lastName: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type UpdateUserMutation = {
   __typename: string;
   cognitoId: string;
   conversations: {
@@ -1778,9 +1834,9 @@ export class APIService {
     )) as any;
     return <CreateMessageMutation>response.data.createMessage;
   }
-  async CreateUser(username: string): Promise<CreateUserMutation> {
-    const statement = `mutation CreateUser($username: String!) {
-        createUser(username: $username) {
+  async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
+    const statement = `mutation CreateUser($input: CreateUserInput!) {
+        createUser(input: $input) {
           __typename
           cognitoId
           conversations {
@@ -1815,12 +1871,56 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      username
+      input
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateUserMutation>response.data.createUser;
+  }
+  async UpdateUser(input: UpdateUserInput): Promise<UpdateUserMutation> {
+    const statement = `mutation UpdateUser($input: UpdateUserInput!) {
+        updateUser(input: $input) {
+          __typename
+          cognitoId
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          id
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstName
+          lastName
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateUserMutation>response.data.updateUser;
   }
   async CreateUserConversations(
     conversationId: string,
