@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-mutation createUser($username: String!) {
-  createUser(username: $username) {
+mutation createUser($cognitoId: ID!) {
+  createUser(input:{
+    cognitoId: $cognitoId
+  }) {
     __typename
     cognitoId
     username

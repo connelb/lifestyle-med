@@ -11,8 +11,8 @@ subscription SubscribeToNewMessage($conversationId: ID!) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -32,8 +32,8 @@ subscription SubscribeToNewMessage($conversationId: ID!) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -58,8 +58,8 @@ subscription SubscribeToNewUCs($userId: ID!) {
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -85,8 +85,8 @@ subscription SubscribeToNewUCs($userId: ID!) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -117,8 +117,8 @@ subscription SubscribeToNewUsers {
       nextToken
     }
     username
-    firstName
-    lastName
+    firstname
+    lastname
     registered
     bio
     image
@@ -353,8 +353,8 @@ subscription OnCreateNutritionComment(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -387,8 +387,8 @@ subscription OnUpdateNutritionComment(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -421,8 +421,8 @@ subscription OnDeleteNutritionComment(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -461,8 +461,8 @@ subscription OnCreateNutrition(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -474,8 +474,8 @@ subscription OnCreateNutrition(
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -515,8 +515,8 @@ subscription OnUpdateNutrition(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -528,8 +528,8 @@ subscription OnUpdateNutrition(
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -569,8 +569,8 @@ subscription OnDeleteNutrition(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -582,8 +582,8 @@ subscription OnDeleteNutrition(
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image

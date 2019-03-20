@@ -1,12 +1,14 @@
 import gql from 'graphql-tag';
 
-export default gql`mutation UpdateUser($input: UpdateUserInput!) {
+export default gql`
+mutation UpdateUser($input: UpdateUserInput!) {
     updateUser(input: $input) {
       __typename
+      cognitoId
       id
       username
-      firstName
-      lastName
+      firstname
+      lastname
       bio
       image
     }

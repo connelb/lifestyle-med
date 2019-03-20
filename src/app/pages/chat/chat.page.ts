@@ -129,12 +129,14 @@ export class ChatPage implements OnInit {
       cognitoId: this.session.idToken.payload['sub'],
       registered: false,
       bio:'',
-      image:''
+      image:'',
+      lastname:'',
+      firstname:''
     };
     //console.log('creating user, does thsi wor??????', user);
     
     this.appsync.hc().then(client => {
-      //console.log('client?', client);
+      console.log("this.session.idToken.payload['cognito:username']", user.username, this.session.idToken.payload['cognito:username']);
       client.mutate({
         mutation: createUser,
         variables: {username: user.username},

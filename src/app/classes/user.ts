@@ -5,8 +5,8 @@ export default class User {
         public id: string,
         //public messages,
         public username: string| null,
-        public firstName: string| null,
-        public lastName: string| null,
+        public firstname: string| null,
+        public lastname: string| null,
         public registered: boolean,
         public bio: string | null,
         public image: string| null

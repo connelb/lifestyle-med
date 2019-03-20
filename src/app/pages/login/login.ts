@@ -53,8 +53,9 @@ export class LoginPage {
             if (!authState.user) {
                 this.user = null;
             } else {
-              console.log('what is authState????????', authState);
+              
                 this.user = authState.user;
+                console.log('this.user.username', this.user.username, authState.user);
                 //this.greeting = "Hello " + this.user.username;
                 this.userData.login(this.user.username);
                 this.session = authState.user.signInUserSession;
@@ -70,15 +71,18 @@ export class LoginPage {
 
   }
 
+  
+
   //signInUserSession.idToken
   logInfoToConsole(session) {
-    console.log(session);
-    console.log(`ID Token: <${session.idToken.jwtToken}>`);
-    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-    console.log('Decoded ID Token:');
-    console.log(JSON.stringify(session.idToken.payload, null, 2));
-    console.log('Decoded Acess Token:');
-    console.log(JSON.stringify(session.accessToken.payload, null, 2));
+    console.log('session:',session);
+    // console.log(`ID Token: <${session.idToken.jwtToken}>`);
+    // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+    // console.log('Decoded ID Token:');
+    // console.log( JSON.stringify(session.idToken.payload, null, 2));
+    // console.log('Decoded Acess Token:');
+    // console.log(JSON.stringify(session.accessToken.payload, null, 2));
+    console.log('cognitoId??????', session.idToken.payload['sub'])
   }
 
   createUser() {
@@ -88,15 +92,17 @@ export class LoginPage {
       cognitoId: this.session.idToken.payload['sub'],
       registered: false,
       bio:'',
-      image:''
+      image:'',
+      firstname:'',
+      lastname:''
     };
-    console.log('creating user', user);
+    //console.log('creating user , brian is it accurate????', user.username);
     
     this.appsync.hc().then(client => {
       //console.log('client?', client);
       client.mutate({
         mutation: createUser,
-        variables: {username: user.username},
+        variables: {cognitoId: user.cognitoId},
 
         optimisticResponse: () => ({
           createUser: {

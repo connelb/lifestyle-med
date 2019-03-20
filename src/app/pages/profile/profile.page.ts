@@ -32,9 +32,9 @@ import {Auth} from 'aws-amplify';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  private profileForm : FormGroup;
+  profileForm : FormGroup;
   userId: string;
-  userName: string = "lyg";
+  //username: string = "lyg";
   imagePath: string;
   //conversations: string;
   //messages:string;
@@ -43,8 +43,8 @@ export class ProfilePage implements OnInit {
   user;
   username: string;
   goal: string = 'example goal';
-  firstName= 'myfirst name';
-  lastName = 'my last name';
+  firstname= 'myfirst name';
+  lastname = 'my last name';
 
   constructor(private api: APIService, private router: Router, private formBuilder: FormBuilder) { 
  
@@ -65,36 +65,37 @@ export class ProfilePage implements OnInit {
     }).then(async user => {
       this.username = user.username;
       this.userId = user.attributes.sub;
-      this.firstName = "";
-      this.lastName = "";
+      // context.identity.sub
+      this.firstname = "";
+      this.lastname = "";
       this. goal = "";
       console.log('what is userId?', user);
-      // let result = await this.api.Me();
-      // if (!result) {
-      //   this.userCreated = false;
-      //   this.user = new User('', '', '','', '', false,'','');
-      //   console.log('llkj - no user?????', this.user);
-      // } else {
-      //   this.userCreated = true;
-      //   this.showPhoto = !!result.image;
-      //   // this.user = new User(
-      //   //   this.userId,//cognitoId
-      //   //   //result.conversations,
-      //   //   result.id,
-      //   //   //result.messages,
-      //   //   result.username,
-      //   //   result.firstName,
-      //   //   result.lastName,
-      //   //   result.registered,
-      //   //   result.bio,
-      //   //   result.image
-      //   // )
-      //   this.user = result;
+      let result = await this.api.Me();
+      if (!result) {
+        this.userCreated = false;
+        this.user = new User('', '', '','', '', false,'','');
+        console.log('llkj - no user?????', this.user);
+      } else {
+        this.userCreated = true;
+        this.showPhoto = !!result.image;
+        this.user = new User(
+          this.userId,//cognitoId
+          //result.conversations,
+          result.id,
+          //result.messages,
+          result.username,
+          result.firstname,
+          result.lastname,
+          result.registered,
+          result.bio,
+          result.image
+        )
+        this.user = result;
 
-      //   this.render();
+        this.render();
 
-      //   console.log('llkl', result)
-      // }
+        console.log('llkl', result)
+      }
     }).catch(err => console.log('there is an erroro!', err));
   }
 
@@ -105,8 +106,8 @@ export class ProfilePage implements OnInit {
   render(){
     console.log('????',this.goal, this.userId)
   this.profileForm = this.formBuilder.group({
-    firstName: [this.firstName],
-    lastName: [this.lastName],
+    firstName: [this.firstname],
+    lastName: [this.lastname],
     userId:[this.userId],
     goal: [this.goal],
   });

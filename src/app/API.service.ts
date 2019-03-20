@@ -9,8 +9,8 @@ export type CreateUserInput = {
   cognitoId: string;
   id?: string | null;
   username?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
   registered?: boolean | null;
   bio?: string | null;
   image?: string | null;
@@ -20,8 +20,8 @@ export type UpdateUserInput = {
   cognitoId: string;
   id?: string | null;
   username?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
   registered?: boolean | null;
   bio?: string | null;
   image?: string | null;
@@ -286,14 +286,14 @@ export type CreateMessageMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -310,14 +310,14 @@ export type CreateMessageMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -337,7 +337,7 @@ export type CreateUserMutation = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string;
+  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -351,9 +351,9 @@ export type CreateUserMutation = {
     } | null> | null;
     nextToken: string | null;
   } | null;
-  username: string;
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   registered: boolean | null;
   bio: string | null;
   image: string | null;
@@ -371,7 +371,7 @@ export type UpdateUserMutation = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string;
+  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -385,9 +385,9 @@ export type UpdateUserMutation = {
     } | null> | null;
     nextToken: string | null;
   } | null;
-  username: string;
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   registered: boolean | null;
   bio: string | null;
   image: string | null;
@@ -412,10 +412,10 @@ export type CreateUserConversationsMutation = {
     user: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -440,14 +440,14 @@ export type CreateUserConversationsMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -563,14 +563,14 @@ export type CreateNutritionCommentMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -590,14 +590,14 @@ export type UpdateNutritionCommentMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -617,14 +617,14 @@ export type DeleteNutritionCommentMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -648,14 +648,14 @@ export type CreateNutritionMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -667,10 +667,10 @@ export type CreateNutritionMutation = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -695,14 +695,14 @@ export type UpdateNutritionMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -714,10 +714,10 @@ export type UpdateNutritionMutation = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -742,14 +742,14 @@ export type DeleteNutritionMutation = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -761,10 +761,10 @@ export type DeleteNutritionMutation = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -812,14 +812,14 @@ export type AllMessageQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -836,14 +836,14 @@ export type AllMessageQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -858,10 +858,10 @@ export type AllMessageConnectionQuery = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -874,10 +874,10 @@ export type AllMessageConnectionQuery = {
     recipient: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -896,14 +896,14 @@ export type AllMessageFromQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -920,14 +920,14 @@ export type AllMessageFromQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -947,7 +947,7 @@ export type AllUserQuery = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string;
+  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -961,9 +961,9 @@ export type AllUserQuery = {
     } | null> | null;
     nextToken: string | null;
   } | null;
-  username: string;
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   registered: boolean | null;
   bio: string | null;
   image: string | null;
@@ -981,7 +981,7 @@ export type MeQuery = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string;
+  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -995,9 +995,9 @@ export type MeQuery = {
     } | null> | null;
     nextToken: string | null;
   } | null;
-  username: string;
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   registered: boolean | null;
   bio: string | null;
   image: string | null;
@@ -1090,14 +1090,14 @@ export type GetNutritionCommentQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1115,10 +1115,10 @@ export type ListNutritionCommentsQuery = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1144,14 +1144,14 @@ export type GetNutritionQuery = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1163,10 +1163,10 @@ export type GetNutritionQuery = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1189,10 +1189,10 @@ export type ListNutritionsQuery = {
     user: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1241,14 +1241,14 @@ export type SubscribeToNewMessageSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1265,14 +1265,14 @@ export type SubscribeToNewMessageSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1299,10 +1299,10 @@ export type SubscribeToNewUCsSubscription = {
     user: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1327,14 +1327,14 @@ export type SubscribeToNewUCsSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1354,7 +1354,7 @@ export type SubscribeToNewUsersSubscription = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string;
+  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -1368,9 +1368,9 @@ export type SubscribeToNewUsersSubscription = {
     } | null> | null;
     nextToken: string | null;
   } | null;
-  username: string;
-  firstName: string | null;
-  lastName: string | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
   registered: boolean | null;
   bio: string | null;
   image: string | null;
@@ -1484,14 +1484,14 @@ export type OnCreateNutritionCommentSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1511,14 +1511,14 @@ export type OnUpdateNutritionCommentSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1538,14 +1538,14 @@ export type OnDeleteNutritionCommentSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1569,14 +1569,14 @@ export type OnCreateNutritionSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1588,10 +1588,10 @@ export type OnCreateNutritionSubscription = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1616,14 +1616,14 @@ export type OnUpdateNutritionSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1635,10 +1635,10 @@ export type OnUpdateNutritionSubscription = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1663,14 +1663,14 @@ export type OnDeleteNutritionSubscription = {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string;
+    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
     } | null;
-    username: string;
-    firstName: string | null;
-    lastName: string | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
     registered: boolean | null;
     bio: string | null;
     image: string | null;
@@ -1682,10 +1682,10 @@ export type OnDeleteNutritionSubscription = {
     author: {
       __typename: "User";
       cognitoId: string;
-      id: string;
-      username: string;
-      firstName: string | null;
-      lastName: string | null;
+      id: string | null;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
       registered: boolean | null;
       bio: string | null;
       image: string | null;
@@ -1788,8 +1788,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -1812,8 +1812,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -1863,8 +1863,8 @@ export class APIService {
             nextToken
           }
           username
-          firstName
-          lastName
+          firstname
+          lastname
           registered
           bio
           image
@@ -1907,8 +1907,8 @@ export class APIService {
             nextToken
           }
           username
-          firstName
-          lastName
+          firstname
+          lastname
           registered
           bio
           image
@@ -1948,8 +1948,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -1980,8 +1980,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2220,8 +2220,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2259,8 +2259,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2298,8 +2298,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2341,8 +2341,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2356,8 +2356,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -2400,8 +2400,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2415,8 +2415,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -2459,8 +2459,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2474,8 +2474,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -2573,8 +2573,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2597,8 +2597,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2635,8 +2635,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -2651,8 +2651,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -2698,8 +2698,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2722,8 +2722,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -2775,8 +2775,8 @@ export class APIService {
             nextToken
           }
           username
-          firstName
-          lastName
+          firstname
+          lastname
           registered
           bio
           image
@@ -2823,8 +2823,8 @@ export class APIService {
             nextToken
           }
           username
-          firstName
-          lastName
+          firstname
+          lastname
           registered
           bio
           image
@@ -3033,8 +3033,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3069,8 +3069,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3122,8 +3122,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3137,8 +3137,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3178,8 +3178,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3286,8 +3286,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3310,8 +3310,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3348,8 +3348,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3380,8 +3380,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3424,8 +3424,8 @@ export class APIService {
             nextToken
           }
           username
-          firstName
-          lastName
+          firstname
+          lastname
           registered
           bio
           image
@@ -3619,8 +3619,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3654,8 +3654,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3689,8 +3689,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3728,8 +3728,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3743,8 +3743,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3783,8 +3783,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3798,8 +3798,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image
@@ -3838,8 +3838,8 @@ export class APIService {
               nextToken
             }
             username
-            firstName
-            lastName
+            firstname
+            lastname
             registered
             bio
             image
@@ -3853,8 +3853,8 @@ export class APIService {
               cognitoId
               id
               username
-              firstName
-              lastName
+              firstname
+              lastname
               registered
               bio
               image

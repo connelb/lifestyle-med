@@ -11,8 +11,8 @@ query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -32,8 +32,8 @@ query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -52,8 +52,8 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -67,8 +67,8 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -100,8 +100,8 @@ query AllMessageFrom(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -121,8 +121,8 @@ query AllMessageFrom(
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -153,8 +153,8 @@ query AllUser($after: String, $first: Int) {
       nextToken
     }
     username
-    firstName
-    lastName
+    firstname
+    lastname
     registered
     bio
     image
@@ -183,8 +183,8 @@ query Me {
       nextToken
     }
     username
-    firstName
-    lastName
+    firstname
+    lastname
     registered
     bio
     image
@@ -289,8 +289,8 @@ query GetNutritionComment($id: ID!, $createdAt: AWSDate!) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -312,8 +312,8 @@ query ListNutritionComments(
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -342,8 +342,8 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
         nextToken
       }
       username
-      firstName
-      lastName
+      firstname
+      lastname
       registered
       bio
       image
@@ -355,8 +355,8 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image
@@ -383,8 +383,8 @@ query ListNutritions(
         cognitoId
         id
         username
-        firstName
-        lastName
+        firstname
+        lastname
         registered
         bio
         image

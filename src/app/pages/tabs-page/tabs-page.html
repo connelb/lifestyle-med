@@ -10,24 +10,27 @@
         <ion-icon name="contacts"></ion-icon>
         <ion-label>Something</ion-label>
       </ion-tab-button> -->
+      <ion-tab-button tab="chat" *ngIf='loggedIn'>
+          <ion-fab>
+            <ion-fab-button>
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-tab-button>
 
     <ion-tab-button tab="post" *ngIf='loggedIn'>
       <ion-icon name="contacts"></ion-icon>
       <ion-label>Post</ion-label>
     </ion-tab-button>
 
+
+
     <ion-tab-button tab="about" *ngIf='!loggedIn'>
       <ion-icon name="information-circle"></ion-icon>
       <ion-label>About</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="chat" *ngIf='loggedIn'>
-        <ion-fab>
-          <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-      </ion-tab-button>
+
   
   </ion-tab-bar>
 
