@@ -148,7 +148,7 @@ export class SleepHistoryPage implements OnInit {
 
       observable.subscribe(({ data }) => {
         if (!data) {
-          return console.log('getAllUsers - no data');
+          return console.log('getallMembers - no data');
         }
         this.rawData = data.listSleeps.items;
         const newSleep = _.sortBy(data.listSleeps.items, 'updatedAt');

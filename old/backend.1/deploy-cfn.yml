@@ -239,7 +239,7 @@ Resources:
           allMessageConnection(after: String, conversationId: ID!, first: Int): MessageConnection
           allMessageFrom(after: String, conversationId: ID!, first: Int, sender: String!): [Message]
           #  Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.
-          allUser(after: String, first: Int): [User]
+          allMember(after: String, first: Int): [User]
           #  Get my user.
           me: User
         }
@@ -515,12 +515,12 @@ Resources:
           "userConversations": $utils.toJson($context.result.items),
           "nextToken": #if(${context.result.nextToken}) "${context.result.nextToken}" #else null #end
         }
-  allUserQueryResolver:
+  allMemberQueryResolver:
     Type: "AWS::AppSync::Resolver"
     Properties:
       ApiId: !GetAtt chatQLApi.ApiId
       TypeName: "Query"
-      FieldName: "allUser"
+      FieldName: "allMember"
       DataSourceName: !GetAtt usersTableDataSource.Name
       RequestMappingTemplate: |
         {

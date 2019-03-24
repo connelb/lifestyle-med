@@ -82,8 +82,8 @@ query AllMessageFrom(
     sender
   }
 }
-query AllUser($after: String, $first: Int) {
-  allUser(after: $after, first: $first) {
+query allMember($after: String, $first: Int) {
+  allMember(after: $after, first: $first) {
     cognitoId
     conversations {
       nextToken

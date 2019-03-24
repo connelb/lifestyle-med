@@ -191,7 +191,7 @@ export class SleepPage implements OnInit {
 
       observable.subscribe(({ data }) => {
         if (!data) {
-          return console.log('getAllUsers - no data');
+          return console.log('getallMembers - no data');
         }
         const newSleep = _.sortBy(data.listSleeps.items, 'updatedAt');
         this.chartLabels = _.map(newSleep, 'updatedAt');

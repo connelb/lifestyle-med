@@ -51,7 +51,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
-import getAllUsers from './graphql/queries/getAllUsers';
+import getallMembers from './graphql/queries/getallMembers';
 import queryListAllMessages from './graphql/queries/queryListAllMessages';
 
 const CurrentUserForProfile = gql`
@@ -65,11 +65,10 @@ query CurrentUserForProfile {
 
 
 const CurrentUserForProfile1 = gql`
-query getAllUsers {
-  allUser {
+query getallMembers {
+  allMember {
     __typename
     id
-    cognitoId
     username
   }
 }`;
@@ -215,11 +214,10 @@ export class AppComponent implements OnInit, OnDestroy {
       this.appsyncService.hc().then(client => {
         const observable = client.watchQuery({
           query: gql`
-        query getAllUsers {
-          allUser {
+        query getallMembers {
+          allMember {
             __typename
             id
-            cognitoId
             username
           }
         }`,
@@ -228,10 +226,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
         observable.subscribe(({ data }) => {
           if (!data) {
-            return console.log('getAllUsers - no data');
+            return console.log('getallMembers - no data');
           }
-          //this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-          //console.log('getAllUsers - Got data', data);
+          //this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
+          //console.log('getallMembers - Got data', data);
           //this.no_user = (this.users.length === 0);
         });
       });
@@ -359,7 +357,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   register1() {
     this.querySubscription = this.apollo.watchQuery<any>({
-      query: getAllUsers
+      query: getallMembers
     })
       .valueChanges
       .subscribe(({ data, loading }) => {

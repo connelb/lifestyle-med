@@ -1,14 +1,14 @@
 // import { Component, Input, Output, EventEmitter } from '@angular/core';
 // import { AppsyncService } from '../../../providers/appsync.service';
 
-// import getAllUsers from '../graphql/queries/getAllUsers';
+// import getallMembers from '../graphql/queries/getallMembers';
 // import createConversation from '../graphql/mutations/createConversation';
 // import createUserConversations from '../graphql/mutations/createUserConversations';
 // import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
 // import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUsers';
 // import { constants, addConversation, addUser } from '../chat-helper';
 // import Conversation from '../types/conversation';
-// import { getAllUsersQuery as UsersQuery } from '../graphql/operation-result-types';
+// import { getallMembersQuery as UsersQuery } from '../graphql/operation-result-types';
 
 // import * as _ from 'lodash';
 // import { v4 as uuid } from 'uuid';
@@ -32,26 +32,26 @@
 //   @Input()
 //   set user(user) {
 //     this._user = user;
-//     if (this._user) { this.getAllUsers(); }
+//     if (this._user) { this.getallMembers(); }
 //   }
 
 //   @Output() onNewConvo = new EventEmitter<any>();
 
 //   constructor(private appsync: AppsyncService) {}
 
-//   getAllUsers() {
+//   getallMembers() {
 //     this.appsync.hc().then(client => {
 //       const observable = client.watchQuery({
-//         query: getAllUsers,
+//         query: getallMembers,
 //         fetchPolicy: 'cache-and-network'
 //       });
 
 //       observable.subscribe(({data}) => {
 //         if (!data) {
-//           return console.log('getAllUsers - no data');
+//           return console.log('getallMembers - no data');
 //         }
-//         this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-//         console.log('getAllUsers - Got data', this.users);
+//         this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
+//         console.log('getallMembers - Got data', this.users);
 //         this.no_user = (this.users.length === 0);
 //       });
 
@@ -128,14 +128,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppsyncService } from '../../../providers/appsync.service';
 
-import getAllUsers from '../graphql/queries/getAllUsers';
+import getallMembers from '../graphql/queries/getallMembers';
 import createConversation from '../graphql/mutations/createConversation';
 import createUserConversations from '../graphql/mutations/createUserConversations';
 import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
 import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUsers';
 import { constants, addConversation, addUser } from '../chat-helper';
 import Conversation from '../types/conversation';
-import { getAllUsersQuery as UsersQuery } from '../graphql/operation-result-types';
+import { getallMembersQuery as UsersQuery } from '../graphql/operation-result-types';
 
 import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
@@ -159,26 +159,26 @@ export class ChatUserListComponent {
   @Input()
   set user(user) {
     this._user = user;
-    if (this._user) { this.getAllUsers(); }
+    if (this._user) { this.getallMembers(); }
   }
 
   @Output() onNewConvo = new EventEmitter<any>();
 
   constructor(private appsync: AppsyncService) {}
 
-  getAllUsers() {
+  getallMembers() {
     this.appsync.hc().then(client => {
       const observable = client.watchQuery({
-        query: getAllUsers,
+        query: getallMembers,
         fetchPolicy: 'cache-and-network'
       });
 
       observable.subscribe(({data}) => {
         if (!data) {
-          return console.log('getAllUsers - no data');
+          return console.log('getallMembers - no data');
         }
-        this.users = _(data.allUser).sortBy('username').reject(['id', this._user.id]).value();
-        console.log('getAllUsers - Got data', this.users);
+        this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
+        console.log('getallMembers - Got data', this.users);
         this.no_user = (this.users.length === 0);
       });
 

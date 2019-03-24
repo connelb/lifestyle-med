@@ -162,7 +162,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "allUser",
+          "name" : "allMember",
           "description" : "   Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.",
           "args" : [ {
             "name" : "after",

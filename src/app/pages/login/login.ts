@@ -8,12 +8,14 @@ import { UserOptions } from '../../interfaces/user-options';
 
 import { AmplifyService }  from 'aws-amplify-angular';
 import User from '../../types/user';
+import Member from '../../types/member';
 import Conversation from '../../types/conversation';
 import AWSAppSyncClient from 'aws-appsync';
 
 import { AppsyncService } from '../../providers/appsync.service';
 import getMe from '../../graphql/queries/getMe';
 import createUser from '../../graphql/mutations/createUser';
+import {APIService} from '../../API.service';
 
 
 
@@ -23,7 +25,7 @@ import createUser from '../../graphql/mutations/createUser';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+  //login: UserOptions = { username: '', password: '' };
   submitted = false;
   signedIn;
   user;
@@ -33,12 +35,13 @@ export class LoginPage {
   session;
   client: AWSAppSyncClient<any>;
   //client:any;
-  me: User;
+  me: Member;
   //conversation: Conversation;
   update: boolean;
   signInUserSession;
 
   constructor(
+    private api: APIService, 
     public amplifyService: AmplifyService,
     public userData: UserData,
     public router: Router,
@@ -85,36 +88,68 @@ export class LoginPage {
     console.log('cognitoId??????', session.idToken.payload['sub'])
   }
 
+  // bio: ""
+  // cognitoId: "4e13fa4d-5d51-4c18-834b-406ba731054b"
+  // firstname: ""
+  // id: "4e13fa4d-5d51-4c18-834b-406ba731054b"
+  // image: ""
+  // lastname: ""
+  // registered: false
+  // username: "kevin"
+
+  // createUser(input:{
+  //   cognitoId: $cognitoId
+  // }) {
+  //   __typename
+  //   cognitoId
+  //   username
+  //   registered
+  //   id
+  //   bio
+  //   image
+
   createUser() {
-    const user: User = {
-      username: this.session.idToken.payload['cognito:username'],
+    const user: Member = {
+      username: this.session.idToken.payload['cognito:username'] || null,
       id: this.session.idToken.payload['sub'],
-      cognitoId: this.session.idToken.payload['sub'],
       registered: false,
       bio:'',
       image:'',
       firstname:'',
       lastname:''
     };
-    //console.log('creating user , brian is it accurate????', user.username);
+    //console.log('what user????', user);
     
     this.appsync.hc().then(client => {
-      //console.log('client?', client);
+      //console.log('user.cognitoId?', user.cognitoId);
       client.mutate({
-        mutation: createUser,
-        variables: {cognitoId: user.cognitoId},
+        mutation: this.api.UpdateMember(user),
+        //variables: user
+        // {cognitoId:'4e13fa4d-5d51-4c18-834b-406ba731054b'}
+        //user
+        //  {
+        //   cognitoId: user.cognitoId,
+        //   username: user.username,
+        //   firstname:user.firstname,
+        //   lastname:user.lastname,
+        //   registered:user.registered,
+        //   id:user.id,
+        //   bio:user.bio,
+        //   image:user.image},
 
-        optimisticResponse: () => ({
-          createUser: {
-            ...user,
-            __typename: 'User'
-          }
-        }),
+        //   await this.api[this.getType()](user);
 
-        update: (proxy, {data: { createUser: _user }}) => {
-          // console.log('createUser update with:', _user);
-          proxy.writeQuery({query: getMe, data: {me: {..._user}}});
-        }
+        // optimisticResponse: () => ({
+        //   createUser: {
+        //     ...user,
+        //     __typename: 'User'
+        //   }
+        // }),
+
+        // update: (proxy, {data: { createUser: _user }}) => {
+        //   console.log('createUser update with:', _user);
+        //   proxy.writeQuery({query: getMe, data: {me: {..._user}}});
+        // }
       }).catch(err => console.log('Error registering user', err));
     });
   }
@@ -123,10 +158,10 @@ export class LoginPage {
     this.appsync.hc().then(client => {
       
       client.watchQuery({
-        query: getMe,
+        query: this.api.Me,
         fetchPolicy: 'cache-only'
       }).subscribe(({data}) => {
-        // console.log('register user, fetch cache', data);
+        console.log('register user, fetch cache', data);
         if (data) { this.me = data.me; }
       });
     });

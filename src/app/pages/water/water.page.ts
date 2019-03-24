@@ -146,7 +146,7 @@ export class WaterPage implements OnInit {
 
       observable.subscribe(({ data }) => {
         if (!data) {
-          return console.log('getAllUsers - no data');
+          return console.log('getallMembers - no data');
         }
 
         this.myWater = _.sortBy(data.listWaters.items, 'updatedAt');

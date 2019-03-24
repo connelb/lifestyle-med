@@ -130,9 +130,9 @@ query AllMessageFrom(
     sender
   }
 }
-query AllUser($after: String, $first: Int) {
-  allUser(after: $after, first: $first) {
-    cognitoId
+query allMember($after: String, $first: Int) {
+  allMember(after: $after, first: $first) {
+    id
     conversations {
       nextToken
       userConversations {
@@ -140,7 +140,6 @@ query AllUser($after: String, $first: Int) {
         userId
       }
     }
-    id
     messages {
       messages {
         content
@@ -162,7 +161,7 @@ query AllUser($after: String, $first: Int) {
 }
 query Me {
   me {
-    cognitoId
+    id
     conversations {
       nextToken
       userConversations {
@@ -170,7 +169,6 @@ query Me {
         userId
       }
     }
-    id
     messages {
       messages {
         content
@@ -422,6 +420,59 @@ query ListWaters(
       userId
       updatedAt
       intake
+    }
+    nextToken
+  }
+}
+query GetMember($id: ID!) {
+  getMember(id: $id) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
+query ListMembers(
+  $filter: TableMemberFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      username
+      firstname
+      lastname
+      registered
+      bio
+      image
     }
     nextToken
   }

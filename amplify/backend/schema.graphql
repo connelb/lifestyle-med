@@ -90,7 +90,7 @@ type Query {
 		first: Int,
 		sender: String!
 	): [Message]
-	allUser(after: String, first: Int): [User]
+	allMember(after: String, first: Int): [User]
 	me: User
 	getMeasurement(measurementId: String!, createdAt: String!): Measurement
 	listMeasurements(filter: TableMeasurementFilterInput, limit: Int, nextToken: String): MeasurementConnection

@@ -55,7 +55,7 @@ type Query {
   allMessageConnection(after: String, conversationId: ID!, first: Int): MessageConnection
   allMessageFrom(after: String, conversationId: ID!, first: Int, sender: String!): [Message]
   #  Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.
-  allUser(after: String, first: Int): [User]
+  allMember(after: String, first: Int): [User]
   #  Get my user.
   me: User
 }

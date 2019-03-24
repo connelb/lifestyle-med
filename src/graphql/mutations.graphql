@@ -506,3 +506,90 @@ mutation DeleteWater($input: DeleteWaterInput!) {
     intake
   }
 }
+mutation CreateMember($input: CreateMemberInput!) {
+  createMember(input: $input) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
+mutation UpdateMember($input: UpdateMemberInput!) {
+  updateMember(input: $input) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
+mutation DeleteMember($input: DeleteMemberInput!) {
+  deleteMember(input: $input) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}

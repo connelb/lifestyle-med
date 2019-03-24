@@ -165,6 +165,29 @@ export type DeleteWaterInput = {
   createdAt: string;
 };
 
+export type CreateMemberInput = {
+  username?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  registered?: boolean | null;
+  bio?: string | null;
+  image?: string | null;
+};
+
+export type UpdateMemberInput = {
+  id: string;
+  username?: string | null;
+  firstname?: string | null;
+  lastname?: string | null;
+  registered?: boolean | null;
+  bio?: string | null;
+  image?: string | null;
+};
+
+export type DeleteMemberInput = {
+  id: string;
+};
+
 export type TableMeasurementFilterInput = {
   measurementId?: TableStringFilterInput | null;
   createdAt?: TableStringFilterInput | null;
@@ -255,6 +278,21 @@ export type TableWaterFilterInput = {
   userId?: TableStringFilterInput | null;
   updatedAt?: TableStringFilterInput | null;
   intake?: TableIntFilterInput | null;
+};
+
+export type TableMemberFilterInput = {
+  id?: TableIDFilterInput | null;
+  username?: TableStringFilterInput | null;
+  firstname?: TableStringFilterInput | null;
+  lastname?: TableStringFilterInput | null;
+  registered?: TableBooleanFilterInput | null;
+  bio?: TableStringFilterInput | null;
+  image?: TableStringFilterInput | null;
+};
+
+export type TableBooleanFilterInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
 };
 
 export type CreateConversationMutation = {
@@ -803,6 +841,105 @@ export type DeleteWaterMutation = {
   intake: number | null;
 };
 
+export type CreateMemberMutation = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type UpdateMemberMutation = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type DeleteMemberMutation = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
 export type AllMessageQuery = {
   __typename: string;
   author: {
@@ -935,9 +1072,9 @@ export type AllMessageFromQuery = {
   sender: string | null;
 };
 
-export type AllUserQuery = {
+export type allMemberQuery = {
   __typename: string;
-  cognitoId: string;
+  id: string;
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
@@ -947,7 +1084,6 @@ export type AllUserQuery = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -971,7 +1107,7 @@ export type AllUserQuery = {
 
 export type MeQuery = {
   __typename: string;
-  cognitoId: string;
+  id: string;
   conversations: {
     __typename: "UserConverstationsConnection";
     nextToken: string | null;
@@ -981,7 +1117,6 @@ export type MeQuery = {
       userId: string;
     } | null> | null;
   } | null;
-  id: string | null;
   messages: {
     __typename: "MessageConnection";
     messages: Array<{
@@ -1228,6 +1363,62 @@ export type ListWatersQuery = {
     userId: string | null;
     updatedAt: string | null;
     intake: number | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetMemberQuery = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type ListMembersQuery = {
+  __typename: string;
+  items: Array<{
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -1722,6 +1913,105 @@ export type OnDeleteWaterSubscription = {
   userId: string | null;
   updatedAt: string | null;
   intake: number | null;
+};
+
+export type OnCreateMemberSubscription = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type OnUpdateMemberSubscription = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type OnDeleteMemberSubscription = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
 };
 
 @Injectable({
@@ -2552,6 +2842,135 @@ export class APIService {
     )) as any;
     return <DeleteWaterMutation>response.data.deleteWater;
   }
+  async CreateMember(input: CreateMemberInput): Promise<CreateMemberMutation> {
+    const statement = `mutation CreateMember($input: CreateMemberInput!) {
+        createMember(input: $input) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateMemberMutation>response.data.createMember;
+  }
+  async UpdateMember(input: UpdateMemberInput): Promise<UpdateMemberMutation> {
+    const statement = `mutation UpdateMember($input: UpdateMemberInput!) {
+        updateMember(input: $input) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateMemberMutation>response.data.updateMember;
+  }
+  async DeleteMember(input: DeleteMemberInput): Promise<DeleteMemberMutation> {
+    const statement = `mutation DeleteMember($input: DeleteMemberInput!) {
+        deleteMember(input: $input) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteMemberMutation>response.data.deleteMember;
+  }
   async AllMessage(
     conversationId: string,
     after?: string,
@@ -2746,11 +3165,11 @@ export class APIService {
     )) as any;
     return <AllMessageFromQuery>response.data.allMessageFrom;
   }
-  async AllUser(after?: string, first?: number): Promise<AllUserQuery> {
-    const statement = `query AllUser($after: String, $first: Int) {
-        allUser(after: $after, first: $first) {
+  async allMember(after?: string, first?: number): Promise<allMemberQuery> {
+    const statement = `query allMember($after: String, $first: Int) {
+        allMember(after: $after, first: $first) {
           __typename
-          cognitoId
+          id
           conversations {
             __typename
             nextToken
@@ -2760,7 +3179,6 @@ export class APIService {
               userId
             }
           }
-          id
           messages {
             __typename
             messages {
@@ -2792,13 +3210,13 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <AllUserQuery>response.data.allUser;
+    return <allMemberQuery>response.data.allMember;
   }
   async Me(): Promise<MeQuery> {
     const statement = `query Me {
         me {
           __typename
-          cognitoId
+          id
           conversations {
             __typename
             nextToken
@@ -2808,7 +3226,6 @@ export class APIService {
               userId
             }
           }
-          id
           messages {
             __typename
             messages {
@@ -3265,6 +3682,93 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListWatersQuery>response.data.listWaters;
+  }
+  async GetMember(id: string): Promise<GetMemberQuery> {
+    const statement = `query GetMember($id: ID!) {
+        getMember(id: $id) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetMemberQuery>response.data.getMember;
+  }
+  async ListMembers(
+    filter?: TableMemberFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListMembersQuery> {
+    const statement = `query ListMembers($filter: TableMemberFilterInput, $limit: Int, $nextToken: String) {
+        listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListMembersQuery>response.data.listMembers;
   }
   SubscribeToNewMessageListener: Observable<
     SubscribeToNewMessageSubscription
@@ -3913,4 +4417,121 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteWaterSubscription>;
+
+  OnCreateMemberListener: Observable<OnCreateMemberSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMember($id: ID, $username: String, $firstname: String, $lastname: String, $registered: Boolean) {
+        onCreateMember(id: $id, username: $username, firstname: $firstname, lastname: $lastname, registered: $registered) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`
+    )
+  ) as Observable<OnCreateMemberSubscription>;
+
+  OnUpdateMemberListener: Observable<OnUpdateMemberSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMember($id: ID, $username: String, $firstname: String, $lastname: String, $registered: Boolean) {
+        onUpdateMember(id: $id, username: $username, firstname: $firstname, lastname: $lastname, registered: $registered) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`
+    )
+  ) as Observable<OnUpdateMemberSubscription>;
+
+  OnDeleteMemberListener: Observable<OnDeleteMemberSubscription> = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMember($id: ID, $username: String, $firstname: String, $lastname: String, $registered: Boolean) {
+        onDeleteMember(id: $id, username: $username, firstname: $firstname, lastname: $lastname, registered: $registered) {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`
+    )
+  ) as Observable<OnDeleteMemberSubscription>;
 }

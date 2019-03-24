@@ -2,7 +2,7 @@ import * as update from 'immutability-helper';
 import {
   getConversationMessagesQuery as MessagesQuery,
   getUserConversationConnectionThroughUserQuery as ConvosQuery,
-  getAllUsersQuery as UsersQuery
+  getallMembersQuery as UsersQuery
  } from './graphql/operation-result-types';
 import Message from './types/message';
 import UserConversation from './types/userConversation';
@@ -79,15 +79,15 @@ export function addConversation(data: ConvosQuery, uc: UserConversation): Convos
   });
 }
 export function addUser(data: UsersQuery, user: User): UsersQuery {
-  if (!data || !data.allUser) {
-    return { allUser: [] };
+  if (!data || !data.allMember) {
+    return { allMember: [] };
   }
 
-  if (data.allUser.some(_user => _user.id === user.id)) {
+  if (data.allMember.some(_user => _user.id === user.id)) {
     return data;
   }
 
-  return update(data, {allUser: {$push: [user]}});
+  return update(data, {allMember: {$push: [user]}});
 }
 
 
@@ -95,7 +95,7 @@ export function addUser(data: UsersQuery, user: User): UsersQuery {
 // import {
 //   getConversationMessagesQuery as MessagesQuery,
 //   getUserConversationConnectionThroughUserQuery as ConvosQuery,
-//   getAllUsersQuery as UsersQuery
+//   getallMembersQuery as UsersQuery
 //  } from './graphql/operation-result-types';
 // import Message from './types/message';
 // import UserConversation from './types/userConversation';
@@ -172,13 +172,13 @@ export function addUser(data: UsersQuery, user: User): UsersQuery {
 //   });
 // }
 // export function addUser(data: UsersQuery, user: User): UsersQuery {
-//   if (!data || !data.allUser) {
-//     return { allUser: [] };
+//   if (!data || !data.allMember) {
+//     return { allMember: [] };
 //   }
 
-//   if (data.allUser.some(_user => _user.id === user.id)) {
+//   if (data.allMember.some(_user => _user.id === user.id)) {
 //     return data;
 //   }
 
-//   return update(data, {allUser: {$push: [user]}});
+//   return update(data, {allMember: {$push: [user]}});
 // }

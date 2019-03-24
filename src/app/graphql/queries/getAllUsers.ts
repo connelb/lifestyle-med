@@ -1,11 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query getAllUsers {
+query getallUsers {
   allUser {
     __typename
     id
-    cognitoId
     username
   }
 }`;

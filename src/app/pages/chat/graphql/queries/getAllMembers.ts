@@ -1,11 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query getMe {
-  me {
+query getallMembers {
+  allMember {
     __typename
     id
     username
-    registered
   }
 }`;

@@ -5,8 +5,9 @@ query getMe {
   me {
     __typename
     id
-    cognitoId
     username
+    firstname
+    lastname
     registered
     bio
     image

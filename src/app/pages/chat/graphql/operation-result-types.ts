@@ -83,9 +83,9 @@ export type createUserConversationsMutation = {
   } | null,
 };
 
-export type getAllUsersQuery = {
+export type getallMembersQuery = {
   // Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.
-  allUser:  Array< {
+  allMember:  Array< {
     __typename: "User",
     // Generated id for a user. read-only
     id: string,

@@ -658,3 +658,126 @@ subscription OnDeleteWater(
     intake
   }
 }
+subscription OnCreateMember(
+  $id: ID
+  $username: String
+  $firstname: String
+  $lastname: String
+  $registered: Boolean
+) {
+  onCreateMember(
+    id: $id
+    username: $username
+    firstname: $firstname
+    lastname: $lastname
+    registered: $registered
+  ) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
+subscription OnUpdateMember(
+  $id: ID
+  $username: String
+  $firstname: String
+  $lastname: String
+  $registered: Boolean
+) {
+  onUpdateMember(
+    id: $id
+    username: $username
+    firstname: $firstname
+    lastname: $lastname
+    registered: $registered
+  ) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
+subscription OnDeleteMember(
+  $id: ID
+  $username: String
+  $firstname: String
+  $lastname: String
+  $registered: Boolean
+) {
+  onDeleteMember(
+    id: $id
+    username: $username
+    firstname: $firstname
+    lastname: $lastname
+    registered: $registered
+  ) {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
