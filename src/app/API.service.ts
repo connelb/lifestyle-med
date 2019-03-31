@@ -166,6 +166,7 @@ export type DeleteWaterInput = {
 };
 
 export type CreateMemberInput = {
+  id: string;
   username?: string | null;
   firstname?: string | null;
   lastname?: string | null;
@@ -1072,7 +1073,41 @@ export type AllMessageFromQuery = {
   sender: string | null;
 };
 
-export type allMemberQuery = {
+export type AllUserQuery = {
+  __typename: string;
+  cognitoId: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  id: string | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
+export type AllMemberQuery = {
   __typename: string;
   id: string;
   conversations: {
@@ -3165,9 +3200,57 @@ export class APIService {
     )) as any;
     return <AllMessageFromQuery>response.data.allMessageFrom;
   }
-  async allMember(after?: string, first?: number): Promise<allMemberQuery> {
-    const statement = `query allMember($after: String, $first: Int) {
-        allMember(after: $after, first: $first) {
+  async AllUser(after?: string, first?: number): Promise<AllUserQuery> {
+    const statement = `query AllUser($after: String, $first: Int) {
+        allUser(after: $after, first: $first) {
+          __typename
+          cognitoId
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          id
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (after) {
+      gqlAPIServiceArguments.after = after;
+    }
+    if (first) {
+      gqlAPIServiceArguments.first = first;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <AllUserQuery>response.data.allUser;
+  }
+  async AllMember(after?: string, first?: number): Promise<AllMemberQuery> {
+    const statement = `query AllMember($after: String, $first: Int) {
+        AllMember(after: $after, first: $first) {
           __typename
           id
           conversations {
@@ -3210,7 +3293,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <allMemberQuery>response.data.allMember;
+    return <AllMemberQuery>response.data.AllMember;
   }
   async Me(): Promise<MeQuery> {
     const statement = `query Me {

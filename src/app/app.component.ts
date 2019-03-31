@@ -39,20 +39,23 @@ import { Storage } from '@ionic/storage';
 import { UserData } from './providers/user-data';
 
 import AWSAppSyncClient from 'aws-appsync';
-import { User } from './interfaces/user'
+//import { User } from './interfaces/user';
+import Member from './types/member';
 
 import { SwUpdate } from '@angular/service-worker';
 import { AppsyncService } from './providers/appsync.service';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
 import getMe from './graphql/queries/getMe';
-import createUser from './graphql/mutations/createUser';
+import createMember from './graphql/mutations/createMember';
 
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
-import getallMembers from './graphql/queries/getallMembers';
+import listAllMembers from './graphql/queries/listAllMembers';
+//import {allMember} from './graphql/queries.graphql'
 import queryListAllMessages from './graphql/queries/queryListAllMessages';
+import {APIService} from './API.service';
 
 const CurrentUserForProfile = gql`
 query CurrentUserForProfile {
@@ -64,14 +67,14 @@ query CurrentUserForProfile {
 `;
 
 
-const CurrentUserForProfile1 = gql`
-query getallMembers {
-  allMember {
-    __typename
-    id
-    username
-  }
-}`;
+// const CurrentUserForProfile1 = gql`
+// query getallMembers {
+//   allMember {
+//     __typename
+//     id
+//     username
+//   }
+// }`;
 
 
 @Component({
@@ -100,20 +103,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
   loggedIn = false;
-  user;
+ //user;
   signedIn;
   greeting;
   session;
   client: AWSAppSyncClient<any>;
   //client: any;
-  me: User;
+  me: Member;
   //conversation: Conversation;
   update: boolean;
   rates$: Observable<any[]>;
   loading$: Observable<boolean>;
   errors$: Observable<any>;
-  users;
-  no_user;
+  //users;
+  //no_user;
+  member;
+  no_member;
 
   loading: boolean;
   currentUser: any;
@@ -129,6 +134,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private api: APIService,
     private events: Events,
     private menu: MenuController,
     private platform: Platform,
@@ -197,43 +203,70 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
 
-    // this.amplifyService.auth().currentSession().then(session => {
-    //   this.logInfoToConsole(session);
-    //   this.session = session;
-    //   // this.register();
-    //   // this.register1();
-    //   this.register2();
+    
 
-    //   setImmediate(() => this.createUser());
-    // });
+    this.amplifyService.auth().currentSession().then(session => {
+      this.logInfoToConsole(session);
+      this.session = session;
+      this.register();
+      setImmediate(() => this.createMember());
+    });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
 
-    if (this.appsyncService.hc()) {
-      this.appsyncService.hc().then(client => {
-        const observable = client.watchQuery({
-          query: gql`
-        query getallMembers {
-          allMember {
-            __typename
-            id
-            username
-          }
-        }`,
-          fetchPolicy: 'cache-and-network'
-        });
+//  async updateProfile(this.user) {
+//   await this.api.CreateUser(this.user);
+// }
 
-        observable.subscribe(({ data }) => {
-          if (!data) {
-            return console.log('getallMembers - no data');
-          }
-          //this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
-          //console.log('getallMembers - Got data', data);
-          //this.no_user = (this.users.length === 0);
-        });
-      });
-    }
+    // if (this.appsyncService.hc()) {
+    //   this.appsyncService.hc().then(client => {
+    //     console.log('component init hydarte called',listAllMembers, this.api.ListMembers())
+    //     const observable = client.watchQuery({
+    //       query: gql.api.ListMembers()//listAllMembers
+          
+
+          // gql`query ListMembers($filter: TableMemberFilterInput, $limit: Int, $nextToken: String) {
+          //   listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          //     __typename
+          //     items {
+          //       __typename
+          //       id
+          //       conversations {
+          //         __typename
+          //         nextToken
+          //       }
+          //       messages {
+          //         __typename
+          //         nextToken
+          //       }
+          //       username
+          //       firstname
+          //       lastname
+          //       registered
+          //       bio
+          //       image
+          //     }
+          //     nextToken
+          //   }
+          // }`
+          
+          
+      //     ,
+      //     fetchPolicy: 'cache-and-network'
+      //   });
+
+      //   observable.subscribe(({ data }) => {
+      //     console.log('any data', data)
+      //     if (!data) {
+      //       return console.log('getallMembers - no data');
+      //     }
+      //     //this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
+      //     //console.log('getallMembers - Got data', data);
+      //     //this.no_user = (this.users.length === 0);
+      //   });
+      // });
+   // }
 
     // }
     // const source$ = this.apollo.query({
@@ -277,31 +310,37 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  createUser() {
-    const user: User = {
-      username: this.session.idToken.payload['cognito:username'],
+
+  createMember() {
+    console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
+    const member: Member = {
       id: this.session.idToken.payload['sub'],
-      cognitoId: this.session.idToken.payload['sub'],
-      registered: false
+      username: this.session.idToken.payload['cognito:username'],
+      firstname:'na',
+      lastname:'na',
+      //cognitoId: this.session.idToken.payload['sub'],
+      registered: false,
+      bio:'na',
+      image:'na'
     };
-    console.log('creating user', user);
+    console.log('creating member', member);
     this.appsyncService.hc().then(client => {
       client.mutate({
-        mutation: createUser,
-        variables: { username: user.username },
+        mutation: createMember,
+        variables: { id: member.id },
 
         optimisticResponse: () => ({
-          createUser: {
-            ...user,
-            __typename: 'User'
+          createMember: {
+            ...member,
+            __typename: 'Member'
           }
         }),
 
-        update: (proxy, { data: { createUser: _user } }) => {
-          // console.log('createUser update with:', _user);
-          proxy.writeQuery({ query: getMe, data: { me: { ..._user } } });
+        update: (proxy, { data: { createMember: _member} }) => {
+          console.log('???????????????? createMember update with:', _member);
+          proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
         }
-      }).catch(err => console.log('Error registering user', err));
+      }).catch(err => console.log('Error registering member', err));
     });
   }
 
@@ -326,11 +365,11 @@ export class AppComponent implements OnInit, OnDestroy {
         this.signedIn = authState.state === 'signedIn';
 
         if (!authState.user) {
-          this.user = null;
+          this.member = null;
         } else {
-          this.user = authState.user;
+          this.member = authState.user;
           //this.greeting = "Hello0000000000 " + this.user.username;
-          this.userData.login(this.user.username);
+          this.userData.login(this.member.username);
           this.checkLoginStatus();
 
           // this.amplifyService.storage()
@@ -355,28 +394,28 @@ export class AppComponent implements OnInit, OnDestroy {
     //this.userData.HAS_LOGGED_IN
   }
 
-  register1() {
-    this.querySubscription = this.apollo.watchQuery<any>({
-      query: getallMembers
-    })
-      .valueChanges
-      .subscribe(({ data, loading }) => {
-        this.loading = loading;
-        this.currentUser = data.me;
-        console.log('reg1', data)
-      });
-  }
+  // register1() {
+  //   this.querySubscription = this.apollo.watchQuery<any>({
+  //     query: this.api.allMember
+  //   })
+  //     .valueChanges
+  //     .subscribe(({ data, loading }) => {
+  //       this.loading = loading;
+  //       this.currentUser = data.me;
+  //       console.log('reg1', data)
+  //     });
+  // }
 
-  register2() {
-    this.appsyncService.hc().then(client => {
-      client.watchQuery({
-        query: queryListAllMessages,
-        fetchPolicy: 'cache-only'
-      }).subscribe(({ data }) => {
-        console.log('queryListAllMessages', data);
-        //if (data) { this.me = data.me; }
-      });
-    });
+  // register2() {
+  //   this.appsyncService.hc().then(client => {
+  //     client.watchQuery({
+  //       query: queryListAllMessages,
+  //       fetchPolicy: 'cache-only'
+  //     }).subscribe(({ data }) => {
+  //       console.log('queryListAllMessages', data);
+  //       //if (data) { this.me = data.me; }
+  //     });
+  //   });
 
     // this.apollo.watchQuery<any>({
     //   query: queryListAllMessages,
@@ -386,7 +425,7 @@ export class AppComponent implements OnInit, OnDestroy {
     //     map(result => result)
     //   ).subscribe(res=>console.log(res))
 
-  }
+  //}
 
   register() {
     this.appsyncService.hc().then(client => {
@@ -394,7 +433,7 @@ export class AppComponent implements OnInit, OnDestroy {
         query: getMe,
         fetchPolicy: 'cache-only'
       }).subscribe(({ data }) => {
-        console.log('reg1', data);
+        console.log('reg', data);
         if (data) { this.me = data.me; }
       });
     });

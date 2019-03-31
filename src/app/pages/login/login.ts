@@ -14,8 +14,10 @@ import AWSAppSyncClient from 'aws-appsync';
 
 import { AppsyncService } from '../../providers/appsync.service';
 import getMe from '../../graphql/queries/getMe';
-import createUser from '../../graphql/mutations/createUser';
+// import createUser from '../../graphql/mutations/createUser';
+import createMember from '../../graphql/mutations/createMember';
 import {APIService} from '../../API.service';
+import gql from 'graphql-tag';
 
 
 
@@ -29,6 +31,7 @@ export class LoginPage {
   submitted = false;
   signedIn;
   user;
+  member;
   //greeting;
 
   username: string;
@@ -65,7 +68,7 @@ export class LoginPage {
                 this.logInfoToConsole(authState.user.signInUserSession);
                 
                 this.register();
-                setImmediate(() => this.createUser());
+                setImmediate(() => this.createMember());
 
                 this.router.navigateByUrl('/app/tabs/blog');
                 //this.router.navigate(['members', 'blog1']);
@@ -108,23 +111,44 @@ export class LoginPage {
   //   bio
   //   image
 
-  createUser() {
-    const user: Member = {
-      username: this.session.idToken.payload['cognito:username'] || null,
+  createMember() {
+    const member: Member = {
       id: this.session.idToken.payload['sub'],
+      username: this.session.idToken.payload['cognito:username'],
+      firstname:'na',
+      lastname:'na',
       registered: false,
-      bio:'',
-      image:'',
-      firstname:'',
-      lastname:''
+      bio:'na',
+      image:'na',
     };
-    //console.log('what user????', user);
+    console.log('is member complete???', member);
     
     this.appsync.hc().then(client => {
       //console.log('user.cognitoId?', user.cognitoId);
+
+      //async onImageUploaded(e) {await this.api.CreateMember(user)};
+
+      // input CreateMemberInput {
+      //   id: ID!
+      //   username: String
+      //   firstname: String
+      //   lastname: String
+      //   registered: Boolean
+      //   bio: String
+      //   image: String
+      // }
+
+//       bio: ""
+// firstname: ""
+// id: "a058b829-6b29-4063-b59b-e7afc81ca481"
+// image: ""
+// lastname: ""
+// registered: false
+// username: "lynette"
+
       client.mutate({
-        mutation: this.api.UpdateMember(user),
-        //variables: user
+        mutation: createMember,
+        variables: member,
         // {cognitoId:'4e13fa4d-5d51-4c18-834b-406ba731054b'}
         //user
         //  {
@@ -139,17 +163,17 @@ export class LoginPage {
 
         //   await this.api[this.getType()](user);
 
-        // optimisticResponse: () => ({
-        //   createUser: {
-        //     ...user,
-        //     __typename: 'User'
-        //   }
-        // }),
+        optimisticResponse: () => ({
+          createMember: {
+            ...member,
+            __typename: 'Member'
+          }
+        }),
 
-        // update: (proxy, {data: { createUser: _user }}) => {
-        //   console.log('createUser update with:', _user);
-        //   proxy.writeQuery({query: getMe, data: {me: {..._user}}});
-        // }
+        update: (proxy, {data: { createMember: _member }}) => {
+          console.log('createMember update with:', _member);
+          proxy.writeQuery({query: getMe, data: {me: {..._member}}});
+        }
       }).catch(err => console.log('Error registering user', err));
     });
   }
@@ -158,10 +182,10 @@ export class LoginPage {
     this.appsync.hc().then(client => {
       
       client.watchQuery({
-        query: this.api.Me,
+        query: getMe,
         fetchPolicy: 'cache-only'
       }).subscribe(({data}) => {
-        console.log('register user, fetch cache', data);
+        console.log('register member, fetch cache', data);
         if (data) { this.me = data.me; }
       });
     });

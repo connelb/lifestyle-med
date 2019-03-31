@@ -1,6 +1,8 @@
 type User = {
-  cognitoId: string,
+  //cognitoId: string,
   username: string,
+  //conservations: any |null,
+  //messages: any | null,
   id: string,
   registered: boolean,
   firstname: string,

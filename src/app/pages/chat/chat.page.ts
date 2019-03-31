@@ -31,6 +31,7 @@ import createUser from '../../graphql/mutations/createUser';
 
 import { Auth } from 'aws-amplify';
 import { AmplifyService } from 'aws-amplify-angular/dist/src/providers/amplify.service';
+import {APIService} from '../../API.service';
 
 
 @Component({
@@ -50,6 +51,7 @@ export class ChatPage implements OnInit {
   user;
 
   constructor(
+    private api: APIService,
     private swUpdate: SwUpdate,
     private appsync: AppsyncService,
     public amplifyService: AmplifyService
@@ -62,10 +64,10 @@ export class ChatPage implements OnInit {
     this.appsync.hc().then(client => {
       
       client.watchQuery({
-        query: getMe,
+        query: this.api.Me,//getMe,
         fetchPolicy: 'cache-only'
       }).subscribe(({data}) => {
-        // console.log('register user, fetch cache', data);
+        console.log('register user, fetch cache', data);
         if (data) { this.me = data.me; }
       });
     });
@@ -126,7 +128,7 @@ export class ChatPage implements OnInit {
     const user: User = {
       username: this.session.idToken.payload['cognito:username'],
       id: this.session.idToken.payload['sub'],
-      cognitoId: this.session.idToken.payload['sub'],
+      //cognitoId: this.session.idToken.payload['sub'],
       registered: false,
       bio:'',
       image:'',
@@ -138,8 +140,8 @@ export class ChatPage implements OnInit {
     this.appsync.hc().then(client => {
       console.log("this.session.idToken.payload['cognito:username']", user.username, this.session.idToken.payload['cognito:username']);
       client.mutate({
-        mutation: createUser,
-        variables: {username: user.username},
+        mutation: this.api.CreateMember,//createUser,
+        variables: {username: user.id},
 
         optimisticResponse: () => ({
           createUser: {
@@ -160,7 +162,7 @@ export class ChatPage implements OnInit {
     this.appsync.hc().then(client => {
       
       client.watchQuery({
-        query: getMe,
+        query: this.api.Me,//getMe,
         fetchPolicy: 'cache-only'
       }).subscribe(({data}) => {
         // console.log('register user, fetch cache', data);

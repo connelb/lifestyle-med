@@ -128,7 +128,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppsyncService } from '../../../providers/appsync.service';
 
-import getallMembers from '../graphql/queries/getallMembers';
+//import getallMembers from '../graphql/queries/getallMembers';
 import createConversation from '../graphql/mutations/createConversation';
 import createUserConversations from '../graphql/mutations/createUserConversations';
 import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
@@ -136,6 +136,7 @@ import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUser
 import { constants, addConversation, addUser } from '../chat-helper';
 import Conversation from '../types/conversation';
 import { getallMembersQuery as UsersQuery } from '../graphql/operation-result-types';
+import {APIService} from '../../../API.service';
 
 import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
@@ -164,12 +165,12 @@ export class ChatUserListComponent {
 
   @Output() onNewConvo = new EventEmitter<any>();
 
-  constructor(private appsync: AppsyncService) {}
+  constructor(private api: APIService, private appsync: AppsyncService) {}
 
   getallMembers() {
     this.appsync.hc().then(client => {
       const observable = client.watchQuery({
-        query: getallMembers,
+        query: this.api.ListMembers,//getallMembers,
         fetchPolicy: 'cache-and-network'
       });
 

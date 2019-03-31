@@ -8,4 +8,3 @@ type Member = {
     image: string | null
   };
   export default Member;
-  
