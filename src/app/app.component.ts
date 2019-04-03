@@ -290,7 +290,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.listenForLoginEvents();
 
     this.swUpdate.available.subscribe(event => {
-      console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
+      //console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
     });
 
@@ -312,7 +312,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   createMember() {
-    console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
+    //console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
     const member: Member = {
       id: this.session.idToken.payload['sub'],
       username: this.session.idToken.payload['cognito:username'],
@@ -337,7 +337,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }),
 
         update: (proxy, { data: { createMember: _member} }) => {
-          console.log('???????????????? createMember update with:', _member);
+          //console.log('???????????????? createMember update with:', _member);
           proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
         }
       }).catch(err => console.log('Error registering member', err));

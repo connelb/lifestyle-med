@@ -1,6 +1,6 @@
 export default class User {
     constructor(
-        public cognitoId: string,
+        //public cognitoId: string,
         //public conversations,
         public id: string,
         //public messages,

@@ -15,23 +15,25 @@
         </amplify-photo-picker> -->
   <h2>{{username}}</h2>
   <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-    <!-- <ion-item>
+      <div formGroupName="userData">
+    <ion-item>
       <ion-label>First Name</ion-label>
       <ion-input type="text" formControlName="firstName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Last Name</ion-label>
       <ion-textarea formControlName="lastName"></ion-textarea>
-    </ion-item> -->
+    </ion-item>
     <ion-item>
         <ion-label>userId</ion-label>
         <ion-textarea formControlName="userId"></ion-textarea>
       </ion-item>
     <ion-item>
       <ion-label>Goal</ion-label>
-      <ion-textarea formControlName="goal"></ion-textarea>
+      <ion-textarea formControlName="goal" placeholder= "goal" ></ion-textarea>
     </ion-item>
     <button ion-button type="submit" [disabled]="!profileForm.valid">Update</button>
+    </div>
   </form>
 
   <div padding-top text-center *ngIf="userId">
