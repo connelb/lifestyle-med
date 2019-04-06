@@ -1,42 +1,84 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding-top text-center>
 
-  <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-  <!-- <amplify-s3-image [path]="user.image" [options]="{'level': 'private'}" *ngIf="showPhoto"></amplify-s3-image>
-        <amplify-photo-picker *ngIf="!showPhoto" path="image" [storageOptions]="{'level': 'private'}" (uploaded)="onImageUploaded($event)">
-        </amplify-photo-picker> -->
+
+  <!-- 
+  <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar"> -->
+  <ion-icon name="create" *ngIf="showPhoto" (click)="editPhoto()" size="2x" class="upload-icon"></ion-icon>
+  <amplify-s3-image *ngIf="image" [path]="image" [options]="{'level': 'private'}"></amplify-s3-image>
+  <!-- {{image|json}}
+  <div *ngIf="image" class="amplify-album">
+    <div class="amplify-album-container">
+      <amplify-s3-image-core
+        class="amplify-image-container"
+        path="{{image}}"
+        [options]="{level:'private'}"
+        (selected)="onImageUploaded($event)"
+      ></amplify-s3-image-core>
+    </div>
+  </div> -->
+
+  <amplify-photo-picker *ngIf="!showPhoto" path="profile" [storageOptions]="{'level': 'private'}" (uploaded)="onImageUploaded($event)">
+  </amplify-photo-picker>
+
+
   <h2>{{username}}</h2>
   <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-      <div formGroupName="userData">
-    <ion-item>
-      <ion-label>First Name</ion-label>
-      <ion-input type="text" formControlName="firstName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Last Name</ion-label>
-      <ion-textarea formControlName="lastName"></ion-textarea>
-    </ion-item>
-    <ion-item>
-        <ion-label>userId</ion-label>
-        <ion-textarea formControlName="userId"></ion-textarea>
-      </ion-item>
-    <ion-item>
-      <ion-label>Goal</ion-label>
-      <ion-textarea formControlName="goal" placeholder= "goal" ></ion-textarea>
-    </ion-item>
-    <button ion-button type="submit" [disabled]="!profileForm.valid">Update</button>
+    <div formGroupName="userData">
+
+      <ion-list>
+        <ion-list-header>
+          Personal Information
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="text-left" size="5"> Name here? </ion-col>
+                <ion-col class="text-center" size="7">
+                  <ion-input type="text" formControlName="firstName">update??</ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>First Name</ion-label>
+          <ion-input type="text" formControlName="firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Last Name</ion-label>
+          <ion-textarea formControlName="lastName"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>User Name</ion-label>
+          <ion-textarea formControlName="userName"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Goal</ion-label>
+          <ion-textarea formControlName="goal" placeholder="goal"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <button ion-button type="submit" [disabled]="!profileForm.valid">Update</button>
     </div>
   </form>
 
-  <div padding-top text-center *ngIf="userId">
+  <!-- <div padding-top text-center *ngIf="userId">
 
 
 
@@ -52,6 +94,6 @@
       <ion-item (click)="support()">Support</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>
-  </div>
+  </div> -->
 
 </ion-content>

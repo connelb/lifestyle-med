@@ -4,6 +4,7 @@ import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { AmplifyAngularModule, AmplifyService, AmplifyIonicModule } from 'aws-amplify-angular';
 
 import { ProfilePage } from './profile.page';
 
@@ -20,6 +21,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    AmplifyAngularModule,
+    AmplifyIonicModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ProfilePage]

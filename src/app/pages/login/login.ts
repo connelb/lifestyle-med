@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 //import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -26,7 +26,7 @@ import gql from 'graphql-tag';
   templateUrl: 'login.html',
   styleUrls: ['./login.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   //login: UserOptions = { username: '', password: '' };
   submitted = false;
   signedIn;
@@ -49,47 +49,46 @@ export class LoginPage {
     public userData: UserData,
     public router: Router,
     private appsync: AppsyncService
-  ) { 
+  ) {}
 
-    //this.amplifyService = amplifyService;
-
+  ngOnInit() {
     this.amplifyService.authStateChange$
-        .subscribe(authState => {
-            this.signedIn = authState.state === 'signedIn';
-            if (!authState.user) {
-                this.user = null;
-            } else {
-              
-                this.user = authState.user;
-                console.log('this.user.username', this.user.username, authState.user);
-                //this.greeting = "Hello " + this.user.username;
-                this.userData.login(this.user.username);
-                this.session = authState.user.signInUserSession;
-                this.logInfoToConsole(authState.user.signInUserSession);
-                
-                this.register();
-                setImmediate(() => this.createMember());
+    .subscribe(authState => {
+        this.signedIn = authState.state === 'signedIn';
+        if (!authState.user) {
+            this.user = null;
+        } else {
+          
+            this.user = authState.user;
+            //console.log('this.user.username', this.user.username, authState.user);
+            //this.greeting = "Hello " + this.user.username;
+            this.userData.login(this.user.username);
+            this.session = authState.user.signInUserSession;
+            //this.logInfoToConsole(authState.user.signInUserSession);
+            
+            // this.register();
+           
+            //setImmediate(() => this.createMember());
 
-                this.router.navigateByUrl('/app/tabs/blog');
-                //this.router.navigate(['members', 'blog1']);
-            }
-        });
-
+            this.router.navigateByUrl('/app/tabs/blog');
+            //this.router.navigate(['members', 'blog1']);
+        }
+    });
   }
 
   
 
   //signInUserSession.idToken
-  logInfoToConsole(session) {
-    console.log('session:',session);
-    // console.log(`ID Token: <${session.idToken.jwtToken}>`);
-    // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-    // console.log('Decoded ID Token:');
-    // console.log( JSON.stringify(session.idToken.payload, null, 2));
-    // console.log('Decoded Acess Token:');
-    // console.log(JSON.stringify(session.accessToken.payload, null, 2));
-    console.log('cognitoId??????', session.idToken.payload['sub'])
-  }
+  // logInfoToConsole(session) {
+  //   console.log('session:',session);
+  //   // console.log(`ID Token: <${session.idToken.jwtToken}>`);
+  //   // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+  //   // console.log('Decoded ID Token:');
+  //   // console.log( JSON.stringify(session.idToken.payload, null, 2));
+  //   // console.log('Decoded Acess Token:');
+  //   // console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  //   console.log('cognitoId??????', session.idToken.payload['sub'])
+  // }
 
   // bio: ""
   // cognitoId: "4e13fa4d-5d51-4c18-834b-406ba731054b"
@@ -112,18 +111,31 @@ export class LoginPage {
   //   image
 
   createMember() {
-    const member: Member = {
-      id: this.session.idToken.payload['sub'],
-      username: this.session.idToken.payload['cognito:username'],
-      firstname:'na',
-      lastname:'na',
-      registered: false,
-      bio:'na',
-      image:'na',
-    };
-    console.log('is member complete???', member);
+ 
+    //console.log('is member complete???', member);
     
     this.appsync.hc().then(client => {
+      
+
+      client.watchQuery({
+        query: getMe,
+        fetchPolicy: 'cache-only'
+      }).subscribe(({data}) => {
+        console.log('register member, fetch cache', data);
+        if (data) { 
+          this.me = data.me;
+        }
+      });
+
+      const member = {
+        id: this.session.idToken.payload['sub'],
+        username: this.session.idToken.payload['cognito:username'],
+        firstname:this.me.firstname,
+        lastname:this.me.lastname,
+        registered: false,
+        bio:this.me.bio,
+        image:this.me.image,
+      };
       //console.log('user.cognitoId?', user.cognitoId);
 
       //async onImageUploaded(e) {await this.api.CreateMember(user)};
@@ -148,7 +160,7 @@ export class LoginPage {
 
       client.mutate({
         mutation: createMember,
-        variables: member,
+        variables: { id: member.id },
         // {cognitoId:'4e13fa4d-5d51-4c18-834b-406ba731054b'}
         //user
         //  {
@@ -178,18 +190,18 @@ export class LoginPage {
     });
   }
 
-  register() {
-    this.appsync.hc().then(client => {
+  // register() {
+  //   this.appsync.hc().then(client => {
       
-      client.watchQuery({
-        query: getMe,
-        fetchPolicy: 'cache-only'
-      }).subscribe(({data}) => {
-        console.log('register member, fetch cache', data);
-        if (data) { this.me = data.me; }
-      });
-    });
-  }
+  //     client.watchQuery({
+  //       query: getMe,
+  //       fetchPolicy: 'cache-only'
+  //     }).subscribe(({data}) => {
+  //       console.log('register member, fetch cache', data);
+  //       if (data) { this.me = data.me; }
+  //     });
+  //   });
+  // }
 
   // onLogin(form: NgForm) {
   //   this.submitted = true;

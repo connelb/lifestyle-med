@@ -34,105 +34,79 @@ import { Auth } from 'aws-amplify';
 })
 export class ProfilePage implements OnInit {
   profileForm: FormGroup;
-  userId;
+  // userId;
   //username: string = "lyg";
   imagePath: string;
   //conversations: string;
   //messages:string;
   showPhoto: boolean;
   userCreated: boolean;
-  user: Member
-  username: string;
+  member: Member;
+  public userProfile: Member;
+  userName;
   goal;
-  firstname = 'myfirst name';
-  lastname = 'my last name';
+  firstName;
+  lastName;
+  id;
+  registered;
+  image;
 
-  constructor(private api: APIService, private router: Router, private formBuilder: FormBuilder) {
-
-
-  }
-
-  // ngOnInit(){
-  //   this.SignupForm = new FormGroup({
-  //     'userData': new FormGroup({
-  //         'username':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
-  //         'email':new FormControl(null,[Validators.required,Validators.email],this.forbiddenEmails),
-  //     }),
-  //     'gender':new FormControl('female'),
-  //     'hobbies':new FormArray([])
-  //   });
-
-  //   this.SignupForm.setValue({
-  //     'userData':{
-  //       'username':'geetha',
-  //       'email':'geetha@gmail.com'
-  //     },
-  //     'gender':'female',
-  //     'hobbies':[]
-  //   })
-  // }
-
+  constructor(private api: APIService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.profileForm = new FormGroup({
       'userData': new FormGroup({
         firstName: new FormControl(null, []),
         lastName: new FormControl(null, []),
-        userId: new FormControl(null, []),
+        userName: new FormControl(null, []),
         goal: new FormControl(null, []),
         //         'username':new FormControl(null,[Validators.required,this.forbiddenNames.bind(this)]),
         //         'email':new FormControl(null,[Validators.required,Validators.email],this.forbiddenEmails),
       })
-
     });
-
-    //     this.user = {
-    //       id:
-    //       firstname: 'New',
-    //       lastname: 'User',
-    // };
 
     this.showPhoto = false;
     Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
-      // this.username = user.username;
-      // this.userId = user.attributes.sub;
-      // // context.identity.sub
-      // this.firstname = "";
-      // this.lastname = "";
-      // this.goal = "";
-      //console.log('what is userId?', user);
       let result = await this.api.Me();
       if (!result) {
         console.log('not logged in')
-        // this.userCreated = false;
-        // this.user = new User('', '','', '', false,'','');
-        //console.log('llkj - no user?????', this.user);
+        this.userCreated = false;
       } else {
-
-        //console.log('what is result??? api.me???', result)
         this.userCreated = true;
         this.showPhoto = !!result.image;
-        // this.user:{
-        //this.userId,//cognitoId
-        //result.conversations,
 
         this.profileForm.setValue({
-              'userData':{
-                'userId':result.id,
-                'goal':result.bio,
-                'firstName':result.bio,
-                'lastName':result.bio
-              }
-            })
-        this.userId = result.id;
-        //result.messages,
+          'userData': {
+            'userName': result.username,
+            'goal': result.bio,
+            'firstName': result.firstname,
+            'lastName': result.lastname
+          }
+        })
+
+        //create member object
+        this.userProfile = {
+          username: result.username,
+          id: result.id,
+          firstname: result.firstname,
+          lastname: result.lastname,
+          registered: result.registered,
+          bio: result.bio,
+          image: result.image
+        }
+
+
+        this.userName = result.username;
+        this.id = result.id;
+        //result.memessages,
         // this.user.username = result.username,
-        this.firstname = result.firstname,
-          this.lastname = result.lastname,
-          // result.registered,
-          this.goal = result.bio;
+        this.firstName = result.firstname;
+        this.lastName = result.lastname;
+        this.registered = result.registered;
+        this.goal = result.bio;
+        this.image = result.image;
         // result.image
         // }
         //this.user = result;
@@ -151,52 +125,19 @@ export class ProfilePage implements OnInit {
     return this.userCreated ? 'UpdateMember' : 'CreateMember';
   }
 
-  render() {
-    //console.log('????',this.goal, this.userId)
-    this.profileForm = this.formBuilder.group({
-      // firstName: [this.firstname],
-      // lastName: [this.lastname],
-      // userId:[this.user.id],
-      // goal: [this.user.goal],
-    });
-  }
-
-  // type User {
-  //   cognitoId: ID!
-  //   conversations(after: String, first: Int): UserConverstationsConnection
-  //   id: ID!
-  //   messages(after: String, first: Int): MessageConnection
-  //   username: String!
-  //   firstName: String
-  //   lastName: String
-  //   registered: Boolean
-  //   bio: String
-  //   image: String
-  // }
-
-  // input UpdateUserInput {
-  //   cognitoId: ID!
-  //   id: ID
-  //   username: String
-  //   firstName: String
-  //   lastName: String
-  //   registered: Boolean
-  //   bio: String
-  //   image: String
-  // }
-
 
   async updateProfile() {
-    //console.log('this.profileForm.value.goal',this.profileForm.value.goal);
+    //console.log('this.profileForm.value.goal',this.profileForm.value.userData);
     const user = {
-      id: this.userId,
-      username: "a",
-      firstname: "b",
-      lastname: "c",
-      bio: this.profileForm.value.goal,
-      image: 'd'
+      id: this.id,
+      username: this.profileForm.value.userData.userName,
+      firstname: this.profileForm.value.userData.firstName,
+      lastname: this.profileForm.value.userData.lastName,
+      registered: this.registered,
+      bio: this.profileForm.value.userData.goal,
+      image: this.image
     }
-    console.log('what is updateProfile??', this.user)
+    console.log('what is updateProfile??', user)
     await this.api[this.getType()](user);
   }
 
@@ -210,15 +151,27 @@ export class ProfilePage implements OnInit {
   // })
 
   async onImageUploaded(e) {
-    this.user.image = e.key;
-    console.log('what is onImageUploaded??', this.user)
+    this.image = e.key;
+    console.log('what is onImageUploaded??', this.member)
     if (this.userCreated) {
-      await this.api.UpdateMember(this.user
-        //   {
-        //   // id: this.userId,
-        //   image: this.user.image
-        // }
-      );
+      // await this.api.UpdateMember(
+      //     {
+      //     id: this.member.id,
+      //     image: this.member.image
+      //   }
+      // );
+
+      const user = {
+        id: this.id,
+        username: this.profileForm.value.userData.userName,
+        firstname: this.profileForm.value.userData.firstName,
+        lastname: this.profileForm.value.userData.lastName,
+        registered: this.registered,
+        bio: this.profileForm.value.userData.goal,
+        image: this.image
+      }
+      console.log('what is updateProfile??', user)
+      await this.api[this.getType()](user);
     }
     this.showPhoto = true;
   }

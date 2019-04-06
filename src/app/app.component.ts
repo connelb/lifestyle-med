@@ -103,6 +103,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
   loggedIn = false;
+  userCreated: boolean;
  //user;
   signedIn;
   greeting;
@@ -191,25 +192,20 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     if (this.swUpdate.isEnabled) {
-
       this.swUpdate.available.subscribe(() => {
-
         if (confirm("New version available. Load New Version?")) {
-
           window.location.reload();
         }
       });
     }
 
-    
-
     this.amplifyService.auth().currentSession().then(session => {
-      this.logInfoToConsole(session);
+      // //this.userCreated = true;
+      // this.logInfoToConsole(session);
       this.session = session;
       this.register();
-      setImmediate(() => this.createMember());
+      // setImmediate(() => this.createMember());
     });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
@@ -310,7 +306,6 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-
   createMember() {
     //console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
     const member: Member = {
@@ -323,7 +318,7 @@ export class AppComponent implements OnInit, OnDestroy {
       bio:'na',
       image:'na'
     };
-    console.log('creating member', member);
+    //console.log('creating member', member);
     this.appsyncService.hc().then(client => {
       client.mutate({
         mutation: createMember,
@@ -344,14 +339,18 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  logInfoToConsole(session) {
-    console.log(session);
-    console.log(`ID Token: <${session.idToken.jwtToken}>`);
-    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-    console.log('Decoded ID Token:');
-    console.log(JSON.stringify(session.idToken.payload, null, 2));
-    console.log('Decoded Acess Token:');
-    console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  // logInfoToConsole(session) {
+  //   console.log('session:',session);
+  //   console.log(`ID Token: <${session.idToken.jwtToken}>`);
+  //   console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+  //   console.log('Decoded ID Token:');
+  //   console.log(JSON.stringify(session.idToken.payload, null, 2));
+  //   console.log('Decoded Access Token:');
+  //   console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  // }
+
+  getType(): string {
+    return this.userCreated ? 'UpdateMember' : 'CreateMember';
   }
 
   // installPwa(): void {
@@ -369,7 +368,7 @@ export class AppComponent implements OnInit, OnDestroy {
         } else {
           this.member = authState.user;
           //this.greeting = "Hello0000000000 " + this.user.username;
-          this.userData.login(this.member.username);
+          // this.userData.login(this.member.username);
           this.checkLoginStatus();
 
           // this.amplifyService.storage()
@@ -390,9 +389,9 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateUser() {
-    //this.userData.HAS_LOGGED_IN
-  }
+  // updateUser() {
+  //   //this.userData.HAS_LOGGED_IN
+  // }
 
   // register1() {
   //   this.querySubscription = this.apollo.watchQuery<any>({
@@ -470,6 +469,16 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('err: ', err)
       })
   }
+
+  // this.amplifyService.authStateChange$.subscribe(authState => {
+  //   const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+  //   if (this.isLoggedIn && !isLoggedIn) {
+  //     router.navigate(['']);
+  //   } else if (!this.isLoggedIn && isLoggedIn) {
+  //     router.navigate(['/chat']);
+  //   }
+  //   this.isLoggedIn = isLoggedIn;
+  // });
 
   openTutorial() {
     this.menu.enable(false);
