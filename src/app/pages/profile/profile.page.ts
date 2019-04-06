@@ -54,6 +54,8 @@ export class ProfilePage implements OnInit {
   constructor(private api: APIService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.showPhoto = false;
+
     this.profileForm = new FormGroup({
       'userData': new FormGroup({
         firstName: new FormControl(null, []),
@@ -64,8 +66,7 @@ export class ProfilePage implements OnInit {
         //         'email':new FormControl(null,[Validators.required,Validators.email],this.forbiddenEmails),
       })
     });
-
-    this.showPhoto = false;
+    
     Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
@@ -107,16 +108,7 @@ export class ProfilePage implements OnInit {
         this.registered = result.registered;
         this.goal = result.bio;
         this.image = result.image;
-        // result.image
-        // }
-        //this.user = result;
 
-
-
-
-        // this.render();
-
-        //console.log('llkl', result)
       }
     }).catch(err => console.log('there is an erroro!', err));
   }
@@ -137,12 +129,14 @@ export class ProfilePage implements OnInit {
       bio: this.profileForm.value.userData.goal,
       image: this.image
     }
-    console.log('what is updateProfile??', user)
+
+    this.userProfile = user;
     await this.api[this.getType()](user);
   }
 
   editPhoto() {
     this.showPhoto = false;
+    console.log('edit photo cLLED');
   }
 
   // (async user => {
@@ -152,16 +146,9 @@ export class ProfilePage implements OnInit {
 
   async onImageUploaded(e) {
     this.image = e.key;
-    console.log('what is onImageUploaded??', this.member)
+    //console.log('what is onImageUploaded??', this.member)
     if (this.userCreated) {
-      // await this.api.UpdateMember(
-      //     {
-      //     id: this.member.id,
-      //     image: this.member.image
-      //   }
-      // );
-
-      const user = {
+   const user = {
         id: this.id,
         username: this.profileForm.value.userData.userName,
         firstname: this.profileForm.value.userData.firstName,
@@ -170,6 +157,8 @@ export class ProfilePage implements OnInit {
         bio: this.profileForm.value.userData.goal,
         image: this.image
       }
+
+      this.userProfile = user;
       console.log('what is updateProfile??', user)
       await this.api[this.getType()](user);
     }

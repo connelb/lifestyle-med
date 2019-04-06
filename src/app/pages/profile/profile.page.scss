@@ -1,0 +1,42 @@
+.upload-icon{
+    position: relative; 
+    top: 152px; 
+    color: yellow;
+}
+
+.ion-button{
+    justify-content: center;
+}
+
+ion-list-header {
+    background-color: #ececec;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .textarea-center {
+    text-align: left;
+    word-wrap: normal;
+  }
+  .close{
+    position: right; 
+  }
+
+  .text-left {
+    text-align: left;
+  }
+  
+  .placeholder-profile {
+    color: #cccccc;
+  }
+  .my-template{
+      align-content: center; 
+  }
+
+  amplify-photo-picker{
+        display: flex;
+        justify-content: space-around;
+  }
+  
