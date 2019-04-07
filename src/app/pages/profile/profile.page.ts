@@ -25,6 +25,7 @@ import User from '../../classes/user';
 import Member from '../../types/user';
 // import User from '../../user';
 import { Auth } from 'aws-amplify';
+import { ToastController } from '@ionic/angular';
 // import createUser from '../../graphql/mutations/createUser';
 
 @Component({
@@ -51,7 +52,8 @@ export class ProfilePage implements OnInit {
   registered;
   image;
 
-  constructor(private api: APIService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private api: APIService, private router: Router,
+    public toastController: ToastController) { }
 
   ngOnInit() {
     this.showPhoto = false;
@@ -132,6 +134,19 @@ export class ProfilePage implements OnInit {
 
     this.userProfile = user;
     await this.api[this.getType()](user);
+    this.presentToast();
+  }
+
+  async presentToast() {
+    // this.modifiedDate();
+    // this.sleepOnSubmit();
+
+    const toast = await this.toastController.create({
+      message: 'Your settings have been saved.',
+      duration: 2000
+    });
+    toast.present();
+
   }
 
   editPhoto() {
