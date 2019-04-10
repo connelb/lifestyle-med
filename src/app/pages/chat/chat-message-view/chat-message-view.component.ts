@@ -262,14 +262,14 @@ export class ChatMessageViewComponent {
         console.log('chat-message-view: nextToken is now', this.nextToken ? 'set' : 'null');
       });
 
-      // this.subscription = observable.subscribeToMore({
-      //   document: subscribeToNewMessages,
-      //   variables: { 'conversationId': this._conversation.id },
-      //   updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}) => {
-      //     console.log('subscribeToMore - updateQuery:', message);
-      //     return unshiftMessage(prev, message);
-      //   }
-      // });
+      this.subscription = observable.subscribeToMore({
+        document: subscribeToNewMessages,
+        variables: { 'conversationId': this._conversation.id },
+        // updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}) => {
+        //   console.log('subscribeToMore - updateQuery:', message);
+        //   return unshiftMessage(prev, message);
+        // }
+      });
       this.observedQuery = observable;
       return observable;
     });

@@ -1,9 +1,9 @@
 type Member = {
     id: string,
-    username: string,
-    firstname: string,
-    lastname: string,
-    registered: boolean,
+    username: string| null,
+    firstname: string| null,
+    lastname: string| null,
+    registered: boolean| null,
     bio: string | null,
     image: string | null
   };

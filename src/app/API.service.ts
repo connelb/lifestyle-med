@@ -1602,6 +1602,39 @@ export type SubscribeToNewUsersSubscription = {
   image: string | null;
 };
 
+export type SubscribeToNewMembersSubscription = {
+  __typename: string;
+  id: string;
+  conversations: {
+    __typename: "UserConverstationsConnection";
+    nextToken: string | null;
+    userConversations: Array<{
+      __typename: "UserConversations";
+      conversationId: string;
+      userId: string;
+    } | null> | null;
+  } | null;
+  messages: {
+    __typename: "MessageConnection";
+    messages: Array<{
+      __typename: "Message";
+      content: string;
+      conversationId: string;
+      createdAt: string | null;
+      id: string;
+      isSent: boolean | null;
+      sender: string | null;
+    } | null> | null;
+    nextToken: string | null;
+  } | null;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
 export type OnCreateMeasurementSubscription = {
   __typename: string;
   measurementId: string;
@@ -4020,6 +4053,47 @@ export class APIService {
       }`
     )
   ) as Observable<SubscribeToNewUsersSubscription>;
+
+  SubscribeToNewMembersListener: Observable<
+    SubscribeToNewMembersSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription SubscribeToNewMembers {
+        subscribeToNewMembers {
+          __typename
+          id
+          conversations {
+            __typename
+            nextToken
+            userConversations {
+              __typename
+              conversationId
+              userId
+            }
+          }
+          messages {
+            __typename
+            messages {
+              __typename
+              content
+              conversationId
+              createdAt
+              id
+              isSent
+              sender
+            }
+            nextToken
+          }
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`
+    )
+  ) as Observable<SubscribeToNewMembersSubscription>;
 
   OnCreateMeasurementListener: Observable<
     OnCreateMeasurementSubscription

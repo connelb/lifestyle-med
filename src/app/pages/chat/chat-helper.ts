@@ -6,7 +6,8 @@ import {
  } from './graphql/operation-result-types';
 import Message from './types/message';
 import UserConversation from './types/userConversation';
-import User from './types/user';
+// import User from './types/user';
+import Member from './../../types/member';
 
 import * as _ from 'lodash';
 
@@ -78,7 +79,7 @@ export function addConversation(data: ConvosQuery, uc: UserConversation): Convos
     me: { conversations: { userConversations: {$push: [uc]}} }
   });
 }
-export function addUser(data: UsersQuery, user: User): UsersQuery {
+export function addUser(data: UsersQuery, user: Member): UsersQuery {
   if (!data || !data.allMember) {
     return { allMember: [] };
   }

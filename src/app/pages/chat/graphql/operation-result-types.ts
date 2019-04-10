@@ -153,6 +153,28 @@ export type getUserConversationConnectionThroughUserQuery = {
   } | null,
 };
 
+// export type getUserConversationConnectionThroughUserQuery = {
+//   // Get my user.
+//   me:  {
+//     // A user's enrolled Conversations. This is an interesting case. This is an interesting pagination case.
+//     conversations:  {
+//       __typename: "UserConverstationsConnection",
+//       nextToken: string | null,
+//       userConversations:  Array< {
+//         __typename: "UserConversations",
+//         conversationId: string,
+//         conversation:  {
+//           __typename: "Conversation",
+//           // A unique identifier for the Conversation.
+//           id: string,
+//           // The Conversation's name.
+//           name: string,
+//         } | null,
+//       } | null > | null,
+//     } | null,
+//   } | null,
+// };
+
 export type subscribeToNewMessageSubscriptionVariables = {
   conversationId: string,
 };

@@ -5,7 +5,16 @@ subscription subscribeToNewUsers {
   subscribeToNewUsers {
     __typename
     id
-    cognitoId
     username
   }
 }`;
+
+// export default gql`
+// subscription subscribeToNewUsers {
+//   subscribeToNewUsers {
+//     __typename
+//     id
+//     cognitoId
+//     username
+//   }
+// }`;

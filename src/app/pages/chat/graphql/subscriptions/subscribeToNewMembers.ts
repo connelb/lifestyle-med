@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query getallMembers {
-  allMember {
+subscription subscribeToNewMembers {
+  subscribeToNewMembers {
     __typename
     id
     username

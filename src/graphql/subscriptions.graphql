@@ -124,6 +124,35 @@ subscription SubscribeToNewUsers {
     image
   }
 }
+subscription SubscribeToNewMembers {
+  subscribeToNewMembers {
+    id
+    conversations {
+      nextToken
+      userConversations {
+        conversationId
+        userId
+      }
+    }
+    messages {
+      messages {
+        content
+        conversationId
+        createdAt
+        id
+        isSent
+        sender
+      }
+      nextToken
+    }
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
 subscription OnCreateMeasurement(
   $measurementId: String
   $createdAt: String

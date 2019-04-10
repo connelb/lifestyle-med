@@ -1,6 +1,36 @@
+
+{{convo|json}}
+  <ion-item-sliding *ngFor="let user of users">
+        <ion-item href="#">
+          <ion-label>
+            <h2>{{user.firstname}}</h2>
+            <p>{{user.firstname|slice:0:1}}</p>
+          </ion-label>
+          <ion-note slot="end">
+            10:45 AM
+          </ion-note>
+        </ion-item>
+    
+        <ion-item-options side="start">
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="heart"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+    
+        <ion-item-options side="end">
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option>
+            <ion-icon slot="icon-only" name="star"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+
 <span *ngFor="let user of users">
     <ion-chip>
         <ion-label><a href='#' [class.active]="current && convo.id === current.id" (click)="createNewConversation(user, $event); false">
-            {{user.username}}</a></ion-label>
+            {{user.firstname|slice:0:1}}{{user.lastname|slice:0:1}}</a></ion-label>
       </ion-chip>
 </span>

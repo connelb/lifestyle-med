@@ -58,6 +58,7 @@ import Message from '../../../types/message';
 import readUserFragment from '../graphql/queries/readUserFragment';
 // import User from '../types/user';
 import User from '../../../types/user';
+import Member from '../../../types/member';
 
 const USER_ID_PREFIX = 'User:';
 
@@ -74,7 +75,8 @@ export class ChatMessageComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() isFirst = false;
   @Output() added: EventEmitter<Message> = new EventEmitter();
 
-  user: User;
+  // user: User;
+  user: Member;
   createdAt;
 
   constructor(private appsync: AppsyncService) {}

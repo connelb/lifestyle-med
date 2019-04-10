@@ -124,12 +124,12 @@ export class AppComponent implements OnInit, OnDestroy {
   loading: boolean;
   currentUser: any;
 
-  mutation = gql`
-      mutation submitRepository($repoFullName: String!) {
-        submitRepository(repoFullName: $repoFullName) {
-          createdAt
-        }
-  }`;
+  // mutation = gql`
+  //     mutation submitRepository($repoFullName: String!) {
+  //       submitRepository(repoFullName: $repoFullName) {
+  //         createdAt
+  //       }
+  // }`;
 
   private querySubscription: Subscription;
 
@@ -199,13 +199,22 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       });
     }
+    // this.appsyncService.hc().then(client => {
+    //   client.watchQuery({
+    //     query: getMe,
+    //     fetchPolicy: 'cache-only'
+    //   }).subscribe(({ data }) => {
+    //     console.log('reg', data);
+    //     if (data) { this.me = data.me; }
+    //   });
+    // });
 
     this.amplifyService.auth().currentSession().then(session => {
       // //this.userCreated = true;
       // this.logInfoToConsole(session);
       this.session = session;
       this.register();
-      // setImmediate(() => this.createMember());
+      setImmediate(() => this.createMember());
     });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))

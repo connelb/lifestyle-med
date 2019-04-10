@@ -127,12 +127,11 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppsyncService } from '../../../providers/appsync.service';
-
-//import getallMembers from '../graphql/queries/getallMembers';
+import getAllMembers from './../../../graphql/queries/getAllMembers';
 import createConversation from '../graphql/mutations/createConversation';
 import createUserConversations from '../graphql/mutations/createUserConversations';
 import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
-import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUsers';
+import subscribeToNewUsers from '../graphql/subscriptions/subscribeToNewUsers';
 import { constants, addConversation, addUser } from '../chat-helper';
 import Conversation from '../types/conversation';
 import { getallMembersQuery as UsersQuery } from '../graphql/operation-result-types';
@@ -144,6 +143,7 @@ import { v4 as uuid } from 'uuid';
 import { Analytics } from 'aws-amplify';
 
 import User from '../types/user';
+import Member from '../types/member';
 
 @Component({
   selector: 'app-chat-user-list',
@@ -153,7 +153,8 @@ import User from '../types/user';
 export class ChatUserListComponent {
 
   _user;
-  users: User[] = [];
+  //users: User[] = [];
+  users: Member[] = [];
   order = 'username';
   no_user = false;
 
@@ -170,7 +171,7 @@ export class ChatUserListComponent {
   getallMembers() {
     this.appsync.hc().then(client => {
       const observable = client.watchQuery({
-        query: this.api.ListMembers,//getallMembers,
+        query:getAllMembers,
         fetchPolicy: 'cache-and-network'
       });
 
@@ -178,13 +179,13 @@ export class ChatUserListComponent {
         if (!data) {
           return console.log('getallMembers - no data');
         }
-        this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
-        console.log('getallMembers - Got data', this.users);
+        this.users = _(data.AllMember).sortBy('username').reject(['id', this._user.id]).value();
+        console.log('getallMembers - Got data', data);
         this.no_user = (this.users.length === 0);
       });
 
       observable.subscribeToMore({
-        document: subscribeToNewUserUsers,
+        document: subscribeToNewUsers,
         updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewUsers: user }}}) => {
           console.log('updateQuery on convo subscription', user, prev);
           return this._user.id === user.id ? prev : addUser(prev, user);

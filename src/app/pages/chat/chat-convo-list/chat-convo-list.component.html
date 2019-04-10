@@ -57,7 +57,7 @@
                     <mat-icon>forum</mat-icon> 
                     {{convo.name}}</a></ion-select-option>
             </ion-select> -->
-            <!-- {{conversations|json}} -->
+            {{conversations|json}}
 <h6>Conversations:</h6>
             <span *ngFor="let convo of conversations" >
                 <ion-chip >
@@ -71,6 +71,34 @@
                 </ion-chip>
               </span>
 
+
+              {{convo|json}}
+              <ion-item-sliding *ngFor="let convo of conversations" >
+                    <ion-item href="#">
+                      <ion-label>
+                        <h2>{{convo.name}}</h2>
+                        <p>{{user.firstname|slice:0:1}}</p>
+                      </ion-label>
+                      <ion-note slot="end">
+                        10:45 AM
+                      </ion-note>
+                    </ion-item>
+                
+                    <ion-item-options side="start">
+                      <ion-item-option>
+                        <ion-icon slot="icon-only" name="heart"></ion-icon>
+                      </ion-item-option>
+                    </ion-item-options>
+                
+                    <ion-item-options side="end">
+                      <ion-item-option color="danger">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                      </ion-item-option>
+                      <ion-item-option>
+                        <ion-icon slot="icon-only" name="star"></ion-icon>
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
 
           <!-- </mat-card>
     </mat-card-content> -->

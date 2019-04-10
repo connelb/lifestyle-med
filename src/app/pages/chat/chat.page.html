@@ -42,8 +42,9 @@
       
           <div class="col-sm-8 p-1" id="chat">
             <div *ngIf="conversation; else instructions">
-              <app-chat-message-view #messageView [senderId]="me.cognitoId" [conversation]="conversation"></app-chat-message-view>
-              <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId"></app-chat-input>
+              <app-chat-message-view #messageView [senderId]="me.id" [conversation]="conversation"></app-chat-message-view>
+              <!-- <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId"></app-chat-input> -->
+              <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input>
             </div>
           </div>
         </div>
