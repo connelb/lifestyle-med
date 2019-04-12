@@ -30,11 +30,10 @@ mutation CreateMessage(
     id: $id
   ) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -51,11 +50,10 @@ mutation CreateMessage(
     id
     isSent
     recipient {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -143,7 +141,6 @@ mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
       }
       conversationId
       user {
-        cognitoId
         id
         username
         firstname
@@ -164,11 +161,10 @@ mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {
     }
     conversationId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -284,11 +280,10 @@ mutation DeleteSleep($input: DeleteSleepInput!) {
 mutation CreateNutritionComment($input: CreateNutritionCommentInput!) {
   createNutritionComment(input: $input) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -308,11 +303,10 @@ mutation CreateNutritionComment($input: CreateNutritionCommentInput!) {
 mutation UpdateNutritionComment($input: UpdateNutritionCommentInput!) {
   updateNutritionComment(input: $input) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -332,11 +326,10 @@ mutation UpdateNutritionComment($input: UpdateNutritionCommentInput!) {
 mutation DeleteNutritionComment($input: DeleteNutritionCommentInput!) {
   deleteNutritionComment(input: $input) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -360,11 +353,10 @@ mutation CreateNutrition($input: CreateNutritionInput!) {
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -379,7 +371,6 @@ mutation CreateNutrition($input: CreateNutritionInput!) {
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname
@@ -402,11 +393,10 @@ mutation UpdateNutrition($input: UpdateNutritionInput!) {
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -421,7 +411,6 @@ mutation UpdateNutrition($input: UpdateNutritionInput!) {
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname
@@ -444,11 +433,10 @@ mutation DeleteNutrition($input: DeleteNutritionInput!) {
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -463,7 +451,6 @@ mutation DeleteNutrition($input: DeleteNutritionInput!) {
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname

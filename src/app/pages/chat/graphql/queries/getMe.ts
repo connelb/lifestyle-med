@@ -1,11 +1,15 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query getMe {
+query Me {
   me {
     __typename
     id
     username
+    firstname
+    lastname
     registered
+    bio
+    image
   }
 }`;

@@ -2,11 +2,10 @@
 query AllMessage($after: String, $conversationId: ID!, $first: Int) {
   allMessage(after: $after, conversationId: $conversationId, first: $first) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -23,11 +22,10 @@ query AllMessage($after: String, $conversationId: ID!, $first: Int) {
     id
     isSent
     recipient {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -49,7 +47,6 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
   ) {
     messages {
       author {
-        cognitoId
         id
         username
         firstname
@@ -64,7 +61,6 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
       id
       isSent
       recipient {
-        cognitoId
         id
         username
         firstname
@@ -91,11 +87,10 @@ query AllMessageFrom(
     sender: $sender
   ) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -112,11 +107,10 @@ query AllMessageFrom(
     id
     isSent
     recipient {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -308,11 +302,10 @@ query ListSleeps(
 query GetNutritionComment($id: ID!, $createdAt: AWSDate!) {
   getNutritionComment(id: $id, createdAt: $createdAt) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -337,7 +330,6 @@ query ListNutritionComments(
   listNutritionComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       author {
-        cognitoId
         id
         username
         firstname
@@ -361,11 +353,10 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -380,7 +371,6 @@ query GetNutrition($nutritionId: ID!, $createdAt: AWSDate!) {
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname
@@ -408,7 +398,6 @@ query ListNutritions(
       mealType
       userId
       user {
-        cognitoId
         id
         username
         firstname

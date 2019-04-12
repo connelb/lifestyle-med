@@ -2,11 +2,10 @@
 subscription SubscribeToNewMessage($conversationId: ID!) {
   subscribeToNewMessage(conversationId: $conversationId) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -23,11 +22,10 @@ subscription SubscribeToNewMessage($conversationId: ID!) {
     id
     isSent
     recipient {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -55,7 +53,6 @@ subscription SubscribeToNewUCs($userId: ID!) {
       }
       conversationId
       user {
-        cognitoId
         id
         username
         firstname
@@ -76,11 +73,10 @@ subscription SubscribeToNewUCs($userId: ID!) {
     }
     conversationId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -373,11 +369,10 @@ subscription OnCreateNutritionComment(
     id: $id
   ) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -407,11 +402,10 @@ subscription OnUpdateNutritionComment(
     id: $id
   ) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -441,11 +435,10 @@ subscription OnDeleteNutritionComment(
     id: $id
   ) {
     author {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -481,11 +474,10 @@ subscription OnCreateNutrition(
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -500,7 +492,6 @@ subscription OnCreateNutrition(
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname
@@ -535,11 +526,10 @@ subscription OnUpdateNutrition(
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -554,7 +544,6 @@ subscription OnUpdateNutrition(
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname
@@ -589,11 +578,10 @@ subscription OnDeleteNutrition(
     mealType
     userId
     user {
-      cognitoId
+      id
       conversations {
         nextToken
       }
-      id
       messages {
         nextToken
       }
@@ -608,7 +596,6 @@ subscription OnDeleteNutrition(
     social
     comments {
       author {
-        cognitoId
         id
         username
         firstname

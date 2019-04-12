@@ -319,13 +319,12 @@ export type CreateConversationMutation = {
 export type CreateMessageMutation = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -343,13 +342,12 @@ export type CreateMessageMutation = {
   id: string;
   isSent: boolean | null;
   recipient: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -449,9 +447,8 @@ export type CreateUserConversationsMutation = {
     } | null;
     conversationId: string;
     user: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -473,13 +470,12 @@ export type CreateUserConversationsMutation = {
   } | null;
   conversationId: string;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -596,13 +592,12 @@ export type DeleteSleepMutation = {
 export type CreateNutritionCommentMutation = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -623,13 +618,12 @@ export type CreateNutritionCommentMutation = {
 export type UpdateNutritionCommentMutation = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -650,13 +644,12 @@ export type UpdateNutritionCommentMutation = {
 export type DeleteNutritionCommentMutation = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -681,13 +674,12 @@ export type CreateNutritionMutation = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -704,9 +696,8 @@ export type CreateNutritionMutation = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -728,13 +719,12 @@ export type UpdateNutritionMutation = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -751,9 +741,8 @@ export type UpdateNutritionMutation = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -775,13 +764,12 @@ export type DeleteNutritionMutation = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -798,9 +786,8 @@ export type DeleteNutritionMutation = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -944,13 +931,12 @@ export type DeleteMemberMutation = {
 export type AllMessageQuery = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -968,13 +954,12 @@ export type AllMessageQuery = {
   id: string;
   isSent: boolean | null;
   recipient: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -994,9 +979,8 @@ export type AllMessageConnectionQuery = {
   messages: Array<{
     __typename: "Message";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1010,9 +994,8 @@ export type AllMessageConnectionQuery = {
     id: string;
     isSent: boolean | null;
     recipient: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1028,13 +1011,12 @@ export type AllMessageConnectionQuery = {
 export type AllMessageFromQuery = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1052,13 +1034,12 @@ export type AllMessageFromQuery = {
   id: string;
   isSent: boolean | null;
   recipient: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1254,13 +1235,12 @@ export type ListSleepsQuery = {
 export type GetNutritionCommentQuery = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1283,9 +1263,8 @@ export type ListNutritionCommentsQuery = {
   items: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1308,13 +1287,12 @@ export type GetNutritionQuery = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1331,9 +1309,8 @@ export type GetNutritionQuery = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1357,9 +1334,8 @@ export type ListNutritionsQuery = {
     mealType: string | null;
     userId: string | null;
     user: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1461,13 +1437,12 @@ export type ListMembersQuery = {
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1485,13 +1460,12 @@ export type SubscribeToNewMessageSubscription = {
   id: string;
   isSent: boolean | null;
   recipient: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1523,9 +1497,8 @@ export type SubscribeToNewUCsSubscription = {
     } | null;
     conversationId: string;
     user: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1547,13 +1520,12 @@ export type SubscribeToNewUCsSubscription = {
   } | null;
   conversationId: string;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1737,13 +1709,12 @@ export type OnDeleteSleepSubscription = {
 export type OnCreateNutritionCommentSubscription = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1764,13 +1735,12 @@ export type OnCreateNutritionCommentSubscription = {
 export type OnUpdateNutritionCommentSubscription = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1791,13 +1761,12 @@ export type OnUpdateNutritionCommentSubscription = {
 export type OnDeleteNutritionCommentSubscription = {
   __typename: string;
   author: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1822,13 +1791,12 @@ export type OnCreateNutritionSubscription = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1845,9 +1813,8 @@ export type OnCreateNutritionSubscription = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1869,13 +1836,12 @@ export type OnUpdateNutritionSubscription = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1892,9 +1858,8 @@ export type OnUpdateNutritionSubscription = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -1916,13 +1881,12 @@ export type OnDeleteNutritionSubscription = {
   mealType: string | null;
   userId: string | null;
   user: {
-    __typename: "User";
-    cognitoId: string;
+    __typename: "Member";
+    id: string;
     conversations: {
       __typename: "UserConverstationsConnection";
       nextToken: string | null;
     } | null;
-    id: string | null;
     messages: {
       __typename: "MessageConnection";
       nextToken: string | null;
@@ -1939,9 +1903,8 @@ export type OnDeleteNutritionSubscription = {
   comments: Array<{
     __typename: "NutritionComment";
     author: {
-      __typename: "User";
-      cognitoId: string;
-      id: string | null;
+      __typename: "Member";
+      id: string;
       username: string | null;
       firstname: string | null;
       lastname: string | null;
@@ -2135,12 +2098,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2159,12 +2121,11 @@ export class APIService {
           isSent
           recipient {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2303,7 +2264,6 @@ export class APIService {
             conversationId
             user {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -2327,12 +2287,11 @@ export class APIService {
           conversationId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2567,12 +2526,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2606,12 +2564,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2645,12 +2602,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2688,12 +2644,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2711,7 +2666,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -2747,12 +2701,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2770,7 +2723,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -2806,12 +2758,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -2829,7 +2780,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3049,12 +2999,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3073,12 +3022,11 @@ export class APIService {
           isSent
           recipient {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3119,7 +3067,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3135,7 +3082,6 @@ export class APIService {
             isSent
             recipient {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3174,12 +3120,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3198,12 +3143,11 @@ export class APIService {
           isSent
           recipient {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3555,12 +3499,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3599,7 +3542,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3644,12 +3586,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3667,7 +3608,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3708,7 +3648,6 @@ export class APIService {
             userId
             user {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3895,12 +3834,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3919,12 +3857,11 @@ export class APIService {
           isSent
           recipient {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -3965,7 +3902,6 @@ export class APIService {
             conversationId
             user {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -3989,12 +3925,11 @@ export class APIService {
           conversationId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4269,12 +4204,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4304,12 +4238,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4339,12 +4272,11 @@ export class APIService {
           __typename
           author {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4378,12 +4310,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4401,7 +4332,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -4433,12 +4363,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4456,7 +4385,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname
@@ -4488,12 +4416,11 @@ export class APIService {
           userId
           user {
             __typename
-            cognitoId
+            id
             conversations {
               __typename
               nextToken
             }
-            id
             messages {
               __typename
               nextToken
@@ -4511,7 +4438,6 @@ export class APIService {
             __typename
             author {
               __typename
-              cognitoId
               id
               username
               firstname

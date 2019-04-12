@@ -56,15 +56,16 @@ import listAllMembers from './graphql/queries/listAllMembers';
 //import {allMember} from './graphql/queries.graphql'
 import queryListAllMessages from './graphql/queries/queryListAllMessages';
 import {APIService} from './API.service';
+import { Auth } from 'aws-amplify';
 
-const CurrentUserForProfile = gql`
-query CurrentUserForProfile {
-  currentUser {
-    login
-    avatar_url
-  }
-}
-`;
+// const CurrentUserForProfile = gql`
+// query CurrentUserForProfile {
+//   currentUser {
+//     login
+//     avatar_url
+//   }
+// }
+// `;
 
 
 // const CurrentUserForProfile1 = gql`
@@ -192,6 +193,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    Auth.currentSession().then(session => {
+      this.logInfoToConsole(session);
+      this.session = session;
+      this.register();
+      setImmediate(() => this.createMember());
+    });
+
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
         if (confirm("New version available. Load New Version?")) {
@@ -209,13 +218,13 @@ export class AppComponent implements OnInit, OnDestroy {
     //   });
     // });
 
-    this.amplifyService.auth().currentSession().then(session => {
-      // //this.userCreated = true;
-      // this.logInfoToConsole(session);
-      this.session = session;
-      this.register();
-      setImmediate(() => this.createMember());
-    });
+    // this.amplifyService.auth().currentSession().then(session => {
+    //   // //this.userCreated = true;
+    //   // this.logInfoToConsole(session);
+    //   this.session = session;
+    //   this.register();
+    //   setImmediate(() => this.createMember());
+    // });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
@@ -316,22 +325,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   createMember() {
-    //console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
-    const member: Member = {
-      id: this.session.idToken.payload['sub'],
+    console.log('createMember called')
+    const member = {
       username: this.session.idToken.payload['cognito:username'],
-      firstname:'na',
-      lastname:'na',
+      id: this.session.idToken.payload['sub'],
+      firstname:this.session.idToken.payload['cognito:username'],
+      lastname:this.session.idToken.payload['cognito:username'],
       //cognitoId: this.session.idToken.payload['sub'],
       registered: false,
-      bio:'na',
-      image:'na'
+      bio:'',
+      image:''
     };
-    //console.log('creating member', member);
+    // console.log('creating user', user);
     this.appsyncService.hc().then(client => {
       client.mutate({
         mutation: createMember,
-        variables: { id: member.id },
+        variables: {id: member.id},
 
         optimisticResponse: () => ({
           createMember: {
@@ -340,23 +349,86 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         }),
 
-        update: (proxy, { data: { createMember: _member} }) => {
-          //console.log('???????????????? createMember update with:', _member);
-          proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
+        update: (proxy, {data: { createMember: _member }}) => {
+          console.log('createUser update with:', _member);
+          proxy.writeQuery({query: getMe, data: {me: {..._member}}});
         }
-      }).catch(err => console.log('Error registering member', err));
+      }).catch(err => console.log('Error registering user', err));
     });
   }
 
-  // logInfoToConsole(session) {
-  //   console.log('session:',session);
-  //   console.log(`ID Token: <${session.idToken.jwtToken}>`);
-  //   console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-  //   console.log('Decoded ID Token:');
-  //   console.log(JSON.stringify(session.idToken.payload, null, 2));
-  //   console.log('Decoded Access Token:');
-  //   console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  // createMember() {
+  //   //console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
+
+  //     this.appsyncService.hc().then(client => {
+  //     client.watchQuery({
+  //       query: getMe,
+  //       fetchPolicy: 'cache-only'
+  //     }).subscribe(({ data }) => {
+  //       console.log('reg', data);
+  //       if (data) { 
+  //         this.me = data.me;
+
+  //         // client.mutate({
+  //         //   mutation: createMember,
+  //         //   variables: { id: me.id },//this.session.idToken.payload['sub']
+    
+  //         //   optimisticResponse: () => ({
+  //         //     createMember: {
+  //         //       ...me,
+  //         //       __typename: 'Member'
+  //         //     }
+  //         //   }),
+    
+  //         //   update: (proxy, { data: { createMember: _member} }) => {
+  //         //     console.log('???????????????? _member:', _member);
+  //         //     proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
+  //         //   }
+  //         // }).catch(err => console.log('Error registering member', err));
+  //        }
+  //     });
+  //   });
+  //   // const member: Member = {
+  //   //   id: this.session.idToken.payload['sub'],
+  //   //   username: this.session.idToken.payload['cognito:username'],
+  //   //   firstname:'',
+  //   //   lastname:'',
+  //   //   //cognitoId: this.session.idToken.payload['sub'],
+  //   //   registered: false,
+  //   //   bio:'',
+  //   //   image:''
+  //   // };
+  //   // console.log('creating member member.id', member.id);
+  //   // this.appsyncService.hc().then(client => {
+  //   //   // console.log('client', client)
+  //   //   client.mutate({
+  //   //     mutation: createMember,
+  //   //     variables: { id: this.me.id },//this.session.idToken.payload['sub']
+
+  //   //     optimisticResponse: () => ({
+  //   //       createMember: {
+  //   //         ...this.me,
+  //   //         __typename: 'Member'
+  //   //       }
+  //   //     }),
+
+  //   //     update: (proxy, { data: { createMember: _member} }) => {
+  //   //       console.log('???????????????? _member:', _member);
+  //   //       proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
+  //   //     }
+  //   //   }).catch(err => console.log('Error registering member', err));
+  //   // });
   // }
+
+  logInfoToConsole(session) {
+    console.log('session:',session);
+    console.log(`ID Token: <${session.idToken.jwtToken}>`);
+    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+    console.log('Decoded ID Token:');
+    console.log(JSON.stringify(session.idToken.payload, null, 2));
+    console.log('Decoded Access Token:');
+    console.log(JSON.stringify(session.accessToken.payload, null, 2));
+  }
 
   getType(): string {
     return this.userCreated ? 'UpdateMember' : 'CreateMember';
@@ -436,15 +508,16 @@ export class AppComponent implements OnInit, OnDestroy {
   //}
 
   register() {
-    this.appsyncService.hc().then(client => {
-      client.watchQuery({
-        query: getMe,
-        fetchPolicy: 'cache-only'
-      }).subscribe(({ data }) => {
-        console.log('reg', data);
-        if (data) { this.me = data.me; }
-      });
-    });
+    console.log('registration called')
+    // this.appsyncService.hc().then(client => {
+    //   client.watchQuery({
+    //     query: getMe,
+    //     fetchPolicy: 'cache-only'
+    //   }).subscribe(({ data }) => {
+    //     console.log('reg', data);
+    //     if (data) { this.me = data.me; }
+    //   });
+    // });
   }
 
   updateLoggedInStatus(loggedIn: boolean) {
