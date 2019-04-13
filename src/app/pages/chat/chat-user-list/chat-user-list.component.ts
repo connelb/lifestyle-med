@@ -176,6 +176,7 @@ export class ChatUserListComponent {
       });
 
       observable.subscribe(({data}) => {
+        //console.log('getAllMembers, should be a list', data)
         if (!data) {
           return console.log('getallMembers - no data');
         }
@@ -242,6 +243,8 @@ function createUserConvo(client, id, convoId, update = false): Promise<any> {
         query: getUserConversationsConnection,
         variables: { first: constants.conversationFirst}
       };
+
+      console.log('user-list, what is _options and the connection with sleep??', _options)
 
       const prev = proxy.readQuery(_options);
       // console.log('retrieve ucs:', prev);

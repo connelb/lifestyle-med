@@ -119,7 +119,7 @@ export class LoginPage implements OnInit {
 
       client.watchQuery({
         query: getMe,
-        fetchPolicy: 'cache-only'
+        fetchPolicy: 'cache-and-network'
       }).subscribe(({data}) => {
         console.log('register member, fetch cache', data);
         if (data) { 

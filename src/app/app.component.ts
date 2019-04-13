@@ -194,12 +194,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    Auth.currentSession().then(session => {
-      this.logInfoToConsole(session);
-      this.session = session;
-      this.register();
-      setImmediate(() => this.createMember());
-    });
+    // Auth.currentSession().then(session => {
+    //   this.logInfoToConsole(session);
+    //   this.session = session;
+    //   this.register();
+    //   setImmediate(() => this.createMember());
+    // });
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
@@ -211,20 +211,20 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.appsyncService.hc().then(client => {
     //   client.watchQuery({
     //     query: getMe,
-    //     fetchPolicy: 'cache-only'
+    //     fetchPolicy: 'cache-and-network'
     //   }).subscribe(({ data }) => {
-    //     console.log('reg', data);
+    //     console.log('rme in init:', data);
     //     if (data) { this.me = data.me; }
     //   });
     // });
 
-    // this.amplifyService.auth().currentSession().then(session => {
-    //   // //this.userCreated = true;
-    //   // this.logInfoToConsole(session);
-    //   this.session = session;
-    //   this.register();
-    //   setImmediate(() => this.createMember());
-    // });
+    this.amplifyService.auth().currentSession().then(session => {
+      // //this.userCreated = true;
+      // this.logInfoToConsole(session);
+      this.session = session;
+      //this.register();
+      //setImmediate(() => this.createMember());
+    });
 
     // this.submitRepository().subscribe(d => console.log('kkjjk', d))
 
@@ -326,15 +326,34 @@ export class AppComponent implements OnInit, OnDestroy {
 
   createMember() {
     console.log('createMember called')
+
+    // this.appsyncService.hc().then(client => {
+    //   client.watchQuery({
+    //     query: getMe,
+    //     fetchPolicy: 'cache-only'
+    //   }).subscribe(({ data }) => {
+    //     console.log('register()', data['me']);
+    //     if (data) { 
+    //       console.log("me return data: ", data)
+    //       this.me = data.me;
+    //      }else{
+    //       console.log("me does not return data!!")
+    //      }
+    //   });
+    // });
+
+    //this.me.registered = true;
+    console.log('this.me??', this.me)
+
     const member = {
       username: this.session.idToken.payload['cognito:username'],
       id: this.session.idToken.payload['sub'],
       firstname:this.session.idToken.payload['cognito:username'],
       lastname:this.session.idToken.payload['cognito:username'],
       //cognitoId: this.session.idToken.payload['sub'],
-      registered: false,
-      bio:'',
-      image:''
+      //registered: false,
+      //bio:'',
+      //image:''
     };
     // console.log('creating user', user);
     this.appsyncService.hc().then(client => {
@@ -353,7 +372,7 @@ export class AppComponent implements OnInit, OnDestroy {
           console.log('createUser update with:', _member);
           proxy.writeQuery({query: getMe, data: {me: {..._member}}});
         }
-      }).catch(err => console.log('Error registering user', err));
+      }).catch(err => console.log('Error registering member', err));
     });
   }
 
@@ -507,17 +526,35 @@ export class AppComponent implements OnInit, OnDestroy {
 
   //}
 
+
+  // register() {
+  //   this.appsync.hc().then(client => {
+  //     client.watchQuery({
+  //       query: getMe,
+  //       fetchPolicy: 'cache-only'
+  //     }).subscribe(({data}) => {
+  //       // console.log('register user, fetch cache', data);
+  //       if (data) { this.me = data.me; }
+  //     });
+  //   });
+  // }
+
   register() {
-    console.log('registration called')
-    // this.appsyncService.hc().then(client => {
-    //   client.watchQuery({
-    //     query: getMe,
-    //     fetchPolicy: 'cache-only'
-    //   }).subscribe(({ data }) => {
-    //     console.log('reg', data);
-    //     if (data) { this.me = data.me; }
-    //   });
-    // });
+    //console.log('registration called')
+    this.appsyncService.hc().then(client => {
+      client.watchQuery({
+        query: getMe,
+        fetchPolicy: 'cache-only'
+      }).subscribe(({ data }) => {
+        console.log('register()', data['me']);
+        if (data) { 
+          console.log("me return data: ", data)
+          this.me = data.me;
+         }else{
+          console.log("me does not return data!!")
+         }
+      });
+    });
   }
 
   updateLoggedInStatus(loggedIn: boolean) {

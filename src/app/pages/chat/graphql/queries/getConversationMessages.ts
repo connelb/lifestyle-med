@@ -1,18 +1,55 @@
 import gql from 'graphql-tag';
 
+// export default gql`
+// query getConversationMessages($conversationId: ID!, $after: String, $first: Int) {
+//   allMessageConnection(conversationId: $conversationId, after: $after, first: $first) {
+//     __typename
+//     nextToken,
+//     messages {
+//       __typename
+//       id
+//       conversationId
+//       content
+//       createdAt
+//       sender
+//       isSent
+//     }
+//   }
+// }`;
+
 export default gql`
-query getConversationMessages($conversationId: ID!, $after: String, $first: Int) {
-  allMessageConnection(conversationId: $conversationId, after: $after, first: $first) {
-    __typename
-    nextToken,
+query getConversationMessages($after: String, $conversationId: ID!, $first: Int) {
+  allMessageConnection(
+    after: $after
+    conversationId: $conversationId
+    first: $first
+  ) {
     messages {
-      __typename
-      id
-      conversationId
+      author {
+        id
+        username
+        firstname
+        lastname
+        registered
+        bio
+        image
+      }
       content
+      conversationId
       createdAt
-      sender
+      id
       isSent
+      recipient {
+        id
+        username
+        firstname
+        lastname
+        registered
+        bio
+        image
+      }
+      sender
     }
+    nextToken
   }
 }`;

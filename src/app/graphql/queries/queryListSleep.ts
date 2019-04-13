@@ -14,4 +14,21 @@ query ListAllSleep {
   }
 `;
 
+// query ListSleeps(
+//   $filter: TableSleepFilterInput
+//   $limit: Int
+//   $nextToken: String
+// ) {
+//   listSleeps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+//     items {
+//       sleepId
+//       createdAt
+//       userId
+//       updatedAt
+//       hours
+//     }
+//     nextToken
+//   }
+// }
+
 

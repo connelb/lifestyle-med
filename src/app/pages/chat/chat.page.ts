@@ -46,16 +46,16 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
 
-    // this.appsync.hc().then(client => {
+    this.appsync.hc().then(client => {
       
-    //   client.watchQuery({
-    //     query: getMe,//getMe,
-    //     fetchPolicy: 'cache-only'
-    //   }).subscribe(({data}) => {
-    //     console.log('register user, fetch cache', data);
-    //     if (data) { this.me = data.me; }
-    //   });
-    // });
+      client.watchQuery({
+        query: getMe,//getMe,
+        fetchPolicy: 'cache-and-network'
+      }).subscribe(({data}) => {
+        console.log('register user, fetch cache', data);
+        if (data) { this.me = data.me; }
+      });
+    });
 
     // this.amplifyService.authStateChange$
     //     .subscribe(authState => {
