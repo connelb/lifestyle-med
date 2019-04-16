@@ -63,7 +63,7 @@ export function addConversation(data: ConvosQuery, uc: UserConversation): Convos
       me: {
         conversations: {
           nextToken: null,
-          __typename: 'UserConversationsConnection',
+          __typename: 'UserConverstationsConnection',
           userConversations: []
         }
       }

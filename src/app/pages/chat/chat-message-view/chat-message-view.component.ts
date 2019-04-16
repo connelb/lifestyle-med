@@ -240,8 +240,8 @@ export class ChatMessageViewComponent {
   loadMessages(event = null, fetchPolicy = 'cache-and-network') {
     if (event) { event.stopPropagation(); }
     const innerObserable = this.appsync.hc().then(client => {
-      console.log('brian, what is client?', client, fetchPolicy)
-      //console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
+      //console.log('brian, what is client?', client, fetchPolicy)
+      console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
       const options = {
         query: getConversationMessages,
         fetchPolicy: fetchPolicy,
@@ -265,10 +265,10 @@ export class ChatMessageViewComponent {
       this.subscription = observable.subscribeToMore({
         document: subscribeToNewMessages,
         variables: { 'conversationId': this._conversation.id },
-        // updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}) => {
-        //   console.log('subscribeToMore - updateQuery:', message);
-        //   return unshiftMessage(prev, message);
-        // }
+        updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}) => {
+          console.log('subscribeToMore - updateQuery:', message);
+          return unshiftMessage(prev, message);
+        }
       });
       this.observedQuery = observable;
       return observable;

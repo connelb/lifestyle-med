@@ -137,6 +137,17 @@ import Conversation from '../types/conversation';
 import { getallMembersQuery as UsersQuery } from '../graphql/operation-result-types';
 import {APIService} from '../../../API.service';
 
+// import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+// import { ObservableQuery } from 'apollo-client';
+// import * as _ from 'lodash';
+// import { AppsyncService } from '../appsync.service';
+// import { addConversation, constants } from '../chat-helper';
+import { getUserConversationConnectionThroughUserQuery as UserConvosQuery } from '../graphql/operation-result-types';
+// import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
+import subscribeToNewUserConversations from '../graphql/subscriptions/subscribeToNewUserConversations';
+// import Conversation from '../types/conversation';
+// import User from '../types/user';
+
 import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
 
@@ -244,7 +255,7 @@ function createUserConvo(client, id, convoId, update = false): Promise<any> {
         variables: { first: constants.conversationFirst}
       };
 
-      console.log('user-list, what is _options and the connection with sleep??', _options)
+  //console.log('user-list, what is _options and the connection with sleep??', _options)
 
       const prev = proxy.readQuery(_options);
       // console.log('retrieve ucs:', prev);
