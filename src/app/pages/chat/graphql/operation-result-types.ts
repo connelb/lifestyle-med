@@ -189,18 +189,18 @@ export type subscribeToNewMessageSubscriptionVariables = {
 // };
 
 // made up
-export type UserConversations = {
-	associated: [UserConversations]
-	conversation: "Conversation"
-	conversationId: string
-	user: "Member"
-	userId: string
-}
-//made up
-export type UserConverstationsConnection = {
-	nextToken: String
-	userConversations: [UserConversations]
-}
+// export type UserConversations = {
+// 	associated: [UserConversations]
+// 	conversation: "Conversation"
+// 	conversationId: string
+// 	user: "Member"
+// 	userId: string
+// }
+// //made up
+// export type UserConverstationsConnection = {
+// 	nextToken: String
+// 	userConversations: [UserConversations]
+// }
 
 export type subscribeToNewMessageSubscription = {
   // Subscribes to all new messages in a given Conversation.

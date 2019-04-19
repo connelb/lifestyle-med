@@ -220,7 +220,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.amplifyService.auth().currentSession().then(session => {
       // //this.userCreated = true;
-      // this.logInfoToConsole(session);
+      this.logInfoToConsole(session);
       this.session = session;
       //this.register();
       //setImmediate(() => this.createMember());
@@ -358,7 +358,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // console.log('creating user', user);
     this.appsyncService.hc().then(client => {
       client.mutate({
-        mutation: createMember,
+        mutation: gql(this.api.CreateMember), //createMember,//
         variables: {id: member.id},
 
         optimisticResponse: () => ({
@@ -370,7 +370,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         update: (proxy, {data: { createMember: _member }}) => {
           console.log('createUser update with:', _member);
-          proxy.writeQuery({query: getMe, data: {me: {..._member}}});
+          proxy.writeQuery({query: gql(this.api.Me) , data: {me: {..._member}}});//  gql(this.api.Me)  getMe
         }
       }).catch(err => console.log('Error registering member', err));
     });

@@ -16,6 +16,7 @@ import createUser from '../../graphql/mutations/createUser';
 import { Auth } from 'aws-amplify';
 import { AmplifyService } from 'aws-amplify-angular/dist/src/providers/amplify.service';
 import { APIService } from '../../API.service';
+import gql from 'graphql-tag';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class ChatPage implements OnInit {
     this.appsync.hc().then(client => {
       
       client.watchQuery({
-        query: getMe,//getMe,
+        query: getMe, //gql(this.api.Me),//getMe,//getMe,
         fetchPolicy: 'cache-and-network'
       }).subscribe(({data}) => {
         console.log('register user, fetch cache', data);
