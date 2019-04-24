@@ -6,7 +6,7 @@ import {
  } from './graphql/operation-result-types';
 import Message from './types/message';
 import UserConversation from './types/userConversation';
-// import User from './types/user';
+//import User from './types/user';
 import Member from './../../types/member';
 
 import * as _ from 'lodash';
@@ -58,6 +58,32 @@ export function pushMessages(data: MessagesQuery, messages: Message[], nextToken
 }
 
 
+// export function addConversation(data: ConvosQuery, uc: UserConversation): ConvosQuery {
+//   if (!data || !_.has(data, 'me.conversations.userConversations')) {
+//     console.log('attemtong to add conversation to data??, what is data and uc?',data, uc)
+//     return {
+//       me: {
+//         conversations: {
+//           nextToken: null,
+//           __typename: 'UserConverstationsConnection',
+//           userConversations: []
+//         }
+//       }
+//     };
+//   }
+
+//   if (data.me.conversations.userConversations.some(_uc => uc.conversationId === _uc.conversationId)) {
+//     // console.log('attemtong to add conversation to data??')
+//     return data;
+//   }
+//   // console.log('attemtong to add conversation to data??', data, uc)
+
+//   return update(data, {
+//     me: { conversations: { userConversations: {$push: [uc]}} }
+//   });
+// }
+
+
 export function addConversation(data: ConvosQuery, uc: UserConversation): ConvosQuery {
   if (!data || !_.has(data, 'me.conversations.userConversations')) {
     return {
@@ -79,7 +105,10 @@ export function addConversation(data: ConvosQuery, uc: UserConversation): Convos
     me: { conversations: { userConversations: {$push: [uc]}} }
   });
 }
+
+
 export function addUser(data: UsersQuery, user: Member): UsersQuery {
+  // console.log('what is data??? in addUser', data);
   if (!data || !data.allMember) {
     return { allMember: [] };
   }

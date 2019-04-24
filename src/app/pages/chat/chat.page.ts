@@ -10,7 +10,7 @@ import Member from '../../types/member';
 import Conversation from '../../types/conversation';
 
 import { AppsyncService } from '../../providers/appsync.service';
-import getMe from '../../graphql/queries/getMe';
+import getMe from './graphql/queries/getMe';
 import createUser from '../../graphql/mutations/createUser';
 
 import { Auth } from 'aws-amplify';
@@ -53,7 +53,7 @@ export class ChatPage implements OnInit {
         query: getMe, //gql(this.api.Me),//getMe,//getMe,
         fetchPolicy: 'cache-and-network'
       }).subscribe(({data}) => {
-        console.log('register user, fetch cache', data);
+        // console.log('register user, fetch cache', data);
         if (data) { this.me = data.me; }
       });
     });
@@ -153,17 +153,17 @@ export class ChatPage implements OnInit {
   setNewConvo(convo) { this.conversation = convo; }
 
   checkForUpdate() {
-    console.log('[ChatQL] checkForUpdate started');
+    // console.log('[ChatQL] checkForUpdate started');
     this.swUpdate.checkForUpdate()
     .then(() => { console.log('[ChatQL] checkForUpdate completed'); })
     .catch(err => { console.error(err); });
   }
 
   activateUpdate() {
-    console.log('[ChatQL] activateUpdate started');
+    // console.log('[ChatQL] activateUpdate started');
     this.swUpdate.activateUpdate()
     .then(() => {
-      console.log('[ChatQL] activateUpdate completed');
+      // console.log('[ChatQL] activateUpdate completed');
       location.reload();
     }).catch(err => { console.error(err); });
     this.update = false;

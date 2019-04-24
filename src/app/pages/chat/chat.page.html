@@ -9,9 +9,6 @@
 
 <ion-content padding>
 
-
-
-
     <div class="container-fluid mb-60px pb-2 align-middle">
         <div *ngIf="update;">
           <p>
@@ -33,7 +30,10 @@
                 <div class="text-center mb-2">
                   <h4><span class="badge badge-pill" [class.badge-dark]="me?.registered" [class.badge-light]="!me || !me.registered">{{me?.username}}</span></h4>
                 </div>
+                <p>chat-user-list:</p>
                 <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+               
+               <p>chat-user-convo</p>
                 <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
       
               </div>
@@ -42,8 +42,10 @@
       
           <div class="col-sm-8 p-1" id="chat">
             <div *ngIf="conversation; else instructions">
+                <p>chat-message-view:</p>
               <app-chat-message-view #messageView [senderId]="me.id" [conversation]="conversation"></app-chat-message-view>
               <!-- <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId"></app-chat-input> -->
+              <p>chat-input :</p>
               <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input>
             </div>
           </div>

@@ -343,7 +343,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // });
 
     //this.me.registered = true;
-    console.log('this.me??', this.me)
+    //console.log('this.me??', this.me)
 
     const member = {
       username: this.session.idToken.payload['cognito:username'],
@@ -369,7 +369,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }),
 
         update: (proxy, {data: { createMember: _member }}) => {
-          console.log('createUser update with:', _member);
+          //console.log('createUser update with:', _member);
           proxy.writeQuery({query: gql(this.api.Me) , data: {me: {..._member}}});//  gql(this.api.Me)  getMe
         }
       }).catch(err => console.log('Error registering member', err));
@@ -440,13 +440,13 @@ export class AppComponent implements OnInit, OnDestroy {
   // }
 
   logInfoToConsole(session) {
-    console.log('session:',session);
-    console.log(`ID Token: <${session.idToken.jwtToken}>`);
-    console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-    console.log('Decoded ID Token:');
-    console.log(JSON.stringify(session.idToken.payload, null, 2));
-    console.log('Decoded Access Token:');
-    console.log(JSON.stringify(session.accessToken.payload, null, 2));
+    // console.log('session:',session);
+    // console.log(`ID Token: <${session.idToken.jwtToken}>`);
+    // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
+    // console.log('Decoded ID Token:');
+    // console.log(JSON.stringify(session.idToken.payload, null, 2));
+    // console.log('Decoded Access Token:');
+    // console.log(JSON.stringify(session.accessToken.payload, null, 2));
   }
 
   getType(): string {

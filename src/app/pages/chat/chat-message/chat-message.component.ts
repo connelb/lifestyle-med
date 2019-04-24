@@ -87,6 +87,7 @@ export class ChatMessageComponent implements AfterViewInit, OnInit, OnChanges {
         id: USER_ID_PREFIX + this.message.sender,
         fragment: readUserFragment
       });
+      console.log('chat-message this.user fragment ok?', this.user)
     });
   }
 

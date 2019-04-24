@@ -1,17 +1,15 @@
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ObservableQuery } from 'apollo-client';
-import * as _ from 'lodash';
-// import { AppsyncService } from '../../../../appsync.service';
 import { AppsyncService } from '../../../providers/appsync.service';
-import { constants, addConversation } from '../chat-helper';
 import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
 import subscribeToNewUserConversations from '../graphql/subscriptions/subscribeToNewUserConversations';
 import { getUserConversationConnectionThroughUserQuery as UserConvosQuery } from '../graphql/operation-result-types';
-
+import { constants, addConversation } from '../chat-helper';
 import Conversation from '../types/conversation';
 import User from '../types/user';
 import Member from '../types/member';
+import { ObservableQuery } from 'apollo-client';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -40,43 +38,77 @@ export class ChatConvoListComponent implements OnInit {
 
   constructor(private appsync: AppsyncService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  click(convo) { this.onConvoClick.emit(convo); }
+  click(convo) {
+    // console.log('convo',convo);
+    this.onConvoClick.emit(convo);
+  }
 
   getAllConvos() {
     this.appsync.hc().then(client => {
       const observable: ObservableQuery<UserConvosQuery> = client.watchQuery({
         query: getUserConversationsConnection,
-        variables: { first: constants.conversationFirst},
+        variables: { first: constants.conversationFirst },
         fetchPolicy: 'cache-and-network'
       });
 
-      observable.subscribe(({data}) => {
-        console.log('Fetched convos data', data);
-        if (!data || !data.me) { return console.log('getUserConversationsConnection: no data'); }
+      observable.subscribe(({ data }) => {
+        //console.log('Fetched convos data', data);
+        if (!data || !data.me.conversations) { return console.log('getUserConversationsConnection: no data'); }
         this.conversations = data.me.conversations.userConversations.map(u => u.conversation).filter(c => c);
         this.conversations = _.sortBy(this.conversations, 'name');
         this.nextToken = data.me.conversations.nextToken;
-        console.log('Fetched convos', this.conversations);
+        console.log('!data || !data.me.conversations', this.conversations);
       });
 
       this.subscription = observable.subscribeToMore({
         document: subscribeToNewUserConversations,
         variables: { 'userId': this._user.id },
-        updateQuery: (prev: UserConvosQuery, {
-          subscriptionData: {data: {subscribeToNewUCs: userConvo }}}) => {
-          console.log('updateQuery on convo subscription', userConvo);
-          // console.log(JSON.stringify(userConvo, null, 2));
-          // console.log(JSON.stringify(prev, null, 2));
-          return addConversation(prev, userConvo);
-        }
+        // updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: {subscribeToNewUCs: userConvo }}}) => {
+        //   console.log('updateQuery on convo subscription', userConvo);
+        //   // console.log(JSON.stringify(userConvo, null, 2));
+        //   // console.log(JSON.stringify(prev, null, 2));
+        //   return addConversation(prev, userConvo);
+        // }
       });
+
       this.observedQuery = observable;
       return observable;
     });
   }
 }
 
+// getAllConvos() {
+//   this.appsync.hc().then(client => {
+//     const observable: ObservableQuery<UserConvosQuery> = client.watchQuery({
+//       query: getUserConversationsConnection,
+//       variables: { first: constants.conversationFirst},
+//       fetchPolicy: 'cache-and-network'
+//     });
+
+//     observable.subscribe(({data}) => {
+//       console.log('Fetched convos data', data);
+//       if (!data || !data.me) { return console.log('getUserConversationsConnection: no data'); }
+//       this.conversations = data.me.conversations.userConversations.map(u => u.conversation).filter(c => c);
+//       this.conversations = _.sortBy(this.conversations, 'name');
+//       this.nextToken = data.me.conversations.nextToken;
+//       console.log('Fetched convos', this.conversations);
+//     });
+
+//     this.subscription = observable.subscribeToMore({
+//       document: subscribeToNewUserConversations,
+//       variables: { 'userId': this._user.id },
+//       updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: {subscribeToNewUCs: userConvo }}}) => {
+//         console.log('updateQuery on convo subscription', userConvo);
+//         // console.log(JSON.stringify(userConvo, null, 2));
+//         // console.log(JSON.stringify(prev, null, 2));
+//         return addConversation(prev, userConvo);
+//       }
+//     });
+//     this.observedQuery = observable;
+//     return observable;
+//   });
+// }
 
 

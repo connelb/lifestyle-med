@@ -304,11 +304,13 @@ export type CreateConversationMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -318,47 +320,13 @@ export type CreateConversationMutation = {
 
 export type CreateMessageMutation = {
   __typename: string;
-  author: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // author: Member
   content: string;
   conversationId: string;
   createdAt: string | null;
   id: string;
   isSent: boolean | null;
-  recipient: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // recipient: Member
   sender: string | null;
 };
 
@@ -379,11 +347,13 @@ export type CreateUserMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -413,11 +383,13 @@ export type UpdateUserMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -845,11 +817,13 @@ export type CreateMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -878,11 +852,13 @@ export type UpdateMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -911,11 +887,13 @@ export type DeleteMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -930,47 +908,13 @@ export type DeleteMemberMutation = {
 
 export type AllMessageQuery = {
   __typename: string;
-  author: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // author: Member
   content: string;
   conversationId: string;
   createdAt: string | null;
   id: string;
   isSent: boolean | null;
-  recipient: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // recipient: Member
   sender: string | null;
 };
 
@@ -978,31 +922,13 @@ export type AllMessageConnectionQuery = {
   __typename: string;
   messages: Array<{
     __typename: "Message";
-    author: {
-      __typename: "Member";
-      id: string;
-      username: string | null;
-      firstname: string | null;
-      lastname: string | null;
-      registered: boolean | null;
-      bio: string | null;
-      image: string | null;
-    } | null;
+    // author: Member
     content: string;
     conversationId: string;
     createdAt: string | null;
     id: string;
     isSent: boolean | null;
-    recipient: {
-      __typename: "Member";
-      id: string;
-      username: string | null;
-      firstname: string | null;
-      lastname: string | null;
-      registered: boolean | null;
-      bio: string | null;
-      image: string | null;
-    } | null;
+    // recipient: Member
     sender: string | null;
   } | null> | null;
   nextToken: string | null;
@@ -1010,47 +936,13 @@ export type AllMessageConnectionQuery = {
 
 export type AllMessageFromQuery = {
   __typename: string;
-  author: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // author: Member
   content: string;
   conversationId: string;
   createdAt: string | null;
   id: string;
   isSent: boolean | null;
-  recipient: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // recipient: Member
   sender: string | null;
 };
 
@@ -1071,11 +963,13 @@ export type AllUserQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1104,11 +998,13 @@ export type AllMemberQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1137,11 +1033,13 @@ export type MeQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1394,11 +1292,13 @@ export type GetMemberQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1436,47 +1336,13 @@ export type ListMembersQuery = {
 
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
-  author: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // author: Member
   content: string;
   conversationId: string;
   createdAt: string | null;
   id: string;
   isSent: boolean | null;
-  recipient: {
-    __typename: "Member";
-    id: string;
-    conversations: {
-      __typename: "UserConverstationsConnection";
-      nextToken: string | null;
-    } | null;
-    messages: {
-      __typename: "MessageConnection";
-      nextToken: string | null;
-    } | null;
-    username: string | null;
-    firstname: string | null;
-    lastname: string | null;
-    registered: boolean | null;
-    bio: string | null;
-    image: string | null;
-  } | null;
+  // recipient: Member
   sender: string | null;
 };
 
@@ -1557,11 +1423,13 @@ export type SubscribeToNewUsersSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1590,11 +1458,13 @@ export type SubscribeToNewMembersSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1962,11 +1832,13 @@ export type OnCreateMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1995,11 +1867,13 @@ export type OnUpdateMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -2028,11 +1902,13 @@ export type OnDeleteMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
+      // author: Member
       content: string;
       conversationId: string;
       createdAt: string | null;
       id: string;
       isSent: boolean | null;
+      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -2096,47 +1972,11 @@ export class APIService {
     const statement = `mutation CreateMessage($content: String, $conversationId: ID!, $createdAt: String!, $id: ID!) {
         createMessage(content: $content, conversationId: $conversationId, createdAt: $createdAt, id: $id) {
           __typename
-          author {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           content
           conversationId
           createdAt
           id
           isSent
-          recipient {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           sender
         }
       }`;
@@ -2997,47 +2837,11 @@ export class APIService {
     const statement = `query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         allMessage(after: $after, conversationId: $conversationId, first: $first) {
           __typename
-          author {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           content
           conversationId
           createdAt
           id
           isSent
-          recipient {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           sender
         }
       }`;
@@ -3065,31 +2869,11 @@ export class APIService {
           __typename
           messages {
             __typename
-            author {
-              __typename
-              id
-              username
-              firstname
-              lastname
-              registered
-              bio
-              image
-            }
             content
             conversationId
             createdAt
             id
             isSent
-            recipient {
-              __typename
-              id
-              username
-              firstname
-              lastname
-              registered
-              bio
-              image
-            }
             sender
           }
           nextToken
@@ -3118,47 +2902,11 @@ export class APIService {
     const statement = `query AllMessageFrom($after: String, $conversationId: ID!, $first: Int, $sender: String!) {
         allMessageFrom(after: $after, conversationId: $conversationId, first: $first, sender: $sender) {
           __typename
-          author {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           content
           conversationId
           createdAt
           id
           isSent
-          recipient {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           sender
         }
       }`;
@@ -3832,47 +3580,11 @@ export class APIService {
       `subscription SubscribeToNewMessage($conversationId: ID!) {
         subscribeToNewMessage(conversationId: $conversationId) {
           __typename
-          author {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           content
           conversationId
           createdAt
           id
           isSent
-          recipient {
-            __typename
-            id
-            conversations {
-              __typename
-              nextToken
-            }
-            messages {
-              __typename
-              nextToken
-            }
-            username
-            firstname
-            lastname
-            registered
-            bio
-            image
-          }
           sender
         }
       }`

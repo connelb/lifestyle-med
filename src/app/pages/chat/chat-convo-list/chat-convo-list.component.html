@@ -1,15 +1,15 @@
-<!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
+<div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
     <h6 class='mb-0'><i class="ion-person-stalker" data-pack="default" data-tags="talk"></i> Convos- new</h6>
   </div>
   <div class="convo-list">
-    <div class="list-group mb-2">
-      <a href *ngFor="let convo of conversations"
+    <div class="list-group mb-2" *ngFor="let convo of conversations">
+      <a href 
       class="list-group-item list-group-item-action p-2 border-0 bg"
       [class.active]="current && convo.id === current.id"
       (click)="click(convo, $event); false">
       {{convo.name}}</a>
     </div>
-  </div> -->
+  </div>
 
 
 
@@ -39,10 +39,10 @@
       <mat-card-title>Current chats</mat-card-title>
       <mat-card-subtitle><i>join a discussion...</i></mat-card-subtitle>
     </mat-card-header> -->
-    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-    <!-- <mat-card-content>
+<!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+<!-- <mat-card-content>
         <mat-card> -->
-            <!-- <mat-chip-list *ngFor="let convo of conversations" class="mat-chip-list-stacked">
+<!-- <mat-chip-list *ngFor="let convo of conversations" class="mat-chip-list-stacked">
           
               <mat-chip>
                 <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
@@ -52,64 +52,58 @@
           
             </mat-chip-list> -->
 
-            <!-- <ion-select placeholder="Select One"  *ngFor="let convo of conversations"  >
+<!-- <ion-select placeholder="Select One"  *ngFor="let convo of conversations"  >
                 <ion-select-option value="f"> <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
                     <mat-icon>forum</mat-icon> 
                     {{convo.name}}</a></ion-select-option>
             </ion-select> -->
-            {{conversations|json}}
-<h6>Conversations:</h6>
-            <span *ngFor="let convo of conversations" >
-                <ion-chip >
-                  <!-- <ion-label> -->
-                    <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
-                      <!-- <mat-icon>forum</mat-icon> -->
-                      <!-- {{convo|json}} -->
-                     
-                      {{convo.name}}</a>
-                    <!-- </ion-label> -->
-                </ion-chip>
-              </span>
+
+<!-- <h6>Conversations:</h6> -->
+<!-- <span *ngFor="let convo of conversations">
+  <ion-chip>
+    <a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+      {{convo?.name}}</a>
+  </ion-chip>
+</span> -->
 
 
-              {{convo|json}}
-              <ion-item-sliding *ngFor="let convo of conversations" >
-                    <ion-item href="#">
-                      <ion-label>
-                        <h2>{{convo.name}}</h2>
-                        <p>{{user.firstname|slice:0:1}}</p>
-                      </ion-label>
-                      <ion-note slot="end">
-                        10:45 AM
-                      </ion-note>
-                    </ion-item>
-                
-                    <ion-item-options side="start">
-                      <ion-item-option>
-                        <ion-icon slot="icon-only" name="heart"></ion-icon>
-                      </ion-item-option>
-                    </ion-item-options>
-                
-                    <ion-item-options side="end">
-                      <ion-item-option color="danger">
-                        <ion-icon slot="icon-only" name="trash"></ion-icon>
-                      </ion-item-option>
-                      <ion-item-option>
-                        <ion-icon slot="icon-only" name="star"></ion-icon>
-                      </ion-item-option>
-                    </ion-item-options>
-                  </ion-item-sliding>
+<!-- convosJson:{{convo|json}}
+<ion-item-sliding *ngFor="let convo of conversations" (click)="click(convo, $event);">
+  <ion-item href="#">
+    <ion-label>
+      <h2>{{convo?.name}}</h2>
+    </ion-label>
+    <ion-note slot="end">
+      time here
+    </ion-note>
+  </ion-item>
 
-          <!-- </mat-card>
+  <ion-item-options side="start">
+    <ion-item-option>
+      <ion-icon slot="icon-only" name="heart"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+
+  <ion-item-options side="end">
+    <ion-item-option color="danger">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-item-option>
+    <ion-item-option>
+      <ion-icon slot="icon-only" name="star"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding> -->
+
+<!-- </mat-card>
     </mat-card-content> -->
 
 
- 
-    <!-- <mat-card-actions>
+
+<!-- <mat-card-actions>
       <button mat-button>LIKE</button>
       <button mat-button>SHARE</button>
     </mat-card-actions> -->
-  <!-- </mat-card> -->
+<!-- </mat-card> -->
 
 
 

@@ -1,3 +1,21 @@
+<div class="bg rounded p-2 border border-dark rounded">
+    <div class="p-0 bg">
+      <span class="d-block font-weight-bold bg-dark text-white text-right rounded p-2 mb-2">
+        <i class="ion-chatbubbles" data-pack="default" data-tags="talk"></i> {{conversation?.name}}
+      </span>
+      <div #scrollMe class="chat" [appInfscroll]="loadMoreMessages" [completedFetching]="completedFetching">
+        <app-chat-message *ngFor="let message of messages; last as isLast; first as isFirst"
+        [message]="message"
+        [fromMe]="fromMe(message)"
+        [isLast]="isLast"
+        [isFirst]="isFirst"
+        (added)="messageAdded(isFirst, $event)"
+        ></app-chat-message>
+      </div>
+    </div>
+  </div>
+
+
 <!-- <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -42,23 +60,24 @@
             </ion-label> -->
     <!-- </ion-item>
   </ion-virtual-scroll> -->
+  <!-- <div #scrollMe class="chat" [appInfscroll]="loadMoreMessages" [completedFetching]="completedFetching"> -->
 
-
+<!-- messages in message-view:{{messages|json}}
   <ion-list *ngFor="let message of messages"  >
-      <ion-item ><!--*virtualItem="let message" -->
-          <!-- <ion-virtual-scroll [items]="messages"> -->
-          <!-- <ion-label> -->
+      <ion-item >
+         
             <app-chat-message [message]="message" [fromMe]="fromMe(message)" [isLast]="isLast" [isFirst]="isFirst" (added)="messageAdded(isFirst, $event)"></app-chat-message>
-        <!-- <ion-label><a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
+       <ion-label><a href [class.active]="current && convo.id === current.id" (click)="click(convo, $event); false">
             <mat-icon>forum</mat-icon>
             {{convo.name}}</a> -->
           <!-- </ion-label> -->
 
           <!-- WHAT IS THIS? {{message|json}} -->
-        <!-- </ion-virtual-scroll> -->
+        <!-- </ion-virtual-scroll> 
       </ion-item>
 
-    </ion-list>
+    </ion-list> -->
+    <!-- </div> -->
     <!-- <h4>test</h4> -->
     <!-- <app-chat-input [conversation]="conversation" [senderId]="me.cognitoId">chat input here
       </app-chat-input> -->

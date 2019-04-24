@@ -1,41 +1,11 @@
 # this is an auto generated file. This will be overwritten
 query AllMessage($after: String, $conversationId: ID!, $first: Int) {
   allMessage(after: $after, conversationId: $conversationId, first: $first) {
-    author {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     content
     conversationId
     createdAt
     id
     isSent
-    recipient {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     sender
   }
 }
@@ -46,29 +16,11 @@ query AllMessageConnection($after: String, $conversationId: ID!, $first: Int) {
     first: $first
   ) {
     messages {
-      author {
-        id
-        username
-        firstname
-        lastname
-        registered
-        bio
-        image
-      }
       content
       conversationId
       createdAt
       id
       isSent
-      recipient {
-        id
-        username
-        firstname
-        lastname
-        registered
-        bio
-        image
-      }
       sender
     }
     nextToken
@@ -86,41 +38,11 @@ query AllMessageFrom(
     first: $first
     sender: $sender
   ) {
-    author {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     content
     conversationId
     createdAt
     id
     isSent
-    recipient {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     sender
   }
 }

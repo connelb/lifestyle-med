@@ -29,41 +29,11 @@ mutation CreateMessage(
     createdAt: $createdAt
     id: $id
   ) {
-    author {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     content
     conversationId
     createdAt
     id
     isSent
-    recipient {
-      id
-      conversations {
-        nextToken
-      }
-      messages {
-        nextToken
-      }
-      username
-      firstname
-      lastname
-      registered
-      bio
-      image
-    }
     sender
   }
 }
