@@ -27,7 +27,6 @@
 // })
 // export class ChatPageModule {}
 
-
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -50,8 +49,6 @@ import { InfscrollDirective } from './infscroll.directive';
 import { MomentAgoPipe } from './moment-ago.pipe';
 
 import { NgxPageScrollModule } from 'ngx-page-scroll';
-
-
 
 
 const routes: Routes = [

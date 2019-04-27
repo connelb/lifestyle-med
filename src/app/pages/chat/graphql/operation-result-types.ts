@@ -224,7 +224,7 @@ export type userFragment = {
   // Generated id for a user. read-only
   id: string,
   // A unique identifier for the user.
-  cognitoId: string,
+  //cognitoId: string,
   // The username
   username: string,
 };

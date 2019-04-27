@@ -83,6 +83,7 @@ export class ChatMessageComponent implements AfterViewInit, OnInit, OnChanges {
 
   ngOnInit() {
     this.appsync.hc().then(client => {
+      console.log("WHAT IS THIS>MESSAGE", this.message)
       this.user = client.readFragment({
         id: USER_ID_PREFIX + this.message.sender,
         fragment: readUserFragment

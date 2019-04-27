@@ -25,7 +25,6 @@ export class ChatConvoListComponent implements OnInit {
   observedQuery: ObservableQuery<UserConvosQuery>;
   subscription: () => void;
 
-
   @Input()
   set user(user: Member) {
     this._user = user;
@@ -55,7 +54,7 @@ export class ChatConvoListComponent implements OnInit {
 
       observable.subscribe(({ data }) => {
         //console.log('Fetched convos data', data);
-        if (!data || !data.me.conversations) { return console.log('getUserConversationsConnection: no data'); }
+        if (!data || !data.me) { return console.log('getUserConversationsConnection: no data'); }
         this.conversations = data.me.conversations.userConversations.map(u => u.conversation).filter(c => c);
         this.conversations = _.sortBy(this.conversations, 'name');
         this.nextToken = data.me.conversations.nextToken;

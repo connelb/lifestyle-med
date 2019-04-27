@@ -82,6 +82,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../chat/chat.module#ChatPageModule'
+            // loadChildren: '../post/post.module#PostModule'
           }
         ]
       },
