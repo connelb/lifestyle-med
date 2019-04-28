@@ -5,28 +5,6 @@ import API, { graphqlOperation } from "@aws-amplify/api";
 import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
-export type CreateUserInput = {
-  cognitoId: string;
-  id?: string | null;
-  username?: string | null;
-  firstname?: string | null;
-  lastname?: string | null;
-  registered?: boolean | null;
-  bio?: string | null;
-  image?: string | null;
-};
-
-export type UpdateUserInput = {
-  cognitoId: string;
-  id?: string | null;
-  username?: string | null;
-  firstname?: string | null;
-  lastname?: string | null;
-  registered?: boolean | null;
-  bio?: string | null;
-  image?: string | null;
-};
-
 export type CreateMeasurementInput = {
   measurementId: string;
   createdAt: string;
@@ -304,13 +282,16 @@ export type CreateConversationMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -320,86 +301,54 @@ export type CreateConversationMutation = {
 
 export type CreateMessageMutation = {
   __typename: string;
-  // author: Member
+  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
+  author: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
+  // The message content.
   content: string;
+  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
+  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
+  // Generated id for a message -- read-only
   id: string;
+  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
-  // recipient: Member
+  recipient: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
   sender: string | null;
-};
-
-export type CreateUserMutation = {
-  __typename: string;
-  cognitoId: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  id: string | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // author: Member
-      content: string;
-      conversationId: string;
-      createdAt: string | null;
-      id: string;
-      isSent: boolean | null;
-      // recipient: Member
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  username: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  registered: boolean | null;
-  bio: string | null;
-  image: string | null;
-};
-
-export type UpdateUserMutation = {
-  __typename: string;
-  cognitoId: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  id: string | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // author: Member
-      content: string;
-      conversationId: string;
-      createdAt: string | null;
-      id: string;
-      isSent: boolean | null;
-      // recipient: Member
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  username: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  registered: boolean | null;
-  bio: string | null;
-  image: string | null;
 };
 
 export type CreateUserConversationsMutation = {
@@ -817,13 +766,16 @@ export type CreateMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -852,13 +804,16 @@ export type UpdateMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -887,13 +842,16 @@ export type DeleteMemberMutation = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -908,13 +866,53 @@ export type DeleteMemberMutation = {
 
 export type AllMessageQuery = {
   __typename: string;
-  // author: Member
+  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
+  author: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
+  // The message content.
   content: string;
+  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
+  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
+  // Generated id for a message -- read-only
   id: string;
+  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
-  // recipient: Member
+  recipient: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
   sender: string | null;
 };
 
@@ -922,13 +920,37 @@ export type AllMessageConnectionQuery = {
   __typename: string;
   messages: Array<{
     __typename: "Message";
-    // author: Member
+    // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
+    author: {
+      __typename: "Member";
+      id: string;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
+      registered: boolean | null;
+      bio: string | null;
+      image: string | null;
+    } | null;
+    // The message content.
     content: string;
+    // The id of the Conversation this message belongs to. This is the table primary key.
     conversationId: string;
+    // The message timestamp. This is also the table sort key.
     createdAt: string | null;
+    // Generated id for a message -- read-only
     id: string;
+    // Flag denoting if this message has been accepted by the server or not.
     isSent: boolean | null;
-    // recipient: Member
+    recipient: {
+      __typename: "Member";
+      id: string;
+      username: string | null;
+      firstname: string | null;
+      lastname: string | null;
+      registered: boolean | null;
+      bio: string | null;
+      image: string | null;
+    } | null;
     sender: string | null;
   } | null> | null;
   nextToken: string | null;
@@ -936,50 +958,54 @@ export type AllMessageConnectionQuery = {
 
 export type AllMessageFromQuery = {
   __typename: string;
-  // author: Member
+  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
+  author: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
+  // The message content.
   content: string;
+  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
+  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
+  // Generated id for a message -- read-only
   id: string;
+  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
-  // recipient: Member
+  recipient: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
   sender: string | null;
-};
-
-export type AllUserQuery = {
-  __typename: string;
-  cognitoId: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  id: string | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // author: Member
-      content: string;
-      conversationId: string;
-      createdAt: string | null;
-      id: string;
-      isSent: boolean | null;
-      // recipient: Member
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  username: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  registered: boolean | null;
-  bio: string | null;
-  image: string | null;
 };
 
 export type AllMemberQuery = {
@@ -998,13 +1024,16 @@ export type AllMemberQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1033,13 +1062,16 @@ export type MeQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1292,13 +1324,16 @@ export type GetMemberQuery = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1336,13 +1371,53 @@ export type ListMembersQuery = {
 
 export type SubscribeToNewMessageSubscription = {
   __typename: string;
-  // author: Member
+  // The author object. Note: `authorId` is only available because we list it in `extraAttributes` in `Conversation.messages`
+  author: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
+  // The message content.
   content: string;
+  // The id of the Conversation this message belongs to. This is the table primary key.
   conversationId: string;
+  // The message timestamp. This is also the table sort key.
   createdAt: string | null;
+  // Generated id for a message -- read-only
   id: string;
+  // Flag denoting if this message has been accepted by the server or not.
   isSent: boolean | null;
-  // recipient: Member
+  recipient: {
+    __typename: "Member";
+    id: string;
+    conversations: {
+      __typename: "UserConverstationsConnection";
+      nextToken: string | null;
+    } | null;
+    messages: {
+      __typename: "MessageConnection";
+      nextToken: string | null;
+    } | null;
+    username: string | null;
+    firstname: string | null;
+    lastname: string | null;
+    registered: boolean | null;
+    bio: string | null;
+    image: string | null;
+  } | null;
   sender: string | null;
 };
 
@@ -1406,42 +1481,6 @@ export type SubscribeToNewUCsSubscription = {
   userId: string;
 };
 
-export type SubscribeToNewUsersSubscription = {
-  __typename: string;
-  cognitoId: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  id: string | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // author: Member
-      content: string;
-      conversationId: string;
-      createdAt: string | null;
-      id: string;
-      isSent: boolean | null;
-      // recipient: Member
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  username: string | null;
-  firstname: string | null;
-  lastname: string | null;
-  registered: boolean | null;
-  bio: string | null;
-  image: string | null;
-};
-
 export type SubscribeToNewMembersSubscription = {
   __typename: string;
   id: string;
@@ -1458,13 +1497,16 @@ export type SubscribeToNewMembersSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1832,13 +1874,16 @@ export type OnCreateMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1867,13 +1912,16 @@ export type OnUpdateMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1902,13 +1950,16 @@ export type OnDeleteMemberSubscription = {
     __typename: "MessageConnection";
     messages: Array<{
       __typename: "Message";
-      // author: Member
+      // The message content.
       content: string;
+      // The id of the Conversation this message belongs to. This is the table primary key.
       conversationId: string;
+      // The message timestamp. This is also the table sort key.
       createdAt: string | null;
+      // Generated id for a message -- read-only
       id: string;
+      // Flag denoting if this message has been accepted by the server or not.
       isSent: boolean | null;
-      // recipient: Member
       sender: string | null;
     } | null> | null;
     nextToken: string | null;
@@ -1972,11 +2023,47 @@ export class APIService {
     const statement = `mutation CreateMessage($content: String, $conversationId: ID!, $createdAt: String!, $id: ID!) {
         createMessage(content: $content, conversationId: $conversationId, createdAt: $createdAt, id: $id) {
           __typename
+          author {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           content
           conversationId
           createdAt
           id
           isSent
+          recipient {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           sender
         }
       }`;
@@ -1992,94 +2079,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateMessageMutation>response.data.createMessage;
-  }
-  async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
-    const statement = `mutation CreateUser($input: CreateUserInput!) {
-        createUser(input: $input) {
-          __typename
-          cognitoId
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          id
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
-          username
-          firstname
-          lastname
-          registered
-          bio
-          image
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateUserMutation>response.data.createUser;
-  }
-  async UpdateUser(input: UpdateUserInput): Promise<UpdateUserMutation> {
-    const statement = `mutation UpdateUser($input: UpdateUserInput!) {
-        updateUser(input: $input) {
-          __typename
-          cognitoId
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          id
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
-          username
-          firstname
-          lastname
-          registered
-          bio
-          image
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateUserMutation>response.data.updateUser;
   }
   async CreateUserConversations(
     conversationId: string,
@@ -2837,11 +2836,47 @@ export class APIService {
     const statement = `query AllMessage($after: String, $conversationId: ID!, $first: Int) {
         allMessage(after: $after, conversationId: $conversationId, first: $first) {
           __typename
+          author {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           content
           conversationId
           createdAt
           id
           isSent
+          recipient {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           sender
         }
       }`;
@@ -2869,11 +2904,31 @@ export class APIService {
           __typename
           messages {
             __typename
+            author {
+              __typename
+              id
+              username
+              firstname
+              lastname
+              registered
+              bio
+              image
+            }
             content
             conversationId
             createdAt
             id
             isSent
+            recipient {
+              __typename
+              id
+              username
+              firstname
+              lastname
+              registered
+              bio
+              image
+            }
             sender
           }
           nextToken
@@ -2902,11 +2957,47 @@ export class APIService {
     const statement = `query AllMessageFrom($after: String, $conversationId: ID!, $first: Int, $sender: String!) {
         allMessageFrom(after: $after, conversationId: $conversationId, first: $first, sender: $sender) {
           __typename
+          author {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           content
           conversationId
           createdAt
           id
           isSent
+          recipient {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           sender
         }
       }`;
@@ -2924,54 +3015,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <AllMessageFromQuery>response.data.allMessageFrom;
-  }
-  async AllUser(after?: string, first?: number): Promise<AllUserQuery> {
-    const statement = `query AllUser($after: String, $first: Int) {
-        allUser(after: $after, first: $first) {
-          __typename
-          cognitoId
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          id
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
-          username
-          firstname
-          lastname
-          registered
-          bio
-          image
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (after) {
-      gqlAPIServiceArguments.after = after;
-    }
-    if (first) {
-      gqlAPIServiceArguments.first = first;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <AllUserQuery>response.data.allUser;
   }
   async AllMember(after?: string, first?: number): Promise<AllMemberQuery> {
     const statement = `query AllMember($after: String, $first: Int) {
@@ -3580,11 +3623,47 @@ export class APIService {
       `subscription SubscribeToNewMessage($conversationId: ID!) {
         subscribeToNewMessage(conversationId: $conversationId) {
           __typename
+          author {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           content
           conversationId
           createdAt
           id
           isSent
+          recipient {
+            __typename
+            id
+            conversations {
+              __typename
+              nextToken
+            }
+            messages {
+              __typename
+              nextToken
+            }
+            username
+            firstname
+            lastname
+            registered
+            bio
+            image
+          }
           sender
         }
       }`
@@ -3658,48 +3737,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscribeToNewUCsSubscription>;
-
-  SubscribeToNewUsersListener: Observable<
-    SubscribeToNewUsersSubscription
-  > = API.graphql(
-    graphqlOperation(
-      `subscription SubscribeToNewUsers {
-        subscribeToNewUsers {
-          __typename
-          cognitoId
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          id
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
-          username
-          firstname
-          lastname
-          registered
-          bio
-          image
-        }
-      }`
-    )
-  ) as Observable<SubscribeToNewUsersSubscription>;
 
   SubscribeToNewMembersListener: Observable<
     SubscribeToNewMembersSubscription

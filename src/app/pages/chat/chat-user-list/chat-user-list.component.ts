@@ -56,7 +56,7 @@ export class ChatUserListComponent {
           return console.log('getAllUsers - no data');
         }
         this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
-        console.log('getAllUsers - Got data', this.users);
+        //console.log('getAllUsers - Got data', this.users);
         this.no_user = (this.users.length === 0);
       });
 
@@ -113,7 +113,7 @@ function createUserConvo(client, id, convoId, update = false): Promise<any> {
     mutation: createUserConversations,
     variables: { 'userId': id, 'conversationId': convoId },
     ...(!update ? {} : { update(proxy, {data: { createUserConversations: userConvo }}) {
-      console.log('createUserConvo - update fn: Brian, this is userConvo', userConvo);
+      //console.log('createUserConvo - update fn: Brian, this is userConvo', userConvo);
 
       const _options = {
         query: getUserConversationsConnection,
@@ -121,9 +121,9 @@ function createUserConvo(client, id, convoId, update = false): Promise<any> {
       };
 
       const prev = proxy.readQuery(_options);
-      console.log('retrieve ucs:', prev);
+      //console.log('retrieve ucs:', prev);
       const data =  addConversation(prev, userConvo);
-      console.log('inserted uc in data', JSON.stringify(data, null, 2));
+      //console.log('inserted uc in data', JSON.stringify(data, null, 2));
       proxy.writeQuery({..._options, data});
     }})
   };

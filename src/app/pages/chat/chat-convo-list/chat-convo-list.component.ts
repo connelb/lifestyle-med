@@ -64,8 +64,8 @@ export class ChatConvoListComponent implements OnInit {
         variables: { 'userId': this._user.id },
         updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: {subscribeToNewUCs: userConvo }}}) => {
           console.log('updateQuery on convo subscription', userConvo);
-          console.log(JSON.stringify(userConvo, null, 2));
-          console.log(JSON.stringify(prev, null, 2));
+          // console.log(JSON.stringify(userConvo, null, 2));
+          // console.log(JSON.stringify(prev, null, 2));
           return addConversation(prev, userConvo);
         }
       });

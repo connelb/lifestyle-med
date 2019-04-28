@@ -49,18 +49,18 @@ export type createUserMutationVariables = {
   username: string,
 };
 
-export type createUserMutation = {
-  // Put a single value of type 'User'. If an item does not exist with the same key the item will be created. If there exists an item at that key already, it will be updated.
-  createUser:  {
-    __typename: "User",
-    // A unique identifier for the user.
-    cognitoId: string,
-    // The username
-    username: string,
-    // Generated id for a user. read-only
-    id: string,
-  } | null,
-};
+// export type createUserMutation = {
+//   // Put a single value of type 'User'. If an item does not exist with the same key the item will be created. If there exists an item at that key already, it will be updated.
+//   createUser:  {
+//     __typename: "User",
+//     // A unique identifier for the user.
+//     cognitoId: string,
+//     // The username
+//     username: string,
+//     // Generated id for a user. read-only
+//     id: string,
+//   } | null,
+// };
 
 export type createUserConversationsMutationVariables = {
   conversationId: string,
@@ -83,20 +83,20 @@ export type createUserConversationsMutation = {
   } | null,
 };
 
-export type getAllUsersQuery = {
-  // Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.
-  allUser:  Array< {
-    __typename: "User",
-    // Generated id for a user. read-only
-    id: string,
-    // A unique identifier for the user.
-    cognitoId: string,
-    // The username
-    username: string,
-    // registered?
-    registered: boolean
-  } | null > | null,
-};
+// export type getAllUsersQuery = {
+//   // Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.
+//   allUser:  Array< {
+//     __typename: "User",
+//     // Generated id for a user. read-only
+//     id: string,
+//     // A unique identifier for the user.
+//     cognitoId: string,
+//     // The username
+//     username: string,
+//     // registered?
+//     registered: boolean
+//   } | null > | null,
+// };
 
 export type getAllMembersQuery = {
   // Scan through all values of type 'User'. Use the 'after' and 'before' arguments with the 'nextToken' returned by the 'UserConnection' result to fetch pages.

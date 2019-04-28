@@ -1,11 +1,41 @@
 # this is an auto generated file. This will be overwritten
 subscription SubscribeToNewMessage($conversationId: ID!) {
   subscribeToNewMessage(conversationId: $conversationId) {
+    author {
+      id
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      username
+      firstname
+      lastname
+      registered
+      bio
+      image
+    }
     content
     conversationId
     createdAt
     id
     isSent
+    recipient {
+      id
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      username
+      firstname
+      lastname
+      registered
+      bio
+      image
+    }
     sender
   }
 }
@@ -58,36 +88,6 @@ subscription SubscribeToNewUCs($userId: ID!) {
       image
     }
     userId
-  }
-}
-subscription SubscribeToNewUsers {
-  subscribeToNewUsers {
-    cognitoId
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    id
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
-    username
-    firstname
-    lastname
-    registered
-    bio
-    image
   }
 }
 subscription SubscribeToNewMembers {

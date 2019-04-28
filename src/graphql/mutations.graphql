@@ -29,72 +29,42 @@ mutation CreateMessage(
     createdAt: $createdAt
     id: $id
   ) {
+    author {
+      id
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      username
+      firstname
+      lastname
+      registered
+      bio
+      image
+    }
     content
     conversationId
     createdAt
     id
     isSent
+    recipient {
+      id
+      conversations {
+        nextToken
+      }
+      messages {
+        nextToken
+      }
+      username
+      firstname
+      lastname
+      registered
+      bio
+      image
+    }
     sender
-  }
-}
-mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    cognitoId
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    id
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
-    username
-    firstname
-    lastname
-    registered
-    bio
-    image
-  }
-}
-mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
-    cognitoId
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    id
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
-    username
-    firstname
-    lastname
-    registered
-    bio
-    image
   }
 }
 mutation CreateUserConversations($conversationId: ID!, $userId: ID!) {

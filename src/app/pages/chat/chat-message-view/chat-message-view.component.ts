@@ -82,7 +82,7 @@ export class ChatMessageViewComponent {
   loadMessages(event = null, fetchPolicy = 'cache-and-network') {
     if (event) { event.stopPropagation(); }
     const innerObserable = this.appsync.hc().then(client => {
-      console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
+      //console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
       const options = {
         query: getConversationMessages,
         fetchPolicy: fetchPolicy,
@@ -95,7 +95,7 @@ export class ChatMessageViewComponent {
       const observable: ObservableQuery<MessagesQuery> = client.watchQuery(options);
 
       observable.subscribe(({data}) => {
-        console.log('chat-message-view: subscribe', data);
+        console.log('chat-message-view: subscribe ?loads messages but not individual messages??', data);
         if (!data) { return console.log('getConversationMessages - no data'); }
         const newMessages = data.allMessageConnection.messages;
         this.messages = [...newMessages].reverse();
