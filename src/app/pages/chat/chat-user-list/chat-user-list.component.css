@@ -1,4 +1,4 @@
-/* .user-list {
+.user-list {
   height: auto;
   max-height: 30vh !important;
   overflow-x: hidden !important;
@@ -12,4 +12,4 @@
 .list-group-item:hover {
   color: white;
   background-color: gray; 
-} */
+}

@@ -4,9 +4,19 @@ export default gql`
 mutation createUser($username: String!) {
   createUser(username: $username) {
     __typename
-    cognitoId
+
     username
     registered
     id
   }
 }`;
+
+// mutation createUser($username: String!) {
+//   createUser(username: $username) {
+//     __typename
+//     cognitoId
+//     username
+//     registered
+//     id
+//   }
+// }`;

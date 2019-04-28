@@ -77,7 +77,7 @@ query AllUser($after: String, $first: Int) {
   }
 }
 query AllMember($after: String, $first: Int) {
-  AllMember(after: $after, first: $first) {
+  allMember(after: $after, first: $first) {
     id
     conversations {
       nextToken

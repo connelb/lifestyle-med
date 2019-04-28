@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+// import { AppsyncService } from '../appsync.service';
 import { AppsyncService } from '../../../providers/appsync.service';
 import { v4 as uuid } from 'uuid';
 import createMessage from '../graphql/mutations/createMessage';
@@ -21,7 +22,6 @@ export class ChatInputComponent {
   constructor(private appsync: AppsyncService) {}
 
   createNewMessage() {
-    //console.log('create new message pressed');
     if (!this.message || this.message.trim().length === 0) {
       this.message = '';
       return;
@@ -35,7 +35,7 @@ export class ChatInputComponent {
       isSent: false,
       id : id
     };
-    //console.log('new message', message);
+    console.log('new message', message);
     this.message = '';
     this.appsync.hc().then(client => {
       client.mutate({
@@ -61,9 +61,9 @@ export class ChatInputComponent {
           proxy.writeQuery({...options, data: _tmp});
         }
       }).then(({data}) => {
-        console.log('message mutation complete', data);
+        console.log('mutation complete', data);
       }).catch(err => console.log('Error creating message', err));
     });
-    //Analytics.record('Chat MSG Sent');
+    Analytics.record('Chat MSG Sent');
   }
 }

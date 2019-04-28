@@ -9,7 +9,6 @@ subscription subscribeToNewUsers {
   }
 }`;
 
-// export default gql`
 // subscription subscribeToNewUsers {
 //   subscribeToNewUsers {
 //     __typename

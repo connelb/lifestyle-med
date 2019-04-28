@@ -49,6 +49,7 @@ import { InfscrollDirective } from './infscroll.directive';
 import { MomentAgoPipe } from './moment-ago.pipe';
 
 import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const routes: Routes = [
@@ -63,6 +64,7 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     FormsModule,
+    NgbModule,
     ChatAppRoutingModule,
     NgxPageScrollModule,
     RouterModule.forChild(routes)

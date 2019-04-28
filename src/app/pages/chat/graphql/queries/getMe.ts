@@ -1,25 +1,22 @@
 import gql from 'graphql-tag';
 
+export default gql`
+query getMe {
+  me {
+    __typename
+    id
+    username
+    registered
+  }
+}`;
+
 // export default gql`
-// query Me {
+// query getMe {
 //   me {
 //     __typename
 //     id
+//     cognitoId
 //     username
-//     firstname
-//     lastname
 //     registered
-//     bio
-//     image
 //   }
 // }`;
-
-export default gql`
-  query getMe {
-    me {
-      __typename
-      id
-      username
-      registered
-    }
-}`;

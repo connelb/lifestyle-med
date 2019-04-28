@@ -2975,7 +2975,7 @@ export class APIService {
   }
   async AllMember(after?: string, first?: number): Promise<AllMemberQuery> {
     const statement = `query AllMember($after: String, $first: Int) {
-        AllMember(after: $after, first: $first) {
+        allMember(after: $after, first: $first) {
           __typename
           id
           conversations {
@@ -3018,7 +3018,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <AllMemberQuery>response.data.AllMember;
+    return <AllMemberQuery>response.data.allMember;
   }
   async Me(): Promise<MeQuery> {
     const statement = `query Me {

@@ -6,7 +6,7 @@ export default gql`
     username
   }`;
 
-
+  // export default gql`
   // fragment user on User {
   //   id
   //   cognitoId

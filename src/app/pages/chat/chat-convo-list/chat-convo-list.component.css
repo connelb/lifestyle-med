@@ -1,4 +1,4 @@
-/* .list-group-item.active {
+.list-group-item.active {
   z-index: 2;
   color: #fff;
   background-color: #007bff;
@@ -20,13 +20,4 @@
 .list-group-item:hover {
   color: white;
   background-color: gray; 
-} */
-
-.example-card {
-  max-width: 400px;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
 }
