@@ -95,7 +95,7 @@ export class ChatMessageViewComponent {
       const observable: ObservableQuery<MessagesQuery> = client.watchQuery(options);
 
       observable.subscribe(({data}) => {
-        console.log('chat-message-view: subscribe ?loads messages but not individual messages??', data);
+        console.log('chat-message-view: subscribe', data);
         if (!data) { return console.log('getConversationMessages - no data'); }
         const newMessages = data.allMessageConnection.messages;
         this.messages = [...newMessages].reverse();

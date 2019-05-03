@@ -12,6 +12,6 @@
     <a href='#' *ngFor="let user of users"
     class="list-group-item list-group-item-action p-2 border-0 bg"
     (click)="createNewConversation(user, $event); false">
-    {{user.username}}</a>
+    <ion-button size="small">{{user.firstname|slice:1:2}}{{user.lastname|slice:1:2}}</ion-button></a>
   </div>
 </div>

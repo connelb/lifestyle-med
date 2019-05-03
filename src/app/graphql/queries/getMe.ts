@@ -1,35 +1,46 @@
 import gql from 'graphql-tag';
 
 export default gql`
-query Me {
+query getMe {
   me {
+    __typename
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
-    firstname
-    lastname
     registered
-    bio
-    image
   }
 }`;
+
+
+
+// query Me {
+//   me {
+//     id
+//     conversations {
+//       nextToken
+//       userConversations {
+//         conversationId
+//         userId
+//       }
+//     }
+//     messages {
+//       messages {
+//         content
+//         conversationId
+//         createdAt
+//         id
+//         isSent
+//         sender
+//       }
+//       nextToken
+//     }
+//     username
+//     firstname
+//     lastname
+//     registered
+//     bio
+//     image
+//   }
+// }`;
 
 
 // import gql from 'graphql-tag';

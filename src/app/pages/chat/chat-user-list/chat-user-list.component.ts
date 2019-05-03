@@ -7,7 +7,8 @@ import getAllMembers from '../graphql/queries/getAllMembers';
 import createConversation from '../graphql/mutations/createConversation';
 import createUserConversations from '../graphql/mutations/createUserConversations';
 import getUserConversationsConnection from '../graphql/queries/getUserConversationsConnection';
-import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUsers';
+// import subscribeToNewUserUsers from '../graphql/subscriptions/subscribeToNewUsers';
+import subscribeToNewMembers from '../graphql/subscriptions/subscribeToNewMembers';
 import { constants, addConversation, addUser } from '../chat-helper';
 import Conversation from '../types/conversation';
 // import { getAllUsersQuery as UsersQuery } from '../graphql/operation-result-types';
@@ -61,8 +62,8 @@ export class ChatUserListComponent {
       });
 
       observable.subscribeToMore({
-        document: subscribeToNewUserUsers,
-        updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewUsers: user }}}) => {
+        document: subscribeToNewMembers,
+        updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewMembers: user }}}) => {
           console.log('updateQuery on convo subscription', user, prev);
           return this._user.id === user.id ? prev : addUser(prev, user);
         }

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export default gql`
-  fragment member on Member {
+ export default gql`
+  fragment user on User {
     id
     username
   }`;

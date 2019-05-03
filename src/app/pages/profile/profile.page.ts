@@ -27,6 +27,8 @@ import Member from '../../types/user';
 import { Auth } from 'aws-amplify';
 import { ToastController } from '@ionic/angular';
 // import createUser from '../../graphql/mutations/createUser';
+import getMe from '../../graphql/queries/getMe';
+import gql from 'graphql-tag';
 
 @Component({
   selector: 'app-profile',
@@ -72,7 +74,9 @@ export class ProfilePage implements OnInit {
     Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
-      let result = await this.api.Me();
+      //console.log('user, something wrong with api.Me?',user);
+      let result = await this.api.Me1();
+      console.log('what is result, profile page',result);
       if (!result) {
         console.log('not logged in')
         this.userCreated = false;

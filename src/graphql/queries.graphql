@@ -182,6 +182,17 @@ query Me {
     image
   }
 }
+query Me1 {
+  me1 {
+    id
+    username
+    firstname
+    lastname
+    registered
+    bio
+    image
+  }
+}
 query GetMeasurement($measurementId: String!, $createdAt: String!) {
   getMeasurement(measurementId: $measurementId, createdAt: $createdAt) {
     measurementId

@@ -1084,6 +1084,17 @@ export type MeQuery = {
   image: string | null;
 };
 
+export type Me1Query = {
+  __typename: string;
+  id: string;
+  username: string | null;
+  firstname: string | null;
+  lastname: string | null;
+  registered: boolean | null;
+  bio: string | null;
+  image: string | null;
+};
+
 export type GetMeasurementQuery = {
   __typename: string;
   measurementId: string;
@@ -3100,6 +3111,22 @@ export class APIService {
       }`;
     const response = (await API.graphql(graphqlOperation(statement))) as any;
     return <MeQuery>response.data.me;
+  }
+  async Me1(): Promise<Me1Query> {
+    const statement = `query Me1 {
+        me1 {
+          __typename
+          id
+          username
+          firstname
+          lastname
+          registered
+          bio
+          image
+        }
+      }`;
+    const response = (await API.graphql(graphqlOperation(statement))) as any;
+    return <Me1Query>response.data.me1;
   }
   async GetMeasurement(
     measurementId: string,
