@@ -113,7 +113,7 @@ export type getAllMembersQuery = {
     // registered?
     registered: boolean
     // bio:string,
-    // image:string
+    image:string
   } | null > | null,
 };
 

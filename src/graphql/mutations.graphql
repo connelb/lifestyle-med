@@ -436,24 +436,6 @@ mutation DeleteWater($input: DeleteWaterInput!) {
 mutation CreateMember($input: CreateMemberInput!) {
   createMember(input: $input) {
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
     firstname
     lastname
@@ -465,24 +447,6 @@ mutation CreateMember($input: CreateMemberInput!) {
 mutation UpdateMember($input: UpdateMemberInput!) {
   updateMember(input: $input) {
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
     firstname
     lastname

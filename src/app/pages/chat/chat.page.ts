@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { PageScrollConfig } from 'ngx-page-scroll';
 
@@ -19,12 +19,14 @@ import { APIService } from '../../API.service';
 import gql from 'graphql-tag';
 
 
+
 @Component({
   selector: 'chat',
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
+  
 
   username: string;
   session;
@@ -46,7 +48,6 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-
     this.appsync.hc().then(client => {
       
       client.watchQuery({

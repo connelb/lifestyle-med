@@ -40,7 +40,7 @@
             <ion-item>
               <ion-button (click)="showPhoto = !showPhoto" fill="outline" slot="end">Close</ion-button>
             </ion-item>
-            <amplify-photo-picker path="profile" [storageOptions]="{'level': 'private'}" (uploaded)="onImageUploaded($event)">
+            <amplify-photo-picker path="profile" [storageOptions]="{'level': 'public'}" (uploaded)="onImageUploaded($event)">
             </amplify-photo-picker>
           </ng-template>
         </ion-card>

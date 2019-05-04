@@ -1,21 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-profile',
-//   templateUrl: './profile.page.html',
-//   styleUrls: ['./profile.page.scss'],
-// })
-// export class ProfilePage implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -70,13 +52,13 @@ export class ProfilePage implements OnInit {
         //         'email':new FormControl(null,[Validators.required,Validators.email],this.forbiddenEmails),
       })
     });
-    
+
     Auth.currentAuthenticatedUser({
       bypassCache: false
     }).then(async user => {
       //console.log('user, something wrong with api.Me?',user);
       let result = await this.api.Me1();
-      console.log('what is result, profile page',result);
+      console.log('what is result, profile page', result);
       if (!result) {
         console.log('not logged in')
         this.userCreated = false;
@@ -142,9 +124,6 @@ export class ProfilePage implements OnInit {
   }
 
   async presentToast() {
-    // this.modifiedDate();
-    // this.sleepOnSubmit();
-
     const toast = await this.toastController.create({
       message: 'Your settings have been saved.',
       duration: 2000
@@ -167,7 +146,7 @@ export class ProfilePage implements OnInit {
     this.image = e.key;
     //console.log('what is onImageUploaded??', this.member)
     if (this.userCreated) {
-   const user = {
+      const user = {
         id: this.id,
         username: this.profileForm.value.userData.userName,
         firstname: this.profileForm.value.userData.firstName,

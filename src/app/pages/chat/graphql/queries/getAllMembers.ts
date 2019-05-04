@@ -7,5 +7,6 @@ query getAllMembers {
     __typename
     id
     username
+    image
   }
 }`;

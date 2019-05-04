@@ -93,24 +93,6 @@ subscription SubscribeToNewUCs($userId: ID!) {
 subscription SubscribeToNewMembers {
   subscribeToNewMembers {
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
     firstname
     lastname
@@ -659,24 +641,6 @@ subscription OnCreateMember(
     registered: $registered
   ) {
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
     firstname
     lastname
@@ -700,24 +664,6 @@ subscription OnUpdateMember(
     registered: $registered
   ) {
     id
-    conversations {
-      nextToken
-      userConversations {
-        conversationId
-        userId
-      }
-    }
-    messages {
-      messages {
-        content
-        conversationId
-        createdAt
-        id
-        isSent
-        sender
-      }
-      nextToken
-    }
     username
     firstname
     lastname

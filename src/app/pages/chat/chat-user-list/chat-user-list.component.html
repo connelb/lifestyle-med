@@ -1,18 +1,47 @@
+<ion-button (click)="toggleInfiniteScroll()" expand="block">
+  Toggle Infinite Scroll
+</ion-button>
+
+<!-- <ion-item>
+          <ion-label>Port</ion-label>
+          <ionic-selectable [(ngModel)]="port" itemValueField="id" itemTextField="name"
+            [items]="ports" [canSearch]="true" [hasInfiniteScroll]="true" (onSearch)="searchPorts($event)"
+            (onInfiniteScroll)="getMorePorts($event)">
+          </ionic-selectable>
+        </ion-item> -->
+
+<!-- <ion-virtual-scroll [items]="items" [headerFn]="myHeaderFn">
+            <ion-item-divider *virtualHeader="let header">
+              {{ header }}
+            </ion-item-divider>
+            <ion-item *virtualItem="let item">
+              Item: {{ item }}
+            </ion-item>
+          </ion-virtual-scroll> -->
+{{users|json}}
+<ion-virtual-scroll [items]="users">
+  <ion-item *virtualItem="let item">
+      <ion-avatar item-start>
+          <amplify-s3-image [path]="item.image" [options]="{'level': 'public'}"></amplify-s3-image>
+      </ion-avatar>
+      <a href='#' (click)="createNewConversation(user, $event); false">{{ item.username }}</a>
+  </ion-item>
+</ion-virtual-scroll>
 
 <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
-  <h6 class='mb-0'><i class="ion-ios-person" data-pack="default" data-tags="talk"></i> Users</h6>
+  <h6 class='mb-0'>
+    <i class="ion-ios-person" data-pack="default" data-tags="talk"></i> Users</h6>
 </div>
 <div class="user-list">
   <div class="list-group mb-2">
     <div *ngIf="no_user;">
-        <br/>
-        <ngb-alert type="success" [dismissible]="false">
-          <span>It looks lonely here... Sign up another user</span>
-        </ngb-alert>
+      <br/>
+      <ngb-alert type="success" [dismissible]="false">
+        <span>It looks lonely here... Sign up another user</span>
+      </ngb-alert>
     </div>
-    <a href='#' *ngFor="let user of users"
-    class="list-group-item list-group-item-action p-2 border-0 bg"
-    (click)="createNewConversation(user, $event); false">
-    <ion-button size="small">{{user.username}}</ion-button></a>
+    <a href='#' *ngFor="let user of users" class="list-group-item list-group-item-action p-2 border-0 bg" (click)="createNewConversation(user, $event); false">
+      <ion-button size="small">{{user.username}}</ion-button>
+    </a>
   </div>
 </div>

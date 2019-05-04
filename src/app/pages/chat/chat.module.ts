@@ -50,6 +50,7 @@ import { MomentAgoPipe } from './moment-ago.pipe';
 
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AmplifyAngularModule, AmplifyIonicModule } from 'aws-amplify-angular';
 
 
 const routes: Routes = [
@@ -65,6 +66,8 @@ const routes: Routes = [
     IonicModule,
     FormsModule,
     NgbModule,
+    AmplifyAngularModule,
+    AmplifyIonicModule,
     ChatAppRoutingModule,
     NgxPageScrollModule,
     RouterModule.forChild(routes)

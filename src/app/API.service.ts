@@ -753,33 +753,6 @@ export type DeleteWaterMutation = {
 export type CreateMemberMutation = {
   __typename: string;
   id: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // The message content.
-      content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
-      conversationId: string;
-      // The message timestamp. This is also the table sort key.
-      createdAt: string | null;
-      // Generated id for a message -- read-only
-      id: string;
-      // Flag denoting if this message has been accepted by the server or not.
-      isSent: boolean | null;
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   username: string | null;
   firstname: string | null;
   lastname: string | null;
@@ -791,33 +764,6 @@ export type CreateMemberMutation = {
 export type UpdateMemberMutation = {
   __typename: string;
   id: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // The message content.
-      content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
-      conversationId: string;
-      // The message timestamp. This is also the table sort key.
-      createdAt: string | null;
-      // Generated id for a message -- read-only
-      id: string;
-      // Flag denoting if this message has been accepted by the server or not.
-      isSent: boolean | null;
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   username: string | null;
   firstname: string | null;
   lastname: string | null;
@@ -1495,33 +1441,6 @@ export type SubscribeToNewUCsSubscription = {
 export type SubscribeToNewMembersSubscription = {
   __typename: string;
   id: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // The message content.
-      content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
-      conversationId: string;
-      // The message timestamp. This is also the table sort key.
-      createdAt: string | null;
-      // Generated id for a message -- read-only
-      id: string;
-      // Flag denoting if this message has been accepted by the server or not.
-      isSent: boolean | null;
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   username: string | null;
   firstname: string | null;
   lastname: string | null;
@@ -1872,33 +1791,6 @@ export type OnDeleteWaterSubscription = {
 export type OnCreateMemberSubscription = {
   __typename: string;
   id: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // The message content.
-      content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
-      conversationId: string;
-      // The message timestamp. This is also the table sort key.
-      createdAt: string | null;
-      // Generated id for a message -- read-only
-      id: string;
-      // Flag denoting if this message has been accepted by the server or not.
-      isSent: boolean | null;
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   username: string | null;
   firstname: string | null;
   lastname: string | null;
@@ -1910,33 +1802,6 @@ export type OnCreateMemberSubscription = {
 export type OnUpdateMemberSubscription = {
   __typename: string;
   id: string;
-  conversations: {
-    __typename: "UserConverstationsConnection";
-    nextToken: string | null;
-    userConversations: Array<{
-      __typename: "UserConversations";
-      conversationId: string;
-      userId: string;
-    } | null> | null;
-  } | null;
-  messages: {
-    __typename: "MessageConnection";
-    messages: Array<{
-      __typename: "Message";
-      // The message content.
-      content: string;
-      // The id of the Conversation this message belongs to. This is the table primary key.
-      conversationId: string;
-      // The message timestamp. This is also the table sort key.
-      createdAt: string | null;
-      // Generated id for a message -- read-only
-      id: string;
-      // Flag denoting if this message has been accepted by the server or not.
-      isSent: boolean | null;
-      sender: string | null;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   username: string | null;
   firstname: string | null;
   lastname: string | null;
@@ -2715,28 +2580,6 @@ export class APIService {
         createMember(input: $input) {
           __typename
           id
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
           username
           firstname
           lastname
@@ -2758,28 +2601,6 @@ export class APIService {
         updateMember(input: $input) {
           __typename
           id
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
           username
           firstname
           lastname
@@ -3773,28 +3594,6 @@ export class APIService {
         subscribeToNewMembers {
           __typename
           id
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
           username
           firstname
           lastname
@@ -4283,28 +4082,6 @@ export class APIService {
         onCreateMember(id: $id, username: $username, firstname: $firstname, lastname: $lastname, registered: $registered) {
           __typename
           id
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
           username
           firstname
           lastname
@@ -4322,28 +4099,6 @@ export class APIService {
         onUpdateMember(id: $id, username: $username, firstname: $firstname, lastname: $lastname, registered: $registered) {
           __typename
           id
-          conversations {
-            __typename
-            nextToken
-            userConversations {
-              __typename
-              conversationId
-              userId
-            }
-          }
-          messages {
-            __typename
-            messages {
-              __typename
-              content
-              conversationId
-              createdAt
-              id
-              isSent
-              sender
-            }
-            nextToken
-          }
           username
           firstname
           lastname

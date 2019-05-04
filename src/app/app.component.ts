@@ -86,15 +86,16 @@ import { Auth } from 'aws-amplify';
 })
 
 
-
-
-
-
 export class AppComponent implements OnInit, OnDestroy {
   appPages = [
     {
-      title: 'Record',
+      title: 'Journal',
       url: '/action-sheet',
+      icon: 'book'
+    },
+    {
+      title: 'Chat',
+      url: '/chat',
       icon: 'contacts'
     },
     {
@@ -105,35 +106,21 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
   loggedIn = false;
   userCreated: boolean;
- //user;
   signedIn;
   greeting;
   session;
   client: AWSAppSyncClient<any>;
-  //client: any;
   me: Member;
-  //conversation: Conversation;
   update: boolean;
   rates$: Observable<any[]>;
   loading$: Observable<boolean>;
   errors$: Observable<any>;
-  //users;
-  //no_user;
-  member;
+  member = '';
   no_member;
-
   loading: boolean;
   currentUser: any;
 
-  // mutation = gql`
-  //     mutation submitRepository($repoFullName: String!) {
-  //       submitRepository(repoFullName: $repoFullName) {
-  //         createdAt
-  //       }
-  // }`;
-
   private querySubscription: Subscription;
-
 
   constructor(
     private api: APIService,
@@ -156,38 +143,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  // newRepository() {
-  //   this.submitRepoService.submitRepository()//'apollographql/apollo-client'
-  //     .subscribe(({ data }) => {
-  //       console.log('got data', data);
-  //     }, (error) => {
-  //       console.log('there was an error sending the query', error);
-  //     });
-  // }
-
-  // temp = {
-  //   chest: "",
-  //   createdAt: "2018-12-29T12:53:06.605Z_745568ed-3161-45c3-9479-ef3a286ca314",
-  //   hips: "",
-  //   leftArm: "",
-  //   leftThigh: "",
-  //   measurementId: "b32772a1-dd95-44c8-aabf-5cfa7e677731",
-  //   rightArm: "",
-  //   rightThigh: "",
-  //   waist: "78",
-  //   weight: "",
-  //   __typename: "Measurement"
-  // }
-
-  // submitRepository() {//repoFullName: string
-  //   return this.apollo.mutate({
-  //     mutation: temp,
-  //     variables: {}//repoFullName: repoFullName
-  //   });
-  // }
-
-
-
   ngOnDestroy() {
     // this.querySubscription.unsubscribe();
   }
@@ -208,15 +163,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       });
     }
-    // this.appsyncService.hc().then(client => {
-    //   client.watchQuery({
-    //     query: getMe,
-    //     fetchPolicy: 'cache-and-network'
-    //   }).subscribe(({ data }) => {
-    //     console.log('rme in init:', data);
-    //     if (data) { this.me = data.me; }
-    //   });
-    // });
 
     this.amplifyService.auth().currentSession().then(session => {
       // //this.userCreated = true;
@@ -226,80 +172,6 @@ export class AppComponent implements OnInit, OnDestroy {
       //setImmediate(() => this.createMember());
     });
 
-    // this.submitRepository().subscribe(d => console.log('kkjjk', d))
-
-
-//  async updateProfile(this.user) {
-//   await this.api.CreateUser(this.user);
-// }
-
-    // if (this.appsyncService.hc()) {
-    //   this.appsyncService.hc().then(client => {
-    //     console.log('component init hydarte called',listAllMembers, this.api.ListMembers())
-    //     const observable = client.watchQuery({
-    //       query: gql.api.ListMembers()//listAllMembers
-          
-
-          // gql`query ListMembers($filter: TableMemberFilterInput, $limit: Int, $nextToken: String) {
-          //   listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          //     __typename
-          //     items {
-          //       __typename
-          //       id
-          //       conversations {
-          //         __typename
-          //         nextToken
-          //       }
-          //       messages {
-          //         __typename
-          //         nextToken
-          //       }
-          //       username
-          //       firstname
-          //       lastname
-          //       registered
-          //       bio
-          //       image
-          //     }
-          //     nextToken
-          //   }
-          // }`
-          
-          
-      //     ,
-      //     fetchPolicy: 'cache-and-network'
-      //   });
-
-      //   observable.subscribe(({ data }) => {
-      //     console.log('any data', data)
-      //     if (!data) {
-      //       return console.log('getallMembers - no data');
-      //     }
-      //     //this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
-      //     //console.log('getallMembers - Got data', data);
-      //     //this.no_user = (this.users.length === 0);
-      //   });
-      // });
-   // }
-
-    // }
-    // const source$ = this.apollo.query({
-    //   query: gql`
-    //   {
-    //     createMessage(content: "First!" conversationId: "myNewId" createdAt: "This afternoon" id: "messageOneId") {
-    //       content
-    //       createdAt
-    //     }
-    //   }
-    //   `
-    // }).pipe(shareReplay(1));
-
-    // this.rates$ = source$.pipe(map(result => result && result.data['createMessage']));//
-    // this.loading$ = source$.pipe(map(result => result.loading));
-    // this.errors$ = source$.pipe(map(result => result.errors));
-    //}
-
-    //this.amplifyService = amplifyService;
     this.checkLoginStatus1();
     this.listenForLoginEvents();
 
@@ -325,26 +197,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   createMember() {
-    console.log('createMember called')
-
-    // this.appsyncService.hc().then(client => {
-    //   client.watchQuery({
-    //     query: getMe,
-    //     fetchPolicy: 'cache-only'
-    //   }).subscribe(({ data }) => {
-    //     console.log('register()', data['me']);
-    //     if (data) { 
-    //       console.log("me return data: ", data)
-    //       this.me = data.me;
-    //      }else{
-    //       console.log("me does not return data!!")
-    //      }
-    //   });
-    // });
-
-    //this.me.registered = true;
-    //console.log('this.me??', this.me)
-
     const member = {
       username: this.session.idToken.payload['cognito:username'],
       id: this.session.idToken.payload['sub'],
@@ -375,69 +227,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }).catch(err => console.log('Error registering member', err));
     });
   }
-
-  // createMember() {
-  //   //console.log("what is this?? context??", this.session.idToken.payload['cognito:username'])
-
-  //     this.appsyncService.hc().then(client => {
-  //     client.watchQuery({
-  //       query: getMe,
-  //       fetchPolicy: 'cache-only'
-  //     }).subscribe(({ data }) => {
-  //       console.log('reg', data);
-  //       if (data) { 
-  //         this.me = data.me;
-
-  //         // client.mutate({
-  //         //   mutation: createMember,
-  //         //   variables: { id: me.id },//this.session.idToken.payload['sub']
-    
-  //         //   optimisticResponse: () => ({
-  //         //     createMember: {
-  //         //       ...me,
-  //         //       __typename: 'Member'
-  //         //     }
-  //         //   }),
-    
-  //         //   update: (proxy, { data: { createMember: _member} }) => {
-  //         //     console.log('???????????????? _member:', _member);
-  //         //     proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
-  //         //   }
-  //         // }).catch(err => console.log('Error registering member', err));
-  //        }
-  //     });
-  //   });
-  //   // const member: Member = {
-  //   //   id: this.session.idToken.payload['sub'],
-  //   //   username: this.session.idToken.payload['cognito:username'],
-  //   //   firstname:'',
-  //   //   lastname:'',
-  //   //   //cognitoId: this.session.idToken.payload['sub'],
-  //   //   registered: false,
-  //   //   bio:'',
-  //   //   image:''
-  //   // };
-  //   // console.log('creating member member.id', member.id);
-  //   // this.appsyncService.hc().then(client => {
-  //   //   // console.log('client', client)
-  //   //   client.mutate({
-  //   //     mutation: createMember,
-  //   //     variables: { id: this.me.id },//this.session.idToken.payload['sub']
-
-  //   //     optimisticResponse: () => ({
-  //   //       createMember: {
-  //   //         ...this.me,
-  //   //         __typename: 'Member'
-  //   //       }
-  //   //     }),
-
-  //   //     update: (proxy, { data: { createMember: _member} }) => {
-  //   //       console.log('???????????????? _member:', _member);
-  //   //       proxy.writeQuery({ query: getMe, data: { me: { ..._member } } });
-  //   //     }
-  //   //   }).catch(err => console.log('Error registering member', err));
-  //   // });
-  // }
 
   logInfoToConsole(session) {
     // console.log('session:',session);
@@ -488,56 +277,6 @@ export class AppComponent implements OnInit, OnDestroy {
       return this.updateLoggedInStatus(loggedIn);
     });
   }
-
-  // updateUser() {
-  //   //this.userData.HAS_LOGGED_IN
-  // }
-
-  // register1() {
-  //   this.querySubscription = this.apollo.watchQuery<any>({
-  //     query: this.api.allMember
-  //   })
-  //     .valueChanges
-  //     .subscribe(({ data, loading }) => {
-  //       this.loading = loading;
-  //       this.currentUser = data.me;
-  //       console.log('reg1', data)
-  //     });
-  // }
-
-  // register2() {
-  //   this.appsyncService.hc().then(client => {
-  //     client.watchQuery({
-  //       query: queryListAllMessages,
-  //       fetchPolicy: 'cache-only'
-  //     }).subscribe(({ data }) => {
-  //       console.log('queryListAllMessages', data);
-  //       //if (data) { this.me = data.me; }
-  //     });
-  //   });
-
-    // this.apollo.watchQuery<any>({
-    //   query: queryListAllMessages,
-    // })
-    //   .valueChanges
-    //   .pipe(
-    //     map(result => result)
-    //   ).subscribe(res=>console.log(res))
-
-  //}
-
-
-  // register() {
-  //   this.appsync.hc().then(client => {
-  //     client.watchQuery({
-  //       query: getMe,
-  //       fetchPolicy: 'cache-only'
-  //     }).subscribe(({data}) => {
-  //       // console.log('register user, fetch cache', data);
-  //       if (data) { this.me = data.me; }
-  //     });
-  //   });
-  // }
 
   register() {
     //console.log('registration called')
