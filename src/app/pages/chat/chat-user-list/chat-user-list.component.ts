@@ -37,6 +37,7 @@ export class ChatUserListComponent {
   order = 'username';
   no_user = false;
   image;
+  profile ="profile/profile.png"
 
   @Input()
   set user(user) {

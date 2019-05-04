@@ -51,6 +51,7 @@ import { MomentAgoPipe } from './moment-ago.pipe';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AmplifyAngularModule, AmplifyIonicModule } from 'aws-amplify-angular';
+// import@ionic/angular { IonicSelectableModule } from '@ionic/angular';
 
 
 const routes: Routes = [
@@ -68,6 +69,7 @@ const routes: Routes = [
     NgbModule,
     AmplifyAngularModule,
     AmplifyIonicModule,
+    // IonicSelectableModule,
     ChatAppRoutingModule,
     NgxPageScrollModule,
     RouterModule.forChild(routes)

@@ -1,7 +1,38 @@
-<div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
+<ion-item *ngFor="let convo of conversations">
+  <ion-icon slot="icon-only" name="navigate"></ion-icon>
+  <a href='#' (click)="click(convo, $event); false">{{convo.name}}</a>
+</ion-item>
+
+<!-- <ion-item *ngFor="let convo of conversations">
+  <ion-icon slot="icon-only" name="navigate"></ion-icon> -->
+  <!-- <a href='#' *ngFor="let convo of conversations"  (click)="click(convo, $event); false">
+          <ion-button size="small">{{user.username}}</ion-button>
+        </a> -->
+  <!-- <ion-button slot="start" (click)="click(convo, $event); false"> -->
+
+    <!--   {{convo.name}}
+      <ion-icon slot="icon-only" name="navigate"></ion-icon>
+    </ion-button> -->
+    <!-- <ion-label>{{convo.name}}</ion-label> -->
+    <!-- <ion-button slot="end">
+      <ion-icon slot="icon-only" name="star"></ion-icon> -->
+  <!-- </ion-button>
+</ion-item> -->
+
+<!-- 
+<ion-virtual-scroll *ngIf="conversations" [items]="conversations">
+  <ion-item *virtualItem="let convo">
+      <ion-button size="small" (click)="click(convo, $event); false">{{convo?.name}}</ion-button>
+     <ion-label>
+      <ion-button size="small" (click)="click(convo, $event); false">{{convo?.name}}</ion-button>
+    </ion-label> 
+  </ion-item>
+</ion-virtual-scroll> -->
+
+<!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
   <h6 class='mb-0'><i class="ion-person-stalker" data-pack="default" data-tags="talk"></i> Convos</h6>
-</div>
-<div class="convo-list">
+</div>-->
+<!-- <div class="convo-list">
   <div class="list-group mb-2">
     <a href *ngFor="let convo of conversations"
     class="list-group-item list-group-item-action p-2 border-0 bg"
@@ -9,8 +40,5 @@
     (click)="click(convo, $event); false">
     <ion-button size="small">{{convo.name}}</ion-button></a>
   </div>
-</div>
-<button
-*ngIf="conversationNextToken"
-type="button" class="btn btn-secondary"
-(click)="false">See more convos</button>
+</div> -->
+<!-- <button *ngIf="conversationNextToken" type="button" class="btn btn-secondary" (click)="false">See more convos</button> -->

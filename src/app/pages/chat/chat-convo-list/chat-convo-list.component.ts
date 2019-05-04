@@ -56,7 +56,7 @@ export class ChatConvoListComponent implements OnInit {
         this.conversations = data.me.conversations.userConversations.map(u => u.conversation).filter(c => c);
         this.conversations = _.sortBy(this.conversations, 'name');
         this.nextToken = data.me.conversations.nextToken;
-        console.log('Fetched convos', this.conversations);
+        console.log('Fetched convos brian', this.conversations);
       });
 
       this.subscription = observable.subscribeToMore({
