@@ -164,17 +164,6 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.amplifyService.auth().currentSession().then(session => {
-      // //this.userCreated = true;
-      this.logInfoToConsole(session);
-      this.session = session;
-      //this.register();
-      //setImmediate(() => this.createMember());
-    });
-
-    this.checkLoginStatus1();
-    this.listenForLoginEvents();
-
     this.swUpdate.available.subscribe(event => {
       //console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
@@ -187,6 +176,17 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       });
     }
+
+    this.amplifyService.auth().currentSession().then(session => {
+      //this.userCreated = true;
+      this.logInfoToConsole(session);
+      this.session = session;
+      //this.register();
+      //setImmediate(() => this.createMember());
+    });
+
+    this.checkLoginStatus1();
+    this.listenForLoginEvents();
   }
 
   initializeApp() {
@@ -244,6 +244,35 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // installPwa(): void {
   //   this.Pwa.promptEvent.prompt();
+  // }
+
+  // checkLoginStatus2(){
+  //   this.amplifyService.authStateChange$
+  //   .subscribe(authState => {
+  //     const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+  //       // this.signedIn = authState.state === 'signedIn';
+  //       if (this.isLoggedIn && !isLoggedIn) {
+  //       // if (!authState.user) {
+  //           this.user = null;
+  //           this.router.navigate(['']);
+  //       // } else {
+  //       } else if (!this.isLoggedIn && isLoggedIn) {
+          
+  //           this.user = authState.user;
+  //           //console.log('this.user.username', this.user.username, authState.user);
+  //           //this.greeting = "Hello " + this.user.username;
+  //           this.userData.login(this.user.username);
+  //           this.session = authState.user.signInUserSession;
+  //           //this.logInfoToConsole(authState.user.signInUserSession);
+            
+  //           // this.register();
+           
+  //           //setImmediate(() => this.createMember());
+
+  //           this.router.navigateByUrl('/blog');
+  //           //this.router.navigate(['members', 'blog1']);
+  //       }
+  //   });
   // }
 
   checkLoginStatus1() {
@@ -338,9 +367,9 @@ export class AppComponent implements OnInit, OnDestroy {
   //   this.isLoggedIn = isLoggedIn;
   // });
 
-  openTutorial() {
-    this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
-    this.router.navigateByUrl('/tutorial');
-  }
+  // openTutorial() {
+  //   this.menu.enable(false);
+  //   this.storage.set('ion_did_tutorial', false);
+  //   this.router.navigateByUrl('/tutorial');
+  // }
 }

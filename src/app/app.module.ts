@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
+import { NavPage } from './../app/pages/nav/nav.page'
 import { environment } from '../environments/environment';
 import { ChartsModule } from 'ng2-charts';
 
@@ -34,14 +35,14 @@ import { GraphQLModule } from './graphql.module';
 import { SubmitRepositoryService } from './providers/submit-repository.service';
 import { MemberRoutingModule } from './members/member-routing.module';
 import { } from './providers/pwa.service';
+import { AuthGuard } from './providers/auth-guard.service';
 
 // import 'chart.js/src/chart.js';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-    // NavComponent,
+    NavPage,
     // FooterComponent,
     // HomeComponent,
     //DashboardComponent,
@@ -73,7 +74,8 @@ import { } from './providers/pwa.service';
     AmplifyService,
     APIService,
     AppsyncService,
-    SubmitRepositoryService
+    SubmitRepositoryService,
+    AuthGuard
     // {
     //   provide: APOLLO_OPTIONS,
     //   useFactory(httpLink: HttpLink) {

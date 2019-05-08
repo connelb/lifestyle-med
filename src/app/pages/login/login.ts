@@ -18,6 +18,7 @@ import getMe from '../../graphql/queries/getMe';
 import createMember from '../../graphql/mutations/createMember';
 import {APIService} from '../../API.service';
 import gql from 'graphql-tag';
+import { Events } from '@ionic/angular';
 
 
 
@@ -27,6 +28,8 @@ import gql from 'graphql-tag';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage implements OnInit {
+  isLoggedIn = false;
+  authState: any;
   //login: UserOptions = { username: '', password: '' };
   submitted = false;
   signedIn;
@@ -44,22 +47,47 @@ export class LoginPage implements OnInit {
   signInUserSession;
 
   constructor(
+    public events: Events,
     private api: APIService, 
     public amplifyService: AmplifyService,
     public userData: UserData,
     public router: Router,
     private appsync: AppsyncService
-  ) {}
+  ) {
+    this.authState = { signedIn: false };
+
+    this.amplifyService.authStateChange$
+    .subscribe(authState => {
+      this.authState.signedIn = authState.state === 'signedIn';
+      this.events.publish('data:AuthState', this.authState);
+    });
+  }
+
+
+//   this.amplifyService.authStateChange$.subscribe(authState => {
+//     const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+//     if (this.isLoggedIn && !isLoggedIn) {
+//       router.navigate(['']);
+//     } else if (!this.isLoggedIn && isLoggedIn) {
+//       router.navigate(['/chat']);
+//     }
+//     this.isLoggedIn = isLoggedIn;
+// });
 
   ngOnInit() {
     this.amplifyService.authStateChange$
     .subscribe(authState => {
-        this.signedIn = authState.state === 'signedIn';
-        if (!authState.user) {
+      const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+        // this.signedIn = authState.state === 'signedIn';
+        if (this.isLoggedIn && !isLoggedIn) {
+        // if (!authState.user) {
             this.user = null;
-        } else {
+            this.router.navigate(['']);
+        // } else {
+        } else if (!this.isLoggedIn && isLoggedIn) {
           
             this.user = authState.user;
+            this.events.publish('data:AuthState', this.authState);
             //console.log('this.user.username', this.user.username, authState.user);
             //this.greeting = "Hello " + this.user.username;
             this.userData.login(this.user.username);
@@ -70,7 +98,7 @@ export class LoginPage implements OnInit {
            
             //setImmediate(() => this.createMember());
 
-            this.router.navigateByUrl('/app/tabs/blog');
+            this.router.navigateByUrl('/blog');
             //this.router.navigate(['members', 'blog1']);
         }
     });
@@ -78,46 +106,9 @@ export class LoginPage implements OnInit {
 
   
 
-  //signInUserSession.idToken
-  // logInfoToConsole(session) {
-  //   console.log('session:',session);
-  //   // console.log(`ID Token: <${session.idToken.jwtToken}>`);
-  //   // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
-  //   // console.log('Decoded ID Token:');
-  //   // console.log( JSON.stringify(session.idToken.payload, null, 2));
-  //   // console.log('Decoded Acess Token:');
-  //   // console.log(JSON.stringify(session.accessToken.payload, null, 2));
-  //   console.log('cognitoId??????', session.idToken.payload['sub'])
-  // }
-
-  // bio: ""
-  // cognitoId: "4e13fa4d-5d51-4c18-834b-406ba731054b"
-  // firstname: ""
-  // id: "4e13fa4d-5d51-4c18-834b-406ba731054b"
-  // image: ""
-  // lastname: ""
-  // registered: false
-  // username: "kevin"
-
-  // createUser(input:{
-  //   cognitoId: $cognitoId
-  // }) {
-  //   __typename
-  //   cognitoId
-  //   username
-  //   registered
-  //   id
-  //   bio
-  //   image
-
   createMember() {
- 
-    //console.log('is member complete???', member);
-    
-    this.appsync.hc().then(client => {
-      
-
-      client.watchQuery({
+ this.appsync.hc().then(client => {
+       client.watchQuery({
         query: getMe,
         fetchPolicy: 'cache-and-network'
       }).subscribe(({data}) => {
