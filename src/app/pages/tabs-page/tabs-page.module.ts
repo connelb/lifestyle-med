@@ -18,6 +18,7 @@ import { SleepPageModule } from '../sleep/sleep.module';
 import { ActionSheetPageModule } from '../action-sheet/action-sheet.module';
 import { HomePageModule } from '../home/home.module';
 import { ProfilePageModule } from '../profile/profile.module';
+import { WaterPageModule } from '../water/water.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ProfilePageModule } from '../profile/profile.module';
     MeasureModule,
     HomePageModule,
     ProfilePageModule,
+    WaterPageModule,
     //SessionDetailModule,
     SpeakerDetailModule,
     SpeakerListModule,

@@ -5,16 +5,21 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignupPage } from './signup';
 import { SignupPageRoutingModule } from './signup-routing.module';
+import { AmplifyAngularModule, AmplifyService,AmplifyIonicModule } from 'aws-amplify-angular';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AmplifyAngularModule,
+    AmplifyIonicModule,
     SignupPageRoutingModule
   ],
   declarations: [
     SignupPage,
-  ]
+  ],
+  providers: [AmplifyService]
 })
 export class SignUpModule { }

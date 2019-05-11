@@ -51,7 +51,7 @@ export class ActionSheetPage{
         icon: 'food',
         handler: () => {
           console.log('Water clicked');
-          this.router.navigateByUrl('/water');
+          this.router.navigateByUrl('/app/tabs/water');
         }
       }, {
         text: 'Breakfast',

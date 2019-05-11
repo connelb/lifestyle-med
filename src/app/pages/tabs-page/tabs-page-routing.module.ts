@@ -91,6 +91,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'water',
+        children: [
+          {
+            path: '',
+            loadChildren: '../water/water.module#WaterPageModule'
+            // loadChildren: '../post/post.module#PostModule'
+          }
+        ]
+      },
+      {
         path: 'profile',
         children: [
           {

@@ -32,6 +32,7 @@ export class WaterPage implements OnInit {
   public lineChartData: Array<any> = [{ data: null }];
   public myChartData: any = [];
   public myWater: any = [];
+  public something:any;
 
   constructor(private appsync: AppsyncService,
     public toastController: ToastController) { 
