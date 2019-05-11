@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
-import { AmplifyAngularModule, AmplifyService,  AmplifyIonicModule } from 'aws-amplify-angular';
+// import { AmplifyAngularModule, AmplifyService,  AmplifyIonicModule } from 'aws-amplify-angular';
 
 
 const routes: Routes = [
@@ -20,12 +20,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    AmplifyAngularModule,
+    // AmplifyAngularModule,
     IonicModule,
-    AmplifyIonicModule,
+    // AmplifyIonicModule,
     RouterModule.forChild(routes)
   ],
-  providers: [AmplifyService],
+  // providers: [AmplifyService],
   declarations: [HomePage]
 })
 export class HomePageModule {}

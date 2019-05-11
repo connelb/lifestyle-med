@@ -10,11 +10,22 @@
 <ion-content padding-top text-center>
   <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
     <div formGroupName="userData">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col>
+            <amplify-s3-image *ngIf="showPhoto" [path]="image" [options]="{'level': 'private'}"></amplify-s3-image>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-list>
         <ion-list-header>
           Personal Information
         </ion-list-header>
-        <amplify-s3-image *ngIf="showPhoto" [path]="image" [options]="{'level': 'private'}"></amplify-s3-image>
+
         <ion-item>
           <ion-label>First Name:</ion-label>
           <ion-input class="text-center" size="7" type="text" formControlName="firstName"></ion-input>

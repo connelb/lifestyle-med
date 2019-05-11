@@ -1,20 +1,15 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content> -->
-
-
 <ion-header>
     <ion-toolbar>
-      <ion-title>Login</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+<ion-header>
   <ion-content padding>
-    <amplify-authenticator framework="ionic"></amplify-authenticator>
+      <button class="btn" ion-button full (click)="add_to_home(event)" *ngIf="showBtn" >Install</button>
+    <div>test</div>
+        <p>Happy October! I hope all is well. There are so many things to talk about this month, but I plan to focus on the fact that it is both Children's Health Month and National Depression and Mental Health Screening Month. Both healthy kids and mental wellness are 2 topics very close to my heart, so I hope I can share with you what I know an
+    </p>
   </ion-content>

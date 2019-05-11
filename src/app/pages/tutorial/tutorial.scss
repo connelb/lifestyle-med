@@ -12,6 +12,10 @@ ion-toolbar {
   margin-top: 2.8rem;
 }
 
+.slide-grid {
+  align-self: auto;
+}
+
 .slide-image {
   max-height: 50%;
   max-width: 60%;
@@ -31,4 +35,8 @@ p {
   b {
     color: #000000;
   }
+}
+
+ion-icon {
+  font-size: 20px;
 }

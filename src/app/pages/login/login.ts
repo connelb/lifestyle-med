@@ -98,7 +98,7 @@ export class LoginPage implements OnInit {
            
             //setImmediate(() => this.createMember());
 
-            this.router.navigateByUrl('/blog');
+            this.router.navigateByUrl('/app/tabs/home');
             //this.router.navigate(['members', 'blog1']);
         }
     });

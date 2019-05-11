@@ -11,6 +11,28 @@
 ion-list-header {
     background-color: #ececec;
   }
+
+  ion-thumbnail {
+    min-width: 10rem;    
+    min-height: 10rem;
+    img {
+        max-width: 10rem;    
+        min-width: 10rem;
+        border-radius:200px;
+    }
+}
+
+// amplify-s3-image{
+//   border-radius:200px;
+// }
+
+  // ion-thumbnail{
+  //   size:100px;
+  //   border-radius:10px;
+  // }
+  // .amplify-image {
+  //   border-radius:200px;
+  // }
   
   .text-center {
     text-align: center;

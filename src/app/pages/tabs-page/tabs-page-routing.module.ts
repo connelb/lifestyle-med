@@ -4,6 +4,8 @@ import { TabsPage } from './tabs-page';
 import { MeasurePage } from '../measure/measure';
 import { BlogPage } from '../blog/blog.page';
 import { ActionSheetPage } from '../action-sheet/action-sheet.page';
+import { HomePage } from '../home/home.page';
+import { ProfilePage } from '../profile/profile.page';
 
 
 const routes: Routes = [
@@ -38,11 +40,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'measure',
+        path: 'home',
         children: [
           {
             path: '',
-            component: MeasurePage,
+            component: HomePage,
           },
           // {
           //   path: 'session/:sessionId',
@@ -50,32 +52,34 @@ const routes: Routes = [
           // }
         ]
       },
+      // {
+      //   path: 'speakers',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../speaker-list/speaker-list.module#SpeakerListModule'
+      //     },
+      //     {
+      //       path: 'session/:sessionId',
+      //       loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
+      //     },
+      //     {
+      //       path: 'speaker-details/:speakerId',
+      //       loadChildren: '../speaker-detail/speaker-detail.module#SpeakerDetailModule'
+      //     }
+      //   ]
+      // },
       {
-        path: 'speakers',
+        path: 'profile',
         children: [
           {
             path: '',
-            loadChildren: '../speaker-list/speaker-list.module#SpeakerListModule'
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-          },
-          {
-            path: 'speaker-details/:speakerId',
-            loadChildren: '../speaker-detail/speaker-detail.module#SpeakerDetailModule'
+            component: ProfilePage,
           }
         ]
       },
-      {
-        path: 'post',
-        children: [
-          {
-            path: '',
-            loadChildren: '../post/post.module#PostModule'
-          }
-        ]
-      },
+
+      
       {
         path: 'chat',
         children: [
@@ -83,6 +87,15 @@ const routes: Routes = [
             path: '',
             loadChildren: '../chat/chat.module#ChatPageModule'
             // loadChildren: '../post/post.module#PostModule'
+          }
+        ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: '../profile/profile.module#ProfilePageModule'
           }
         ]
       },

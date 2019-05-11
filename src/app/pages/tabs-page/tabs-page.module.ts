@@ -16,6 +16,8 @@ import { ChatPageModule } from '../chat/chat.module';
 import { SignUpModule } from '../signup/signup.module';
 import { SleepPageModule } from '../sleep/sleep.module';
 import { ActionSheetPageModule } from '../action-sheet/action-sheet.module';
+import { HomePageModule } from '../home/home.module';
+import { ProfilePageModule } from '../profile/profile.module';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { ActionSheetPageModule } from '../action-sheet/action-sheet.module';
     PostModule,
     ChatPageModule,
     MeasureModule,
+    HomePageModule,
+    ProfilePageModule,
     //SessionDetailModule,
     SpeakerDetailModule,
     SpeakerListModule,

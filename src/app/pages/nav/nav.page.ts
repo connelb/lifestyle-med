@@ -14,12 +14,12 @@ export class NavPage {
   appPages = [
     {
       title: 'Journal',
-      url: '/action-sheet',
+      url: '/app/tabs/action-sheet',
       icon: 'book'
     },
     {
       title: 'Chat',
-      url: '/chat',
+      url: '/app/tabs/chat',
       icon: 'contacts'
     },
     {
@@ -39,14 +39,16 @@ export class NavPage {
   // ) {
 
     isLoggedIn = false;
+    user:string;
 
     constructor(private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
       this.amplifyService.authStateChange$.subscribe(authState => {
+        this.user = authState.user;
         const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
         if (this.isLoggedIn && !isLoggedIn) {
           router.navigate(['']);
         } else if (!this.isLoggedIn && isLoggedIn) {
-          router.navigate(['/chat']);
+          router.navigateByUrl('/app/tabs/home');
         }
         this.isLoggedIn = isLoggedIn;
       });
@@ -69,7 +71,7 @@ export class NavPage {
 
   openTutorial() {
     this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', true);
+    this.storage.set('ion_did_tutorial', false);
     this.router.navigateByUrl('/tutorial');
   }
 

@@ -163,12 +163,12 @@ export class ProfilePage implements OnInit {
     this.showPhoto = true;
   }
 
-  logOut() {
-    Auth.signOut({ global: true })
-      .then(data => {
-        this.router.navigate(['/auth']);
-      })
-      .catch(err => console.log(err));
-  }
+  // logOut() {
+  //   Auth.signOut({ global: true })
+  //     .then(data => {
+  //       this.router.navigate(['/auth']);
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
 }

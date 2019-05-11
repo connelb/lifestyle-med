@@ -20,12 +20,12 @@ export class TutorialPage {
     public router: Router,
     public storage: Storage
   ) {}
-
+  
   startApp() {
     this.router
-      // .navigateByUrl('/app/tabs/blog')
-      .navigateByUrl('/home')
-      .then(() => this.storage.set('ion_did_tutorial', 'true'));
+      .navigateByUrl('/blog')
+      // .navigateByUrl('/home')
+      .then(() => this.storage.set('ion_did_tutorial', 'false'));
   }
 
   onSlideChangeStart(event) {
@@ -37,7 +37,7 @@ export class TutorialPage {
   ionViewWillEnter() {
     this.storage.get('ion_did_tutorial').then(res => {
       if (res === true) {
-        this.router.navigateByUrl('/app/tabs/blog');
+        this.router.navigateByUrl('/blog');
       }
     });
 
