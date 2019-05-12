@@ -118,15 +118,15 @@ const routes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'signup',
-      //   children: [
-      //     {
-      //       path: '',
-      //       loadChildren: '../signup/signup.module#SignUpModule'
-      //     }
-      //   ]
-      // },
+      {
+        path: 'signup',
+        children: [
+          {
+            path: '',
+            loadChildren: '../signup/signup.module#SignUpModule'
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: '/app/tabs/blog',

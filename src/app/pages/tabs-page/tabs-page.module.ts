@@ -19,6 +19,7 @@ import { ActionSheetPageModule } from '../action-sheet/action-sheet.module';
 import { HomePageModule } from '../home/home.module';
 import { ProfilePageModule } from '../profile/profile.module';
 import { WaterPageModule } from '../water/water.module';
+import { SignupPageRoutingModule } from '../signup/signup-routing.module';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { WaterPageModule } from '../water/water.module';
     HomePageModule,
     ProfilePageModule,
     WaterPageModule,
+    SignupPageRoutingModule,
     //SessionDetailModule,
     SpeakerDetailModule,
     SpeakerListModule,

@@ -178,11 +178,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     this.amplifyService.auth().currentSession().then(session => {
-      //this.userCreated = true;
+      this.userCreated = true;
       this.logInfoToConsole(session);
       this.session = session;
-      //this.register();
-      //setImmediate(() => this.createMember());
+      this.register();
+      setImmediate(() => this.createMember());
     });
 
     this.checkLoginStatus1();
@@ -202,10 +202,10 @@ export class AppComponent implements OnInit, OnDestroy {
       id: this.session.idToken.payload['sub'],
       firstname:this.session.idToken.payload['cognito:username'],
       lastname:this.session.idToken.payload['cognito:username'],
-      //cognitoId: this.session.idToken.payload['sub'],
-      //registered: false,
-      //bio:'',
-      //image:''
+      cognitoId: this.session.idToken.payload['sub'],
+      registered: true,
+      bio:'',
+      image:''
     };
     // console.log('creating user', user);
     this.appsyncService.hc().then(client => {
@@ -228,8 +228,40 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  UpdateMember() {
+    const member = {
+      // username: this.session.idToken.payload['cognito:username'],
+      // id: this.session.idToken.payload['sub'],
+      // firstname:this.session.idToken.payload['cognito:username'],
+      // lastname:this.session.idToken.payload['cognito:username'],
+      // cognitoId: this.session.idToken.payload['sub'],
+      // registered: true,
+      // bio:'',
+      // image:''
+    };
+    // console.log('creating user', user);
+    this.appsyncService.hc().then(client => {
+      client.mutate({
+        mutation: gql(this.api.Me1), //createMember,//
+        variables: {id: this.session.idToken.payload['sub']},
+
+        optimisticResponse: () => ({
+          createMember: {
+            ...member,
+            __typename: 'Member'
+          }
+        }),
+
+        update: (proxy, {data: { createMember: _member }}) => {
+          //console.log('createUser update with:', _member);
+          proxy.writeQuery({query: gql(this.api.Me) , data: {me: {..._member}}});//  gql(this.api.Me)  getMe
+        }
+      }).catch(err => console.log('Error updating member', err));
+    });
+  }
+
   logInfoToConsole(session) {
-    // console.log('session:',session);
+    console.log('session:',session);
     // console.log(`ID Token: <${session.idToken.jwtToken}>`);
     // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
     // console.log('Decoded ID Token:');

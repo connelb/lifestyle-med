@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuController, IonSlides } from '@ionic/angular';
 
 import { Storage } from '@ionic/storage';
+import { AmplifyService } from 'aws-amplify-angular';
 
 @Component({
   selector: 'page-tutorial',
@@ -12,20 +13,22 @@ import { Storage } from '@ionic/storage';
 })
 export class TutorialPage {
   showSkip = true;
+  isLoggedIn = false;
 
   @ViewChild('slides') slides: IonSlides;
 
   constructor(
+    //private amplifyService: AmplifyService,
     public menu: MenuController,
     public router: Router,
     public storage: Storage
   ) {}
+
   
   startApp() {
     this.router
       .navigateByUrl('/blog')
-      // .navigateByUrl('/home')
-      .then(() => this.storage.set('ion_did_tutorial', 'false'));
+      .then(() => this.storage.set('ion_did_tutorial', true));
   }
 
   onSlideChangeStart(event) {
@@ -37,7 +40,7 @@ export class TutorialPage {
   ionViewWillEnter() {
     this.storage.get('ion_did_tutorial').then(res => {
       if (res === true) {
-        this.router.navigateByUrl('/blog');
+        this.router.navigateByUrl('/app/tabs/login');
       }
     });
 

@@ -54,13 +54,13 @@ export class LoginPage implements OnInit {
     public router: Router,
     private appsync: AppsyncService
   ) {
-    this.authState = { signedIn: false };
+    // this.authState = { signedIn: false };
 
-    this.amplifyService.authStateChange$
-    .subscribe(authState => {
-      this.authState.signedIn = authState.state === 'signedIn';
-      this.events.publish('data:AuthState', this.authState);
-    });
+    // this.amplifyService.authStateChange$
+    // .subscribe(authState => {
+    //   this.authState.signedIn = authState.state === 'signedIn';
+    //   this.events.publish('data:AuthState', this.authState);
+    // });
   }
 
 
@@ -75,8 +75,18 @@ export class LoginPage implements OnInit {
 // });
 
   ngOnInit() {
+    // this.amplifyService.auth().currentSession().then(session => {
+    //   // this.userCreated = true;
+    //   // this.logInfoToConsole(session);
+    //   // this.session = session;
+    //   // this.register();
+    //   // setImmediate(() => this.createMember());
+    // });
+
+
     this.amplifyService.authStateChange$
     .subscribe(authState => {
+      console.log('authState ',authState );
       const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
         // this.signedIn = authState.state === 'signedIn';
         if (this.isLoggedIn && !isLoggedIn) {
