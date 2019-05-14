@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { BlogPage } from './blog.page';
+import { PopoverPage } from '../blog-popover/blog-popover';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [BlogPage]
+  declarations: [BlogPage, PopoverPage],
+  entryComponents: [PopoverPage],
 })
 export class BlogPageModule {}

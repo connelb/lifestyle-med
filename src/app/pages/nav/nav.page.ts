@@ -23,6 +23,11 @@ export class NavPage {
       icon: 'contacts'
     },
     {
+      title: 'Profile',
+      url: '/app/tabs/profile',
+      icon: 'contacts'
+    },
+    {
       title: 'About',
       url: '/app/tabs/about',
       icon: 'information-circle'
@@ -46,9 +51,11 @@ export class NavPage {
         this.user = authState.user;
         const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
         if (this.isLoggedIn && !isLoggedIn) {
+          console.log('this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
           router.navigate(['']);
         } else if (!this.isLoggedIn && isLoggedIn) {
-          router.navigateByUrl('/app/tabs/home');
+          console.log('!this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
+          router.navigateByUrl('/blog');
         }
         this.isLoggedIn = isLoggedIn;
       });
@@ -77,6 +84,7 @@ export class NavPage {
 
   public signOut() {
     // this.storage.set('ion_did_tutorial', false);
+    this.storage.set('hasLoggedIn', false);
     this.amplifyService.auth().signOut();
   }
 

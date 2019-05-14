@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,31 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit {
   showBtn: boolean = false;
   deferredPrompt;
+  update: boolean;
 
-  constructor() { }
+  constructor(public swUpdate: SwUpdate) { }
 
   ngOnInit() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load New Version?")) {
+          window.location.reload();
+        }
+      });
+    }
+
+    this.swUpdate.available.subscribe(event => {
+      //console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
+      this.update = true;
+    });
+
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load New Version?")) {
+          window.location.reload();
+        }
+      });
+    }
   }
 
   ionViewWillEnter(){

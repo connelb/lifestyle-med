@@ -13,38 +13,30 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'blog',
-        children: [
-          {
-            path: '',
-            component: BlogPage,
-          },
-          // {
-          //   path: 'session/:sessionId',
-          //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-          // }
-        ]
-      },
+      // {
+      //   path: 'blog',
+      //   children: [
+      //     {
+      //       path: '',
+      //       component: BlogPage,
+      //     },
+      //     // {
+      //     //   path: 'session/:sessionId',
+      //     //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
+      //     // }
+      //   ]
+      // },
       {
         path: 'action-sheet',
         children: [
+          // {
+          //   path: '',
+          //   redirectTo: '/app/tabs/home',
+          //   pathMatch: 'full'
+          // }
           {
             path: '',
             component: ActionSheetPage,
-          },
-          // {
-          //   path: 'session/:sessionId',
-          //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-          // }
-        ]
-      },
-      {
-        path: 'home',
-        children: [
-          {
-            path: '',
-            component: HomePage,
           },
           // {
           //   path: 'session/:sessionId',
@@ -127,11 +119,30 @@ const routes: Routes = [
           }
         ]
       },
+      // {
+      //   path: 'login',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../login/login.module#LoginModule'
+      //     }
+      //   ]
+      // },
+      
       {
-        path: '',
-        redirectTo: '/app/tabs/blog',
-        pathMatch: 'full'
+        path: 'home',
+        children: [
+          {
+            path: '',
+            component: HomePage,
+          },
+          // {
+          //   path: 'session/:sessionId',
+          //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
+          // }
+        ]
       }
+
     ]
   }
 ];

@@ -1,4 +1,3 @@
-
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -10,16 +9,35 @@
 
 <ion-content padding>
 
-    <ion-content padding>
- 
-        
- 
+  <ion-content padding>
 
-        <img mat-card-image src="'./../../../../assets/img/lc_header.png"  alt="Lynette Connell">
-        
-          <p>
-              Happy October! I hope all is well. There are so many things to talk about this month, but I plan to focus on the fact that it is both Children's Health Month and National Depression and Mental Health Screening Month. Both healthy kids and mental wellness are 2 topics very close to my heart, so I hope I can share with you what I know an
-          </p>
-        
-    
-</ion-content>
+
+
+    <!-- tut: {{tut}}
+    <br> signedIn: {{signedIn}}
+    <br> hasLoggedIn: {{hasLoggedIn}}
+    <br> username: {{username}}
+    <br> authState:{{authState|json}} -->
+    <ion-button shape="round" expand="full" size="small" (click)="presentPopover($event)">
+        Click to learn how to sign up
+      </ion-button>
+
+    <img mat-card-image src="'./../../../../assets/img/lc_header.png" alt="Lynette Connell">
+
+
+    <!-- <ion-card *ngIf="!hasLoggedIn">
+      <ion-card-content>
+        <b>Welcome! </b>Select the
+        <ion-icon name="menu"></ion-icon> icon on the upper top left of the screen. Sign up and you will receive a confirmation code via email.
+        Apply the access code and then log in again to enable full access.
+      </ion-card-content>
+    </ion-card> -->
+
+    <p>
+      Happy October! I hope all is well. There are so many things to talk about this month, but I plan to focus on the fact that
+      it is both Children's Health Month and National Depression and Mental Health Screening Month. Both healthy kids and
+      mental wellness are 2 topics very close to my heart, so I hope I can share with you what I know an
+    </p>
+
+
+  </ion-content>
