@@ -25,10 +25,10 @@ export class CheckUser implements CanLoad, CanActivate {
   canLoad() {
     return this.user.isLoggedIn().then(res => {
       if (res) {
-        this.router.navigate(['/app', 'tabs', 'blog']);
+        this.router.navigate(['/blog']);
         return true;
       } else {
-        this.router.navigate(['/app', 'tabs', 'blog']);
+        this.router.navigate(['/blog']);
         return false;
       }
     });

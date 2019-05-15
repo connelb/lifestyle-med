@@ -50,7 +50,7 @@ import { AuthGuard } from './providers/auth-guard.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MemberRoutingModule,
+    //MemberRoutingModule,
     HttpClientModule,
     ApolloModule,
     AmplifyAngularModule,
