@@ -4,6 +4,7 @@ import { Events, PopoverController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { PopoverPage } from '../blog-popover/blog-popover';
+// import isLoggedIn1 from './../../providers/user-data';
 
 
 @Component({
@@ -19,15 +20,12 @@ export class BlogPage implements OnInit {
   tut: any;
   hasLoggedIn = false;
   signedIn;
+  signedIn23;
   
   //authState = { signedIn: false };
   username;
 
   constructor(public popoverCtrl: PopoverController, public storage: Storage, public events: Events, public amplifyService: AmplifyService) {
-
-
-  
-
 
     console.log("blog constructor called", );
     this.authState = { signedIn: false };
@@ -42,11 +40,7 @@ export class BlogPage implements OnInit {
       // }
     })
 
-    this.amplifyService.authStateChange$
-      .subscribe(authState => {
-        this.authState.signedIn = authState.state === 'signedIn';
-        // this.events.publish('data:AuthState', this.authState);
-      });
+
 
     this.storage.get('username').then(res => {
       // if (res === true) {
@@ -87,6 +81,8 @@ export class BlogPage implements OnInit {
     // });
   }
 
+ 
+
   async presentPopover(event: Event) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,
@@ -95,7 +91,19 @@ export class BlogPage implements OnInit {
     await popover.present();
   }
 
+  async isLoggedIn(){
+    this.amplifyService.authStateChange$
+    .subscribe(authState => this.authState = authState)
+      // return authState
+      // this.authState.signedIn = authState.state === 'signedIn';
+      // this.events.publish('data:AuthState', this.authState);
+    // });
+    return this.authState
+  }
+
   ngOnInit() {
+
+    this.signedIn23 = this.isLoggedIn()
     // console.log('what is blog init called');
     // this.events.subscribe('data:AuthState', async (data) => {
     //   // this.isLoggedIn = data.signedIn;

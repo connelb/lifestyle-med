@@ -37,13 +37,17 @@ const routes: Routes = [
           {
             path: '',
             component: ActionSheetPage,
-          },
-          // {
-          //   path: 'session/:sessionId',
-          //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-          // }
+          }
         ]
       },
+          {
+            path: 'sleep-history',
+            children: [
+              {
+                path: '',
+            loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
+              }]
+          },
       // {
       //   path: 'speakers',
       //   children: [
@@ -71,7 +75,7 @@ const routes: Routes = [
         ]
       },
 
-      
+
       {
         path: 'chat',
         children: [
@@ -128,14 +132,20 @@ const routes: Routes = [
       //     }
       //   ]
       // },
-      
+
       {
         path: 'home',
         children: [
           {
             path: '',
-            component: HomePage,
+            loadChildren: '../home/home.module#HomePageModule'
+            // component: HomePage,
           },
+          {
+            path: '',
+            redirectTo: '/app/tabs/home',
+            pathMatch: 'full'
+          }
           // {
           //   path: 'session/:sessionId',
           //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'

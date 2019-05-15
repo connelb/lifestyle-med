@@ -9,6 +9,7 @@ import { AmplifyService }  from 'aws-amplify-angular';
 })
 export class UserData {
   authState: any;
+  signedIn;
 
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
@@ -20,6 +21,10 @@ export class UserData {
     public AmplifyService:AmplifyService
   ) { 
     this.authState = { signedIn: false };
+
+    this.events.subscribe('data:AuthState', async (data) => {
+      this.signedIn = data.signedIn;
+    })
   }
 
   hasFavorite(sessionName: string): boolean {
@@ -76,6 +81,13 @@ export class UserData {
     return this.storage.get('username').then((value) => {
       return value;
     });
+  }
+
+  isLoggedIn1(){
+    if (!this.signedIn) {
+      return this.signedIn;
+    }
+    return this.signedIn;
   }
 
   isLoggedIn(): Promise<boolean> {
