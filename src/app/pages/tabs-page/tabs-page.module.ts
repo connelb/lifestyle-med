@@ -20,6 +20,8 @@ import { HomePageModule } from '../home/home.module';
 import { ProfilePageModule } from '../profile/profile.module';
 import { WaterPageModule } from '../water/water.module';
 import { SignupPageRoutingModule } from '../signup/signup-routing.module';
+import { SleepHistoryPage } from '../sleep-history/sleep-history.page';
+import { SleepHistoryPageModule } from '../sleep-history/sleep-history.module';
 
 @NgModule({
   imports: [
@@ -34,11 +36,12 @@ import { SignupPageRoutingModule } from '../signup/signup-routing.module';
     WaterPageModule,
     SignupPageRoutingModule,
     //SessionDetailModule,
-    SpeakerDetailModule,
-    SpeakerListModule,
+    // SpeakerDetailModule,
+    // SpeakerListModule,
     BlogPageModule,
     SignUpModule,
     SleepPageModule,
+    SleepHistoryPageModule,
     ActionSheetPageModule,
     TabsPageRoutingModule
   ],

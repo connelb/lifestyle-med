@@ -4,22 +4,6 @@ import { CheckTutorial } from './providers/check-tutorial.service';
 import { CheckUser } from './providers/check-user.service';
 import { AuthGuard } from './providers/auth-guard.service';
 
-// const routes: Routes = [
-//   { path: '', redirectTo: 'login', pathMatch: 'full' },
-//   { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
-//   { path: 'register', loadChildren: './public/register/register.module#RegisterPageModule' },
-//   { 
-//     path: 'members', 
-//     canActivate: [AuthGuardService],
-//     loadChildren: './members/member-routing.module#MemberRoutingModule'
-//   },
-// ];
-
-// { path: '', redirectTo: 'home', pathMatch: 'full' },
-// { path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [AuthGuardService]},
-// { path: 'cards/:id', loadChildren: './cards/cards.module#CardsPageModule', canActivate: [AuthGuardService] },
-// { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-
 const routes: Routes = [
   {
     path: '',
@@ -29,11 +13,6 @@ const routes: Routes = [
     path: 'support',
     loadChildren: './pages/support/support.module#SupportModule'
   },
-  // {
-  //   path: 'tutorial',
-  //   loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
-  //   canLoad: [CheckTutorial]
-  // },
   {
     path: 'signup',
     loadChildren: './pages/signup/signup.module#SignUpModule'
@@ -50,19 +29,13 @@ const routes: Routes = [
     loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
     canActivate: [AuthGuard]
   },
-
-  // {
-  //   path: 'home',
-  //   loadChildren: './pages/home/home.module#HomePageModule',
-  //   // path: 'members', 
-  //   //canActivate: [CheckUser],
-  //   // loadChildren: './members/member-routing.module#MemberRoutingModule'
-  // },
-  // { path: 'sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' },
-  // { path: 'water', loadChildren: './pages/water/water.module#WaterPageModule' },
-  // { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',canActivate: [AuthGuard] },
-  // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule',canActivate: [AuthGuard]  },
-  // { path: 'nav', loadChildren: './pages/nav/nav.module#NavPageModule' }
+  { path: 'app/tabs/chat', loadChildren: './pages/chat/chat.module#ChatPageModule'},
+  { path: 'app/tabs/sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' },
+  { path: 'app/tabs/water', loadChildren: './pages/water/water.module#WaterPageModule' },
+  { path: 'app/tabs/sleep', loadChildren: './pages/sleep/sleep.module#SleepPageModule' },
+  { path: 'app/tabs/profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',canActivate: [AuthGuard] },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule',canActivate: [AuthGuard]  },
+  //{ path: 'nav', loadChildren: './pages/nav/nav.module#NavPageModule' },
 
   {
     path: 'tutorial',

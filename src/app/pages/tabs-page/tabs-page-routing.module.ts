@@ -14,16 +14,12 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       // {
-      //   path: 'blog',
+      //   path: 'water',
       //   children: [
       //     {
-      //       path: '',
-      //       component: BlogPage,
+      //         path: '',
+      //         loadChildren: '../water/water.module#WaterPageModule'
       //     },
-      //     // {
-      //     //   path: 'session/:sessionId',
-      //     //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
-      //     // }
       //   ]
       // },
       {
@@ -37,9 +33,7 @@ const routes: Routes = [
           {
             path: '',
             component: ActionSheetPage,
-          }
-        ]
-      },
+          },
           {
             path: 'sleep-history',
             children: [
@@ -48,6 +42,8 @@ const routes: Routes = [
             loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
               }]
           },
+        ]
+      },
       // {
       //   path: 'speakers',
       //   children: [
@@ -65,46 +61,46 @@ const routes: Routes = [
       //     }
       //   ]
       // },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '',
-            component: ProfilePage,
-          }
-        ]
-      },
+      // {
+      //   path: 'profile',
+      //   children: [
+      //     {
+      //       path: '',
+      //       component: ProfilePage,
+      //     }
+      //   ]
+      // },
 
 
-      {
-        path: 'chat',
-        children: [
-          {
-            path: '',
-            loadChildren: '../chat/chat.module#ChatPageModule'
-            // loadChildren: '../post/post.module#PostModule'
-          }
-        ]
-      },
-      {
-        path: 'water',
-        children: [
-          {
-            path: '',
-            loadChildren: '../water/water.module#WaterPageModule'
-            // loadChildren: '../post/post.module#PostModule'
-          }
-        ]
-      },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '',
-            loadChildren: '../profile/profile.module#ProfilePageModule'
-          }
-        ]
-      },
+      // {
+      //   path: 'chat',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../chat/chat.module#ChatPageModule'
+      //       // loadChildren: '../post/post.module#PostModule'
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'app/tabs/water',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../water/water.module#WaterPageModule'
+      //       // loadChildren: '../post/post.module#PostModule'
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'profile',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../profile/profile.module#ProfilePageModule'
+      //     }
+      //   ]
+      // },
       {
         path: 'about',
         children: [
@@ -114,15 +110,15 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'signup',
-        children: [
-          {
-            path: '',
-            loadChildren: '../signup/signup.module#SignUpModule'
-          }
-        ]
-      },
+      // {
+      //   path: 'signup',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../signup/signup.module#SignUpModule'
+      //     }
+      //   ]
+      // },
       // {
       //   path: 'login',
       //   children: [
@@ -140,17 +136,17 @@ const routes: Routes = [
             path: '',
             loadChildren: '../home/home.module#HomePageModule'
             // component: HomePage,
-          },
-          {
-            path: '',
-            redirectTo: '/app/tabs/home',
-            pathMatch: 'full'
           }
           // {
           //   path: 'session/:sessionId',
           //   loadChildren: '../session-detail/session-detail.module#SessionDetailModule'
           // }
         ]
+      },
+      {
+        path: '',
+        redirectTo: '/app/tabs/home',
+        pathMatch: 'full'
       }
 
     ]

@@ -63,6 +63,56 @@ export class LoginPage implements OnInit {
   loading: boolean;
   currentUser: any;
 
+  signUpConfig = {
+    header: 'Sign up to get access code via email',
+    defaultCountryCode: '1',
+    hideAllDefaults: true,
+    signUpFields: [
+      {
+        label: 'Username',
+        key: 'username',
+        required: true,
+        displayOrder: 1,
+        type: 'string',
+      },
+      {
+        label: 'Password',
+        key: 'password',
+        required: true,
+        displayOrder: 2,
+        type: 'password',
+      },
+      {
+        label: 'Email',
+        key: 'email',
+        required: true,
+        displayOrder: 3,
+        type: 'email',
+      },
+      // {
+      //   label: 'Name',
+      //   key: 'name',
+      //   required: true,
+      //   displayOrder: 4,
+      //   type: 'string',
+      // },
+      // {
+      //   label: 'Family name',
+      //   key: 'family_name',
+      //   required: true,
+      //   displayOrder: 5,
+      //   type: 'string',
+      // },
+      // {
+      //   label: 'Phone number',
+      //   key: 'phone_number',
+      //   required: false,
+      //   displayOrder: 4,
+      //   type: 'string',
+      // }
+    ]
+  };
+
   constructor(
     public events: Events,
     public storage:Storage,
@@ -79,6 +129,8 @@ export class LoginPage implements OnInit {
         this.authState.signedIn = authState.state === 'signedIn';
         this.events.publish('data:AuthState', this.authState);
       });
+
+ 
   }
 
 

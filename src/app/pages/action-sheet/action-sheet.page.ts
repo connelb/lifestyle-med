@@ -20,15 +20,15 @@ export class ActionSheetPage{
         text: 'Record',
         icon: 'share',
         handler: () => {
-          // console.log('Delete clicked');
-          this.router.navigateByUrl('/sleep');
+          console.log('sleep clicked');
+          this.router.navigateByUrl('/app/tabs/sleep');
         }
       }, {
         text: 'History',
         icon: 'share',
         handler: () => {
-          console.log('Share clicked');
-          this.router.navigateByUrl('/sleep-history');
+          console.log('sleep-history clicked');
+          this.router.navigateByUrl('/app/tabs/sleep-history');
         }
       },
       {

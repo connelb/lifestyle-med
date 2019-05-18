@@ -7,7 +7,7 @@
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!-- [hide]="['Greetings']" -->
 <ion-content>
-    <amplify-authenticator framework="Ionic" [hide]="['Greetings']"></amplify-authenticator>
+    <amplify-authenticator framework="Ionic" [signUpConfig]='signUpConfig' ></amplify-authenticator>
 </ion-content>
