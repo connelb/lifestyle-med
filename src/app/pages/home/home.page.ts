@@ -36,6 +36,23 @@ export class HomePage implements OnInit {
     }
   }
 
+  checkForUpdate() {
+    // console.log('[ChatQL] checkForUpdate started');
+    this.swUpdate.checkForUpdate()
+    .then(() => { console.log('[ChatQL] checkForUpdate completed'); })
+    .catch(err => { console.error(err); });
+  }
+
+  activateUpdate() {
+    // console.log('[ChatQL] activateUpdate started');
+    this.swUpdate.activateUpdate()
+    .then(() => {
+      // console.log('[ChatQL] activateUpdate completed');
+      location.reload();
+    }).catch(err => { console.error(err); });
+    this.update = false;
+  }
+
   ionViewWillEnter(){
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt

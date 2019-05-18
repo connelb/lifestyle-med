@@ -1,7 +1,7 @@
 .chat {
   overflow-x: hidden !important;
   overflow-y: auto;
-  height: 60vh !important;
+  height: 20vh !important;
 }
 
 :host ::ng-deep app-chat-message:first-child .chat-message {

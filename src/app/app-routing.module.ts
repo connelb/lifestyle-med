@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'app/tabs/sleep-history', loadChildren: './pages/sleep-history/sleep-history.module#SleepHistoryPageModule' },
   { path: 'app/tabs/water', loadChildren: './pages/water/water.module#WaterPageModule' },
   { path: 'app/tabs/sleep', loadChildren: './pages/sleep/sleep.module#SleepPageModule' },
-  { path: 'app/tabs/profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',canActivate: [AuthGuard] },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',canActivate: [AuthGuard] },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule',canActivate: [AuthGuard]  },
   //{ path: 'nav', loadChildren: './pages/nav/nav.module#NavPageModule' },
 

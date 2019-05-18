@@ -1,13 +1,20 @@
-<div class="rounded p-2 mt-2 bg border border-dark rounded">
-  <div class="input-group">
-    <input type="text" class="form-control no-focus"
+<!-- <div class="rounded p-2 mt-2 bg border border-dark rounded">
+  <div class="input-group"> -->
+<!-- <ion-input type="text" class="form-control no-focus"
     required placeholder="Type a Message"
     id="message" [(ngModel)]="message" name="message"
-    (keyup.enter)="createNewMessage()" />
-    <span class="input-group-btn">
-      <button class="btn btn-dark" (click)="createNewMessage()" type="button">
-        Send&nbsp;<i class='ion-chatbubble-working'></i>
-      </button>
+    (keyup.enter)="createNewMessage()"></ion-input> -->
+<ion-segment>
+  <ion-item>
+    <ion-textarea clearOnEdit="true" placeholder="Type a message..." id="message" [(ngModel)]="message" name="message" (keyup.enter)="createNewMessage()"></ion-textarea>
+    <span>
+      <ion-button (click)="createNewMessage()" slot="primary">
+        <ion-icon name="chatbubbles"></ion-icon>
+        Send
+      </ion-button>
     </span>
-  </div>
-</div>
+  </ion-item>
+</ion-segment>
+<!-- </span> -->
+<!-- </div>
+</div> -->

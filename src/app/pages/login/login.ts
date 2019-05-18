@@ -145,18 +145,18 @@ export class LoginPage implements OnInit {
 // });
 
   ngOnInit() {
+
     // this.amplifyService.auth().currentSession().then(session => {
-    //   // this.userCreated = true;
-    //   // this.logInfoToConsole(session);
-    //   // this.session = session;
-    //   // this.register();
-    //   // setImmediate(() => this.createMember());
+    //   this.storage.set('hasLoggedIn', true)
+    //   this.userCreated = true;
+    //   this.logInfoToConsole(session);
+    //   this.session = session;
+    //   this.register();
+    //   setImmediate(() => this.createMember());
     // });
-    // this.amplifyService.authStateChange$
-    //   .subscribe(authState => {
-    //     this.authState.signedIn = authState.state === 'signedIn';
-    //     this.events.publish('data:AuthState', this.authState);
-    //   });
+
+    // this.checkLoginStatus1();
+    // this.listenForLoginEvents();
 
     this.amplifyService.authStateChange$
     .subscribe(authState => {
@@ -170,6 +170,10 @@ export class LoginPage implements OnInit {
         // if (!authState.user) {
             this.user = null;
             this.router.navigate(['']);
+
+
+
+
         // } else {
         } else if (!this.isLoggedIn && isLoggedIn) {
           
@@ -190,17 +194,6 @@ export class LoginPage implements OnInit {
         }
     });
 
-    this.amplifyService.auth().currentSession().then(session => {
-      this.storage.set('hasLoggedIn', true)
-      this.userCreated = true;
-      this.logInfoToConsole(session);
-      this.session = session;
-      this.register();
-      setImmediate(() => this.createMember());
-    });
-
-    this.checkLoginStatus1();
-    this.listenForLoginEvents();
   }
 
   
@@ -318,7 +311,7 @@ export class LoginPage implements OnInit {
       bio:'',
       image:''
     };
-    // console.log('creating user', user);
+    console.log('creating new member', member);
     this.appsyncService.hc().then(client => {
       client.mutate({
         mutation: gql(this.api.CreateMember), //createMember,//

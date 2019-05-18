@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
       path: 'support',
       loadChildren: '../pages/support/support.module#SupportModule'
     },
+    { path: 'home', loadChildren: '../pages/home/home.module#HomePageModule' },
     { path: 'blog', loadChildren: '../pages/blog/blog.module#BlogPageModule' },
     { path: 'chat', loadChildren: '../pages/chat/chat.module#ChatPageModule' },
     { path: 'action-sheet', loadChildren: '../pages/action-sheet/action-sheet.module#ActionSheetPageModule' },
