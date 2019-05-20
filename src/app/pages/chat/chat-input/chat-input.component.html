@@ -4,17 +4,50 @@
     required placeholder="Type a Message"
     id="message" [(ngModel)]="message" name="message"
     (keyup.enter)="createNewMessage()"></ion-input> -->
-<ion-segment>
-  <ion-item>
-    <ion-textarea clearOnEdit="true" placeholder="Type a message..." id="message" [(ngModel)]="message" name="message" (keyup.enter)="createNewMessage()"></ion-textarea>
-    <span>
+<!-- <ion-segment>
+  <ion-item> -->
+<!-- <div class="input-wrap"> -->
+
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+        <ion-textarea clearOnEdit="true" placeholder="Type a message..." id="message" [(ngModel)]="message" name="message" (keyup.enter)="createNewMessage()">
+          </ion-textarea>
+    </ion-col>
+    <ion-col size="2">
+        <ion-button size="default" (click)="createNewMessage()">
+            <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+          </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<!-- </div> -->
+
+<!-- <span>
       <ion-button (click)="createNewMessage()" slot="primary">
-        <ion-icon name="chatbubbles"></ion-icon>
+          <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+       <ion-icon name="chatbubbles"></ion-icon>
         Send
-      </ion-button>
-    </span>
-  </ion-item>
-</ion-segment>
+      </ion-button> 
+
+    </span> -->
+<!-- </ion-item>
+</ion-segment> -->
+
+
+<!-- <ion-textarea #messageInput placeholder="Enter your message!" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()">
+      </ion-textarea>
+      <ion-button ion-button clear icon-only item-right (click)="sendMessage()">
+        <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+      </ion-button> -->
+
+
+
+
 <!-- </span> -->
 <!-- </div>
 </div> -->

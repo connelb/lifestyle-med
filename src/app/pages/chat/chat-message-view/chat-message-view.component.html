@@ -4,6 +4,7 @@
       <i class="ion-chatbubbles" data-pack="default" data-tags="talk"></i> {{conversation?.name}}
     </span>
     <div #scrollMe class="chat" [appInfscroll]="loadMoreMessages" [completedFetching]="completedFetching">
+     
       <app-chat-message *ngFor="let message of messages; last as isLast; first as isFirst"
       [message]="message"
       [fromMe]="fromMe(message)"
@@ -11,6 +12,7 @@
       [isFirst]="isFirst"
       (added)="messageAdded(isFirst, $event)"
       ></app-chat-message>
+    
     </div>
   </div>
 </div>

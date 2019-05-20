@@ -1,0 +1,38 @@
+ion-card{
+    background-color: white;
+    margin-left: 16px;
+}
+.sent-date{
+    font-size: 0.7em;
+    float: right;
+    color: grey;
+}
+
+.myself {
+    background-color: #FFFFFFFF;
+    margin-left: -20px;
+ }
+
+ .other {
+    background-color: #FFFFFFFF;
+    margin-right: 0px;
+    margin-left: 20px;
+ }
+
+ ion-col{
+     margin-block-end: 5px;
+ }
+
+ ion-card-content {
+
+    /* padding-left: 20px; */
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* font-size: 16px;
+    line-height: 1.4; */
+}
+ion-card-subtitle{
+    float:right;
+    padding-inline-end: 2px;
+}

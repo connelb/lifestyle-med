@@ -3,8 +3,38 @@ import { Component, Input, Output, EventEmitter, AfterViewInit, OnInit, OnChange
 import { AppsyncService } from '../../../providers/appsync.service';
 import Message from '../types/message';
 import readUserFragment from '../graphql/queries/readUserFragment';
-// import User from '../types/user';
+import User from '../types/user';
 import Member from '../types/member';
+import Member1 from '../types/member1';
+import gql from 'graphql-tag';
+import { APIService } from '../../../API.service';
+//import getMember from '../graphql/queries/getMember';
+import { Auth } from 'aws-amplify';
+
+import { API, graphqlOperation } from "aws-amplify";
+
+// const listQuestions = `
+// query listQuestions($id: ID!) {
+//   getDeck(id: $id) {
+//     name
+//     cards {
+//       items {
+//         id
+//         question
+//       }
+//     }
+//   }
+// }
+// `;
+
+const getMember = `
+query getMember($id: ID!) {
+  getMember(id: $id) {
+    username
+  }
+}
+`;
+
 
 const USER_ID_PREFIX = 'User:';
 
@@ -22,20 +52,22 @@ export class ChatMessageComponent implements AfterViewInit, OnInit, OnChanges {
   @Output() added: EventEmitter<Message> = new EventEmitter();
 
   // user: User;
-  user: Member;
+  user: Member1;
   createdAt;
 
-  constructor(private appsync: AppsyncService) {}
+  constructor(private API: APIService, private appsync: AppsyncService) {}
 
   ngOnInit() {
-    this.appsync.hc().then(client => {
-      this.user = client.readFragment({
-        id: USER_ID_PREFIX + this.message.sender,
-        fragment: readUserFragment
-      });
-      console.log('chat-message this.user fragment ok?:::::::::::::::::::', this.user)
-    });
+    this.getMember();
   }
+
+  getMember() {
+    const query = API.graphql(graphqlOperation(getMember , { id: this.message.sender })) as Promise<any>;
+    
+    query.then(res => {
+      this.user = res.data.getMember;
+    });
+    }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let propName in changes) {

@@ -1,6 +1,6 @@
 <ion-item *ngFor="let convo of conversations">
   <ion-icon slot="icon-only" name="navigate"></ion-icon>
-  <a href='#' (click)="click(convo, $event); false">{{convo.name}}</a>
+  <ion-button expand="block" fill="outline" (click)="click(convo, $event); false">{{convo.name}}</ion-button>
 </ion-item>
 
 <!-- <ion-item *ngFor="let convo of conversations">

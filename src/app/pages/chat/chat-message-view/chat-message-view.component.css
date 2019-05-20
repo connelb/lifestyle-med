@@ -1,13 +1,11 @@
 .chat {
   overflow-x: hidden !important;
   overflow-y: auto;
-  height: 20vh !important;
+  height: 40vh !important;
+  margin-block-start: 5px;
 }
 
-:host ::ng-deep app-chat-message:first-child .chat-message {
-  /* margin-top: 1em; */
-}
 
 .bg {
-  background-color: #e4e7eb;
+  background-color:  #FFFFFFFF;
 }

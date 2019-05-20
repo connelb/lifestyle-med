@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 export class CheckTutorial implements CanLoad {
   constructor(private storage: Storage, private router: Router) {
     //remove for development testing only
-    this.storage.set('ion_did_tutorial', false)
+    //this.storage.set('ion_did_tutorial', false)
   }
 
   canLoad() {

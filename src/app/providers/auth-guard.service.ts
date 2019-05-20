@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     return this.amplifyService.auth().currentAuthenticatedUser()
       .then(user => true)
       .catch(err => {
-        this.router.navigate(['']);
+        this.router.navigate(['/home']);
         return false;
     });
    }

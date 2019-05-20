@@ -167,14 +167,10 @@ export class LoginPage implements OnInit {
         this.events.publish('data:AuthState', this.authState);
 
         if (this.isLoggedIn && !isLoggedIn) {
-        // if (!authState.user) {
+        //if (!authState.user) {
             this.user = null;
-            this.router.navigate(['']);
-
-
-
-
-        // } else {
+            this.router.navigate(['/blog']);
+        //} 
         } else if (!this.isLoggedIn && isLoggedIn) {
           
             this.user = authState.user;
@@ -189,7 +185,7 @@ export class LoginPage implements OnInit {
            
             //setImmediate(() => this.createMember());
 
-            this.router.navigateByUrl('/blog');
+            this.router.navigateByUrl('/home');
             //this.router.navigate(['members', 'blog1']);
         }
     });
@@ -432,7 +428,7 @@ export class LoginPage implements OnInit {
 
 
 
-          //this.router.navigateByUrl('/app/tabs/blog');
+          this.router.navigateByUrl('/home');
         }
       });
   }
