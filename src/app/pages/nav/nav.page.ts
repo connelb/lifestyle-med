@@ -31,17 +31,19 @@ export class NavPage {
 
     isLoggedIn = false;
     user:string;
+    
 
     constructor( public events: Events, private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
+      this.storage.set("ion_repeat_tutorial", false);
       this.amplifyService.authStateChange$.subscribe(authState => {
         this.user = authState.user;
         const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-        if (this.isLoggedIn && !isLoggedIn) {
-          console.log('this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
+        if (!isLoggedIn) {
+          console.log('not logged in: this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
           router.navigate(['']);
-        } else if (!this.isLoggedIn && isLoggedIn) {
-          console.log('!this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
-          router.navigateByUrl('/login');
+        } else if (isLoggedIn) {
+          console.log('logged in!!: !this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
+          router.navigateByUrl('/home');
         }
         this.isLoggedIn = isLoggedIn;
       });
@@ -51,6 +53,7 @@ export class NavPage {
   openTutorial() {
     this.menu.enable(false);
     this.storage.set('ion_did_tutorial', false);
+    this.storage.set('ion_repeat_tutorial', true);
     this.router.navigateByUrl('/tutorial');
   }
 

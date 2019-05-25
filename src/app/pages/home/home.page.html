@@ -6,7 +6,7 @@
       <ion-title>Home</ion-title>
     </ion-toolbar>
   </ion-header>
-<ion-header>
+
   <ion-content padding>
 
       <div *ngIf="update;">
@@ -26,3 +26,29 @@
         <p>Happy October! I hope all is well. There are so many things to talk about this month, but I plan to focus on the fact that it is both Children's Health Month and National Depression and Mental Health Screening Month. Both healthy kids and mental wellness are 2 topics very close to my heart, so I hope I can share with you what I know an
     </p>
   </ion-content>
+
+  <!-- <ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Public Blog-Life by Design</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-content padding>
+      <ion-button *ngIf="authState.state != 'signedIn'" shape="round" size="small" (click)="presentPopover($event)">
+          Join now!
+        </ion-button>
+  
+      <img mat-card-image src="'./../../../../assets/img/lc_header.png" alt="Lynette Connell">
+  
+      <p>
+        Happy October! I hope all is well. There are so many things to talk about this month, but I plan to focus on the fact that
+        it is both Children's Health Month and National Depression and Mental Health Screening Month. Both healthy kids and
+        mental wellness are 2 topics very close to my heart, so I hope I can share with you what I know an
+      </p>
+  
+    </ion-content> -->
