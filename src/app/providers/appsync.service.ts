@@ -21,7 +21,9 @@ export class AppsyncService {
     // this.hc = client.hydrated;
     this._hc = client;
   }
+
   hc() {
     return this._hc.hydrated();
   }
+  
 }

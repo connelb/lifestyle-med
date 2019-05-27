@@ -38,6 +38,7 @@ export class TutorialPage implements OnInit{
       this.authState = data;
       this.isLoggedIn= this.authState.idToken.payload.email_verified;
       this.storage.set('hasLoggedIn',true);
+      this.storage.set('hasSignedUp',this.authState.idToken.payload.email_verified);
     }).catch(err => {
       this.storage.set('hasLoggedIn',false);
       console.log("err:",err)
@@ -66,7 +67,6 @@ export class TutorialPage implements OnInit{
   }
 
   ionViewWillEnter() {
-
     this.storage.get("ion_did_tutorial").then(res => this.seen = res);
     this.storage.get('hasLoggedIn').then(res => this.isLoggedIn = res);
 

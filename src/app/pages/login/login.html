@@ -8,6 +8,27 @@
   </ion-toolbar>
 </ion-header>
 <!-- [hide]="['Greetings']" -->
+
+authState: {{authState?.state|json}}
+{{ showsignedOut }}
+ {{showsignIn }}
+ {{showsignUp}}
+
 <ion-content>
-    <amplify-authenticator framework="Ionic" [signUpConfig]='signUpConfig' ></amplify-authenticator>
+    <amplify-authenticator *ngIf="authState?.state === 'signedOut'" framework="Ionic" [signUpConfig]='signUpConfig' ></amplify-authenticator>
+    
+    {{authState?.state}}
+    
+    <!-- <amplify-auth-sign-up  *ngIf="showsignUp" framework="Ionic"></amplify-auth-sign-up> -->
+    <amplify-auth-confirm-sign-up  *ngIf="authState?.state === 'signUp'" [authState]="authState"></amplify-auth-confirm-sign-up>
+    <!-- <amplify-auth-confirm-sign-up-ionic></amplify-auth-confirm-sign-up-ionic> -->
+    <!-- <amplify-auth-sign-up *ngIf="authState?.state === 'signUp'" framework="Ionic" [signUpConfig]='signUpConfig' ></amplify-auth-sign-up> -->
+    <!-- <amplify-auth-confirm-sign-in></amplify-auth-confirm-sign-in>
+    <amplify-auth-confirm-sign-up></amplify-auth-confirm-sign-up>
+    <amplify-auth-forgot-password></amplify-auth-forgot-password>
+    <amplify-auth-greetings></amplify-auth-greetings>
+    <amplify-auth-require-new-password></amplify-auth-require-new-password>
+    <amplify-auth-sign-in></amplify-auth-sign-in> 
+    <amplify-auth-sign-up *ngIf="authState.state === 'signedOut'" framework="Ionic" ></amplify-auth-sign-up> -->
+      
 </ion-content>

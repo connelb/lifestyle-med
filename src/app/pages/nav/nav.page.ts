@@ -39,10 +39,10 @@ export class NavPage {
         this.user = authState.user;
         const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
         if (!isLoggedIn) {
-          console.log('not logged in: this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
+          // console.log('not logged in: this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
           router.navigate(['']);
         } else if (isLoggedIn) {
-          console.log('logged in!!: !this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
+          // console.log('logged in!!: !this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
           router.navigateByUrl('/home');
         }
         this.isLoggedIn = isLoggedIn;
@@ -59,10 +59,12 @@ export class NavPage {
 
   public signOut() {
     // this.storage.set('ion_did_tutorial', false);
-    this.storage.set('hasLoggedIn', false);
+    //this.storage.set('hasLoggedIn', false);
+    
     this.amplifyService.auth().signOut()
           .then(() => {
         this.isLoggedIn =false;
+        this.storage.set('ion_repeat_tutorial', false);
         this.storage.set('ion_did_tutorial', false);
         this.storage.set('hasLoggedIn', false);
         this.storage.set('loggedIn', false);
@@ -76,23 +78,5 @@ export class NavPage {
         console.log('err: ', err)
       })
   }
-
-  // logout() {     
-  //   this.amplifyService.auth().signOut()
-  //     .then(() => {
-  //       this.loggedIn =false;
-  //       this.storage.set('ion_did_tutorial', false);
-  //       this.storage.set('hasLoggedIn', false);
-  //       this.storage.set('loggedIn', false);
-  //       this.events.publish('loggedIn', false);
-  //       this.router.navigateByUrl('/home');
-  //       // this.userData.logout().then(() => {
-  //       //   return this.router.navigateByUrl('/app/tabs/blog');
-  //       // })
-  //     })
-  //     .catch(err => {
-  //       console.log('err: ', err)
-  //     })
-  // }
 
 }

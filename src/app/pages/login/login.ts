@@ -29,36 +29,42 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage implements OnInit {
+  showsignedOut:boolean = false;
+  showsignIn:boolean = false;
+  showsignUp:boolean = false;
+  showforgotPassword:boolean = false;
+  showrequireNewPassword:boolean = false;
+
+
+  // ‘confirmSignIn’
+  // ‘confirmSignUp’
+  // ‘forgotPassword’
+  // ‘requireNewPassword’
+  // ‘signedIn’
+  // ‘signIn’
+  // ‘signUp’
+
+
+  //state: "confirmSignUp"
   isLoggedIn = false;
+ 
+
   authState: any;
-  //login: UserOptions = { username: '', password: '' };
   submitted = false;
   signedIn;
   user;
   member;
-  //greeting;
-
   username: string;
   session;
   client: AWSAppSyncClient<any>;
-  //client:any;
   me: Member;
-  //conversation: Conversation;
   update: boolean;
   signInUserSession;
 
   loggedIn = false;
   userCreated: boolean;
-  // signedIn;
   greeting;
-  // session;
-  // client: AWSAppSyncClient<any>;
-  // me: Member;
-  
-  // rates$: Observable<any[]>;
-  // loading$: Observable<boolean>;
-  // errors$: Observable<any>;
-  // member = '';
+ 
   no_member;
   loading: boolean;
   currentUser: any;
@@ -88,28 +94,7 @@ export class LoginPage implements OnInit {
         required: true,
         displayOrder: 3,
         type: 'email',
-      },
-      // {
-      //   label: 'Name',
-      //   key: 'name',
-      //   required: true,
-      //   displayOrder: 4,
-      //   type: 'string',
-      // },
-      // {
-      //   label: 'Family name',
-      //   key: 'family_name',
-      //   required: true,
-      //   displayOrder: 5,
-      //   type: 'string',
-      // },
-      // {
-      //   label: 'Phone number',
-      //   key: 'phone_number',
-      //   required: false,
-      //   displayOrder: 4,
-      //   type: 'string',
-      // }
+      }
     ]
   };
 
@@ -122,27 +107,30 @@ export class LoginPage implements OnInit {
     public router: Router,
     private appsyncService: AppsyncService
   ) {
-    this.authState = { signedIn: false };
+    //this.authState = { signedIn: false };
 
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        this.authState.signedIn = authState.state === 'signedIn';
+        this.authState = authState;
+        console.log('what is the login is state?? constructor',authState.state)
+        //this.authState.signedIn = authState.state === 'signedIn';
         this.events.publish('data:AuthState', this.authState);
-      });
 
- 
+        this.showsignedOut = authState.state === 'signedOut';
+        this.showsignIn = authState.state === 'signedIn';
+        this.showsignUp = authState.state === 'signUp';
+        // this.showforgotPassword = authState.state === 'signedIn';
+        // this.showrequireNewPassword = authState.state === 'signedIn';
+      });
   }
 
-
-//   this.amplifyService.authStateChange$.subscribe(authState => {
-//     const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-//     if (this.isLoggedIn && !isLoggedIn) {
-//       router.navigate(['']);
-//     } else if (!this.isLoggedIn && isLoggedIn) {
-//       router.navigate(['/chat']);
-//     }
-//     this.isLoggedIn = isLoggedIn;
-// });
+  // ‘confirmSignIn’
+  // ‘confirmSignUp’
+  // ‘forgotPassword’
+  // ‘requireNewPassword’
+  // ‘signedIn’
+  // ‘signIn’
+  // ‘signUp’
 
   ngOnInit() {
 
@@ -160,10 +148,14 @@ export class LoginPage implements OnInit {
 
     this.amplifyService.authStateChange$
     .subscribe(authState => {
-      console.log('authState ',authState );
+
+      this.showsignedOut = authState.state === 'signedOut';
+        this.showsignIn = authState.state === 'signedIn';
+        this.showsignUp = authState.state === 'signUp';
+      console.log('authState init ',authState );
       const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
         // this.signedIn = authState.state === 'signedIn';
-        this.authState.signedIn = authState.state === 'signedIn';
+        //this.authState.signedIn = authState.state === 'signedIn';
         this.events.publish('data:AuthState', this.authState);
 
         if (this.isLoggedIn && !isLoggedIn) {
@@ -361,7 +353,7 @@ export class LoginPage implements OnInit {
   }
 
   logInfoToConsole(session) {
-    console.log('session:',session);
+    //console.log('session:',session);
     // console.log(`ID Token: <${session.idToken.jwtToken}>`);
     // console.log(`Access Token: <${session.accessToken.jwtToken}>`);
     // console.log('Decoded ID Token:');
@@ -374,60 +366,16 @@ export class LoginPage implements OnInit {
     return this.userCreated ? 'UpdateMember' : 'CreateMember';
   }
 
-  // installPwa(): void {
-  //   this.Pwa.promptEvent.prompt();
-  // }
-
-  // checkLoginStatus2(){
-  //   this.amplifyService.authStateChange$
-  //   .subscribe(authState => {
-  //     const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-  //       // this.signedIn = authState.state === 'signedIn';
-  //       if (this.isLoggedIn && !isLoggedIn) {
-  //       // if (!authState.user) {
-  //           this.user = null;
-  //           this.router.navigate(['']);
-  //       // } else {
-  //       } else if (!this.isLoggedIn && isLoggedIn) {
-          
-  //           this.user = authState.user;
-  //           //console.log('this.user.username', this.user.username, authState.user);
-  //           //this.greeting = "Hello " + this.user.username;
-  //           this.userData.login(this.user.username);
-  //           this.session = authState.user.signInUserSession;
-  //           //this.logInfoToConsole(authState.user.signInUserSession);
-            
-  //           // this.register();
-           
-  //           //setImmediate(() => this.createMember());
-
-  //           this.router.navigateByUrl('/blog');
-  //           //this.router.navigate(['members', 'blog1']);
-  //       }
-  //   });
-  // }
-
   checkLoginStatus1() {
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        //console.log('from app.component', authState.user);
         this.signedIn = authState.state === 'signedIn';
 
         if (!authState.user) {
           this.member = null;
         } else {
           this.member = authState.user;
-          //this.greeting = "Hello0000000000 " + this.user.username;
-          // this.userData.login(this.member.username);
           this.checkLoginStatus();
-
-          // this.amplifyService.storage()
-          //   .list('')
-          //   .then(data => console.log('data from S3: ', data))
-          //   .catch(err => console.log('error'))
-
-
-
           this.router.navigateByUrl('/home');
         }
       });

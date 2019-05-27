@@ -6,20 +6,24 @@ import { AuthGuard } from './providers/auth-guard.service';
 
 
 const routes: Routes = [
-    {
+  {
     path: '',
     redirectTo: '/tutorial',
     pathMatch: 'full'
   },
-// { path: '', redirectTo: 'home', pathMatch: 'full' },
-{ path: 'home', loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard]},
-{path: 'blog', loadChildren: './pages/blog/blog.module#BlogPageModule'},
-{ path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard] },
+  { path: 'blog', loadChildren: './pages/blog/blog.module#BlogPageModule' },
+  // { path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
+  // { path: 'login', loadChildren: './pages/signin/signin.module#SigninModule' },
+  { path: 'login', loadChildren: './pages/signin/signin.module#SigninPageModule' },
+  { path: 'signup', loadChildren: './pages/signup/signup.module#SignUpModule' },
+  { path: 'confirm', loadChildren: './pages/confirm/confirm.module#ConfirmPageModule' },
   {
     path: 'tutorial',
     loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
     canLoad: [CheckTutorial]
-  }
+  },
+  { path: 'confirm', loadChildren: './pages/confirm/confirm.module#ConfirmPageModule' }
 ]
 
 // const routes: Routes = [
@@ -48,7 +52,7 @@ const routes: Routes = [
 //   { path: 'app/tabs/water', loadChildren: './pages/water/water.module#WaterPageModule' ,canActivate: [AuthGuard] },
 //   { path: 'app/tabs/sleep', loadChildren: './pages/sleep/sleep.module#SleepPageModule' ,canActivate: [AuthGuard] },
 //   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',canActivate: [AuthGuard] },
-  
+
 //   {
 //     path: 'tutorial',
 //     loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
