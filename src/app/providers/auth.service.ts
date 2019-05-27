@@ -36,14 +36,26 @@ export class AuthService {
       })
       .then(data => {
         console.log('signup ok', data);
-        this.router.navigate(['/confirm']);
+        //this.router.navigate(['/confirm']);
       })
       .catch(err => console.log(err)));
   }
 
   /** confirm code */
-  public confirmSignUp(email, code): Observable<any> {
-    return fromPromise(Auth.confirmSignUp(email, code));
+  public confirmSignUp(username, code): Observable<any> {
+    return fromPromise(
+      // After retrieveing the confirmation code from the user
+      Auth.confirmSignUp(username, code, {
+        // Optional. Force user confirmation irrespective of existing alias. By default set to True.
+        forceAliasCreation: true
+      }).then(data => {
+        this.router.navigate([''])
+        console.log('confirm ok, direct to login??',data)
+      }
+      )
+        .catch(err => console.log(err)));
+      
+      //Auth.confirmSignUp(email, code));
   }
 
   /** signin */

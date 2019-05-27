@@ -31,7 +31,7 @@ export class ConfirmPage implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.signupForm.controls; }
+  get f() { return this.confirmationForm.controls; }
 
   initForm() {
     this.confirmationForm = this.fb.group({
@@ -45,7 +45,7 @@ export class ConfirmPage implements OnInit {
     this.auth.confirmSignUp(email, confirmationCode)
       .subscribe(
         result => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
         },
         error => {
           this.presentToastWithOptions()

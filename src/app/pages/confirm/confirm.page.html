@@ -1,18 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>confirm</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title>Confirmation</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
     <form [formGroup]="confirmationForm">
         <ion-list>
-            <!-- <ion-item>
-              <ion-label position="stacked" color="primary">email</ion-label>
-              <ion-input placeholder= {{formControlName.email}} formControlName="email" type="email"  required>
-              </ion-input>
-            </ion-item> -->
-  
             <ion-item>
                 <ion-label position="stacked" color="primary">Email</ion-label>
                 <ion-input formControlName="email" type="email" [ngClass]="{ 'is-invalid':f.email.errors }">

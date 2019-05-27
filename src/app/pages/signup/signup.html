@@ -9,110 +9,178 @@
 </ion-header>
 
 <ion-content>
-    <div class="confirmation" *ngIf="!successfullySignup">
-        <form [formGroup]="signupForm" >
+
+  <div *ngIf="authState?.state=='signedOut'">
+    signedOut
+  </div>
+  <div *ngIf="authState?.state=='signUp'">
+    signUp
+  </div>
+  <div *ngIf="authState?.state=='confirmSignUp'">
+    confirmSignUp
+  </div>
+
+  <!-- // ‘confirmSignIn’
+    // ‘confirmSignUp’
+    // ‘forgotPassword’
+    // ‘requireNewPassword’
+    // ‘signedIn’
+    // ‘signIn’
+    // ‘signUp’ -->
+
+    <!-- <ion-button color="light" expand="block" (click)="successfullySignup = true" *ngIf="successfullySignup">Confirmation from Email and Code</ion-button> -->
+    <div *ngIf="authState?.state === 'signedOut'">
+        <form [formGroup]="signinForm">
           <ion-list>
+            <!-- <ion-item>
+                <ion-label position="stacked" color="primary">email</ion-label>
+                <ion-input placeholder= {{formControlName.email}} formControlName="email" type="email"  required>
+                </ion-input>
+              </ion-item> -->
+    
+            <ion-item>
+              <ion-label position="stacked" color="primary">Username</ion-label>
+              <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f3.username.errors }">
+              </ion-input>
+            </ion-item>
+    
+            <!-- <ion-text color="danger">
+                <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+                  Username is required
+                </p>
+              </ion-text> -->
+    
               <ion-item>
-                  <ion-label position="stacked" color="primary">Username</ion-label>
-                  <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f.username.errors }" >
+                  <ion-label position="stacked" color="primary">Password:</ion-label>
+                  <ion-input type="password" formControlName="password" required>
                   </ion-input>
                 </ion-item>
+    
+            <!-- <ion-text color="danger">
+                <p [hidden]="confirmationCode.valid || submitted == false" class="ion-padding-start">
+                    confirmation code is required
+                </p>
+              </ion-text> -->
+          </ion-list>
+    
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="light" expand="block" (click)="onSubmitSignin(signinForm.value)">Sign in</ion-button>
+              <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
+            </ion-col>
+            <!-- <ion-col>
+                    <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
+                  </ion-col> -->
+          </ion-row>
+        </form>
+      </div>
 
-              <ion-item>
-                <ion-label position="stacked" color="primary">Email</ion-label>
-                <ion-input formControlName="email" type="email" [ngClass]="{ 'is-invalid':f.email.errors }">
-                </ion-input>
-              </ion-item>
-        
-              <!-- <ion-text color="danger">
+
+  <div class="confirmation" *ngIf="authState?.state === 'signedOut'">
+    <form [formGroup]="signupForm">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Username</ion-label>
+          <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f1.username.errors }">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked" color="primary">Email</ion-label>
+          <ion-input formControlName="email" type="email" [ngClass]="{ 'is-invalid':f1.email.errors }">
+          </ion-input>
+        </ion-item>
+
+        <!-- <ion-text color="danger">
                 <p [hidden]="email.valid || submitted == false" class="ion-padding-start">
                   Email is required
                 </p>
               </ion-text> -->
-        
-              <ion-item>
-                <ion-label position="stacked" color="primary">Password:</ion-label>
-                <ion-input type="password" formControlName="password" required>
-                </ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-label position="stacked" color="primary">Confirm Password</ion-label>
-                  <ion-input type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" >
-                  </ion-input>
-                  <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                      <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                      <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-                  </div>
-                </ion-item>
 
-                <!-- <label>Confirm Password</label>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Password:</ion-label>
+          <ion-input type="password" formControlName="password" required>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Confirm Password</ion-label>
+          <ion-input type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f2.confirmPassword.errors }">
+          </ion-input>
+          <div *ngIf="submitted && f2.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f2.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f2.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </ion-item>
+
+        <!-- <label>Confirm Password</label>
                 <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" /> -->
 
-        
-              <!-- <ion-text color="danger">
+
+        <!-- <ion-text color="danger">
                 <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
                     password is required
                 </p>
               </ion-text> -->
-            </ion-list>
-    
-          <ion-row>
-              <ion-col>
-                <ion-button type="submit" color="light" expand="block" (click)="onSubmitSignup(signupForm.value)">Submit</ion-button>
-                <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
-              </ion-col>
-              <!-- <ion-col>
+      </ion-list>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="light" expand="block" (click)="onSubmitSignup(signupForm.value)">Submit</ion-button>
+          <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
+        </ion-col>
+        <!-- <ion-col>
                     <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
                   </ion-col> -->
-            </ion-row>
-        </form>
-</div>
+      </ion-row>
+    </form>
+  </div>
 
-<ion-button color="light" expand="block"  (click)="successfullySignup = true" *ngIf="successfullySignup">Confirmation from Email and Code</ion-button>
 
-  <div class="confirmation" *ngIf="successfullySignup">
+
+
+  <div class="confirmation" *ngIf="authState?.state === 'confirmSignUp'">
     <form [formGroup]="confirmationForm">
       <ion-list>
-          <!-- <ion-item>
+        <!-- <ion-item>
             <ion-label position="stacked" color="primary">email</ion-label>
             <ion-input placeholder= {{formControlName.email}} formControlName="email" type="email"  required>
             </ion-input>
           </ion-item> -->
 
-          <ion-item>
-              <ion-label position="stacked" color="primary">Email</ion-label>
-              <ion-input formControlName="email" type="email" [ngClass]="{ 'is-invalid':f.email.errors }">
-              </ion-input>
-            </ion-item>
-    
-          <!-- <ion-text color="danger">
+        <ion-item>
+          <ion-label position="stacked" color="primary">Username</ion-label>
+          <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f1.username.errors }">
+          </ion-input>
+        </ion-item>
+
+        <!-- <ion-text color="danger">
             <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
               Username is required
             </p>
           </ion-text> -->
-    
-          <ion-item>
-            <ion-label position="stacked" color="primary">Confirmation Code:</ion-label>
-            <ion-input  type="text" formControlName="confirmationCode" required>
-            </ion-input>
-          </ion-item>
-    
-          <!-- <ion-text color="danger">
+
+        <ion-item>
+          <ion-label position="stacked" color="primary">Confirmation Code:</ion-label>
+          <ion-input type="text" formControlName="confirmationCode" required>
+          </ion-input>
+        </ion-item>
+
+        <!-- <ion-text color="danger">
             <p [hidden]="confirmationCode.valid || submitted == false" class="ion-padding-start">
                 confirmation code is required
             </p>
           </ion-text> -->
-        </ion-list>
+      </ion-list>
 
       <ion-row>
-          <ion-col>
-            <ion-button type="submit" color="light" expand="block" (click)="onSubmitConfirmation(confirmationForm.value)">Confirm</ion-button>
-            <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
-          </ion-col>
-          <!-- <ion-col>
+        <ion-col>
+          <ion-button type="submit" color="light" expand="block" (click)="onSubmitConfirmation(confirmationForm.value)">Confirm</ion-button>
+          <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
+        </ion-col>
+        <!-- <ion-col>
                 <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
               </ion-col> -->
-        </ion-row>
+      </ion-row>
     </form>
   </div>
 </ion-content>

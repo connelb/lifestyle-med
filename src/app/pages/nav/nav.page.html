@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content>
       <ion-item *ngIf="isLoggedIn">
-        Welcome {{user?.username}}
+        Welcome {{user?.username}}: {{status}}
       </ion-item>
       <ion-list *ngIf="isLoggedIn">
         <ion-list-header>
@@ -101,4 +101,4 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-  <ion-router-outlet main></ion-router-outlet>
+  <ion-router-outlet main>{{status}}</ion-router-outlet>

@@ -29,26 +29,42 @@ export class NavPage {
     }
   ];
 
-    isLoggedIn = false;
-    user:string;
-    
+  isLoggedIn = false;
+  user: string;
+  status: string;
 
-    constructor( public events: Events, private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
-      this.storage.set("ion_repeat_tutorial", false);
-      this.amplifyService.authStateChange$.subscribe(authState => {
-        this.user = authState.user;
-        const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-        if (!isLoggedIn) {
-          // console.log('not logged in: this.isLoggedIn && !isLoggedIn',this.isLoggedIn,!isLoggedIn, this.isLoggedIn && !isLoggedIn)
-          router.navigate(['']);
-        } else if (isLoggedIn) {
-          // console.log('logged in!!: !this.isLoggedIn && isLoggedIn',!this.isLoggedIn,isLoggedIn,!this.isLoggedIn && isLoggedIn)
-          router.navigateByUrl('/home');
-        }
-        this.isLoggedIn = isLoggedIn;
-      });
-    }
 
+  constructor(public events: Events, private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
+    this.storage.set("ion_repeat_tutorial", false);
+    this.amplifyService.authStateChange$.subscribe(authState => {
+      this.user = authState.user;
+      this.status = authState.state;
+      const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+      if (authState.state === 'confirmSignIn') {
+        console.log('confirmSignIn', authState.state)
+        //router.navigate(['/confirm']);
+      } else if (authState.state === 'signUp') {
+        console.log('signUp', authState.state)
+        //router.navigateByUrl('/home');
+      } else if (authState.state === 'signedIn') {
+        console.log('signedIn', authState.state)
+        //router.navigateByUrl('/home');
+      } else if (authState.state === 'confirmSignUp') {
+        console.log('confirmSignUp', authState.state)
+        //router.navigateByUrl('/home');
+      }
+
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
+
+  // ‘confirmSignIn’
+  // ‘confirmSignUp’
+  // ‘forgotPassword’
+  // ‘requireNewPassword’
+  // ‘signedIn’
+  // ‘signIn’
+  // ‘signUp’ 
 
   openTutorial() {
     this.menu.enable(false);
@@ -60,10 +76,10 @@ export class NavPage {
   public signOut() {
     // this.storage.set('ion_did_tutorial', false);
     //this.storage.set('hasLoggedIn', false);
-    
+
     this.amplifyService.auth().signOut()
-          .then(() => {
-        this.isLoggedIn =false;
+      .then(() => {
+        this.isLoggedIn = false;
         this.storage.set('ion_repeat_tutorial', false);
         this.storage.set('ion_did_tutorial', false);
         this.storage.set('hasLoggedIn', false);
