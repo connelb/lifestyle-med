@@ -121,6 +121,7 @@ export class SignupPage implements OnInit {
 
     Auth.confirmSignUp(username, confirmationCode).then(data => {
       this.presentToast()
+      this.successfullySignup = false;
       console.log('signup ok: o');
 
     })

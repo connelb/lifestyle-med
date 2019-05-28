@@ -18,8 +18,8 @@
     // ‘signIn’
     // ‘signUp’ -->
 
-  <!-- *****  signIn ***********-->
-  <div class="signin" *ngIf="authState?.state === 'signIn'">
+  <!-- *****  signIn ***********  *ngIf="authState?.state === 'signIn'"   -->
+  <div class="signin" *ngIf="!successfullySignup">
       <h4 class="ion-padding-start">Sign In</h4>
       <p class="ion-padding-start ion-padding-end"></p>
     <form [formGroup]="signinForm">
@@ -56,9 +56,10 @@
       </ion-row>
     </form>
   </div>
+  <div *ngIf="!successfullySignup">No account?<ion-button fill = "clear" (click)="successfullySignup = true" > Create an account</ion-button></div>
 
   <!-- *****  SignUp ***********-->
-  <div class="signup" *ngIf="authState?.state === 'signedOut'">
+  <div class="signup" *ngIf="authState?.state === 'signedOut' && successfullySignup == true">
     <h4 class="ion-padding-start">Sign Up</h4>
     <p class="ion-padding-start ion-padding-end">
         Sign up using your email to receive an access code.
