@@ -4,21 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Signup</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-  <div *ngIf="authState?.state=='signedOut'">
-    signedOut
-  </div>
-  <div *ngIf="authState?.state=='signUp'">
-    signUp
-  </div>
-  <div *ngIf="authState?.state=='confirmSignUp'">
-    confirmSignUp
-  </div>
 
   <!-- // ‘confirmSignIn’
     // ‘confirmSignUp’
@@ -28,55 +18,51 @@
     // ‘signIn’
     // ‘signUp’ -->
 
-    <!-- <ion-button color="light" expand="block" (click)="successfullySignup = true" *ngIf="successfullySignup">Confirmation from Email and Code</ion-button> -->
-    <div *ngIf="authState?.state === 'signedOut'">
-        <form [formGroup]="signinForm">
-          <ion-list>
-            <!-- <ion-item>
-                <ion-label position="stacked" color="primary">email</ion-label>
-                <ion-input placeholder= {{formControlName.email}} formControlName="email" type="email"  required>
-                </ion-input>
-              </ion-item> -->
-    
-            <ion-item>
-              <ion-label position="stacked" color="primary">Username</ion-label>
-              <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f3.username.errors }">
-              </ion-input>
-            </ion-item>
-    
-            <!-- <ion-text color="danger">
+  <!-- *****  signIn ***********-->
+  <div class="signin" *ngIf="authState?.state === 'signIn'">
+      <h4 class="ion-padding-start">Sign In</h4>
+      <p class="ion-padding-start ion-padding-end"></p>
+    <form [formGroup]="signinForm">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Username</ion-label>
+          <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f3.username.errors }">
+          </ion-input>
+        </ion-item>
+
+        <!-- <ion-text color="danger">
                 <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
                   Username is required
                 </p>
               </ion-text> -->
-    
-              <ion-item>
-                  <ion-label position="stacked" color="primary">Password:</ion-label>
-                  <ion-input type="password" formControlName="password" required>
-                  </ion-input>
-                </ion-item>
-    
-            <!-- <ion-text color="danger">
+
+        <ion-item>
+          <ion-label position="stacked" color="primary">Password:</ion-label>
+          <ion-input type="password" formControlName="password" required>
+          </ion-input>
+        </ion-item>
+
+        <!-- <ion-text color="danger">
                 <p [hidden]="confirmationCode.valid || submitted == false" class="ion-padding-start">
                     confirmation code is required
                 </p>
               </ion-text> -->
-          </ion-list>
-    
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit" color="light" expand="block" (click)="onSubmitSignin(signinForm.value)">Sign in</ion-button>
-              <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
-            </ion-col>
-            <!-- <ion-col>
-                    <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
-                  </ion-col> -->
-          </ion-row>
-        </form>
-      </div>
+      </ion-list>
 
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="light" expand="block" (click)="onSubmitSignin(signinForm.value)">Sign in</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
 
-  <div class="confirmation" *ngIf="authState?.state === 'signedOut'">
+  <!-- *****  SignUp ***********-->
+  <div class="signup" *ngIf="authState?.state === 'signedOut'">
+    <h4 class="ion-padding-start">Sign Up</h4>
+    <p class="ion-padding-start ion-padding-end">
+        Sign up using your email to receive an access code.
+    </p>
     <form [formGroup]="signupForm">
       <ion-list>
         <ion-item>
@@ -137,28 +123,15 @@
 
 
 
+  <!-- *****  Confirmation ***********-->
 
   <div class="confirmation" *ngIf="authState?.state === 'confirmSignUp'">
+    <h4 class="ion-padding-start">Access Code</h4>
+    <p class="ion-padding-start ion-padding-end">
+      Retrieve an access code from your email.
+    </p>
     <form [formGroup]="confirmationForm">
       <ion-list>
-        <!-- <ion-item>
-            <ion-label position="stacked" color="primary">email</ion-label>
-            <ion-input placeholder= {{formControlName.email}} formControlName="email" type="email"  required>
-            </ion-input>
-          </ion-item> -->
-
-        <ion-item>
-          <ion-label position="stacked" color="primary">Username</ion-label>
-          <ion-input formControlName="username" type="text" [ngClass]="{ 'is-invalid':f1.username.errors }">
-          </ion-input>
-        </ion-item>
-
-        <!-- <ion-text color="danger">
-            <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-              Username is required
-            </p>
-          </ion-text> -->
-
         <ion-item>
           <ion-label position="stacked" color="primary">Confirmation Code:</ion-label>
           <ion-input type="text" formControlName="confirmationCode" required>
@@ -175,11 +148,7 @@
       <ion-row>
         <ion-col>
           <ion-button type="submit" color="light" expand="block" (click)="onSubmitConfirmation(confirmationForm.value)">Confirm</ion-button>
-          <!-- <ion-button (click)="onSubmitLogin(loginForm.value)" type="submit" expand="block">Login</ion-button> -->
         </ion-col>
-        <!-- <ion-col>
-                <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
-              </ion-col> -->
       </ion-row>
     </form>
   </div>

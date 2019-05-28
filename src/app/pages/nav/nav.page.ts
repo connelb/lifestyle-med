@@ -44,13 +44,13 @@ export class NavPage {
         console.log('confirmSignIn', authState.state)
         //router.navigate(['/confirm']);
       } else if (authState.state === 'signUp') {
-        console.log('signUp', authState.state)
+        console.log('signUp from nav', authState.state)
         //router.navigateByUrl('/home');
       } else if (authState.state === 'signedIn') {
-        console.log('signedIn', authState.state)
-        //router.navigateByUrl('/home');
+        console.log('signedIn from nav', authState.state)
+        router.navigateByUrl('/home');
       } else if (authState.state === 'confirmSignUp') {
-        console.log('confirmSignUp', authState.state)
+        console.log('confirmSignUp from nav', authState.state)
         //router.navigateByUrl('/home');
       }
 

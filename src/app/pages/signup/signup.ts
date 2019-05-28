@@ -6,7 +6,7 @@ import { AmplifyService } from 'aws-amplify-angular';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Router } from '@angular/router';
-import { AuthService } from './../../providers/auth.service';
+//import { AuthService } from './../../providers/auth.service';
 import { ToastController } from '@ionic/angular';
 import { MustMatch } from './../../providers/must-match.validator';
 import Amplify, { Auth } from 'aws-amplify';
@@ -23,22 +23,22 @@ export class SignupPage implements OnInit {
   public confirmationForm: FormGroup;
   public successfullySignup: boolean;
   authState: any;
+  username:any;
 
   submitted = false;
-  
+
 
   constructor(
     public amplifyService: AmplifyService,
-    // public router: Router,
     private fb: FormBuilder,
     private router: Router,
-    private auth: AuthService,
+    //private auth: AuthService,
     public toastController: ToastController,
   ) {
     this.amplifyService.authStateChange$
       .subscribe(authState => {
         this.authState = authState;
-        console.log('what is the login is state?? constructor',authState.state)
+        //console.log('what is the login is state?? constructor', authState.state)
         //this.authState.signedIn = authState.state === 'signedIn';
         // this.events.publish('data:AuthState', this.authState);
 
@@ -49,7 +49,7 @@ export class SignupPage implements OnInit {
         // this.showrequireNewPassword = authState.state === 'signedIn';
       });
 
-   }
+  }
 
   ngOnInit() {
     //this.successfullySignup = true;
@@ -62,75 +62,84 @@ export class SignupPage implements OnInit {
   get f3() { return this.signinForm.controls; }
 
   initForm() {
+
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      // password: ['', [Validators.required, Validators.minLength(6)]],
-      // email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-}, {
-  validator: MustMatch('password', 'confirmPassword')
-});
-this.signinForm = this.fb.group({
-  username: ['', Validators.required],
-  // 'email': ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-  password: ['', [Validators.required, Validators.minLength(6)]],
-});
-    this.confirmationForm = this.fb.group({
+    }, {
+        validator: MustMatch('password', 'confirmPassword')
+      });
+
+    this.signinForm = this.fb.group({
       username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+
+    this.confirmationForm = this.fb.group({
+      // username: ['', Validators.required],
       // 'email': ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       confirmationCode: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
   onSubmitSignin(value: any) {
-    const username= value.username, password = value.password;
+    const username = value.username, password = value.password;
+  
     Auth.signIn(username, password)
-      .then(user => console.log('signin ok',user))
+      .then(user => {
+        console.log('signin ok: user',  user)
+        this.router.navigate(['']);
+      })
       .catch(err => console.log(err));
   }
 
   onSubmitSignup(value: any) {
-    const username= value.username, email = value.email, password = value.password;
-    // this.auth.signUp(username, password, email)
-    //   .subscribe(
-    //     result => {
-    //       this.successfullySignup = true;
-    //       this.router.navigate(['']);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     });
-
-        Auth.signUp({
-          username,
-          password,
-          attributes: {
-            email,             // optional
-            //phone_number,      // optional - E.164 number convention
-            // Other custom attributes...
-          },
-          validationData: [],  // optional
-          })
-          .then(data => {
-            console.log('signup ok', data);
-            //this.router.navigate(['/confirm']);
-          })
-          .catch(err => console.log(err));
+    this.username = value.username;
+    const username = this.username, email = value.email, password = value.password;
+    
+    Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email,             // optional
+        //phone_number,      // optional - E.164 number convention
+        // Other custom attributes...
+      },
+      validationData: [],  // optional
+    })
+      .then(data => {
+        console.log('signup ok', data);
+        //this.router.navigate(['/confirm']);
+      })
+      .catch(err => console.log(err));
   }
 
   onSubmitConfirmation(value: any) {
-    const username = value.username, confirmationCode = value.confirmationCode;
-    this.auth.confirmSignUp(username, confirmationCode)
-      .subscribe(
-        result => {
-          this.presentToast()
-          this.router.navigate(['/signup']);
-        },
-        error => {
-          this.presentToastWithOptions()
-          console.log(error);
-        });
+    const username = this.username, confirmationCode = value.confirmationCode;
+
+    Auth.confirmSignUp(username, confirmationCode).then(data => {
+      this.presentToast()
+      console.log('signup ok: o');
+
+    })
+      .catch(err => {
+        this.presentToastWithOptions();
+        console.log(err);
+      }
+      );
+
+    // this.Auth.confirmSignUp(username, confirmationCode)
+    //   .subscribe(
+    //     result => {
+    //       this.presentToast()
+    //       this.router.navigate(['/signup']);
+    //     },
+    //     error => {
+    //       this.presentToastWithOptions()
+    //       console.log(error);
+    //     });
   }
 
   async presentToastWithOptions() {
