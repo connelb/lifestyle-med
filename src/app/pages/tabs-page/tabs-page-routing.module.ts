@@ -61,27 +61,27 @@ const routes: Routes = [
       //     }
       //   ]
       // },
-      // {
-      //   path: 'profile',
-      //   children: [
-      //     {
-      //       path: '',
-      //       component: ProfilePage,
-      //     }
-      //   ]
-      // },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            component: ProfilePage,
+          }
+        ]
+      },
 
 
-      // {
-      //   path: 'chat',
-      //   children: [
-      //     {
-      //       path: '',
-      //       loadChildren: '../chat/chat.module#ChatPageModule'
-      //       // loadChildren: '../post/post.module#PostModule'
-      //     }
-      //   ]
-      // },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: '',
+            loadChildren: '../chat/chat.module#ChatPageModule'
+            // loadChildren: '../post/post.module#PostModule'
+          }
+        ]
+      },
       // {
       //   path: 'app/tabs/water',
       //   children: [

@@ -19,6 +19,16 @@ const routes: Routes = [
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignUpModule' },
   { path: 'confirm', loadChildren: './pages/confirm/confirm.module#ConfirmPageModule' },
   {
+    path: 'app',
+    loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
+    canActivate: [AuthGuard]
+  },
+  // {
+  //   path: 'members',
+  //   loadChildren: './pages/members/members.module#MembersModule',
+  //   canActivate: [AuthGuard]
+  // },
+  {
     path: 'tutorial',
     loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
     canLoad: [CheckTutorial]

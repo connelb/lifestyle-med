@@ -36,6 +36,9 @@ import { SubmitRepositoryService } from './providers/submit-repository.service';
 import { MemberRoutingModule } from './members/member-routing.module';
 import { } from './providers/pwa.service';
 import { AuthGuard } from './providers/auth-guard.service';
+import { MembersModule } from './members/members.module';
+// import { ProfilePageModule } from './pages/profile/profile.module';
+//import { MembersPage } from './pages/profile/profile.page';
 
 // import 'chart.js/src/chart.js';
 
@@ -43,6 +46,7 @@ import { AuthGuard } from './providers/auth-guard.service';
   declarations: [
     AppComponent,
     NavPage,
+    //ProfilePage 
     // FooterComponent,
     // HomeComponent,
     //DashboardComponent,
@@ -50,11 +54,13 @@ import { AuthGuard } from './providers/auth-guard.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MembersModule,
     MemberRoutingModule,
     HttpClientModule,
     ApolloModule,
     AmplifyAngularModule,
-     HttpLinkModule,
+    HttpLinkModule,
+    // ProfilePageModule,
 
     // BrowserModule,
     BrowserAnimationsModule,
