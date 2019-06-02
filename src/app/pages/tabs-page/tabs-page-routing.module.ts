@@ -13,37 +13,54 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      // {
-      //   path: 'water',
-      //   children: [
-      //     {
-      //         path: '',
-      //         loadChildren: '../water/water.module#WaterPageModule'
-      //     },
-      //   ]
-      // },
       {
         path: 'action-sheet',
         children: [
-          // {
-          //   path: '',
-          //   redirectTo: '/app/tabs/home',
-          //   pathMatch: 'full'
-          // }
           {
             path: '',
             component: ActionSheetPage,
-          },
+          }]
+        },
+      {
+        path: 'sleep',
+        children: [
           {
-            path: 'sleep-history',
-            children: [
-              {
-                path: '',
-            loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
-              }]
+            path: '',
+        loadChildren: '../sleep/sleep.module#SleepPageModule'
+          }]
+      },
+      {
+        path: 'sleep-history',
+        children: [
+          {
+            path: '',
+        loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
+          }]
+      },
+      {
+        path: 'water',
+        children: [
+          {
+              path: '',
+              loadChildren: '../water/water.module#WaterPageModule'
           },
         ]
       },
+      // {
+      //   path: 'action-sheet',
+      //   children: [
+      //     // {
+      //     //   path: '',
+      //     //   redirectTo: '/app/tabs/home',
+      //     //   pathMatch: 'full'
+      //     // }
+      //     {
+      //       path: '',
+      //       component: ActionSheetPage,
+      //     },
+          
+      //   ]
+      // },
       // {
       //   path: 'speakers',
       //   children: [

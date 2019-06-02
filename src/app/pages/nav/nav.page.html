@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content>
       <ion-item *ngIf="isLoggedIn">
-        Welcome {{user?.username}}: {{status}}
+        Welcome {{user?.firstname || user?.username}}
       </ion-item>
       <ion-list *ngIf="isLoggedIn">
         <ion-list-header>
@@ -35,14 +35,6 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/support">
-            <ion-icon slot="start" name="help"></ion-icon>
-            <ion-label>
-              Support
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle auto-hide="false">
           <ion-item button (click)="signOut()">
             <ion-icon slot="start" name="log-out"></ion-icon>
             <ion-label>
@@ -55,28 +47,11 @@
         <ion-list-header>
           Account
         </ion-list-header>
-        <!-- <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/login">
-            <ion-icon slot="start" name="log-in"></ion-icon>
-            <ion-label>
-              Login
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle> -->
         <ion-menu-toggle auto-hide="false">
           <ion-item routerLink="/signup">
             <ion-icon slot="start" name="log-in"></ion-icon>
             <ion-label>
               Login
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-
-        <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/support">
-            <ion-icon slot="start" name="help"></ion-icon>
-            <ion-label>
-              Support
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
@@ -94,4 +69,4 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-  <ion-router-outlet main>{{status}}</ion-router-outlet>
+  <ion-router-outlet main></ion-router-outlet>

@@ -21,7 +21,11 @@ export class SignupPage implements OnInit {
   public signupForm: FormGroup;
   public signinForm: FormGroup;
   public confirmationForm: FormGroup;
+  public forgotForm: FormGroup;
+  public resetForm: FormGroup;
   public successfullySignup: boolean;
+  public successfullyPassword: boolean;
+  public successfullyReset: boolean;
   authState: any;
   username:any;
 
@@ -52,7 +56,9 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.successfullySignup = true;
+    this.successfullySignup = false;
+    this.successfullyPassword = false;
+    this.successfullyReset = false;
     this.initForm();
   }
 
@@ -60,8 +66,11 @@ export class SignupPage implements OnInit {
   get f1() { return this.signupForm.controls; }
   get f2() { return this.confirmationForm.controls; }
   get f3() { return this.signinForm.controls; }
+  get f4() { return this.forgotForm.controls; }
+  get f5() { return this.resetForm.controls; }
 
   initForm() {
+    
 
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
@@ -82,17 +91,79 @@ export class SignupPage implements OnInit {
       // 'email': ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       confirmationCode: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    this.forgotForm = this.fb.group({
+      username: ['', Validators.required],
+      // 'email': ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      // confirmationCode: ['', [Validators.required, Validators.minLength(6)]],
+      // new_password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+    this.resetForm = this.fb.group({
+      username: ['', Validators.required],
+      // 'email': ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      confirmationCode: ['', [Validators.required, Validators.minLength(6)]],
+      new_password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   onSubmitSignin(value: any) {
     const username = value.username, password = value.password;
+    this.successfullyPassword = false;
   
     Auth.signIn(username, password)
       .then(user => {
-        console.log('signin ok: user',  user)
+        console.log('signin ok: user',  user);
+        console.log('onSubmitSignin:',this.authState.state)
         this.router.navigate(['']);
       })
       .catch(err => console.log(err));
+  }
+
+  onSubmitForgot(value: any) {
+    const username = value.username
+    Auth.forgotPassword(username)
+  .then(data => {
+    console.log('onSubmitForgot:',this.authState.state)
+    this.successfullyPassword = false;
+    this.successfullyReset = true;
+    this.presentToast();
+
+    console.log('onSubmitForgot:',this.authState.state, this.successfullyPassword, data.CodeDeliveryDetails.Destination);
+    //this.router.navigate(['']);
+  })
+  .catch(err => console.log(err));
+  }
+
+  onSubmitReset(value: any) {
+    const username = value.username, code= value.code, new_password= value.new_password;
+    // Collect confirmation code and new password , then
+
+
+    Auth.forgotPasswordSubmit(username, code, new_password)
+      .then(data => {
+        console.log('onSubmitReset: data',data);
+        console.log('onSubmitReset: this.authState.state, this.successfullyReset',this.authState.state, this.successfullyReset);
+    //this.router.navigate(['']);
+        this.successfullyPassword = false;
+        this.successfullyReset = false;
+        this.presentToast();
+        // this.successfullyReset = true;
+        // console.log('onSubmitReset:',this.authState.state, this.successfullyReset);
+        // this.presentToast();
+        
+    //this.router.navigate(['']);
+        
+        //this.router.navigate(['']);
+      })
+      .catch(err => console.log(err));
+  
+    // Auth.forgotPassword(username)
+    //   .then(user => {
+    //     console.log('signin ok: user',  user)
+    //     this.router.navigate(['']);
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   onSubmitSignup(value: any) {
@@ -111,6 +182,7 @@ export class SignupPage implements OnInit {
     })
       .then(data => {
         console.log('signup ok', data);
+        console.log('onSubmitSignup:',this.authState.state)
         //this.router.navigate(['/confirm']);
       })
       .catch(err => console.log(err));
@@ -120,7 +192,8 @@ export class SignupPage implements OnInit {
     const username = this.username, confirmationCode = value.confirmationCode;
 
     Auth.confirmSignUp(username, confirmationCode).then(data => {
-      this.presentToast()
+      this.presentToast();
+      console.log('onSubmitConfirmation:',this.authState.state)
       this.successfullySignup = false;
       console.log('signup ok: o');
 
