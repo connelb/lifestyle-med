@@ -16,6 +16,7 @@ import * as _ from 'lodash';
 import { timestamp, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Observable } from 'apollo-link';
+import { APIService } from '../../API.service';
 
 
 
@@ -67,7 +68,9 @@ export class SleepPage implements OnInit {
   constructor(
     private el: ElementRef,
     public toastController: ToastController,
-    private appsync: AppsyncService) {
+    private appsync: AppsyncService,
+  private api: APIService) {
+
 
     this.getAllSleep();
 
@@ -128,7 +131,8 @@ export class SleepPage implements OnInit {
 
   ngOnInit() {
     // To Do: do I really did to do this or use local storage?
-    this.register();
+    this.api.Me1().then(res => this.me = res);
+    //this.register();
     this.getAllSleep();
 
     this.chart = new Chart('canvas', {

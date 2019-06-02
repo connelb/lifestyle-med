@@ -4,11 +4,12 @@ import createWater from '../../graphql/mutations/createWater';
 import queryListWater from '../../graphql/queries/queryListWater';
 import { AppsyncService } from '../../providers/appsync.service';
 import getMe from '../../graphql/queries/getMe';
-import User from '../../types/user';
+import Member from '../../types/member';
 import { Chart } from 'chart.js';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
+import { APIService } from '../../API.service';
 
 @Component({
   selector: 'water',
@@ -18,7 +19,7 @@ import { v4 as uuid } from 'uuid';
 export class WaterPage implements OnInit {
   waterPost: any = '';
   value: number = 8;
-  me: User;
+  me: Member;
   public chart: Chart;
   dateValue = new Date().toISOString().slice(0, 10);
   waterIntake: number = 8;
@@ -35,7 +36,8 @@ export class WaterPage implements OnInit {
   public something:any;
 
   constructor(private appsync: AppsyncService,
-    public toastController: ToastController) { 
+    public toastController: ToastController,
+  private api: APIService ) { 
 
     this.getAllWater();
 
@@ -95,6 +97,8 @@ export class WaterPage implements OnInit {
   //data: _.values(_.groupBy(myWater, 'updatedAt')).map((objs, idx) => _.sumBy(objs, 'intake') )
 
   ngOnInit() {
+    this.api.Me1().then(res => this.me = res);
+
     this.getAllWater();
     console.log('is myWater sorted??', this.myWater)
 
@@ -123,7 +127,7 @@ export class WaterPage implements OnInit {
 
 
     // To Do: do I really did to do this or use local storage?
-    this.register();
+    //this.register();
   }
 
   register() {
