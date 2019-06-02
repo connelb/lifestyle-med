@@ -4,7 +4,7 @@ import createSleep from '../../graphql/mutations/createSleep';
 import { AppsyncService } from '../../providers/appsync.service';
 import { v4 as uuid } from 'uuid';
 import getMe from '../../graphql/queries/getMe';
-import User from '../../types/user';
+import Member from '../../types/member';
 import queryListSleepRecent from '../../graphql/queries/queryListSleepRecent';
 import GetSleep from '../../graphql/queries/getSleep';
 // import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -41,7 +41,7 @@ export class SleepPage implements OnInit {
   @ViewChild('mychart') mychart;
 
 
-  me: User;
+  me: Member;
   // sleepFormGroup: FormGroup;
   sleepPost: any = '';
 
@@ -68,7 +68,6 @@ export class SleepPage implements OnInit {
     private el: ElementRef,
     public toastController: ToastController,
     private appsync: AppsyncService) {
-    console.log('constructor')
 
     this.getAllSleep();
 
@@ -128,6 +127,8 @@ export class SleepPage implements OnInit {
 
 
   ngOnInit() {
+    // To Do: do I really did to do this or use local storage?
+    this.register();
     this.getAllSleep();
 
     this.chart = new Chart('canvas', {
@@ -152,8 +153,7 @@ export class SleepPage implements OnInit {
     });
 
 
-    // To Do: do I really did to do this or use local storage?
-    this.register();
+
   }
 
   register() {
@@ -162,7 +162,7 @@ export class SleepPage implements OnInit {
         query: getMe,
         fetchPolicy: 'cache-only'
       }).subscribe(({ data }) => {
-        //console.log('register user, fetch cache', data);
+        console.log('register user, fetch cache', data);
         if (data) { this.me = data.me; }
       });
     });

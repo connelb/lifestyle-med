@@ -115,7 +115,7 @@ export class SignupPage implements OnInit {
       .then(user => {
         console.log('signin ok: user',  user);
         console.log('onSubmitSignin:',this.authState.state)
-        this.router.navigate(['']);
+        this.router.navigate(['/home']);
       })
       .catch(err => console.log(err));
   }

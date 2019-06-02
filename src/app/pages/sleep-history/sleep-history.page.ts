@@ -94,6 +94,7 @@ export class SleepHistoryPage implements OnInit {
   }
 
   ngOnInit() {
+    this.register();
 
     this.getAllSleep();
 
@@ -117,10 +118,6 @@ export class SleepHistoryPage implements OnInit {
         legend: { display: false }
       }
     });
-
-
-    // To Do: do I really did to do this or use local storage?
-    this.register();
   }
 
 //   ionViewWillLeave() {
