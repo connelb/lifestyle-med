@@ -22,9 +22,9 @@ export class UserData {
   ) { 
     this.authState = { signedIn: false };
 
-    this.events.subscribe('data:AuthState', async (data) => {
-      this.signedIn = data.signedIn;
-    })
+    // this.events.subscribe('data:AuthState', async (data) => {
+    //   this.signedIn = data.signedIn;
+    // })
   }
 
   hasFavorite(sessionName: string): boolean {

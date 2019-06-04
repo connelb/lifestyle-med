@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { Routes, RouterModule } from '@angular/router';
 
-import { LoginPage } from './login';
-import { LoginPageRoutingModule } from './login-routing.module';
+import { IonicModule } from '@ionic/angular';
 import { AmplifyAngularModule, AmplifyService,  AmplifyIonicModule } from 'aws-amplify-angular';
+
+
+import { LoginPage } from './login.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: LoginPage
+  }
+];
 
 @NgModule({
   imports: [
@@ -14,11 +23,8 @@ import { AmplifyAngularModule, AmplifyService,  AmplifyIonicModule } from 'aws-a
     IonicModule,
     AmplifyAngularModule,
     AmplifyIonicModule,
-    LoginPageRoutingModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [
-    LoginPage,
-  ],
-  providers: [AmplifyService],
+  declarations: [LoginPage]
 })
-export class LoginModule { }
+export class LoginPageModule {}

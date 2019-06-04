@@ -54,7 +54,7 @@ export class TutorialPage implements OnInit{
     this.storage.set('ion_did_tutorial',true).then(res => this.seen = res);
 
       if(this.isLoggedIn===false){
-        this.router.navigateByUrl('/signup');
+        this.router.navigateByUrl('/login');
       }else if (this.isLoggedIn===true){
         this.router.navigateByUrl('/home');
       }

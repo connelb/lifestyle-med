@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 //import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserData } from '../../providers/user-data';
+//import { UserData } from '../../providers/user-data1';
 
 import { UserOptions } from '../../interfaces/user-options';
 
@@ -103,7 +103,7 @@ export class LoginPage implements OnInit {
     public storage:Storage,
     private api: APIService, 
     public amplifyService: AmplifyService,
-    public userData: UserData,
+    //public userData: UserData,
     public router: Router,
     private appsyncService: AppsyncService
   ) {
@@ -169,7 +169,7 @@ export class LoginPage implements OnInit {
             this.events.publish('data:AuthState', this.authState);
             //console.log('this.user.username', this.user.username, authState.user);
             //this.greeting = "Hello " + this.user.username;
-            this.userData.login(this.user.username);
+            //this.userData.login(this.user.username);
             this.session = authState.user.signInUserSession;
             //this.logInfoToConsole(authState.user.signInUserSession);
             
@@ -375,17 +375,17 @@ export class LoginPage implements OnInit {
           this.member = null;
         } else {
           this.member = authState.user;
-          this.checkLoginStatus();
+          //his.checkLoginStatus();
           this.router.navigateByUrl('/home');
         }
       });
   }
 
-  checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
-  }
+  // checkLoginStatus() {
+  //   return this.userData.isLoggedIn().then(loggedIn => {
+  //     return this.updateLoggedInStatus(loggedIn);
+  //   });
+  // }
 
   register() {
     //console.log('registration called')

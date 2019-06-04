@@ -3,7 +3,7 @@
 import { Router } from '@angular/router';
 import { AmplifyService } from 'aws-amplify-angular';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Router } from '@angular/router';
 //import { AuthService } from './../../providers/auth.service';
@@ -11,13 +11,56 @@ import { ToastController } from '@ionic/angular';
 import { MustMatch } from './../../providers/must-match.validator';
 import Amplify, { Auth } from 'aws-amplify';
 
+// import { Component, AfterContentInit } from '@angular/core';
+import { Events } from '@ionic/angular';
+import { AuthGuard } from '../../providers/auth-guard.service'
+//import { AmplifyService }  from 'aws-amplify-angular';
+
+ 
+
 
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
   styleUrls: ['./signup.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage implements OnInit, AfterContentInit {
+
+  signUpConfig = {
+    header: 'Sign up to get access code via email',
+    defaultCountryCode: '1',
+    hideAllDefaults: true,
+    signUpFields: [
+      {
+        label: 'Username',
+        key: 'username',
+        required: true,
+        displayOrder: 1,
+        type: 'string',
+      },
+      {
+        label: 'Password',
+        key: 'password',
+        required: true,
+        displayOrder: 2,
+        type: 'password',
+      },
+      {
+        label: 'Email',
+        key: 'email',
+        required: true,
+        displayOrder: 3,
+        type: 'email',
+      }
+    ]
+  };
+
+  authState: any;
+  // including AuthGuardService here so that it's available to listen to auth events
+  authService: AuthGuard
+  amplifyService: AmplifyService
+
+
   public signupForm: FormGroup;
   public signinForm: FormGroup;
   public confirmationForm: FormGroup;
@@ -26,40 +69,58 @@ export class SignupPage implements OnInit {
   public successfullySignup: boolean;
   public successfullyPassword: boolean;
   public successfullyReset: boolean;
-  authState: any;
+  //authState: any;
   username:any;
 
   submitted = false;
 
 
   constructor(
-    public amplifyService: AmplifyService,
+    //public amplifyService: AmplifyService,
     private fb: FormBuilder,
     private router: Router,
     //private auth: AuthService,
     public toastController: ToastController,
+    public events: Events,
+    public guard: AuthGuard,
+    public amplify: AmplifyService
   ) {
+
+    this.authService = guard;
+    this.amplifyService = amplify;
     this.amplifyService.authStateChange$
-      .subscribe(authState => {
-        this.authState = authState;
-        //console.log('what is the login is state?? constructor', authState.state)
-        //this.authState.signedIn = authState.state === 'signedIn';
-        // this.events.publish('data:AuthState', this.authState);
+    .subscribe(authState => {
+      this.authState.loggedIn = authState.state === 'signedIn';
+      this.events.publish('data:AuthState', this.authState)
+    });
 
-        // this.showsignedOut = authState.state === 'signedOut';
-        // this.showsignIn = authState.state === 'signedIn';
-        // this.showsignUp = authState.state === 'signUp';
-        // this.showforgotPassword = authState.state === 'signedIn';
-        // this.showrequireNewPassword = authState.state === 'signedIn';
-      });
 
+
+    // this.amplifyService.authStateChange$
+    //   .subscribe(authState => {
+    //     this.authState = authState;
+    //     //console.log('what is the login is state?? constructor', authState.state)
+    //     //this.authState.signedIn = authState.state === 'signedIn';
+    //     // this.events.publish('data:AuthState', this.authState);
+
+    //     // this.showsignedOut = authState.state === 'signedOut';
+    //     // this.showsignIn = authState.state === 'signedIn';
+    //     // this.showsignUp = authState.state === 'signUp';
+    //     // this.showforgotPassword = authState.state === 'signedIn';
+    //     // this.showrequireNewPassword = authState.state === 'signedIn';
+    //   });
+
+  }
+
+  ngAfterContentInit(){
+    this.events.publish('data:AuthState', this.authState)
   }
 
   ngOnInit() {
     this.successfullySignup = false;
     this.successfullyPassword = false;
     this.successfullyReset = false;
-    this.initForm();
+    //this.initForm();
   }
 
   // convenience getter for easy access to form fields
@@ -115,7 +176,7 @@ export class SignupPage implements OnInit {
       .then(user => {
         console.log('signin ok: user',  user);
         console.log('onSubmitSignin:',this.authState.state)
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       })
       .catch(err => console.log(err));
   }

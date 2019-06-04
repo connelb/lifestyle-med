@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- [hide]="['Greetings']"  [signUpConfig]='signUpConfig'-->
+  
+  <ion-content>
+      <amplify-authenticator [hide]="['Greetings']" framework="ionic" [signUpConfig]='signUpConfig'></amplify-authenticator>   
+  </ion-content>

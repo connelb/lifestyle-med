@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { MenuController, Platform, Events } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
@@ -9,7 +9,8 @@ import { AmplifyService } from 'aws-amplify-angular';
   templateUrl: './nav.page.html',
   styleUrls: ['./nav.page.scss'],
 })
-export class NavPage {
+export class NavPage implements OnInit, AfterContentInit {
+  // authState: any;
   // loggedIn = false;
   appPages = [
     {
@@ -29,32 +30,58 @@ export class NavPage {
     }
   ];
 
-  isLoggedIn = false;
+  isLoggedIn;
   user: string;
   status: string;
 
 
   constructor(public events: Events, private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
     this.storage.set("ion_repeat_tutorial", false);
+    // this.events.subscribe('data:AuthState', async (data) => {
+    //   if (data) {
+    //     console.log('whats data', data)
+    //     this.isLoggedIn = data.state === 'signedIn';
+    //   }
+
+    // });
+
+    // this.amplifyService.authStateChange$.subscribe(authState => {
+
+    //   this.user = authState.user;
+    //   this.status = authState.state;
+    //   this.isLoggedIn = authState.state === 'signedIn';
+    // });
+
+    // const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
+    // if (authState.state === 'confirmSignIn') {
+    //   console.log('confirmSignIn', authState.state)
+    //   //router.navigate(['/confirm']);
+    // } else if (authState.state === 'signUp') {
+    //   console.log('signUp from nav', authState.state)
+    //   //router.navigateByUrl('/home');
+    // } else if (authState.state === 'signedIn') {
+    //   console.log('signedIn from nav', authState.state)
+    //   router.navigateByUrl('/home');
+    // } else if (authState.state === 'confirmSignUp') {
+    //   console.log('confirmSignUp from nav', authState.state)
+    //   //router.navigateByUrl('/home');
+    // }
+
+    // this.isLoggedIn = isLoggedIn;
+    // });
+    console.log('this.user, this.state', this.user, this.status, this.isLoggedIn)
+  }
+
+  ngOnInit() {
+    console.log('hi')
+  }
+
+  ngAfterContentInit() {
     this.amplifyService.authStateChange$.subscribe(authState => {
+
       this.user = authState.user;
       this.status = authState.state;
-      const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-      if (authState.state === 'confirmSignIn') {
-        console.log('confirmSignIn', authState.state)
-        //router.navigate(['/confirm']);
-      } else if (authState.state === 'signUp') {
-        console.log('signUp from nav', authState.state)
-        //router.navigateByUrl('/home');
-      } else if (authState.state === 'signedIn') {
-        console.log('signedIn from nav', authState.state)
-        router.navigateByUrl('/home');
-      } else if (authState.state === 'confirmSignUp') {
-        console.log('confirmSignUp from nav', authState.state)
-        //router.navigateByUrl('/home');
-      }
-
-      this.isLoggedIn = isLoggedIn;
+      this.isLoggedIn = authState.state === 'signedIn';
     });
   }
 

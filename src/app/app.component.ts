@@ -36,7 +36,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Events, MenuController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { UserData } from './providers/user-data';
+//import { UserData } from './providers/user-data1';
 
 import AWSAppSyncClient from 'aws-appsync';
 //import { User } from './interfaces/user';
@@ -131,7 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storage: Storage,
-    private userData: UserData,
+    //private userData: UserData,
     public amplifyService: AmplifyService,
     // private swUpdate: SwUpdate,
     public appsyncService: AppsyncService,
