@@ -26,7 +26,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-        loadChildren: '../sleep/sleep.module#SleepPageModule'
+        //loadChildren: '../sleep/sleep.module#SleepPageModule'
+        loadChildren: () => import('../sleep/sleep.module').then(m => m.SleepPageModule)
           }]
       },
       {
@@ -34,7 +35,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-        loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
+            loadChildren: () => import('../sleep-history/sleep-history.module').then(m => m.SleepHistoryPageModule)
+        //loadChildren: '../sleep-history/sleep-history.module#SleepHistoryPageModule'
           }]
       },
       {
@@ -42,7 +44,8 @@ const routes: Routes = [
         children: [
           {
               path: '',
-              loadChildren: '../water/water.module#WaterPageModule'
+              loadChildren: () => import('../water/water.module').then(m => m.WaterPageModule)
+              //loadChildren: '../water/water.module#WaterPageModule'
           },
         ]
       },
@@ -94,7 +97,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../chat/chat.module#ChatPageModule'
+            loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
+            //loadChildren: '../chat/chat.module#ChatPageModule'
             // loadChildren: '../post/post.module#PostModule'
           }
         ]
@@ -123,7 +127,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../about/about.module#AboutModule'
+            loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
+            //loadChildren: '../about/about.module#AboutModule'
           }
         ]
       },
@@ -151,7 +156,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../home/home.module#HomePageModule'
+            loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+            //loadChildren: '../home/home.module#HomePageModule'
             // component: HomePage,
           }
           // {

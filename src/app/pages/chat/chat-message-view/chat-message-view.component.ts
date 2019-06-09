@@ -47,7 +47,7 @@ export class ChatMessageViewComponent {
 
   @Input() senderId;
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe', {static: true}) private myScrollContainer: ElementRef;
 
   constructor(private appsync: AppsyncService) {
     this.loadMoreMessages = this.loadMoreMessages.bind(this);
@@ -106,7 +106,7 @@ export class ChatMessageViewComponent {
       this.subscription = observable.subscribeToMore({
         document: subscribeToNewMessages,
         variables: { 'conversationId': this._conversation.id },
-        updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}) => {
+        updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}:any) => {
           console.log('subscribeToMore - updateQuery:', message);
           return unshiftMessage(prev, message);
         }

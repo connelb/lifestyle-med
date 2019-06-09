@@ -11,19 +11,20 @@ export class HomePage implements OnInit {
   deferredPrompt;
   update: boolean;
 
-  constructor(public swUpdate: SwUpdate) { }
+  constructor(public swUpdate: SwUpdate) {
+    swUpdate.available.subscribe(event => {
+      console.log('current version is', event.current);
+      console.log('available version is', event.available);
+    });
+    swUpdate.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
+   }
 
   ngOnInit() {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
-        if (confirm("New version available. Load New Version?")) {
-          window.location.reload();
-        }
-      });
-    }
-
     this.swUpdate.available.subscribe(event => {
-      //console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
+      console.log('[App] Update available: current version is', event.current, 'available version is', event.available);
       this.update = true;
     });
 

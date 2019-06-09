@@ -58,12 +58,15 @@ export class ChatConvoListComponent implements OnInit {
         this.nextToken = data.me.conversations.nextToken;
         console.log('Fetched convos brian', this.conversations);
       });
+      
+      // : userConvo
 
       this.subscription = observable.subscribeToMore({
         document: subscribeToNewUserConversations,
         variables: { 'userId': this._user.id },
-        updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: {subscribeToNewUCs: userConvo }}}) => {
-          console.log('updateQuery on convo subscription', userConvo);
+        updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: {subscribeToNewUCs: userConvo } } }: any) => {
+        // updateQuery: (prev: UserConvosQuery, {subscriptionData: {data: subscribeToNewUCs }:userConvo}) => {
+          //console.log('updateQuery on convo subscription', userConvo);
           // console.log(JSON.stringify(userConvo, null, 2));
           // console.log(JSON.stringify(prev, null, 2));
           return addConversation(prev, userConvo);

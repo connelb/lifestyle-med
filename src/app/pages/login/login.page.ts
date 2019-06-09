@@ -3,6 +3,7 @@ import { ToastController, Events } from '@ionic/angular';
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthGuard } from '../../providers/auth-guard.service'
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +52,8 @@ export class LoginPage implements OnInit, AfterContentInit {
     public toastController: ToastController,
     public events: Events,
     public guard: AuthGuard,
-    public amplify: AmplifyService
+    public amplify: AmplifyService,
+    public storage: Storage
   ) {
     this.authState = { loggedIn: false };
     this.authService = guard;
@@ -60,7 +62,8 @@ export class LoginPage implements OnInit, AfterContentInit {
       .subscribe(authState => {
         if (authState) {
           this.authState.loggedIn = authState.state === 'signedIn';
-          this.events.publish('data:AuthState', this.authState)
+          this.events.publish('data:AuthState', this.authState);
+          this.storage.set('hasLoggedIn',true);
           router.navigateByUrl('/home');
         }
 

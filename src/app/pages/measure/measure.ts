@@ -17,7 +17,7 @@ import createWorkout from '../../graphql/mutations/createWorkout';
 //import Measurement from '../types/measurement';
 import {Measurement} from '../../interfaces/measurement'
 import { Analytics } from 'aws-amplify';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import getMe from '../../graphql/queries/getMe';
 import { Auth } from 'aws-amplify';
 import User from '../../types/user';
@@ -32,7 +32,7 @@ import gql from 'graphql-tag';
 })
 export class MeasurePage implements OnInit {
   // Gets a reference to the list element
-  @ViewChild('scheduleList') scheduleList: IonList;
+  @ViewChild('scheduleList', {static: true}) scheduleList: IonList;
 
   dayIndex = 0;
   queryText = '';

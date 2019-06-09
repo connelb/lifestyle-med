@@ -18,7 +18,7 @@ export class BlogPage implements OnInit {
   // isLoggedIn = { signedIn: false };
   authState: any;
   tut: any;
-  hasLoggedIn = false;
+  hasLoggedIn;
   signedIn;
   signedIn23;
   

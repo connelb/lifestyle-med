@@ -3,38 +3,35 @@ import { RouterModule, Routes } from '@angular/router';
 import { CheckTutorial } from './providers/check-tutorial.service';
 import { AuthGuard } from './providers/auth-guard.service';
 
-
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/tutorial',
     pathMatch: 'full'
   },
-  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard] },
-  { path: 'blog', loadChildren: './pages/blog/blog.module#BlogPageModule' },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  //{ path: 'login', loadChildren: './pages/login/login.module#LoginModule' },
-  // { path: 'login', loadChildren: './pages/signin/signin.module#SigninModule' },
-  //{ path: 'login', loadChildren: './pages/signin/signin.module#SigninPageModule' },
-  //{ path: 'signup', loadChildren: './pages/signup/signup.module#SignUpModule' },
-  //{ path: 'confirm', loadChildren: './pages/confirm/confirm.module#ConfirmPageModule' },
   {
-    path: 'app',
-    loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'members',
-  //   loadChildren: './pages/members/members.module#MembersModule',
-  //   canActivate: [AuthGuard]
-  // },
+  {
+    path: 'blog',
+    loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'app',
+    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule),
+    canActivate: [AuthGuard]
+  },
   {
     path: 'tutorial',
-    loadChildren: './pages/tutorial/tutorial.module#TutorialModule',
+    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
-  },
-  //{ path: 'confirm', loadChildren: './pages/confirm/confirm.module#ConfirmPageModule' },
-  
+  }
 ]
 
 @NgModule({

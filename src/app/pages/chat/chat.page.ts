@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { PageScrollConfig } from 'ngx-page-scroll';
+// import { PageScrollConfig } from 'ngx-page-scroll';
 
 import AWSAppSyncClient from 'aws-appsync';
 import { AUTH_TYPE } from 'aws-appsync/lib/link/auth-link';
@@ -62,7 +62,7 @@ export class ChatPage implements OnInit {
     private swUpdate: SwUpdate,
     private appsync: AppsyncService
   ) {
-    PageScrollConfig.defaultDuration = 400;
+    // PageScrollConfig.defaultDuration = 400;
   }
 
   ngOnInit() {

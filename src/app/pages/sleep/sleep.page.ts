@@ -39,7 +39,7 @@ export class SleepPage implements OnInit {
 
   canvas: any;
   ctx: any;
-  @ViewChild('mychart') mychart;
+  @ViewChild('mychart' ,{static: true}) mychart;
 
 
   me: Member;

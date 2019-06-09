@@ -48,7 +48,7 @@ import { ChatMessageViewComponent } from './chat-message-view/chat-message-view.
 import { InfscrollDirective } from './infscroll.directive';
 import { MomentAgoPipe } from './moment-ago.pipe';
 
-import { NgxPageScrollModule } from 'ngx-page-scroll';
+// import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AmplifyAngularModule, AmplifyIonicModule } from 'aws-amplify-angular';
 // import@ionic/angular { IonicSelectableModule } from '@ionic/angular';
@@ -71,7 +71,7 @@ const routes: Routes = [
     AmplifyIonicModule,
     // IonicSelectableModule,
     ChatAppRoutingModule,
-    NgxPageScrollModule,
+    // NgxPageScrollModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

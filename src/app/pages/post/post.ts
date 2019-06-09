@@ -24,7 +24,7 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./post.scss']
 })
 export class PostPage implements AfterViewInit {
-  @ViewChild('mapCanvas') mapElement: ElementRef;
+  @ViewChild('mapCanvas', {static: true}) mapElement: ElementRef;
 
   dateValue = new Date().toISOString().slice(0, 10);
 

@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.

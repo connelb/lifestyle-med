@@ -14,6 +14,7 @@ import Conversation from '../types/conversation';
 import { ListMembersQuery as UsersQuery1 } from '../../../API.service';
 import { getAllMembersQuery as UsersQuery } from '../graphql/operation-result-types';
 import * as _ from 'lodash';
+
 import { v4 as uuid } from 'uuid';
 
 import { Analytics } from 'aws-amplify';
@@ -37,7 +38,7 @@ export class ChatUserListComponent {
   order = 'username';
   no_user = false;
   image;
-  profile ="profile/profile.png"
+  profile = "profile/profile.png"
 
   @Input()
   set user(user) {
@@ -47,7 +48,7 @@ export class ChatUserListComponent {
 
   @Output() onNewConvo = new EventEmitter<any>();
 
-  constructor(private appsync: AppsyncService) {}
+  constructor(private appsync: AppsyncService) { }
 
   getAllUsers1() {
     this.appsync.hc().then(client => {
@@ -56,7 +57,7 @@ export class ChatUserListComponent {
         fetchPolicy: 'cache-and-network'
       });
 
-      observable.subscribe(({data}) => {
+      observable.subscribe(({ data }) => {
         // console.log("???????",data);
         if (!data) {
           return console.log('getAllUsers - no data');
@@ -75,7 +76,7 @@ export class ChatUserListComponent {
         fetchPolicy: 'cache-and-network'
       });
 
-      observable.subscribe(({data}) => {
+      observable.subscribe(({ data }) => {
         // console.log("???????",data);
         if (!data) {
           return console.log('getAllUsers - no data');
@@ -87,7 +88,8 @@ export class ChatUserListComponent {
 
       observable.subscribeToMore({
         document: subscribeToNewMembers,
-        updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewMembers: user }}}) => {
+        // updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewMembers: user }:userConvo}}:any) => {
+        updateQuery: (prev: UsersQuery, { subscriptionData: { data: { subscribeToNewUsers: user } } }) => {
           console.log('updateQuery on convo subscription', user, prev);
           return this._user.id === user.id ? prev : addUser(prev, user);
         }
@@ -105,14 +107,13 @@ export class ChatUserListComponent {
         variables: { first: constants.conversationFirst }
       };
 
-
       const userConvos = client.readQuery(options);
       const path = 'me.conversations.userConversations';
-      const userConvo = _.chain(userConvos).get(path).find(c => _.some(c.associated, ['userId', user.id])).value();
+      const userConvo = (_.chain(userConvos).get(path) as any).find(c => _.some(c.associated, ['userId', user.id])).value();
 
       if (userConvo) {
         return this.onNewConvo.emit(userConvo.conversation);
-      }
+}
 
       const newConvo: Conversation = {
         id: uuid(),
@@ -124,11 +125,11 @@ export class ChatUserListComponent {
         mutation: createConversation,
         variables: newConvo
       })
-      .then(() => createUserConvo(client, user.id, newConvo.id))
-      .then(() => createUserConvo(client, this._user.id, newConvo.id, true))
-      .then(() => this.onNewConvo.emit(newConvo))
-      .catch(err => console.log('create convo error', err));
-      Analytics.record('New Conversation');
+        .then(() => createUserConvo(client, user.id, newConvo.id))
+        .then(() => createUserConvo(client, this._user.id, newConvo.id, true))
+        .then(() => this.onNewConvo.emit(newConvo))
+        .catch(err => console.log('create convo error', err));
+      //Analytics.record('New Conversation');
     });
   }
 }
@@ -137,20 +138,22 @@ function createUserConvo(client, id, convoId, update = false): Promise<any> {
   const options = {
     mutation: createUserConversations,
     variables: { 'userId': id, 'conversationId': convoId },
-    ...(!update ? {} : { update(proxy, {data: { createUserConversations: userConvo }}) {
-      //console.log('createUserConvo - update fn: Brian, this is userConvo', userConvo);
+    ...(!update ? {} : {
+      update(proxy, { data: { createUserConversations: userConvo } }) {
+        //console.log('createUserConvo - update fn: Brian, this is userConvo', userConvo);
 
-      const _options = {
-        query: getUserConversationsConnection,
-        variables: { first: constants.conversationFirst}
-      };
+        const _options = {
+          query: getUserConversationsConnection,
+          variables: { first: constants.conversationFirst }
+        };
 
-      const prev = proxy.readQuery(_options);
-      //console.log('retrieve ucs:', prev);
-      const data =  addConversation(prev, userConvo);
-      //console.log('inserted uc in data', JSON.stringify(data, null, 2));
-      proxy.writeQuery({..._options, data});
-    }})
+        const prev = proxy.readQuery(_options);
+        //console.log('retrieve ucs:', prev);
+        const data = addConversation(prev, userConvo);
+        //console.log('inserted uc in data', JSON.stringify(data, null, 2));
+        proxy.writeQuery({ ..._options, data });
+      }
+    })
   };
   return client.mutate(options);
 }

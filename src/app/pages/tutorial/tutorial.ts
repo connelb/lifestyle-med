@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Events } from '@ionic/angular';
 import { Auth } from 'aws-amplify';
-import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
+// import { INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic/src/platform_providers';
 
 @Component({
   selector: 'page-tutorial',
@@ -22,7 +22,7 @@ export class TutorialPage implements OnInit{
   authState: any;
   user;
 
-  @ViewChild('slides') slides: IonSlides;
+  @ViewChild('slides', {static: true}) slides: IonSlides;
 
   constructor(
     private amplifyService: AmplifyService,
@@ -37,10 +37,10 @@ export class TutorialPage implements OnInit{
     .then(data => {
       this.authState = data;
       this.isLoggedIn= this.authState.idToken.payload.email_verified;
-      this.storage.set('hasLoggedIn',true);
+      this.storage.set('hasLoggedIn',true).then(res => this.isLoggedIn = true);
       this.storage.set('hasSignedUp',this.authState.idToken.payload.email_verified);
     }).catch(err => {
-      this.storage.set('hasLoggedIn',false);
+      this.storage.set('hasLoggedIn',false).then(res => this.isLoggedIn = false);
       console.log("err:",err)
     });
   }
@@ -62,18 +62,20 @@ export class TutorialPage implements OnInit{
 
   onSlideChangeStart(event) {
     event.target.isEnd().then(isEnd => {
+      this.storage.set('ion_did_tutorial',true).then(res => this.seen = res);
       this.showSkip = !isEnd;
     });
   }
 
   ionViewWillEnter() {
-    this.storage.get("ion_did_tutorial").then(res => this.seen = res);
+    
+    //this.storage.get("ion_did_tutorial").then(res => this.seen = res);
     this.storage.get('hasLoggedIn').then(res => this.isLoggedIn = res);
 
     this.storage.get("ion_repeat_tutorial").then(res => {
       if (res === false && this.isLoggedIn == true) {
         this.router.navigateByUrl('/home');
-        }
+      }
     });
 
     this.menu.enable(false);
