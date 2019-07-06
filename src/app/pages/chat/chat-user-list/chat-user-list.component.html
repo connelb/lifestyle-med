@@ -1,19 +1,60 @@
-<ion-spinner  name="dots" *ngIf="users.length === 0"></ion-spinner>
-<ion-virtual-scroll [items]="users">
-    <!-- <ion-label>
-        Members
-      </ion-label> -->
-    <ion-item *virtualItem="let item">
-<ion-item (click)="createNewConversation(item, $event); false">
+<ion-spinner name="dots" *ngIf="users.length === 0">
+</ion-spinner>
+
+
+users:{{users|json}}
+<hr>
+<!-- <ion-buttons slot="end">
+  <ion-button (click)="getAllUsers()">
+    <ion-icon name="open" small></ion-icon>
+
+    <ion-virtual-scroll [items]="users">
+      <ion-item *virtualItem="let item">
+        <ion-item (click)="createNewConversation(item, $event); false">
+          <ion-avatar slot="start">
+            <amplify-s3-image [path]="item.image || profile" [options]="{'level': 'public'}"></amplify-s3-image>
+          </ion-avatar>
+          <ion-label>
+            {{item|json}}
+          </ion-label>
+        </ion-item>
+      </ion-item>
+    </ion-virtual-scroll>
+
+  </ion-button>
+</ion-buttons> -->
+
+
+<!-- <ion-card *ngFor="let user of users; index as i"> -->
+<!-- <ion-card-title class="hover card-title" (click)="modify(user, i)">{{user.username}}</ion-card-title> -->
+
+<!-- <ion-item-sliding *ngFor="let user of users; index as i">
+  <ion-item>
     <ion-avatar slot="start">
-        <amplify-s3-image [path]="item.image || profile" [options]="{'level': 'public'}"></amplify-s3-image>
+      <amplify-s3-image [path]="user.image || profile" [options]="{'level': 'public'}"></amplify-s3-image>
     </ion-avatar>
     <ion-label>
-        {{item.username}}
+      {{user.username}}
     </ion-label>
   </ion-item>
-</ion-item>
-</ion-virtual-scroll>
+  <ion-item-options>
+    <ion-button size="small" color="danger" (click)="createNewConversation(user, $event); false" slot="end">
+      <ion-icon name="mail" small></ion-icon>Chat</ion-button>
+  </ion-item-options>
+</ion-item-sliding> -->
+
+
+<!-- <ion-card-content click)="modify(user, i)">
+        <ion-item (click)="createNewConversation(item, $event); false">
+            <ion-avatar slot="start">
+                <amplify-s3-image [path]="user.image || profile" [options]="{'level': 'public'}"></amplify-s3-image>
+            </ion-avatar>
+            <ion-label>
+                {{user.username}}
+            </ion-label>
+          </ion-item>
+    </ion-card-content> -->
+<!-- </ion-card> -->
 
 <!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
   <h6 class='mb-0'>

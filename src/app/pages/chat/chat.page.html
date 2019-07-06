@@ -3,42 +3,100 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Chat</ion-title>
+    <ion-title>Chats</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <!-- <div class="container-fluid mb-60px pb-2 align-middle"> -->
+  <div *ngIf="update;">
+    <p>
+      <!--  *ngIf="users && me" <ngb-alert type="primary" [dismissible]="false"> -->
+      <span>New version available
+        <button class="btn btn-primary float-right" (click)="activateUpdate()">Update</button>
+        <br>
+      </span>
+      <!-- </ngb-alert> -->
+    </p>
+  </div>
 
-  <div class="container-fluid mb-60px pb-2 align-middle">
-    <div *ngIf="update;">
-      <p>
-        <!-- <ngb-alert type="primary" [dismissible]="false"> -->
-        <span>New version available
-          <button class="btn btn-primary float-right" (click)="activateUpdate()">Update</button>
-          <br>
-        </span>
-        <!-- </ngb-alert> -->
-      </p>
-    </div>
-   
-    <ion-label>
-      Members:
-    </ion-label>
-    <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
-    <ion-label>
-      Conversations:
-    </ion-label>
-    <ion-item>
-      <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
-    </ion-item>
+  <div class="row">
+    <div class="col-sm-4 p-1">
 
-    <div class="col-sm-8 p-1" id="chat">
-      <div *ngIf="conversation; else instructions">
-        <app-chat-message-view #messageView [senderId]="me.id" [conversation]="conversation"></app-chat-message-view>
-        <!-- <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input> -->
+      <div class="border bg border-dark rounded rounded p-2 h-100">
+        <div class="left-pane bg">
+
+          <!-- <div class="text-center mb-2">
+            <h4>
+              <span class="badge badge-pill" [class.badge-dark]="me?.registered" [class.badge-light]="!me || !me.registered">{{me?.username}}</span>
+            </h4> 
+          </div> -->
+          <!-- <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list> -->
+          <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+
+        </div>
       </div>
     </div>
+
+    <div class="col-sm-8 p-1" id="chat">
+      <!-- <div *ngIf="conversation; else instructions"> -->
+      
+        <app-chat-message-view #messageView [senderId]="me.id" [conversation]="conversation"></app-chat-message-view>
+      
+      <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input>
+      <!-- </div> -->
+    </div>
   </div>
+  <!-- </div> -->
+
+
+
+
+  <!-- <ion-list>
+      <ion-list-header>members</ion-list-header>
+      {{users|json}}
+      <ion-item>
+        <ion-label>Users</ion-label>
+        <ion-select>
+          <ion-select-option *ngFor="let user of users">{{user?.username}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+
+   
+        <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+     -->
+
+
+
+  <!-- <ion-label>
+      Members:
+    </ion-label>
+
+    <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+    -->
+  <!-- <ion-label>
+      Chats -->
+  <!-- <span>
+        <ion-buttons slot="end">
+          <ion-button (click)="getAllUsers()">
+            <ion-icon name="open" small></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </span> -->
+  <!-- </ion-label> -->
+
+  <!-- <ion-item>
+      <app-chat-convo-list [user]="me" [current]="conversation" (onConvoClick)="setNewConvo($event)" pageScroll href="#chat"></app-chat-convo-list>
+    </ion-item> -->
+
+  <!-- <div class="col-sm-8 p-1" id="chat">
+      <div *ngIf="conversation; else instructions">
+        <app-chat-message-view #messageView [senderId]="me.id" [conversation]="conversation"></app-chat-message-view>
+      </div>
+    </div> -->
+  <!-- </div> -->
 
   <ng-template #instructions>
     <div class="bg rounded p-2 border border-dark rounded text-center instructions">
@@ -48,5 +106,5 @@
   </ng-template>
 </ion-content>
 <ion-footer no-border>
-    <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input>
+  <!-- <app-chat-input [conversation]="conversation" [senderId]="me.id"></app-chat-input> -->
 </ion-footer>

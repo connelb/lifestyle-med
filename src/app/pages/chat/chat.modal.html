@@ -1,0 +1,10 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Members</ion-title>
+    </ion-toolbar>
+    <ion-button class="dismiss-btn" (click)="cancel()" slot="end" >Cancel</ion-button>
+</ion-header>
+<ion-content>
+
+    <app-chat-user-list [user]="me" (onNewConvo)="setNewConvo($event)" pageScroll href="#chat"></app-chat-user-list>
+</ion-content>

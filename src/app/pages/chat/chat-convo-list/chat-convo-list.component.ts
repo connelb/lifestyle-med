@@ -11,6 +11,15 @@ import * as _ from 'lodash';
 
 import { ObservableQuery } from 'apollo-client';
 
+import {Injectable, Pipe , PipeTransform} from '@angular/core';
+
+@Pipe({ name: 'myfilter' })
+export class MyFilterPipe implements PipeTransform {
+    transform(conversations: any[], args): any {
+        return conversations.filter(convo => convo.name.toLowerCase().includes(args.toLowerCase()) );
+    }
+}
+
 
 @Component({
   selector: 'app-chat-convo-list',
@@ -18,6 +27,7 @@ import { ObservableQuery } from 'apollo-client';
   styleUrls: ['./chat-convo-list.component.css']
 })
 export class ChatConvoListComponent implements OnInit {
+  searchString = '';
 
   nextToken: string;
   conversations: Conversation[] = [];
@@ -40,7 +50,10 @@ export class ChatConvoListComponent implements OnInit {
 
   ngOnInit() {}
 
-  click(convo) { this.onConvoClick.emit(convo); }
+  click(convo) { 
+    //console.log('what is convo??', convo)
+    this.onConvoClick.emit(convo);
+   }
 
   getAllConvos() {
     this.appsync.hc().then(client => {
@@ -51,12 +64,12 @@ export class ChatConvoListComponent implements OnInit {
       });
 
       observable.subscribe(({data}) => {
-        //console.log('Fetched convos data', data);
-        if (!data || !data.me) { return console.log('getUserConversationsConnection: no data'); }
+        //console.log('Fetched convos data-getUserConversationsConnection,?????? ', data);
+        if (!data || !data.me) { return console.log('getUserConversationsConnection: no data',data); }
         this.conversations = data.me.conversations.userConversations.map(u => u.conversation).filter(c => c);
         this.conversations = _.sortBy(this.conversations, 'name');
         this.nextToken = data.me.conversations.nextToken;
-        console.log('Fetched convos brian', this.conversations);
+        //console.log('Fetched convos brian', this.conversations);
       });
       
       // : userConvo

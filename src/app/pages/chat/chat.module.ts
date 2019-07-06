@@ -42,16 +42,17 @@ import { ChatPage } from './chat.page';
 import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { ChatInputComponent } from './chat-input/chat-input.component';
 import { ChatUserListComponent } from './chat-user-list/chat-user-list.component';
-import { ChatConvoListComponent } from './chat-convo-list/chat-convo-list.component';
+import { ChatConvoListComponent, MyFilterPipe  } from './chat-convo-list/chat-convo-list.component';
 import { ChatMessageViewComponent } from './chat-message-view/chat-message-view.component';
 
 import { InfscrollDirective } from './infscroll.directive';
 import { MomentAgoPipe } from './moment-ago.pipe';
 
 // import { NgxPageScrollModule } from 'ngx-page-scroll';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AmplifyAngularModule, AmplifyIonicModule } from 'aws-amplify-angular';
 // import@ionic/angular { IonicSelectableModule } from '@ionic/angular';
+//import { ChatModal } from './chat.modal';
 
 
 const routes: Routes = [
@@ -66,7 +67,7 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     FormsModule,
-    NgbModule,
+    //NgbModule,
     AmplifyAngularModule,
     AmplifyIonicModule,
     // IonicSelectableModule,
@@ -80,9 +81,15 @@ const routes: Routes = [
     ChatInputComponent,
     ChatUserListComponent,
     ChatConvoListComponent,
+    MyFilterPipe,
     ChatMessageViewComponent,
     MomentAgoPipe,
-    InfscrollDirective
+    InfscrollDirective,
+    //ChatModal
+  ],
+  entryComponents: [
+    // ListPage,
+   //ChatModal
   ]
 })
 export class ChatPageModule{}

@@ -64,6 +64,6 @@ export class ChatInputComponent {
         console.log('mutation complete', data);
       }).catch(err => console.log('Error creating message', err));
     });
-    Analytics.record('Chat MSG Sent');
+    //Analytics.record('Chat MSG Sent');
   }
 }

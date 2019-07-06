@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ActionSheetPage{
 
-  constructor(public actionSheetController: ActionSheetController, public router: Router ) {
-    
-   }
+  constructor(public actionSheetController: ActionSheetController, public router: Router ) {}
 
   async sleep() {
     const actionSheet = await this.actionSheetController.create({

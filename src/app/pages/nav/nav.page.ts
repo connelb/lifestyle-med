@@ -9,7 +9,7 @@ import { AmplifyService } from 'aws-amplify-angular';
   templateUrl: './nav.page.html',
   styleUrls: ['./nav.page.scss'],
 })
-export class NavPage implements OnInit, AfterContentInit {
+export class NavPage implements AfterContentInit {
   // authState: any;
   // loggedIn = false;
   appPages = [
@@ -37,51 +37,17 @@ export class NavPage implements OnInit, AfterContentInit {
 
   constructor(public events: Events, private menu: MenuController, public storage: Storage, private amplifyService: AmplifyService, public router: Router) {
     this.storage.set("ion_repeat_tutorial", false);
-    // this.events.subscribe('data:AuthState', async (data) => {
-    //   if (data) {
-    //     console.log('whats data', data)
-    //     this.isLoggedIn = data.state === 'signedIn';
-    //   }
-
-    // });
-
-    // this.amplifyService.authStateChange$.subscribe(authState => {
-
-    //   this.user = authState.user;
-    //   this.status = authState.state;
-    //   this.isLoggedIn = authState.state === 'signedIn';
-    // });
-
-    // const isLoggedIn = authState.state === 'signedIn' || authState.state === 'confirmSignIn';
-    // if (authState.state === 'confirmSignIn') {
-    //   console.log('confirmSignIn', authState.state)
-    //   //router.navigate(['/confirm']);
-    // } else if (authState.state === 'signUp') {
-    //   console.log('signUp from nav', authState.state)
-    //   //router.navigateByUrl('/home');
-    // } else if (authState.state === 'signedIn') {
-    //   console.log('signedIn from nav', authState.state)
-    //   router.navigateByUrl('/home');
-    // } else if (authState.state === 'confirmSignUp') {
-    //   console.log('confirmSignUp from nav', authState.state)
-    //   //router.navigateByUrl('/home');
-    // }
-
-    // this.isLoggedIn = isLoggedIn;
-    // });
-    console.log('this.user, this.state', this.user, this.status, this.isLoggedIn)
-  }
-
-  ngOnInit() {
-    console.log('hi')
   }
 
   ngAfterContentInit() {
+    console.log('ngAfterContentInit() called from nav')
     this.amplifyService.authStateChange$.subscribe(authState => {
 
       this.user = authState.user;
       this.status = authState.state;
       this.isLoggedIn = authState.state === 'signedIn';
+
+      this.events.publish('data:AuthState', this.status);
     });
   }
 

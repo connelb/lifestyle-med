@@ -1,5 +1,15 @@
 <ion-grid>
   <ion-row align-items-end>
+    <ion-col align-self-start>
+      {{message.content}}
+    </ion-col>
+    <ion-col align-self-end>
+      <ion-card-subtitle>{{createdAt | momentAgo }}</ion-card-subtitle>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- <ion-grid>
+  <ion-row align-items-end>
     <ng-template *ngIf="fromMe then showBlock; else notShowBlock">
     </ng-template>
   </ion-row>
@@ -25,7 +35,7 @@
           <ion-card-subtitle>{{createdAt | momentAgo }}</ion-card-subtitle>
         </ion-card>
       </ion-col>
-</ng-template>
+</ng-template> -->
 
 <!-- 
 <ion-item text-wrap>

@@ -13,3 +13,13 @@
   color: white;
   background-color: gray; 
 }
+
+.hover {
+  cursor: pointer;
+}
+.complete {
+  color: green;
+}
+.card-title {
+  margin: 12px 0 0 12px !important;
+}

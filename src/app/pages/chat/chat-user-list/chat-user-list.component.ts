@@ -23,6 +23,8 @@ import User from '../types/user';
 import Member from '../types/member';
 //import { IonInfiniteScroll } from '@ionic/angular';
 import listAllMembers from '../../../graphql/queries/listAllMembers';
+import { ModalController, Events } from '@ionic/angular';
+import { ChatModal } from './../chat.modal';
 
 @Component({
   selector: 'app-chat-user-list',
@@ -40,6 +42,8 @@ export class ChatUserListComponent {
   image;
   profile = "profile/profile.png"
 
+  // modal:any;
+
   @Input()
   set user(user) {
     this._user = user;
@@ -48,28 +52,29 @@ export class ChatUserListComponent {
 
   @Output() onNewConvo = new EventEmitter<any>();
 
-  constructor(private appsync: AppsyncService) { }
+  constructor(public modalController: ModalController,private appsync: AppsyncService) { }
 
-  getAllUsers1() {
-    this.appsync.hc().then(client => {
-      const observable = client.watchQuery({
-        query: getAllMembers,
-        fetchPolicy: 'cache-and-network'
-      });
+  // getAllUsers1() {
+  //   this.appsync.hc().then(client => {
+  //     const observable = client.watchQuery({
+  //       query: getAllMembers,
+  //       fetchPolicy: 'cache-and-network'
+  //     });
 
-      observable.subscribe(({ data }) => {
-        // console.log("???????",data);
-        if (!data) {
-          return console.log('getAllUsers - no data');
-        }
-        this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
-        //console.log('getAllUsers - Got data', this.users);
-        this.no_user = (this.users.length === 0);
-      });
-    })
-  };
+  //     observable.subscribe(({ data }) => {
+  //       // console.log("???????",data);
+  //       if (!data) {
+  //         return console.log('getAllUsers - no data');
+  //       }
+  //       this.users = _(data.allMember).sortBy('username').reject(['id', this._user.id]).value();
+  //       //console.log('getAllUsers - Got data', this.users);
+  //       this.no_user = (this.users.length === 0);
+  //     });
+  //   })
+  // };
 
   getAllUsers() {
+    console.log(' getAllUsers() fn called');
     this.appsync.hc().then(client => {
       const observable = client.watchQuery({
         query: getAllMembers,
@@ -77,7 +82,7 @@ export class ChatUserListComponent {
       });
 
       observable.subscribe(({ data }) => {
-        // console.log("???????",data);
+        //console.log("getAllMemrbers return anything???????",data);
         if (!data) {
           return console.log('getAllUsers - no data');
         }
@@ -90,12 +95,44 @@ export class ChatUserListComponent {
         document: subscribeToNewMembers,
         // updateQuery: (prev: UsersQuery, {subscriptionData: {data: {subscribeToNewMembers: user }:userConvo}}:any) => {
         updateQuery: (prev: UsersQuery, { subscriptionData: { data: { subscribeToNewUsers: user } } }) => {
-          console.log('updateQuery on convo subscription', user, prev);
+          //console.log('updateQuery on convo subscription', user, prev);
           return this._user.id === user.id ? prev : addUser(prev, user);
         }
       });
     });
   }
+
+  // async modify(item, i) {
+  //   let props = {
+  //     itemList: this.users,
+  //     /*
+  //       We pass in an item parameter only when the user clicks on an existing item
+  //       and therefore populate an editItem value so that our modal knows this is an edit operation.
+  //     */
+  //     editItem: item || undefined
+  //   };
+
+  //   console.log('props', props);
+
+  //   // Create the modal
+  //   this.modal = await this.modalController.create({
+  //     component: ChatModal,
+  //     componentProps: props
+  //   });
+  //   // Listen for the modal to be closed...
+  //   this.modal.onDidDismiss((result) => {
+  //     console.log('what is modal result??',result);
+  //     // if (result.data.newItem){
+  //     //   // ...and add a new item if modal passes back newItem
+  //     //   result.data.itemList.items.push(result.data.newItem)
+  //     // } else if (result.data.editItem){
+  //     //   // ...or splice the items array if the modal passes back editItem
+  //     //   result.data.itemList.items[i] = result.data.editItem
+  //     // }
+  //     //this.save(result.data.itemList);
+  //   })
+  //   return this.modal.present()
+  // }
 
   createNewConversation(user, event) {
     event.stopPropagation();

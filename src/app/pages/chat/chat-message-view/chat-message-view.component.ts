@@ -80,9 +80,10 @@ export class ChatMessageViewComponent {
   fromMe(message): boolean { return message.sender === this.senderId; }
 
   loadMessages(event = null, fetchPolicy = 'cache-and-network') {
+    console.log('load messages called');
     if (event) { event.stopPropagation(); }
     const innerObserable = this.appsync.hc().then(client => {
-      //console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
+      console.log('chat-message-view: loadMessages', this._conversation.id, fetchPolicy);
       const options = {
         query: getConversationMessages,
         fetchPolicy: fetchPolicy,
@@ -95,19 +96,19 @@ export class ChatMessageViewComponent {
       const observable: ObservableQuery<MessagesQuery> = client.watchQuery(options);
 
       observable.subscribe(({data}) => {
-        console.log('chat-message-view: subscribe', data);
+        //console.log('chat-message-view: subscribe', data);
         if (!data) { return console.log('getConversationMessages - no data'); }
         const newMessages = data.allMessageConnection.messages;
         this.messages = [...newMessages].reverse();
         this.nextToken = data.allMessageConnection.nextToken;
-        console.log('chat-message-view: nextToken is now', this.nextToken ? 'set' : 'null');
+        //console.log('chat-message-view: nextToken is now', this.nextToken ? 'set' : 'null');
       });
 
       this.subscription = observable.subscribeToMore({
         document: subscribeToNewMessages,
         variables: { 'conversationId': this._conversation.id },
         updateQuery: (prev: MessagesQuery, {subscriptionData: {data: {subscribeToNewMessage: message }}}:any) => {
-          console.log('subscribeToMore - updateQuery:', message);
+          //console.log('subscribeToMore - updateQuery:', message);
           return unshiftMessage(prev, message);
         }
       });

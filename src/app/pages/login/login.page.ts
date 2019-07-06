@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, AfterContentInit {
+export class LoginPage implements AfterContentInit {
   authState: any;
   // including AuthGuardService here so that it's available to listen to auth events
   authService: AuthGuard
@@ -56,22 +56,16 @@ export class LoginPage implements OnInit, AfterContentInit {
     public storage: Storage
   ) {
     this.authState = { loggedIn: false };
-    this.authService = guard;
+    //this.authService = guard;
     this.amplifyService = amplify;
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        if (authState) {
           this.authState.loggedIn = authState.state === 'signedIn';
           this.events.publish('data:AuthState', this.authState);
+          this.storage.set('data:AuthState', this.authState);
           this.storage.set('hasLoggedIn',true);
           router.navigateByUrl('/home');
-        }
-
       });
-  }
-
-  ngOnInit() {
-    console.log('hi')
   }
 
   ngAfterContentInit() {

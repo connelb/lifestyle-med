@@ -5,6 +5,11 @@ type Conversation {
 	name: String!
 }
 
+type Todo1 @model {
+  id: ID!
+  todo: String!
+}
+
 type User @model {
   id: ID!
   username: String!

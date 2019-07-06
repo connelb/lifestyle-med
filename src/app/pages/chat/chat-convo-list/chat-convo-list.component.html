@@ -1,25 +1,200 @@
+<ion-list>
+  <ion-list>
+    <ion-item *ngFor="let convo of conversations" (click)="click(convo, $event); false">
+      <ion-card  fullscreen class="chat-card">
+        <ion-card-header>
+          <ion-item >
+            <ion-avatar slot="start">
+              <img [src]="convo.name" alt="Speaker profile pic">
+            </ion-avatar>
+            {{convo.name}}
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <app-chat-message-view #messageView [senderId]="_user.id" [conversation]="convo"></app-chat-message-view>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <!-- 
+  <ion-item>
+    <ion-label floating>Username</ion-label>
+    <ion-searchbar placeholder="Filter Chats" [(ngModel)]='searchString'></ion-searchbar>
+  </ion-item> -->
+  <!-- <ion-list-header>
+    Recent Conversations
+  </ion-list-header> -->
+  <!-- <ion-item *ngFor='let convo of ( conversations|myfilter : searchString)'>
+      
+    <ion-avatar slot="start">
+      <img src="./avatar-finn.png">
+    </ion-avatar>
+    <ion-button fill="outline" (click)="click(convo, $event); false">
+    <ion-label>
+      <h2><b>{{convo.name}}</b></h2>
+      <h3>I'm a big deal</h3>
+      <p>Listen, I've had a pretty messed up day...</p>
+    </ion-label>
+    </ion-button>
+  </ion-item> -->
+
+  <!-- <ion-card *ngFor='let convo of ( conversations|myfilter : searchString)'>
+    <ion-button fill="outline" slot="end">
+      <ion-item>
+        
+        <ion-thumbnail slot="start">
+          <ion-img [src]="convo"></ion-img>
+        </ion-thumbnail>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>{{convo.name}}</ion-label>
+      </ion-item>
+    </ion-button>
+
+    <ion-card-content>
+      This is content, without any paragraph or header tags, within an ion-card-content element.
+    </ion-card-content>
+  </ion-card>
+</ion-list> -->
+
+
+  <!-- <ion-grid fixed>
+  <ion-row *ngFor='let convo of ( conversations|myfilter : searchString)'>
+    <ion-button fill="outline" (click)="click(convo, $event); false">
+      <ion-ripple-effect> </ion-ripple-effect>{{convo.name}}
+
+      <ion-col slot="start">
+        <ion-avatar slot="start">
+          <img [src]="convo.name" alt="Speaker profile pic">
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="4" size-md="4">
+        {{ convo.id }}
+      </ion-col>
+      <ion-col slot="end">
+        {{ convo.name }}
+      </ion-col>
+    </ion-button>
+  </ion-row>
+</ion-grid> -->
+
+
+
+  <!-- <ion-grid fixed>
+  <ion-row class="ion-align-items-stretch" *ngFor="let convo of conversations">
+    <ion-col size="2" size-md="2">
+   
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="user.image" alt="Speaker profile pic">
+        </ion-avatar>
+      </ion-item>
+      
+    </ion-col>
+    <ion-col size="4" size-md="4">
+      <ion-item>
+        <ion-label>
+          {{convo.name}}
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label>
+          {{convo.name}}
+        </ion-label>
+      </ion-item>
+      <ion-button expand="block" fill="outline" >{{convo.name}}</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-icon name="arrow-forward" (click)="click(convo, $event); false"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
 <ion-item *ngFor="let convo of conversations">
   <ion-icon slot="icon-only" name="navigate"></ion-icon>
   <ion-button expand="block" fill="outline" (click)="click(convo, $event); false">{{convo.name}}</ion-button>
-</ion-item>
+</ion-item> -->
 
-<!-- <ion-item *ngFor="let convo of conversations">
+  <!-- second
+<ion-card *ngFor="let convo of conversations">
+<ion-card-content>
+        <ion-item (click)=(click)="click(convo, $event); false">
+            <ion-avatar slot="start">
+                <amplify-s3-image [path]="user.image || profile" [options]="{'level': 'public'}"></amplify-s3-image>
+            </ion-avatar>
+            <ion-label>
+                {{convo.name}}
+            </ion-label>
+          </ion-item>
+    </ion-card-content>
+ </ion-card> -->
+
+  <!-- <ion-content class="outer-content">
+
+  <ion-grid fixed>
+    {{conversations|json}}
+    <ion-row class="ion-align-items-stretch">
+
+      <ion-col size="12" size-md="6" *ngFor="let convo of conversations"> -->
+
+  <!-- <ion-card class="speaker-card">
+              <ion-card-header>
+                <ion-item >
+                  <ion-avatar slot="start">
+                    <img [src]="user.image" alt="Speaker profile pic"> 
+                  </ion-avatar>
+                 
+                </ion-item>
+              </ion-card-header> -->
+
+  <!--   
+              <ion-row class="ion-no-padding ion-justify-content-center">
+                <ion-col size="4" class="ion-text-left">
+                  <ion-button fill="clear" size="small" color="primary" (click)="goToSpeakerTwitter(speaker)">
+                    <ion-icon name="logo-twitter" slot="start"></ion-icon>
+                    Tweet
+                  </ion-button>
+                </ion-col>
+                <ion-col size="4" class="ion-text-center">
+                  <ion-button fill="clear" size="small" color="primary" (click)="openSpeakerShare(speaker)">
+                    <ion-icon name="share-alt" slot="start"></ion-icon>
+                    Share
+                  </ion-button>
+                </ion-col>
+                <ion-col size="4" lass="ion-text-right">
+                  <ion-button fill="clear" size="small" color="primary" (click)="openContact(speaker)">
+                    <ion-icon name="chatboxes" slot="start"></ion-icon>
+                    Contact
+                  </ion-button>
+                </ion-col>
+              </ion-row> 
+            </ion-card> -->
+  <!-- </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <!-- </ion-list> -->
+  <!-- </ion-content> -->
+
+  <!-- <ion-item *ngFor="let convo of conversations">
   <ion-icon slot="icon-only" name="navigate"></ion-icon> -->
   <!-- <a href='#' *ngFor="let convo of conversations"  (click)="click(convo, $event); false">
           <ion-button size="small">{{user.username}}</ion-button>
         </a> -->
   <!-- <ion-button slot="start" (click)="click(convo, $event); false"> -->
 
-    <!--   {{convo.name}}
+  <!--   {{convo.name}}
       <ion-icon slot="icon-only" name="navigate"></ion-icon>
     </ion-button> -->
-    <!-- <ion-label>{{convo.name}}</ion-label> -->
-    <!-- <ion-button slot="end">
+  <!-- <ion-label>{{convo.name}}</ion-label> -->
+  <!-- <ion-button slot="end">
       <ion-icon slot="icon-only" name="star"></ion-icon> -->
   <!-- </ion-button>
 </ion-item> -->
 
-<!-- 
+  <!-- 
 <ion-virtual-scroll *ngIf="conversations" [items]="conversations">
   <ion-item *virtualItem="let convo">
       <ion-button size="small" (click)="click(convo, $event); false">{{convo?.name}}</ion-button>
@@ -29,10 +204,10 @@
   </ion-item>
 </ion-virtual-scroll> -->
 
-<!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
+  <!-- <div class="d-block font-weight-bold bg-dark text-white text-right rounded p-2">
   <h6 class='mb-0'><i class="ion-person-stalker" data-pack="default" data-tags="talk"></i> Convos</h6>
 </div>-->
-<!-- <div class="convo-list">
+  <!-- <div class="convo-list">
   <div class="list-group mb-2">
     <a href *ngFor="let convo of conversations"
     class="list-group-item list-group-item-action p-2 border-0 bg"
@@ -41,4 +216,4 @@
     <ion-button size="small">{{convo.name}}</ion-button></a>
   </div>
 </div> -->
-<!-- <button *ngIf="conversationNextToken" type="button" class="btn btn-secondary" (click)="false">See more convos</button> -->
+  <!-- <button *ngIf="conversationNextToken" type="button" class="btn btn-secondary" (click)="false">See more convos</button> -->

@@ -21,3 +21,24 @@
   color: white;
   background-color: gray; 
 }
+
+.chat-card {
+  height: 100%;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-card ion-card-header {
+  padding: 0;
+}
+
+.chat-card ion-card-header .item {
+  padding: 4px 5px;
+}
+
+.chat-card ion-card-content {
+  flex: 1 1 auto;
+
+  padding: 0;
+}
