@@ -52,7 +52,7 @@ import { MomentAgoPipe } from './moment-ago.pipe';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AmplifyAngularModule, AmplifyIonicModule } from 'aws-amplify-angular';
 // import@ionic/angular { IonicSelectableModule } from '@ionic/angular';
-//import { ChatModal } from './chat.modal';
+import { ChatModal } from './chat.modal';
 
 
 const routes: Routes = [
@@ -85,7 +85,7 @@ const routes: Routes = [
     ChatMessageViewComponent,
     MomentAgoPipe,
     InfscrollDirective,
-    //ChatModal
+    ChatModal
   ],
   entryComponents: [
     // ListPage,

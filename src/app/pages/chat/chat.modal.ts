@@ -24,6 +24,7 @@ export class ChatModal implements OnInit {
     me: Member;
     users: Member[] = [];
     modal;
+    
 
     constructor(private modalController: ModalController, private appsync: AppsyncService) { }
 
@@ -128,6 +129,9 @@ export class ChatModal implements OnInit {
             // })
          
 
+    }
+    setNewConvo(){
+      
     }
 
     async cancel() {
