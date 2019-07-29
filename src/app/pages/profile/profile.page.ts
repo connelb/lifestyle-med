@@ -8,7 +8,8 @@ import Member from '../../types/user';
 // import User from '../../user';
 import { Auth } from 'aws-amplify';
 import { ToastController } from '@ionic/angular';
-// import createUser from '../../graphql/mutations/createUser';
+import createMember from '../../graphql/mutations/createMember';
+import updateMember from '../../graphql/mutations/updateMember';
 import getMe from '../../graphql/queries/getMe';
 import gql from 'graphql-tag';
 
@@ -101,6 +102,10 @@ export class ProfilePage implements OnInit {
     }).catch(err => console.log('there is an erroro!', err));
   }
 
+  ionViewWillEnter() {
+    console.log('when does this refresh??')
+}
+
   getType(): string {
     return this.userCreated ? 'UpdateMember' : 'CreateMember';
   }
@@ -142,8 +147,13 @@ export class ProfilePage implements OnInit {
   //   this.userName = user.username;
   // })
 
-  async onImageUploaded(e) {
-    this.image = e.key;
+  async onImageLoaded(e) {
+    console.log('e on loaded',e.name);
+  }
+
+  async onImagePicked(e) {
+    console.log('e on picked??',e.name);
+    this.image = e.name;
     //console.log('what is onImageUploaded??', this.member)
     if (this.userCreated) {
       const user = {
@@ -153,14 +163,15 @@ export class ProfilePage implements OnInit {
         lastname: this.profileForm.value.userData.lastName,
         registered: this.registered,
         bio: this.profileForm.value.userData.goal,
-        image: this.image
+        image: 'profile/'+this.image
       }
 
       this.userProfile = user;
-      console.log('what is updateProfile??', user)
+      console.log('what is updateProfile??', this.getType(), user)
       await this.api[this.getType()](user);
     }
     this.showPhoto = true;
+    this.presentToast();
   }
 
   // logOut() {

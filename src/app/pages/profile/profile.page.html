@@ -15,7 +15,12 @@
           <ion-col>
           </ion-col>
           <ion-col>
-            <amplify-s3-image *ngIf="showPhoto" [path]="image" [options]="{'level': 'private'}"></amplify-s3-image>
+            <amplify-s3-image [options]="{'level': 'private'}" [path]=user.image></amplify-s3-image>
+            <amplify-s3-image [options]="{'level': 'private'}" ></amplify-s3-image>
+
+            <amplify-s3-album [options]="{'level': 'private'}" path="profile" (selected)="onAlbumImageSelected($event)">
+            </amplify-s3-album>
+
           </ion-col>
           <ion-col>
           </ion-col>
@@ -51,7 +56,7 @@
             <ion-item>
               <ion-button (click)="showPhoto = !showPhoto" fill="outline" slot="end">Close</ion-button>
             </ion-item>
-            <amplify-photo-picker path="profile" [storageOptions]="{'level': 'public'}" (uploaded)="onImageUploaded($event)">
+            <amplify-photo-picker path="profile" [storageOptions]="{'level': 'private'}" (picked)="onImagePicked($event)" (loaded)="onImageLoaded($event)">
             </amplify-photo-picker>
           </ng-template>
         </ion-card>
