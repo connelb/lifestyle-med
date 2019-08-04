@@ -79,6 +79,7 @@ export class NavPage implements AfterContentInit {
         this.storage.set('loggedIn', false);
         this.events.publish('loggedIn', false);
         this.router.navigateByUrl('/home');
+        
         // this.userData.logout().then(() => {
         //   return this.router.navigateByUrl('/app/tabs/blog');
         // })

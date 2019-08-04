@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import createWater from '../../graphql/mutations/createWater';
 import queryListWater from '../../graphql/queries/queryListWater';
@@ -14,13 +14,32 @@ import { v4 as uuid } from 'uuid';
 import { APIService } from '../../API.service';
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { __rest } from 'tslib';
+import { ChangeDetectorRef } from '@angular/core';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label  } from 'ng2-charts';
 
 @Component({
   selector: 'water',
   templateUrl: './water.page.html',
   styleUrls: ['./water.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WaterPage implements OnInit, AfterContentInit {
+
+  // public lineChartData: ChartDataSets[] = [
+  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+  // ];
+  // public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  // // public lineChartOptions: (ChartOptions & { annotation: any }) = {
+  // //   responsive: true,
+  // // };
+  // public lineChartColors: Color[] = [
+  //   {
+  //     borderColor: 'black',
+  //     backgroundColor: 'rgba(255,0,0,0.3)',
+  //   },
+  // ];
+  
   myLabels = [];
   myDataset = [];
 
@@ -32,20 +51,20 @@ export class WaterPage implements OnInit, AfterContentInit {
   dateValue = new Date().toISOString().slice(0, 10);
   waterIntake: number = 8;
 
-  public chartOptions: any;
-  public chartType: string = 'bar';
-  public chartData: any = [];
-  public chartLabels: Array<string>;
+  public chartOptions: ChartOptions;
+  public chartType: string = 'line';
+  // public chartData: any = [];
+  public chartLabels: Array<Label> =[];
   // public lineChartData1: any = [];
 
-  public lineChartData: Array<any> = [{ data: null }];
-  public myChartData: any = [];
+  //public lineChartData: Array<any> = [{ data: null }];
+  public myChartData:Array<any> = [{ data: null }];
   public myWater: any = [];
   public something: any;
 
   constructor(private appsync: AppsyncService,
     public toastController: ToastController,
-    private api: APIService) {
+    private api: APIService,private cd: ChangeDetectorRef) {
 
     //this.getAllWater();
 
@@ -105,25 +124,19 @@ export class WaterPage implements OnInit, AfterContentInit {
   //data: _.values(_.groupBy(myWater, 'updatedAt')).map((objs, idx) => _.sumBy(objs, 'intake') )
 
   ngAfterContentInit() {
-    console.log('ngAfterContentInit() called from water')
+
   }
 
   async ngOnInit() {
     await this.api.Me1().then(res => this.userId = res.id);
 
-    this.getAllWater();
-
+    console.log('ngAfterContentInit() called from water')
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
         // labels: this.myChartData.map(res => res.x),
-        labels: _.keys(_.groupBy(this.myWater, 'updatedAt')),
-        datasets: [
-          {
-            //data: this.myChartData.map(res => res.y),
-            data: _.values(_.groupBy(this.myWater, 'updatedAt')).map((objs, idx) => _.sumBy(objs, 'intake'))
-          }
-        ]
+        labels: this.chartLabels,
+        datasets: this.myChartData
       },
       options: {
         responsive: true,
@@ -136,55 +149,11 @@ export class WaterPage implements OnInit, AfterContentInit {
       }
     });
 
-
-    // To Do: do I really did to do this or use local storage?
-    //this.register();
+    this.getAllWater();
   }
 
-  // async register() {
-  //   console.log('registered??')
-
-
-
-  //   this.appsync.hc().then(client => {
-  //     client.watchQuery({
-  //       query: getMe,
-  //       fetchPolicy: 'cache-only'
-  //     }).subscribe(({ data }) => {
-  //       console.log('register user, fetch cache', data);
-  //       if (data) { this.me = data.me; }
-  //     });
-  //   });
-  // }
 
   async getAllWater() {
-
-    //this.appsync.hc().then(client => {
-    //     client.mutate({
-    //       mutation: createWater,
-    //       variables: this.waterPost,
-
-    //   optimisticResponse: () => ({
-    //     createWater: {
-    //       ...this.waterPost,
-    //       __typename: 'Water'
-    //     }
-    //   }),
-    //   update: (proxy, { data: { createWater: _water } }) => {
-    //     const query = queryListWater;
-    //     const data = proxy.readQuery({ query });
-    //     data.listWaters.items.push(_water)
-    //     proxy.writeQuery({ query, data });
-    //   }
-    // )
-
-
-
-    // const me = API.graphql(graphqlOperation(getMe)) as Promise<any>;
-
-    //  me.then(res => res);
-
-
     this.appsync.hc().then(client => {
 
       const observable = client.watchQuery({
@@ -192,6 +161,8 @@ export class WaterPage implements OnInit, AfterContentInit {
         variables: { userId: this.userId },
         fetchPolicy: 'cache-and-network'
       }).subscribe(({ data }) => {
+        this.cd.markForCheck();
+       
         if (data) {
           let myLabels = [];
           let myDataset = [];
@@ -273,34 +244,6 @@ export class WaterPage implements OnInit, AfterContentInit {
       }).then(({ data }) => {
         console.log('mutation complete', data);
         this.getAllWater()
-        // let myLabels = [];
-        // let myDataset = [];
-
-        // if (data) {
-        //   var nest = d3Collection.nest()
-        //     .key(function (d) { return d['updatedAt']; })
-        //     .sortKeys(d3Array.ascending)
-        //     .rollup(function (values) { return d3Array.sum(values, function (d) { return +d['intake']; }) })
-        //     .entries(data.listWaters.items);
-
-        //   nest.forEach(d => {
-        //     myLabels.push(d.key),
-        //       myDataset.push(d.value)
-        //   })
-
-        //   this.chart.config.data = {
-        //     labels: myLabels,
-        //     datasets: [
-        //       {
-        //         data: myDataset,
-        //       }
-        //     ]
-        //   }
-
-          //this.chart.update()
-        //})
-
-
       }).catch(err => console.log('Error creating sleep', err));
     });
   }
